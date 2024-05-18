@@ -17,8 +17,6 @@ Usrc/main/kotlin/org/example/dawfilmsinterface/productos/validators/ButacaValida
 Ksrc/main/kotlin/org/example/dawfilmsinterface/database/SqlDeLightManager.kt,b\6\b65d1102e3003615e697af560056f1b5e750ba11
 ö
 jsrc/main/kotlin/org/example/dawfilmsinterface/productos/repositories/complementos/ComplementoRepository.kt,c\b\cb3f1b34204d8c143d3d14801c0eb27e9d0a7450
-q
-Asrc/main/kotlin/org/example/dawfilmsinterface/cine/models/Sala.kt,4\4\443c8a05422219894d7cb94904b4ba975d68753b
 n
 >src/main/kotlin/org/example/dawfilmsinterface/locale/Locale.kt,5\f\5f2b481fea60b8741d8c14a10b6ba13555abe7f3
 ê
@@ -37,3 +35,9 @@ p
 \src/main/kotlin/org/example/dawfilmsinterface/clientes/repositories/ClienteRepositoryImpl.kt,8\4\8497f3d16e140000d3a0c95ef3af123f3add13ec
 ä
 Zsrc/main/kotlin/org/example/dawfilmsinterface/productos/models/complementos/Complemento.kt,6\8\688a486da761919b9c4f2aa32e93b2d682af1426
+m
+=src/main/kotlin/org/example/dawfilmsinterface/di/AppModule.kt,3\f\3f57df8a9ff3039d2b91a23a29e71c4f389322f0
+É
+Ssrc/main/kotlin/org/example/dawfilmsinterface/productos/models/producto/Producto.kt,e\0\e0a028a121278fa1e28bb8d5586ddc5a1391536b
+[
++src/test/kotlin/di/ProductosVentasModule.kt,f\1\f125cb2fdcac3e186ed324230a9470c655e1adcc
