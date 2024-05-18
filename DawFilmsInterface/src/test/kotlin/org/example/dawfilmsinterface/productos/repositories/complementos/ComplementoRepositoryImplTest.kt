@@ -4,11 +4,8 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 
 /**
  * Tests para comprobar el correcto funcionamiento del repositorio de complementos
@@ -16,6 +13,7 @@ import org.junit.jupiter.api.TestInstance
  * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
  * @since 1.0.0
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ComplementoRepositoryImplTest {
     private lateinit var dbManager : SqlDeLightManager
@@ -33,7 +31,14 @@ class ComplementoRepositoryImplTest {
         dbManager
     }
 
+    @AfterAll
+    fun tearDown() {
+        dbManager.clearData()
+        dbManager.insertSampleData()
+    }
+
     @Test
+    @Order(1)
     fun findAll() {
         val complementos = complementoRepository.findAll()
 
@@ -41,6 +46,7 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
+    @Order(2)
     fun findById() {
         val complemento = complementoRepository.findById("1")
 
@@ -48,39 +54,42 @@ class ComplementoRepositoryImplTest {
         assertEquals("Complemento", complemento?.tipoProducto)
         assertEquals("Palomitas", complemento?.nombre)
         assertEquals(3.0, complemento?.precio)
-        assertEquals(50, complemento?.stock)
+        assertEquals(20, complemento?.stock)
         assertEquals(CategoriaComplemento.COMIDA, complemento?.categoria)
     }
 
     @Test
+    @Order(3)
     fun findByIdNotFound() {
-        val complemento = complementoRepository.findById("-1")
+        val complemento = complementoRepository.findById("5")
 
         assertEquals(null, complemento)
     }
 
     @Test
+    @Order(4)
     fun save() {
         val complemento = complementoRepository.save(
             Complemento(
-                id = "16",
+                id = "2",
                 tipoProducto = "Complemento",
                 nombre = "Agua",
                 precio = 2.0,
-                stock = 40,
+                stock = 20,
                 categoria = CategoriaComplemento.BEBIDA
             )
         )
 
-        assertEquals("16", complemento.id)
+        assertEquals("2", complemento.id)
         assertEquals("Complemento", complemento.tipoProducto)
         assertEquals("Agua", complemento.nombre)
         assertEquals(2.0, complemento.precio)
-        assertEquals(40, complemento.stock)
+        assertEquals(20, complemento.stock)
         assertEquals(CategoriaComplemento.BEBIDA, complemento.categoria)
     }
 
     @Test
+    @Order(5)
     fun update() {
         val complemento = complementoRepository.update(
             "1",
@@ -103,6 +112,7 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
+    @Order(6)
     fun updateNotFound() {
         val complemento = complementoRepository.update(
             "15",
@@ -120,6 +130,7 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
+    @Order(7)
     fun delete() {
         val complemento = complementoRepository.delete("1")
 
@@ -127,6 +138,7 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
+    @Order(8)
     fun deleteNotFound() {
         val complemento = complementoRepository.delete("20")
 

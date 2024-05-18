@@ -44,6 +44,35 @@ fun ProductoEntity.toProducto(): Producto {
     }
 }
 
+fun ProductoEntity.toComplemento(): Complemento {
+    return Complemento(
+        id = this.id,
+        tipoProducto = this.tipo_producto,
+        nombre = this.nombre_complemento!!,
+        precio = this.precio,
+        stock = this.stock_complemento!!.toInt(),
+        categoria = CategoriaComplemento.valueOf(this.categoria_complemento!!.uppercase()),
+        createdAt = LocalDate.parse(this.created_at),
+        updatedAt = this.updated_at.let { LocalDate.parse(it) },
+        isDeleted = this.is_deleted.toInt() == 1
+    )
+}
+
+fun ProductoEntity.toButaca(): Butaca {
+    return Butaca(
+        id = this.id,
+        tipoProducto = this.tipo_producto,
+        fila = this.fila_butaca!!.toInt(),
+        columna = this.columna_butaca!!.toInt(),
+        tipoButaca = TipoButaca.valueOf(this.tipo_butaca!!.uppercase()),
+        estadoButaca = EstadoButaca.valueOf(this.estado_butaca!!.uppercase()),
+        ocupacionButaca = OcupacionButaca.valueOf(this.ocupacion_butaca!!.uppercase()),
+        createdAt = LocalDate.parse(this.created_at),
+        updatedAt = this.updated_at.let { LocalDate.parse(it) },
+        isDeleted = this.is_deleted.toInt() == 1
+    )
+}
+
 fun Producto.toProductoDto(): ProductoDto {
     return when (this) {
         is Butaca -> ProductoDto(

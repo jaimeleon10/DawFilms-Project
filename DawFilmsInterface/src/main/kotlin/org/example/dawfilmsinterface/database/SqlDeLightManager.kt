@@ -8,7 +8,6 @@ import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
 
-
 private val logger = logging()
 
 class SqlDeLightManager(
@@ -36,10 +35,28 @@ class SqlDeLightManager(
         }
     }
 
-    private fun clearData() {
+    fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }
         dbQueries.transaction {
-            //dbQueries.deleteAll()
+            dbQueries.deleteAllClientes()
+            dbQueries.deleteAllProductos()
+            dbQueries.deleteAllLineas()
+            dbQueries.deleteAllVentas()
         }
+    }
+
+    private fun executeSqlScript(filePath: String) {
+        val script = File(filePath).readText()
+        script.split(";").forEach { statement ->
+            if (statement.trim().isNotEmpty()) {
+                JdbcSqliteDriver(config.dataBaseUrl).execute(null, statement.trim(), 0)
+            }
+        }
+    }
+
+    fun insertSampleData() {
+        logger.debug { "SqlDeLightManager.init() - Insert Sample Data" }
+        val dir = File(System.getProperty("user.dir")).absolutePath + "\\src\\main\\sqldelight\\database\\DatabaseInitData.sq"
+        executeSqlScript(dir)
     }
 }
