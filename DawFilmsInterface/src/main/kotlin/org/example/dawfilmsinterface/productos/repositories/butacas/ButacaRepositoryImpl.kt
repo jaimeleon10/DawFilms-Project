@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.productos.repositories.butacas
 
 import org.example.dawfilmsinterface.clientes.mappers.toCliente
 import org.example.dawfilmsinterface.database.SqlDeLightManager
+import org.example.dawfilmsinterface.productos.mappers.toButaca
 import org.example.dawfilmsinterface.productos.mappers.toButacaDto
 import org.example.dawfilmsinterface.productos.mappers.toProducto
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
@@ -23,7 +24,7 @@ class ButacaRepositoryImpl(
 
     override fun findById(id: String): Butaca? {
         logger.debug { "Buscando butaca con id: $id" }
-        return db.selectProductoById(id).executeAsOneOrNull()?.toProducto() as Butaca
+        return db.selectButacaById(id).executeAsOneOrNull()?.toButaca()
     }
 
     override fun save(item: Butaca): Butaca {
@@ -44,7 +45,7 @@ class ButacaRepositoryImpl(
                 is_deleted = 0
             )
         }
-        return db.selectProductoLastInserted().executeAsOne().toProducto() as Butaca
+        return db.selectButacaById(item.id).executeAsOne().toButaca()
     }
 
     override fun update(id: String, item: Butaca): Butaca? {
@@ -73,7 +74,7 @@ class ButacaRepositoryImpl(
         this.findById(id) ?: return null
         val timeStamp = LocalDate.now()
 
-        db.deleteLogicoProducto(
+        db.deleteLogicoButaca(
             updated_at = timeStamp.toString(),
             id = id
         )

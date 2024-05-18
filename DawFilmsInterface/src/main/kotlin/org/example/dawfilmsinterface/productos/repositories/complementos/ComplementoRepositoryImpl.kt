@@ -1,6 +1,7 @@
 package org.example.dawfilmsinterface.productos.repositories.complementos
 
 import org.example.dawfilmsinterface.database.SqlDeLightManager
+import org.example.dawfilmsinterface.productos.mappers.toComplemento
 import org.example.dawfilmsinterface.productos.mappers.toProducto
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
@@ -23,12 +24,12 @@ class ComplementoRepositoryImpl(
 
     override fun findById(id: String): Complemento? {
         logger.debug { "Buscando complemento con id: $id" }
-        return db.selectProductoById(id).executeAsOneOrNull()?.toProducto() as Complemento
+        return db.selectComplementoById(id).executeAsOneOrNull()?.toComplemento()
     }
 
     override fun findByNombre(nombre: String): Complemento? {
         logger.debug { "Buscando complemento con nombre: $nombre" }
-        return db.selectComplementoByNombre(nombre).executeAsOneOrNull()?.toProducto() as Complemento
+        return db.selectComplementoByNombre(nombre).executeAsOneOrNull()?.toComplemento()
     }
 
     override fun save(item: Complemento): Complemento {
@@ -47,7 +48,7 @@ class ComplementoRepositoryImpl(
                 is_deleted = 0
             )
         }
-        return db.selectProductoLastInserted().executeAsOne().toProducto() as Complemento
+        return db.selectComplementoById(item.id).executeAsOne().toComplemento()
     }
 
     override fun update(id: String, item: Complemento): Complemento? {
@@ -74,7 +75,7 @@ class ComplementoRepositoryImpl(
         this.findById(id) ?: return null
         val timeStamp = LocalDate.now()
 
-        db.deleteLogicoProducto(
+        db.deleteLogicoComplemento(
             updated_at = timeStamp.toString(),
             id = id
         )
