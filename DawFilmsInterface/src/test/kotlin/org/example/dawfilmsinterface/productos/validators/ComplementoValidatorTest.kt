@@ -46,6 +46,6 @@ class ComplementoValidatorTest {
 
         val error = complementoValidator.validate(complementoInvalido).error
 
-        assertTrue(error is ProductoError.ProductoValidationError)
+        assertTrue(error is ProductoError.ProductoNoValido)
     }
 }
