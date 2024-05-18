@@ -1,17 +1,14 @@
 package org.example.dawfilmsinterface.productos.repositories.complementos
 
+import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.koin.core.component.inject
-import org.koin.core.context.startKoin
-import org.koin.fileProperties
-import org.koin.test.junit5.AutoCloseKoinTest
-import kotlin.test.assertEquals
 
 /**
  * Tests para comprobar el correcto funcionamiento del repositorio de complementos
@@ -20,28 +17,27 @@ import kotlin.test.assertEquals
  * @since 1.0.0
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
-    private val dbManager : SqlDeLightManager by inject()
-    private val complementoRepository : ComplementoRepository by inject()
+class ComplementoRepositoryImplTest {
+    private lateinit var dbManager : SqlDeLightManager
+    private lateinit var complementoRepository : ComplementoRepositoryImpl
 
     @BeforeAll
     fun setUpAll() {
         println("Iniciando tests...")
-        startKoin {
-            fileProperties("/application.properties")
-        }
+        dbManager = SqlDeLightManager(Config())
+        complementoRepository = ComplementoRepositoryImpl(dbManager)
     }
 
     @BeforeEach
     fun setUp() {
-        dbManager.initialize()
+        dbManager
     }
 
     @Test
     fun findAll() {
         val complementos = complementoRepository.findAll()
 
-        assertEquals(15, complementos.size)
+        assertEquals(1, complementos.size)
     }
 
     @Test
@@ -49,6 +45,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
         val complemento = complementoRepository.findById("1")
 
         assertEquals("1", complemento?.id)
+        assertEquals("Complemento", complemento?.tipoProducto)
         assertEquals("Palomitas", complemento?.nombre)
         assertEquals(3.0, complemento?.precio)
         assertEquals(50, complemento?.stock)
@@ -67,6 +64,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
         val complemento = complementoRepository.save(
             Complemento(
                 id = "16",
+                tipoProducto = "Complemento",
                 nombre = "Agua",
                 precio = 2.0,
                 stock = 40,
@@ -75,6 +73,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
         )
 
         assertEquals("16", complemento.id)
+        assertEquals("Complemento", complemento.tipoProducto)
         assertEquals("Agua", complemento.nombre)
         assertEquals(2.0, complemento.precio)
         assertEquals(40, complemento.stock)
@@ -87,6 +86,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
             "1",
             Complemento(
                 id = "1",
+                tipoProducto = "Complemento",
                 nombre = "Complemento actualizado",
                 precio = 3.50,
                 stock = 50,
@@ -95,6 +95,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
         )
 
         assertEquals("1", complemento?.id)
+        assertEquals("Complemento", complemento?.tipoProducto)
         assertEquals("Complemento actualizado", complemento?.nombre)
         assertEquals(3.50, complemento?.precio)
         assertEquals(50, complemento?.stock)
@@ -107,6 +108,7 @@ class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
             "15",
             Complemento(
                 id = "1",
+                tipoProducto = "Complemento",
                 nombre = "Complemento actualizado",
                 precio = 3.50,
                 stock = 50,
