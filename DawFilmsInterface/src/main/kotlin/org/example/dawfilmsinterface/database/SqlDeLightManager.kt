@@ -42,6 +42,4 @@ class SqlDeLightManager(
             //dbQueries.deleteAll()
         }
     }
-
-
 }

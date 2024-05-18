@@ -12,7 +12,7 @@ import java.util.*
 
 private val logger = logging()
 
-class VentaSericeImpl(
+class VentaServiceImpl(
     private val ventaRepository: VentaRepository,
 ) : VentaService {
     override fun getById(id: UUID): Result<Venta, VentaError> {
