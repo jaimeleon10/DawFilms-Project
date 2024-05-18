@@ -30,11 +30,6 @@ class ClienteRepositoryImpl(
         return db.selectClienteById(id).executeAsOneOrNull()?.toCliente()
     }
 
-    override fun findByNumSocio(numSocio: String): Cliente? {
-        logger.debug { "Buscando cliente por número de socio: $numSocio" }
-        return db.selectClienteByNumSocio(numSocio).executeAsOneOrNull()?.toCliente()
-    }
-
     override fun save(cliente: Cliente): Cliente {
         logger.debug { "Guardando cliente: $cliente" }
         val timeStamp = LocalDate.now().toString()
