@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.MenuClienteController">
+   <children>
+      <Label alignment="CENTER" layoutX="327.0" layoutY="20.0" prefHeight="60.0" prefWidth="263.0" text="MENÚ DEL CINE" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="95.0" startX="-420.0" stroke="#ffbd2e" />
+      <Label alignment="CENTER" layoutX="336.0" layoutY="366.0" prefHeight="40.0" prefWidth="234.0" style="-fx-underline: true;" text="Selecciona una opción:" textFill="WHITE">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="buyTicketButton" alignment="CENTER_RIGHT" graphicTextGap="7.0" layoutX="107.0" layoutY="443.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="203.0" style="-fx-background-color: transparent;" text="Comprar entrada" textFill="#ffd757">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/ticket.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="showCinemaButton" graphicTextGap="7.0" layoutX="621.0" layoutY="443.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="191.0" style="-fx-background-color: transparent;" text="Ver sala de cine" textFill="#ffd757">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/cine.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="111.0" fitWidth="126.0" layoutX="14.0" layoutY="555.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exitButton" alignment="CENTER" graphicTextGap="10.0" layoutX="371.0" layoutY="555.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Cerrar sesión" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/salida.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <MenuBar layoutX="24.0" layoutY="24.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+                  <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" text="Salir" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Line endX="420.0" layoutX="460.0" layoutY="330.0" startX="-420.0" stroke="#ffbd2e" />
+      <Button fx:id="complementsListButton" alignment="CENTER_RIGHT" graphicTextGap="7.0" layoutX="322.0" layoutY="443.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="263.0" style="-fx-background-color: transparent;" text="Listado de complementos" textFill="#ffd757">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/soda.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="200.0" fitWidth="246.0" layoutX="392.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/images/el-reino-del-planeta-de-los-simios.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="246.0" layoutX="550.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/images/garfield_la_pelicula.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="246.0" layoutX="232.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/images/3_dias_maximo.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="246.0" layoutX="705.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/images/Tarot.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="246.0" layoutX="78.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/images/el-especialista.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="749.0" layoutY="33.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+   </children>
+</AnchorPane>

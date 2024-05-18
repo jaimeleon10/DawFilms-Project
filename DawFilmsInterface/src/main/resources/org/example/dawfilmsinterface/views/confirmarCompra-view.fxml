@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.ConfirmarCompraController">
+   <children>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="36.0" prefHeight="60.0" prefWidth="320.0" text="DATOS DE COMPRA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="113.0" startX="-420.0" stroke="#ffbd2e" />
+      <Line endX="420.0" layoutX="460.0" layoutY="165.0" startX="-420.0" stroke="#ffbd2e" />
+      <HBox alignment="CENTER" layoutX="72.0" layoutY="113.0" prefHeight="50.0" prefWidth="778.0" style="-fx-spacing: 50;">
+         <children>
+            <Label fx:id="cantidadComplementosLabel" alignment="CENTER" graphicTextGap="10.0" text="Complementos seleccionados: 0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="cantidadButacasLabel" graphicTextGap="10.0" prefHeight="21.0" prefWidth="215.0" text="Butacas seleccionadas: 0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="84.0" layoutY="541.0" prefHeight="100.0" prefWidth="750.0" style="-fx-background-color: #3D486A; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
+         <children>
+            <Button fx:id="confirmarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="438.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Confirmar compra" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/confirmarCompra.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="cancelarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="62.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Cancelar compra" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/cancelarCompra.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="complementosTable" layoutX="521.0" layoutY="188.0" prefHeight="320.0" prefWidth="295.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+        <columns>
+          <TableColumn prefWidth="115.0" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Cantidad" />
+        </columns>
+      </TableView>
+      <TableView fx:id="butacasTable" layoutX="102.0" layoutY="188.0" prefHeight="320.0" prefWidth="385.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+         <columns>
+            <TableColumn prefWidth="115.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Fila" />
+            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Columna" />
+            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Precio" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="70.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="753.0" layoutY="49.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+   </children>
+</AnchorPane>

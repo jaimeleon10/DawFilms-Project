@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.SeleccionComplementosController">
+   <children>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="30.0" prefHeight="60.0" prefWidth="320.0" text="ELIGE TUS COMPLEMENTOS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="113.0" startX="-420.0" stroke="#ffbd2e" />
+      <Line endX="420.0" layoutX="460.0" layoutY="165.0" startX="-420.0" stroke="#ffbd2e" />
+      <HBox alignment="CENTER" layoutX="72.0" layoutY="113.0" prefHeight="50.0" prefWidth="778.0" style="-fx-spacing: 35;">
+         <children>
+            <Label fx:id="selectedComplementosQuantityLabel" graphicTextGap="10.0" prefHeight="21.0" prefWidth="266.0" text="Complementos seleccionados: 0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="84.0" layoutY="541.0" prefHeight="100.0" prefWidth="750.0" style="-fx-background-color: #3D486A; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
+         <children>
+            <Button fx:id="continueButton" alignment="CENTER" layoutX="599.0" layoutY="29.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="118.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="selectedComplementosLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="COMPLEMENTOS SELECCIONADOS (vacio y se va escribiendo id-cantidad)" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="72.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="complementosTable" layoutX="86.0" layoutY="186.0" prefHeight="329.0" prefWidth="384.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+        <columns>
+          <TableColumn prefWidth="151.20004272460938" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn prefWidth="103.20001220703125" style="-fx-font-size: 15;" text="Precio" visible="false" />
+            <TableColumn prefWidth="101.5999755859375" style="-fx-font-size: 15;" text="Categoría" />
+            <TableColumn prefWidth="125.0" style="-fx-font-size: 15;" text="Stock" visible="false" />
+          <TableColumn prefWidth="128.0" style="-fx-font-size: 15;" text="Disponibilidad" />
+        </columns>
+      </TableView>
+      <Spinner fx:id="quantityComplementSpinner" layoutX="562.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Spinner>
+      <Label graphicTextGap="10.0" layoutX="562.0" layoutY="230.0" prefHeight="27.0" prefWidth="126.0" text="Complemento:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label graphicTextGap="10.0" layoutX="562.0" layoutY="311.0" prefHeight="27.0" prefWidth="82.0" text="Cantidad:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="743.0" layoutY="43.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <TextField fx:id="complementField" editable="false" layoutX="562.0" layoutY="260.0" prefHeight="30.0" prefWidth="200.0">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="addComplementButton" alignment="CENTER" layoutX="562.0" layoutY="407.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Añadir complemento" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
