@@ -23,7 +23,7 @@ class SqlDeLightManager(
         }.databaseQueries
     }
 
-    fun initialize() {
+    init {
         logger.debug { "Inicializando el gestor de Bases de Datos" }
         // Borramos la base de datos
         if (config.databaseInit) {

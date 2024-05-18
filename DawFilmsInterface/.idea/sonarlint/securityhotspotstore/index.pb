@@ -39,5 +39,3 @@ m
 =src/main/kotlin/org/example/dawfilmsinterface/di/AppModule.kt,3\f\3f57df8a9ff3039d2b91a23a29e71c4f389322f0
 ƒ
 Ssrc/main/kotlin/org/example/dawfilmsinterface/productos/models/producto/Producto.kt,e\0\e0a028a121278fa1e28bb8d5586ddc5a1391536b
-[
-+src/test/kotlin/di/ProductosVentasModule.kt,f\1\f125cb2fdcac3e186ed324230a9470c655e1adcc

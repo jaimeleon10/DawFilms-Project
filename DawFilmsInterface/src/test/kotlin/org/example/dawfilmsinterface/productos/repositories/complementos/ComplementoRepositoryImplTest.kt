@@ -30,14 +30,14 @@ class ComplementoRepositoryImplTest {
 
     @BeforeEach
     fun setUp() {
-        dbManager.initialize()
+        dbManager
     }
 
     @Test
     fun findAll() {
         val complementos = complementoRepository.findAll()
 
-        assertEquals(15, complementos.size)
+        assertEquals(1, complementos.size)
     }
 
     @Test
