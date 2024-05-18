@@ -48,4 +48,36 @@ class ComplementoValidatorTest {
 
         assertTrue(error is ProductoError.ProductoNoValido)
     }
+
+    @Test
+    fun `validate when nombre es una cadena vacía`() {
+        val complementoInvalido = Complemento(
+            id = "1",
+            tipoProducto = "Complemento",
+            nombre = "",
+            precio = 3.00,
+            stock = 50,
+            categoria = CategoriaComplemento.COMIDA
+        )
+
+        val error = complementoValidator.validate(complementoInvalido).error
+
+        assertTrue(error is ProductoError.ProductoNoValido)
+    }
+
+    @Test
+    fun `validate when nombre es un carácter especial`() {
+        val complementoInvalido = Complemento(
+            id = "1",
+            tipoProducto = "Complemento",
+            nombre = "palomitas?",
+            precio = 3.00,
+            stock = 50,
+            categoria = CategoriaComplemento.COMIDA
+        )
+
+        val error = complementoValidator.validate(complementoInvalido).error
+
+        assertTrue(error is ProductoError.ProductoNoValido)
+    }
 }
