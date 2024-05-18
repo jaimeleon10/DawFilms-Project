@@ -1,5 +1,42 @@
+-- DATOS INICIALES DE PRUEBA
+INSERT INTO ProductoEntity (id, tipo_producto, precio, fila_butaca, columna_butaca,tipo_butaca, estado_butaca, ocupacion_butaca, nombre_complemento, stock_complemento, categoria_complemento, created_at, updated_at, is_deleted)
+VALUES ('A1', 'Butaca', 5.0, 0, 0, 'NORMAL', 'ACTIVA', 'LIBRE', NULL, NULL, NULL, '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO ProductoEntity (id, tipo_producto, precio, fila_butaca, columna_butaca,tipo_butaca, estado_butaca, ocupacion_butaca, nombre_complemento, stock_complemento, categoria_complemento, created_at, updated_at, is_deleted)
+VALUES ('1', 'Complemento', 3.0, NULL , NULL, NULL, NULL, NULL, 'Palomitas', 20, 'Comida', '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at, is_deleted)
+VALUES (1, 'admin', 'admin', '2024-01-01', '11111111A', 'admin@admin.com', 'AAA111', '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at, is_deleted)
+VALUES (2, 'Jaime', 'Leon', '2002-04-10', '12345678A', 'jaime@gmail.com', 'AAA112', '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO LineaVentaEntity (id, venta_id, producto_id, producto_tipo, cantidad, precio, created_at, updated_at, is_deleted)
+VALUES ('17c712fb-5531-4f33-a744-0fdb65cd9dcf', '37c712fb-5531-4f33-a744-0fdb65cd9dcf', 'A1', 'Butaca', 1, 5.0, '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO LineaVentaEntity (id, venta_id, producto_id, producto_tipo, cantidad, precio, created_at, updated_at, is_deleted)
+VALUES ('27c712fb-5531-4f33-a744-0fdb65cd9dcf', '37c712fb-5531-4f33-a744-0fdb65cd9dcf', '1', 'Complemento', 1, 3.0, '2024-05-18', '2024-05-18', 0);
+
+INSERT INTO VentaEntity (id, cliente_id, total, fecha_compra, created_at, updated_at, is_deleted)
+VALUES ('37c712fb-5531-4f33-a744-0fdb65cd9dcf', 2, 8.0, '2024-05-18', '2024-05-18', '2024-05-18', 0);
+
+-- DELETES ALL
+
+deleteAllVentas:
+DELETE FROM VentaEntity;
+
+deleteAllLineas:
+DELETE FROM LineaVentaEntity;
+
+deleteAllProductos:
+DELETE FROM ProductoEntity;
+
+deleteAllClientes:
+DELETE FROM UsuarioEntity;
+
+
 -- Tabla de Clientes
-CREATE TABLE IF NOT EXISTS ClienteEntity (
+CREATE TABLE IF NOT EXISTS UsuarioEntity (
       id INTEGER PRIMARY KEY,
       nombre TEXT NOT NULL,
       apellido TEXT NOT NULL,
@@ -14,32 +51,32 @@ CREATE TABLE IF NOT EXISTS ClienteEntity (
 
 -- Operaciones CRUD para la tabla de Clientes
 selectAllClientes:
-SELECT * FROM ClienteEntity;
+SELECT * FROM UsuarioEntity;
 
 selectClienteById:
-SELECT * FROM ClienteEntity WHERE id = ?;
+SELECT * FROM UsuarioEntity WHERE id = ?;
 
 selectClienteByNumSocio:
-SELECT * FROM ClienteEntity WHERE numSocio = ?;
+SELECT * FROM UsuarioEntity WHERE numSocio = ?;
 
 selectAllClientesByIsDeleted:
-SELECT * FROM ClienteEntity WHERE is_deleted = ?;
+SELECT * FROM UsuarioEntity WHERE is_deleted = ?;
 
 selectClienteLastInserted:
-SELECT * FROM ClienteEntity WHERE id = last_insert_rowid();
+SELECT * FROM UsuarioEntity WHERE id = last_insert_rowid();
 
 insertCliente:
-INSERT INTO ClienteEntity (nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at)
+INSERT INTO UsuarioEntity (nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?);
 
 updateCliente:
-UPDATE ClienteEntity SET nombre = ?, apellido = ?, fecha_nacimiento = ?, dni = ?, email = ?, numSocio = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+UPDATE UsuarioEntity SET nombre = ?, apellido = ?, fecha_nacimiento = ?, dni = ?, email = ?, numSocio = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
 
 deleteCliente:
-DELETE FROM ClienteEntity WHERE id = ?;
+DELETE FROM UsuarioEntity WHERE id = ?;
 
 removeAllClientes:
-DELETE FROM ClienteEntity;
+DELETE FROM UsuarioEntity;
 
 -- Tabla de Productos:
 CREATE TABLE IF NOT EXISTS ProductoEntity (
@@ -101,7 +138,7 @@ UPDATE ProductoEntity SET updated_at = ?, is_deleted = 1 WHERE id = ?;
 -- Tabla de Ventas
 CREATE TABLE IF NOT EXISTS VentaEntity (
     id TEXT PRIMARY KEY,
-    cliente_id INTEGER NOT NULL REFERENCES ClienteEntity(id),
+    cliente_id INTEGER NOT NULL REFERENCES UsuarioEntity(id),
     total REAL NOT NULL,
     fecha_compra TEXT NOT NULL,
     created_at TEXT NOT NULL,
