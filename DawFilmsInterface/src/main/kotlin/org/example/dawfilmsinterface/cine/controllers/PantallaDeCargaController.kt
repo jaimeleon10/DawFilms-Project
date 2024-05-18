@@ -72,7 +72,10 @@ class PantallaDeCargaController {
             Platform.runLater {
                 progressBar.progress = i.toDouble() / 100.0
                 if (i % 7 == 0) updateCargandoLabel(i)
-                if (progressBar.progress == 1.0) RoutesManager.changeScene(view = RoutesManager.View.MENU_CLIENTE)
+                if (progressBar.progress == 1.0) {
+                    logger.debug { "Barra de carga al 100%, cambiando ventana" }
+                    RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
+                }
             }
         }
     }

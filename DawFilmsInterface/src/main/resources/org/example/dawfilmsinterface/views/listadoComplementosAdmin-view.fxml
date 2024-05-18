@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos.ListadoComplementosAdminController">
+   <children>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="40.0" prefHeight="60.0" prefWidth="360.0" text="LISTADO DE COMPLEMENTOS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="139.0" startX="-420.0" stroke="#ffbd2e" />
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="76.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="complementosTable" layoutX="40.0" layoutY="166.0" prefHeight="471.0" prefWidth="416.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+        <columns>
+          <TableColumn prefWidth="147.20001220703125" style="-fx-font-size: 14;" text="Nombre" />
+            <TableColumn minWidth="0.0" prefWidth="77.60006713867188" style="-fx-font-size: 14;" text="Precio" />
+            <TableColumn minWidth="0.0" prefWidth="60.7999267578125" style="-fx-font-size: 14;" text="Stock" />
+          <TableColumn prefWidth="129.5999755859375" style="-fx-font-size: 14;" text="Disponibilidad" />
+        </columns>
+      </TableView>
+      <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="743.0" layoutY="53.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="817.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/hamburguesa.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="idSelectedField" layoutX="661.0" layoutY="282.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="522.0" layoutY="279.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="339.0" prefHeight="35.0" prefWidth="115.0" text="Nombre" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="399.0" prefHeight="35.0" prefWidth="115.0" text="Precio" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="459.0" prefHeight="35.0" prefWidth="115.0" text="Stock" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="nombreSelectedField" layoutX="661.0" layoutY="342.0" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="precioSelectedField" layoutX="661.0" layoutY="402.0" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="stockSelectedField" layoutX="661.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" />
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="717.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/soda.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="612.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/pizza.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="505.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/popcorn.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="addButton" alignment="CENTER" graphicTextGap="10.0" layoutX="480.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Añadir" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/añadir.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="editButton" alignment="CENTER" graphicTextGap="10.0" layoutX="623.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Editar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/editar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="deleteButton" alignment="CENTER" graphicTextGap="10.0" layoutX="766.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Borrar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/borrar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="backMenuButton" alignment="CENTER" graphicTextGap="10.0" layoutX="606.0" layoutY="607.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al menú" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

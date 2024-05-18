@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.SeleccionButacasController">
+   <children>
+      <Label alignment="CENTER" layoutX="326.0" layoutY="35.0" prefHeight="60.0" prefWidth="263.0" text="ELIGE TUS BUTACAS" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="113.0" startX="-420.0" stroke="#ffbd2e" />
+      <Line endX="420.0" layoutX="460.0" layoutY="165.0" startX="-420.0" stroke="#ffbd2e" />
+      <HBox alignment="CENTER" layoutX="72.0" layoutY="113.0" prefHeight="50.0" prefWidth="778.0" style="-fx-spacing: 20;">
+         <children>
+            <Label alignment="CENTER" graphicTextGap="10.0" style="-fx-line-spacing: 10;" text="Seleccionada Normal" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/butacaSeleccionada.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label alignment="CENTER" graphicTextGap="10.0" style="-fx-line-spacing: 10;" text="Seleccionada VIP" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/butacaSeleccionadaVIP.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label alignment="CENTER" graphicTextGap="10.0" text="Ocupada" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/butacaOcupada.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label alignment="CENTER" graphicTextGap="10.0" text="Mantenimiento" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/butacaMantenimiento.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label alignment="CENTER" graphicTextGap="10.0" text="Fuera de servicio" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/butacaFueraDeServicio.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4f6680" height="45.0" layoutX="231.0" layoutY="189.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="455.0" />
+      <Label alignment="CENTER" layoutX="419.0" layoutY="201.0" text="PANTALLA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" layoutX="231.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="296.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="361.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA3Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE3Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="426.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA4Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE4Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="491.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA5Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE5Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="556.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="621.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaA7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaB7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaC7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaD7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <ToggleButton fx:id="butacaE7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dawfilmsinterface/icons/butacaSinSeleccionar.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ToggleButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="84.0" layoutY="541.0" prefHeight="100.0" prefWidth="750.0" style="-fx-background-color: #3d486a; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
+         <children>
+            <Button fx:id="continueButton" alignment="CENTER" layoutX="599.0" layoutY="29.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="118.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="selectedButacasLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="BUTACAS SELECCIONADAS (vacío y se va escribiendo al seleccionar butacas)" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <VBox alignment="CENTER" layoutX="165.0" layoutY="257.0" prefHeight="250.0" prefWidth="65.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="29.0" text="A" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="29.0" text="B" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="29.0" text="C" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="29.0" text="D" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="29.0" text="E" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="70.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="753.0" layoutY="49.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+   </children>
+</AnchorPane>
