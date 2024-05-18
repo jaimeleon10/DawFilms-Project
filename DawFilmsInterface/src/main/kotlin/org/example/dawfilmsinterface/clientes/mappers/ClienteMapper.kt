@@ -1,11 +1,11 @@
 package org.example.dawfilmsinterface.clientes.mappers
 
-import database.ClienteEntity
+import database.UsuarioEntity
 import org.example.dawfilmsinterface.clientes.dto.ClienteDto
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import java.time.LocalDate
 
-fun ClienteEntity.toCliente(): Cliente {
+fun UsuarioEntity.toCliente(): Cliente {
     return Cliente(
         id = this.id,
         nombre = this.nombre,
