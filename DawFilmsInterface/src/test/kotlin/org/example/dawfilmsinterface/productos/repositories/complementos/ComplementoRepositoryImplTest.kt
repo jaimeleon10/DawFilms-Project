@@ -13,6 +13,12 @@ import org.koin.fileProperties
 import org.koin.test.junit5.AutoCloseKoinTest
 import kotlin.test.assertEquals
 
+/**
+ * Tests para comprobar el correcto funcionamiento del repositorio de complementos
+ *
+ * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
+ * @since 1.0.0
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ComplementoRepositoryImplTest : AutoCloseKoinTest() {
     private val dbManager : SqlDeLightManager by inject()

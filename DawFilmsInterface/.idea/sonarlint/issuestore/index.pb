@@ -29,3 +29,11 @@ Osrc/main/kotlin/org/example/dawfilmsinterface/productos/errors/ProductoError.kt
 rsrc/test/kotlin/org/example/dawfilmsinterface/productos/repositories/complementos/ComplementoRepositoryImplTest.kt,9\d\9d629b63f3ae1ccb7d01e5ba4466a42631fb2948
 ”
 dsrc/main/kotlin/org/example/dawfilmsinterface/productos/repositories/butacas/ButacaRepositoryImpl.kt,d\2\d22a95a2a13e4a0ab16aa835262dacb5ea11422a
+Ž
+^src/test/kotlin/org/example/dawfilmsinterface/productos/validators/ComplementoValidatorTest.kt,5\f\5f5771bd70f441b3b4062867285d55d70e1f6512
+p
+@src/main/kotlin/org/example/dawfilmsinterface/cache/CacheImpl.kt,0\3\033ee9a09e18dab967c3f897a6b432133195d637
+Œ
+\src/main/kotlin/org/example/dawfilmsinterface/clientes/repositories/ClienteRepositoryImpl.kt,8\4\8497f3d16e140000d3a0c95ef3af123f3add13ec
+Š
+Zsrc/main/kotlin/org/example/dawfilmsinterface/productos/models/complementos/Complemento.kt,6\8\688a486da761919b9c4f2aa32e93b2d682af1426
