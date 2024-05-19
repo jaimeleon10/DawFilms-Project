@@ -9,6 +9,7 @@ import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComp
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
+import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.junit.jupiter.api.Test
