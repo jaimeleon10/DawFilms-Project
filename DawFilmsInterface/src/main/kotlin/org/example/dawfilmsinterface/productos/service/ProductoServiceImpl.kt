@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.services.productos
+package org.example.dawfilmsinterface.productos.service
 
 import com.github.michaelbull.result.*
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
@@ -20,7 +20,7 @@ class ProductoServiceImpl(
     private val productosCache: ProductosCache,
     private val butacaValidator: ButacaValidator,
     private val complementoValidator: ComplementoValidator
-) : ProductoService{
+) : ProductoService {
     override fun getAllProductos(): Result<List<Producto>, ProductoError> {
         logger.debug { "Obteniendo todos los productos" }
         val productos: MutableList<Producto> = mutableListOf()

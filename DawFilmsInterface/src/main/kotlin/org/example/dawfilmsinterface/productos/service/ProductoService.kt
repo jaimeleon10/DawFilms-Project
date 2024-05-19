@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.services.productos
+package org.example.dawfilmsinterface.productos.service
 
 import com.github.michaelbull.result.Result
 import org.example.dawfilmsinterface.productos.errors.ProductoError

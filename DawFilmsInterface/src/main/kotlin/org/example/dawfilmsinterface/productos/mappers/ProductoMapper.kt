@@ -113,60 +113,42 @@ fun Producto.toProductoDto(): ProductoDto {
     }
 }
 
-fun Butaca.toButacaDto(): ButacaDto {
-    return ButacaDto(
-        id = this.id,
-        tipoProducto = this.tipoProducto,
-        fila = this.fila,
-        columna = this.columna,
-        tipoButaca = this.tipoButaca.toString(),
-        estadoButaca = this.estadoButaca.toString(),
-        ocupacionButaca = this.ocupacionButaca.toString(),
-        createdAt = this.createdAt.toString(),
-        updatedAt = this.updatedAt.toString(),
-        isDeleted = this.isDeleted
-    )
-}
-
-fun ButacaDto.toButaca(): Butaca {
+fun ProductoDto.toButaca(): Butaca {
     return Butaca(
         id = this.id,
         tipoProducto = this.tipoProducto,
-        fila = this.fila,
-        columna = this.columna,
-        tipoButaca = TipoButaca.valueOf(this.tipoButaca.uppercase()),
-        estadoButaca = EstadoButaca.valueOf(this.estadoButaca.uppercase()),
-        ocupacionButaca = OcupacionButaca.valueOf(this.ocupacionButaca.uppercase()),
+        fila = this.filaButaca!!.toInt(),
+        columna = this.columnaButaca!!.toInt(),
+        tipoButaca = TipoButaca.valueOf(this.tipoButaca!!.uppercase()),
+        estadoButaca = EstadoButaca.valueOf(this.estadoButaca!!.uppercase()),
+        ocupacionButaca = OcupacionButaca.valueOf(this.ocupacionButaca!!.uppercase()),
         createdAt = LocalDate.parse(this.createdAt),
-        updatedAt = this.updatedAt ?.let { LocalDate.parse(it) },
+        updatedAt = this.updatedAt.let { LocalDate.parse(it) },
         isDeleted = this.isDeleted
     )
 }
 
-fun Complemento.toComplementoDto(): ComplementoDto {
-    return ComplementoDto(
-        id = this.id.toString(),
-        tipoProducto = this.tipoProducto,
-        nombre = this.nombre,
-        precio = this.precio,
-        stock = this.stock,
-        categoria = this.categoria.toString(),
-        createdAt = this.createdAt.toString(),
-        updatedAt = this.updatedAt.toString(),
-        isDeleted = isDeleted
-    )
-}
-
-fun ComplementoDto.toComplemento(): Complemento {
+fun ProductoDto.toComplemento(): Complemento {
     return Complemento(
         id = this.id,
         tipoProducto = this.tipoProducto,
-        nombre = this.nombre,
-        precio = this.precio,
-        stock = this.stock,
-        categoria = CategoriaComplemento.valueOf(this.categoria.uppercase()),
+        nombre = this.nombreComplemento!!,
+        precio = this.precioComplemento!!,
+        stock = this.stockComplemento!!.toInt(),
+        categoria = CategoriaComplemento.valueOf(this.categoriaComplemento!!.uppercase()),
         createdAt = LocalDate.parse(this.createdAt),
-        updatedAt = this.updatedAt ?.let { LocalDate.parse(it) },
+        updatedAt = this.updatedAt.let { LocalDate.parse(it) },
         isDeleted = this.isDeleted
     )
+}
+
+fun List<Producto>.toProductoDtoList(): List<ProductoDto> {
+    return map { it.toProductoDto() }
+}
+
+fun List<ProductoDto>.toProductoList(): List<Producto> {
+    return map {
+        if (it.tipoProducto == "Butaca") it.toButaca()
+        else it.toComplemento()
+    }
 }
