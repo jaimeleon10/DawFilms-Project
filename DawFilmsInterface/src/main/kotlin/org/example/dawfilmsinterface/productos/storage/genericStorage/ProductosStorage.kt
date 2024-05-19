@@ -11,5 +11,4 @@ interface ProductosStorage {
     fun loadJson(): Result<Producto, ProductoError>
     fun storeXml(): Result<Long, ProductoError>
     fun loadXml(): Result<Producto, ProductoError>
-    fun exportHtml(): Result<Long, ProductoError>
 }
