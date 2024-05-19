@@ -11,8 +11,8 @@ import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaReposi
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepositoryImpl
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepositoryImpl
-import org.example.dawfilmsinterface.productos.services.productos.ProductoService
-import org.example.dawfilmsinterface.productos.services.productos.ProductoServiceImpl
+import org.example.dawfilmsinterface.productos.service.ProductoService
+import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
