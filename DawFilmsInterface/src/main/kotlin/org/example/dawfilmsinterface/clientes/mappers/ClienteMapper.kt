@@ -14,6 +14,7 @@ fun UsuarioEntity.toCliente(): Cliente {
         dni = this.dni,
         email = this.email,
         numSocio = this.numSocio,
+        password = this.password,
         createdAt = LocalDate.parse(this.created_at),
         updatedAt = LocalDate.parse(this.updated_at),
         isDeleted = this.is_deleted.toInt() == 1
@@ -29,6 +30,7 @@ fun Cliente.toClienteDto(): ClienteDto {
         dni = this.dni,
         email = this.email,
         numSocio = this.numSocio,
+        password = this.password,
         createdAt = this.createdAt.toString(),
         updatedAt = this.updatedAt.toString(),
         isDeleted = this.isDeleted

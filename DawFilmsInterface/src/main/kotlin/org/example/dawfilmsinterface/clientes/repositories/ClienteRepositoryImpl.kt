@@ -41,6 +41,7 @@ class ClienteRepositoryImpl(
                 dni = cliente.dni,
                 email = cliente.email,
                 numSocio = cliente.numSocio,
+                password = cliente.password,
                 created_at = timeStamp,
                 updated_at = timeStamp,
             )
@@ -60,6 +61,7 @@ class ClienteRepositoryImpl(
             dni = cliente.dni,
             email = cliente.email,
             numSocio = cliente.numSocio,
+            password = cliente.password,
             updatedAt = timeStamp,
             isDeleted = cliente.isDeleted
         )
@@ -71,6 +73,7 @@ class ClienteRepositoryImpl(
             dni = result.dni,
             email = result.email,
             numSocio = result.numSocio,
+            password = result.password,
             updated_at = timeStamp.toString(),
             is_deleted = if (result.isDeleted) 1 else 0,
             id = id
@@ -90,6 +93,7 @@ class ClienteRepositoryImpl(
             dni = result.dni,
             email = result.email,
             numSocio = result.numSocio,
+            password = result.password,
             updated_at = timeStamp.toString(),
             is_deleted = 1,
             id = result.id,
