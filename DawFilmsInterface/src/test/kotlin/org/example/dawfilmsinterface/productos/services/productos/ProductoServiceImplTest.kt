@@ -5,6 +5,10 @@ import com.github.michaelbull.result.Ok
 import org.example.dawfilmsinterface.cache.errors.CacheError
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
 import org.example.dawfilmsinterface.productos.errors.ProductoError
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
@@ -52,10 +56,28 @@ class ProductoServiceImplTest {
 
     @Test
     fun getAllProductos() {
+        Mockito.`when`(mockButacaRepository.findAll()).thenReturn(listOf())
+        Mockito.`when`(mockComplementoRepository.findAll()).thenReturn(listOf())
+
+        val results = service.getAllButacas()
+        val result = service.getAllComplementos()
+
+        assertTrue(results.isOk)
+        assertTrue(result.isOk)
+
+        verify(mockButacaRepository, times(1)).findAll()
+        verify(mockComplementoRepository, times(1)).findAll()
     }
 
     @Test
     fun getAllButacas() {
+        Mockito.`when`(mockButacaRepository.findAll()).thenReturn(listOf())
+
+        val result = service.getAllButacas()
+
+        assertTrue(result.isOk)
+
+        verify(mockButacaRepository, times(1)).findAll()
     }
 
     @Test
@@ -71,6 +93,38 @@ class ProductoServiceImplTest {
 
     @Test
     fun getButacaById() {
+        val id = "A1"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA,
+            OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockProductosCache.get(id)).thenReturn(Ok(butaca))
+
+        val result = service.getButacaById(id)
+
+        assertTrue(result.isOk)
+        assertTrue(result.value == butaca)
+
+        verify(mockProductosCache, times(1)).get(id)
+        verify(mockButacaRepository, times(0)).findById(id)
+        verify(mockProductosCache, times(0)).put(id, butaca)
+    }
+    @Test
+    fun `getButacaById when isError`() {
+        val id = "A1"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+        val message = "No existe el valor en la cache"
+
+        Mockito.`when`(mockProductosCache.get(id)).thenReturn(Err(CacheError(message)))
+        Mockito.`when`(mockButacaRepository.findById(id)).thenReturn(null)
+
+        val result = service.getButacaById(id)
+
+        assertTrue(result.isErr)
+        assertFalse(result.value == butaca)
+
+        verify(mockProductosCache, times(1)).get(id)
+        verify(mockButacaRepository, times(1)).findById(id)
+        verify(mockProductosCache, times(0)).put(id, butaca)
     }
 
     @Test
@@ -144,6 +198,21 @@ class ProductoServiceImplTest {
 
     @Test
     fun saveButaca() {
+        val id = "A2"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 1, 1, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockButacaValidator.validate(butaca)).thenReturn(Ok(butaca))
+        Mockito.`when`(mockButacaRepository.save(butaca)).thenReturn(butaca)
+        Mockito.`when`(mockProductosCache.put(id, butaca)).thenReturn(Ok(butaca))
+
+        val result = service.saveButaca(butaca)
+
+        assertTrue(result.isOk)
+        assertTrue(result.value == butaca)
+
+        verify(mockButacaValidator, times(1)).validate(butaca)
+        verify(mockButacaRepository, times(1)).save(butaca)
+        verify(mockProductosCache, times(1)).put(id, butaca)
     }
 
     @Test
@@ -167,6 +236,21 @@ class ProductoServiceImplTest {
 
     @Test
     fun updateButaca() {
+        val id = "A1"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockButacaValidator.validate(butaca)).thenReturn(Ok(butaca))
+        Mockito.`when`(mockButacaRepository.update(id, butaca)).thenReturn(butaca)
+        Mockito.`when`(mockProductosCache.put(id, butaca)).thenReturn(Ok(butaca))
+
+        val result = service.updateButaca(id, butaca)
+
+        assertTrue(result.isOk)
+        assertTrue(result.value == butaca)
+
+        verify(mockButacaValidator, times(1)).validate(butaca)
+        verify(mockButacaRepository, times(1)).update(id, butaca)
+        verify(mockProductosCache, times(1)).put(id, butaca)
     }
 
     @Test
@@ -206,9 +290,40 @@ class ProductoServiceImplTest {
         verify(mockComplementoRepository, times(1)).update(id, complemento)
         verify(mockProductosCache, times(0)).put(id, complemento)
     }
+    @Test
+    fun `updateButaca when isError`() {
+        val id = "A5"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 4, 4, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockButacaValidator.validate(butaca)).thenReturn(Ok(butaca))
+        Mockito.`when`(mockButacaRepository.update(id, butaca)).thenReturn(null)
+
+        val result = service.updateButaca(id, butaca)
+
+        assertTrue(result.isErr)
+        assertTrue(result.error is ProductoError.ProductoNoActualizado)
+        assertEquals(result.error.message, "Butaca no actualizada con id: $id")
+
+        verify(mockButacaValidator, times(1)).validate(butaca)
+        verify(mockButacaRepository, times(1)).update(id, butaca)
+        verify(mockProductosCache, times(0)).put(id, butaca)
+    }
 
     @Test
     fun deleteButaca() {
+        val id = "A1"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockButacaRepository.delete(id)).thenReturn(butaca)
+        Mockito.`when`(mockProductosCache.remove(id)).thenReturn(Ok(butaca))
+
+        val result = service.deleteButaca(id)
+
+        assertTrue(result.isOk)
+        assertTrue(result.value == butaca)
+
+        verify(mockButacaRepository, times(1)).delete(id)
+        verify(mockProductosCache, times(1)).remove(id)
     }
 
     @Test
@@ -244,5 +359,22 @@ class ProductoServiceImplTest {
         verify(mockComplementoRepository, times(1)).delete(id)
         verify(mockProductosCache, times(0)).remove(id)
         verify(mockProductosCache, times(0)).put(id, complemento)
+    }
+    @Test
+    fun `deleteButaca when isError`() {
+        val id = "A5"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 4, 4, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        Mockito.`when`(mockButacaRepository.delete(id)).thenReturn(null)
+
+        val result = service.deleteButaca(id)
+
+        assertTrue(result.isErr)
+        assertTrue(result.error is ProductoError.ProductoNoEliminado)
+        assertEquals(result.error.message, "Butaca no eliminada con id: $id")
+
+        verify(mockButacaRepository, times(1)).delete(id)
+        verify(mockProductosCache, times(0)).remove(id)
+        verify(mockProductosCache, times(0)).put(id, butaca)
     }
 }
