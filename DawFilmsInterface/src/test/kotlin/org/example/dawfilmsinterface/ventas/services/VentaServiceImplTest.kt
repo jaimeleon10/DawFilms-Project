@@ -49,7 +49,8 @@ class VentaServiceImplTest {
                 fechaNacimiento = LocalDate.of(2000,1,1),
                 dni = "12345678A",
                 email = "test1@gmail.com",
-                numSocio = "AAA111"),
+                numSocio = "AAA111",
+                password = "password"),
             lineas = listOf(
                 LineaVenta(
                     tipoProducto = "Butaca",
@@ -110,7 +111,8 @@ class VentaServiceImplTest {
                 fechaNacimiento = LocalDate.of(2000,1,1),
                 dni = "12345678A",
                 email = "test1@gmail.com",
-                numSocio = "AAA111"),
+                numSocio = "AAA111",
+                password = "password"),
             lineas = listOf(
                 LineaVenta(
                     tipoProducto = "Butaca",
