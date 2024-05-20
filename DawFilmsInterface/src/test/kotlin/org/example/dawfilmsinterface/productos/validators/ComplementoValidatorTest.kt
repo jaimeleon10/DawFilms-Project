@@ -24,7 +24,7 @@ class ComplementoValidatorTest {
     @BeforeEach
     fun setUp() {
         complementoValidator = ComplementoValidator()
-        complemento = Complemento("1", "Complemento", "Palomitas", 3.0, 50, CategoriaComplemento.COMIDA)
+        complemento = Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 50, CategoriaComplemento.COMIDA)
     }
 
     @Test
@@ -37,6 +37,7 @@ class ComplementoValidatorTest {
         val complementoInvalido = Complemento(
             id = "1",
             tipoProducto = "Complemento",
+            imagen = "futura_imagen.png",
             nombre = "234",
             precio = 3.00,
             stock = 50,
@@ -53,6 +54,7 @@ class ComplementoValidatorTest {
         val complementoInvalido = Complemento(
             id = "1",
             tipoProducto = "Complemento",
+            imagen = "futura_imagen.png",
             nombre = "",
             precio = 3.00,
             stock = 50,
@@ -69,6 +71,7 @@ class ComplementoValidatorTest {
         val complementoInvalido = Complemento(
             id = "1",
             tipoProducto = "Complemento",
+            imagen = "futura_imagen.png",
             nombre = "palomitas?",
             precio = 3.00,
             stock = 50,

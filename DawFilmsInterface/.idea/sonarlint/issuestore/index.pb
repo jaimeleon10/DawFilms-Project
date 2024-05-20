@@ -89,3 +89,7 @@ Lsrc/main/kotlin/org/example/dawfilmsinterface/clientes/cache/ClienteCache.kt,7
 Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/services/ClienteServiceImpl.kt,3\b\3bf13c29a389c589522e9e5393113b6dfe6f10ad
 …
 Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/validators/ClienteValidator.kt,3\2\32574455f6d25c770e8404bdbf9899ff78d9be0a
+”
+dsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImplTest.kt,f\1\f1ad62eebaff672aa18eab55fbbad2713685e7ba
+’
+bsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJsonImplTest.kt,0\e\0e19dd3771882e80db6f5ce167a577509600a8be
