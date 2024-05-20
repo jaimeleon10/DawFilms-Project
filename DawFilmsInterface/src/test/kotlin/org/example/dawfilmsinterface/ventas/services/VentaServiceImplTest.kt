@@ -78,7 +78,6 @@ class VentaServiceImplTest {
         val venta=serviceVentas.getById(id)
 
         assertTrue(venta.isOk)
-        //assertEquals(UUID.fromString("67c712fb-5531-4f33-a744-0fdb65cd9dcf"),venta.value.id)
         assertTrue(venta.value == mockVenta)
 
         verify(repoVentas, times(1)).findById(id)
@@ -137,7 +136,6 @@ class VentaServiceImplTest {
 
         whenever(repoVentas.validateCliente(mockVenta.cliente)).thenReturn(Ok(mockVenta.cliente))
         whenever(repoVentas.validateLineas(mockVenta.lineas)).thenReturn(Ok(mockVenta.lineas))
-        //whenever(repoVentas.actualizarStock(mockVenta.lineas)).thenReturm(Ok(mockVenta.lineas))
         whenever(repoVentas.save(mockVenta)).thenReturn(Ok(mockVenta).value)
 
         val venta = serviceVentas.createVenta(mockVenta)
@@ -148,7 +146,6 @@ class VentaServiceImplTest {
 
         verify(repoVentas,times(1)).validateCliente(mockVenta.cliente)
         verify(repoVentas,times(1)).validateLineas(mockVenta.lineas)
-        //verify(repoVentas, times(1)).actualizarStock(mockVenta.lineas)
         verify(repoVentas, times(1)).save(mockVenta)
     }
 }
