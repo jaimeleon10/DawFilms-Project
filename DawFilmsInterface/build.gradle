@@ -70,6 +70,10 @@ dependencies {
 
     //Koin tests
     testImplementation("io.insert-koin:koin-test-junit5")
+
+    // XML
+    implementation("io.github.pdvrieze.xmlutil:core-jvm:0.86.3")
+    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:0.86.3")
 }
 
 test {

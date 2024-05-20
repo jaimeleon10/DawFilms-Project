@@ -19,6 +19,7 @@ module org.example.dawfilmsinterface {
     requires koin.core.jvm;
 
     requires open;
+    requires net.devrieze.xmlutil.serialization;
 
     opens org.example.dawfilmsinterface to javafx.fxml;
     exports org.example.dawfilmsinterface;
