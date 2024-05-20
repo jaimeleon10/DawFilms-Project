@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.services.productos
+package org.example.dawfilmsinterface.productos.services
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
@@ -17,7 +17,6 @@ import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
