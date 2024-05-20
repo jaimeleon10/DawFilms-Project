@@ -52,6 +52,7 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("1", complemento?.id)
         assertEquals("Complemento", complemento?.tipoProducto)
+        assertEquals("futura_imagen.png", complemento?.imagen)
         assertEquals("Palomitas", complemento?.nombre)
         assertEquals(3.0, complemento?.precio)
         assertEquals(20, complemento?.stock)
@@ -73,6 +74,7 @@ class ComplementoRepositoryImplTest {
             Complemento(
                 id = "2",
                 tipoProducto = "Complemento",
+                imagen = "futura_imagen.png",
                 nombre = "Agua",
                 precio = 2.0,
                 stock = 20,
@@ -82,6 +84,7 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("2", complemento.id)
         assertEquals("Complemento", complemento.tipoProducto)
+        assertEquals("futura_imagen.png", complemento?.imagen)
         assertEquals("Agua", complemento.nombre)
         assertEquals(2.0, complemento.precio)
         assertEquals(20, complemento.stock)
@@ -96,6 +99,7 @@ class ComplementoRepositoryImplTest {
             Complemento(
                 id = "1",
                 tipoProducto = "Complemento",
+                imagen = "futura_imagen.png",
                 nombre = "Complemento actualizado",
                 precio = 3.50,
                 stock = 50,
@@ -105,6 +109,7 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("1", complemento?.id)
         assertEquals("Complemento", complemento?.tipoProducto)
+        assertEquals("futura_imagen.png", complemento?.imagen)
         assertEquals("Complemento actualizado", complemento?.nombre)
         assertEquals(3.50, complemento?.precio)
         assertEquals(50, complemento?.stock)
@@ -119,6 +124,7 @@ class ComplementoRepositoryImplTest {
             Complemento(
                 id = "1",
                 tipoProducto = "Complemento",
+                imagen = "futura_imagen.png",
                 nombre = "Complemento actualizado",
                 precio = 3.50,
                 stock = 50,
