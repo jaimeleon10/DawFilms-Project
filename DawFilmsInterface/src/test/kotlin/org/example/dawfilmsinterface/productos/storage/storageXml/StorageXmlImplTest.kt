@@ -2,10 +2,9 @@ package org.example.dawfilmsinterface.productos.storage.storageXml
 
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
+import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import java.io.File
@@ -30,7 +29,7 @@ class StorageXmlImplTest {
 
     @Test
     fun storeXml() {
-        val data = listOf(
+        val data = listOf<Producto>(
             Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
                 LocalDate.now(), LocalDate.now(),false)
         )
@@ -43,7 +42,7 @@ class StorageXmlImplTest {
 
     @Test
     fun loadXml() {
-        val data = listOf(
+        val data = listOf<Producto>(
             Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
                 LocalDate.now(), LocalDate.now(),false)
         )
