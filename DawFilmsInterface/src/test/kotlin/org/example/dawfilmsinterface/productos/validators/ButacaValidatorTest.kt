@@ -38,7 +38,9 @@ class ButacaValidatorTest {
 
     @Test
     fun validate() {
-        butacaValidator.validate(butaca)
+        val result = butacaValidator.validate(butaca)
+
+        assertTrue(result.isOk)
     }
 
     @Test
