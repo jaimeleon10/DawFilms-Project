@@ -12,4 +12,9 @@ interface ProductosStorage {
     fun loadJson(file: File): Result<List<Producto>, ProductoError>
     fun storeXml(file: File, data: List<Producto>): Result<Long, ProductoError>
     fun loadXml(file: File): Result<List<Producto>, ProductoError>
+    fun saveImage(fileName: File): Result<File, ProductoError>
+    fun loadImage(fileName: String): Result<File, ProductoError>
+    fun deleteImage(fileName: File): Result<Unit, ProductoError>
+    fun deleteAllImages(): Result<Long, ProductoError>
+    fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError>
 }
