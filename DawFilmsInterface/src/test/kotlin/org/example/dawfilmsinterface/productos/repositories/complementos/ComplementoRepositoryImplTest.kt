@@ -6,6 +6,9 @@ import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComp
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import org.lighthousegames.logging.logging
+
+private val logger = logging()
 
 /**
  * Tests para comprobar el correcto funcionamiento del repositorio de complementos
@@ -21,14 +24,9 @@ class ComplementoRepositoryImplTest {
 
     @BeforeAll
     fun setUpAll() {
-        println("Iniciando tests...")
+        logger.debug { "Iniciando tests..." }
         dbManager = SqlDeLightManager(Config())
         complementoRepository = ComplementoRepositoryImpl(dbManager)
-    }
-
-    @BeforeEach
-    fun setUp() {
-        dbManager
     }
 
     @AfterAll
@@ -84,7 +82,7 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("2", complemento.id)
         assertEquals("Complemento", complemento.tipoProducto)
-        assertEquals("futura_imagen.png", complemento?.imagen)
+        assertEquals("futura_imagen.png", complemento.imagen)
         assertEquals("Agua", complemento.nombre)
         assertEquals(2.0, complemento.precio)
         assertEquals(20, complemento.stock)
