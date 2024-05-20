@@ -5,11 +5,11 @@ VALUES ('A1', 'Butaca', 'futura_imagen.png', 5.0, 0, 0, 'NORMAL', 'ACTIVA', 'LIB
 INSERT INTO ProductoEntity (id, tipo_producto, imagen, precio, fila_butaca, columna_butaca,tipo_butaca, estado_butaca, ocupacion_butaca, nombre_complemento, stock_complemento, categoria_complemento, created_at, updated_at, is_deleted)
 VALUES ('1', 'Complemento', 'futura_imagen.png', 3.0, NULL , NULL, NULL, NULL, NULL, 'Palomitas', 20, 'Comida', '2024-05-18', '2024-05-18', 0);
 
-INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at, is_deleted)
-VALUES (1, 'admin', 'admin', '2024-01-01', '11111111A', 'admin@admin.com', 'AAA111', '2024-05-18', '2024-05-18', 0);
+INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, password, created_at, updated_at, is_deleted)
+VALUES (1, 'admin', 'admin', '2024-01-01', '11111111A', 'admin@admin.com', 'AAA111', 'admin', '2024-05-18', '2024-05-18', 0);
 
-INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, created_at, updated_at, is_deleted)
-VALUES (2, 'Jaime', 'Leon', '2002-04-10', '12345678A', 'jaime@gmail.com', 'AAA112', '2024-05-18', '2024-05-18', 0);
+INSERT INTO UsuarioEntity (id, nombre, apellido, fecha_nacimiento, dni, email, numSocio, password, created_at, updated_at, is_deleted)
+VALUES (2, 'Jaime', 'Leon', '2002-04-10', '12345678A', 'jaime@gmail.com', 'AAA112', 'password', '2024-05-18', '2024-05-18', 0);
 
 INSERT INTO LineaVentaEntity (id, venta_id, producto_id, producto_tipo, cantidad, precio, created_at, updated_at, is_deleted)
 VALUES ('17c712fb-5531-4f33-a744-0fdb65cd9dcf', '37c712fb-5531-4f33-a744-0fdb65cd9dcf', 'A1', 'Butaca', 1, 5.0, '2024-05-18', '2024-05-18', 0);
