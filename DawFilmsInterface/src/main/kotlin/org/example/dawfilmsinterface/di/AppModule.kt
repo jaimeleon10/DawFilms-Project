@@ -75,6 +75,7 @@ val appModule = module {
         bind<ComplementoRepository>()
     }
 
+    //Productos
     singleOf(::ProductoServiceImpl) {
         bind<ProductoService>()
     }
