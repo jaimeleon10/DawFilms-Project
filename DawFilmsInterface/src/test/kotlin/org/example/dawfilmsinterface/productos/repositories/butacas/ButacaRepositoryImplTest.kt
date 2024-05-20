@@ -30,11 +30,6 @@ class ButacaRepositoryImplTest {
         butacaRepository = ButacaRepositoryImpl(dbManager)
     }
 
-    @BeforeEach
-    fun setUp() {
-        dbManager
-    }
-
     @AfterAll
     fun tearDown() {
         dbManager.clearData()
