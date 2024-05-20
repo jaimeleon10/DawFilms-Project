@@ -7,9 +7,9 @@ import java.io.File
 
 interface ProductosStorage {
     fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError>
-    fun loadCsv(file: File): Result<Producto, ProductoError>
+    fun loadCsv(file: File): Result<List<Producto>, ProductoError>
     fun storeJson(file: File, data: List<Producto>): Result<Long, ProductoError>
-    fun loadJson(file: File): Result<Producto, ProductoError>
+    fun loadJson(file: File): Result<List<Producto>, ProductoError>
     fun storeXml(file: File, data: List<Producto>): Result<Long, ProductoError>
-    fun loadXml(file: File): Result<Producto, ProductoError>
+    fun loadXml(file: File): Result<List<Producto>, ProductoError>
 }

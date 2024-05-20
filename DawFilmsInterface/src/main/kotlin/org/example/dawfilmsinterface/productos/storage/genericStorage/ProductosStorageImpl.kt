@@ -1,6 +1,5 @@
 package org.example.dawfilmsinterface.productos.storage.genericStorage
 
-import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
@@ -22,7 +21,7 @@ class ProductosStorageImpl(
         return storageCsv.storeCsv(file, data)
     }
 
-    override fun loadCsv(file: File): Result<Producto, ProductoError> {
+    override fun loadCsv(file: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }
         return storageCsv.loadCsv(file)
     }
@@ -32,7 +31,7 @@ class ProductosStorageImpl(
         return storageJson.storeJson(file, data)
     }
 
-    override fun loadJson(file: File): Result<Producto, ProductoError> {
+    override fun loadJson(file: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Cargando datos en fichero $file"}
         return storageJson.loadJson(file)
     }
@@ -42,7 +41,7 @@ class ProductosStorageImpl(
         return storageXml.storeXml(file, data)
     }
 
-    override fun loadXml(file: File): Result<Producto, ProductoError> {
+    override fun loadXml(file: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }
         return storageXml.loadXml(file)
     }
