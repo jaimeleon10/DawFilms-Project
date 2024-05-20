@@ -25,7 +25,7 @@ class ClienteServiceImpl(
 
     override fun getById(id: Long): Result<Cliente, ClienteError> {
         logger.debug { "Obteniendo cliente con id: $id" }
-        return clienteCache.get(id.toInt()).mapBoth(
+        return clienteCache.get(id).mapBoth(
             success = {
                 logger.debug { "Cliente encontrado en cache" }
                 Ok(it)
@@ -45,7 +45,7 @@ class ClienteServiceImpl(
             Ok(clienteRepository.save(it))
         }.andThen { c ->
             println("Guardando en cache")
-            clienteCache.put(c.id.toInt(), c)
+            clienteCache.put(c.id, c)
         }
     }
 
@@ -56,7 +56,7 @@ class ClienteServiceImpl(
                 ?.let { Ok(it) }
                 ?: Err(ClienteError.ClienteNoActualizado("Cliente no actualizado con id: $id"))
         }.andThen {
-            clienteCache.put(id.toInt(), it)
+            clienteCache.put(id, it)
         }
     }
 
@@ -64,7 +64,7 @@ class ClienteServiceImpl(
         logger.debug { "Borrando cliente con id: $id" }
         return clienteRepository.delete(id)
             ?.let {
-                clienteCache.remove(id.toInt())
+                clienteCache.remove(id)
                 Ok(it)
             } ?: Err(ClienteError.ClienteNoEliminado("Butaca no eliminada con id: $id"))
     }
