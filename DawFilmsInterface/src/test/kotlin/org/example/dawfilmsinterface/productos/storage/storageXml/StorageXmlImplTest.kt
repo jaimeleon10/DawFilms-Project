@@ -1,26 +1,26 @@
-package org.example.dawfilmsinterface.productos.storage.storageJson
+package org.example.dawfilmsinterface.productos.storage.storageXml
 
-import org.example.dawfilmsinterface.productos.dto.ProductoDto
-import org.example.dawfilmsinterface.productos.mappers.toProductoList
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.junit.jupiter.api.*
+import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import java.io.File
 import java.nio.file.Files
 import java.time.LocalDate
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-class StorageJsonImplTest {
+class StorageXmlImplTest {
 
-    private lateinit var storageJson: StorageJsonImpl
+    private lateinit var storageXml: StorageXml
     private lateinit var myFile: File
 
     @BeforeEach
     fun setUp() {
-        storageJson = StorageJsonImpl()
-        myFile = Files.createTempFile("productos", ".json").toFile()
+        storageXml = StorageXmlImpl()
+        myFile = Files.createTempFile("productos", ".xml").toFile()
     }
 
     @AfterEach
@@ -28,32 +28,30 @@ class StorageJsonImplTest {
         Files.deleteIfExists(myFile.toPath())
     }
 
-    @Order(1)
     @Test
-    fun storeJson() {
+    fun storeXml() {
         val data = listOf(
             Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
                 LocalDate.now(), LocalDate.now(),false)
         )
 
-        val result = storageJson.storeJson(myFile, data)
+        val result = storageXml.storeXml(myFile, data)
 
         assertTrue(result.isOk)
         assertEquals(data.size.toLong(), result.value)
     }
 
-    @Order(2)
     @Test
-    fun loadJson() {
+    fun loadXml() {
         val data = listOf(
             Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
                 LocalDate.now(), LocalDate.now(),false)
         )
 
-        storageJson.storeJson(myFile, data)
+        storageXml.storeXml(myFile, data)
         println("Datos escritos en el fichero: $myFile")
 
-        val result = storageJson.loadJson(myFile)
+        val result = storageXml.loadXml(myFile)
 
         assertTrue(result.isOk)
         assertEquals(data, result.value)

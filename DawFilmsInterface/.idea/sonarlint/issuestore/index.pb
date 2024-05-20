@@ -93,3 +93,5 @@ Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/validators/ClienteValida
 dsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImplTest.kt,f\1\f1ad62eebaff672aa18eab55fbbad2713685e7ba
 í
 bsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJsonImplTest.kt,0\e\0e19dd3771882e80db6f5ce167a577509600a8be
+ê
+`src/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageXml/StorageXmlImplTest.kt,2\3\23a4cf05ad96d2ea0ab37a5f441bccc0a5f7b16c
