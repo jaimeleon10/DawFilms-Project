@@ -39,6 +39,7 @@ class ComplementoRepositoryImpl(
             db.insertComplemento(
                 id = item.id,
                 tipo_producto = item.tipoProducto,
+                imagen = item.imagen,
                 precio = item.precio,
                 nombre_complemento = item.nombre,
                 stock_complemento = item.stock.toLong(),
@@ -58,6 +59,7 @@ class ComplementoRepositoryImpl(
 
         db.updateComplemento(
             tipo_producto = item.tipoProducto,
+            imagen = item.imagen,
             precio = item.precio,
             nombre_complemento = item.nombre,
             stock_complemento = item.stock.toLong(),

@@ -6,6 +6,7 @@ import java.time.LocalDate
 class Butaca (
     id: String,
     tipoProducto: String = "Butaca",
+    imagen: String = "",
     val fila: Int,
     val columna: Int,
     val tipoButaca: TipoButaca,
@@ -14,9 +15,9 @@ class Butaca (
     createdAt: LocalDate = LocalDate.now(),
     updatedAt: LocalDate? = null,
     isDeleted: Boolean? = false
-): Producto(id, tipoProducto, createdAt, updatedAt, isDeleted) {
+): Producto(id, tipoProducto, imagen, createdAt, updatedAt, isDeleted) {
 
     override fun toString(): String {
-        return "Butaca(id: $id, tipoButaca: $tipoButaca, precio: ${tipoButaca.precio}, fila: $fila, columna: $columna, estadoButaca: $estadoButaca, ocupacionButaca: $ocupacionButaca, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted)"
+        return "Butaca(id: $id, tipoButaca: $tipoButaca, imagen: $imagen, precio: ${tipoButaca.precio}, fila: $fila, columna: $columna, estadoButaca: $estadoButaca, ocupacionButaca: $ocupacionButaca, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted)"
     }
 }

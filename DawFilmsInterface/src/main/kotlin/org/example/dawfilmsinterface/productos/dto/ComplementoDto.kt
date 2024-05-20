@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class ComplementoDto(
     val id: String,
     val tipoProducto: String,
+    val imagen: String,
     val nombre: String,
     val precio: Double,
     val stock: Int,

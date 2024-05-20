@@ -9,6 +9,9 @@ import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import java.io.File
 import nl.adaptivity.xmlutil.serialization.XML
+import org.example.dawfilmsinterface.productos.dto.ProductoDto
+import org.example.dawfilmsinterface.productos.mappers.toProductoDtoList
+import org.example.dawfilmsinterface.productos.mappers.toProductoList
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -18,7 +21,7 @@ class StorageXmlImpl : StorageXml {
         logger.debug{ "Guardando datos en fichero $file" }
         return try {
             val xml = XML { indent = 4 }
-            val xmlString = xml.encodeToString<List<Producto>>(data)
+            val xmlString = xml.encodeToString<List<ProductoDto>>(data.toProductoDtoList())
             file.writeText(xmlString)
             Ok(data.size.toLong())
         }catch (e : Exception) {
@@ -31,8 +34,8 @@ class StorageXmlImpl : StorageXml {
         val xml = XML{}
         return try {
             val xmlString = file.readText()
-            val data = xml.decodeFromString<List<Producto>>(xmlString)
-            Ok(data)
+            val data = xml.decodeFromString<List<ProductoDto>>(xmlString)
+            Ok(data.toProductoList())
         } catch (e : Exception){
             Err(ProductoError.ProductoStorageError("Error al leer el XML: ${e.message}"))
         }

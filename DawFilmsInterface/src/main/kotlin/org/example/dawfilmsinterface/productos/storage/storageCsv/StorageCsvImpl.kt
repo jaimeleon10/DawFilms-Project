@@ -18,10 +18,10 @@ class StorageCsvImpl: StorageCsv {
     override fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }
         return try {
-            file.writeText("ID,Tipo Producto,Fila Butaca,Columna Butaca,Tipo Butaca,EstadoButaca,Ocupacion Butaca,Nombre Complemento,Precio Complemento,Categoria Complemento, Stock Complemento, CreatedAt, UpdatedAt, IsDeleted\n")
+            file.writeText("ID,Tipo Producto,Imagen,Fila Butaca,Columna Butaca,Tipo Butaca,EstadoButaca,Ocupacion Butaca,Nombre Complemento,Precio Complemento,Categoria Complemento, Stock Complemento, CreatedAt, UpdatedAt, IsDeleted\n")
             data.map { it.toProductoDto() }
                 .forEach {
-                    file.appendText("${it.id},${it.tipoProducto},${it.filaButaca},${it.columnaButaca},${it.tipoButaca},${it.estadoButaca},${it.ocupacionButaca},${it.nombreComplemento},${it.precioComplemento},${it.categoriaComplemento},${it.stockComplemento},${it.createdAt},${it.updatedAt},${it.isDeleted}\n")
+                    file.appendText("${it.id},${it.tipoProducto},${it.imagen},${it.filaButaca},${it.columnaButaca},${it.tipoButaca},${it.estadoButaca},${it.ocupacionButaca},${it.nombreComplemento},${it.precioComplemento},${it.categoriaComplemento},${it.stockComplemento},${it.createdAt},${it.updatedAt},${it.isDeleted}\n")
                 }
             Ok(data.size.toLong())
         } catch (e: Exception) {
@@ -39,33 +39,35 @@ class StorageCsvImpl: StorageCsv {
                     if (data[1] == "Butaca") ProductoDto(
                         id = data[0],
                         tipoProducto = data[1],
-                        filaButaca = data[2].toInt(),
-                        columnaButaca = data[3].toInt(),
-                        tipoButaca = data[4],
-                        estadoButaca = data[5],
-                        ocupacionButaca = data[6],
+                        imagen = data[2],
+                        filaButaca = data[3].toInt(),
+                        columnaButaca = data[4].toInt(),
+                        tipoButaca = data[5],
+                        estadoButaca = data[6],
+                        ocupacionButaca = data[7],
                         nombreComplemento = null,
                         precioComplemento = null,
                         categoriaComplemento = null,
                         stockComplemento = null,
-                        createdAt = data[11],
-                        updatedAt = data[12],
-                        isDeleted = data[13].toBoolean()
+                        createdAt = data[12],
+                        updatedAt = data[13],
+                        isDeleted = data[14].toBoolean()
                     ).toButaca() else ProductoDto(
                         id = data[0],
                         tipoProducto = data[1],
+                        imagen = data[2],
                         filaButaca = null,
                         columnaButaca = null,
                         tipoButaca = null,
                         estadoButaca = null,
                         ocupacionButaca = null,
-                        nombreComplemento = data[7],
-                        precioComplemento = data[8].toDouble(),
-                        categoriaComplemento = data[9],
-                        stockComplemento = data[10].toInt(),
-                        createdAt = data[11],
-                        updatedAt = data[12],
-                        isDeleted = data[13].toBoolean()
+                        nombreComplemento = data[8],
+                        precioComplemento = data[9].toDouble(),
+                        categoriaComplemento = data[10],
+                        stockComplemento = data[11].toInt(),
+                        createdAt = data[12],
+                        updatedAt = data[13],
+                        isDeleted = data[14].toBoolean()
                     ).toComplemento()
                 }
             Ok(productsList)
