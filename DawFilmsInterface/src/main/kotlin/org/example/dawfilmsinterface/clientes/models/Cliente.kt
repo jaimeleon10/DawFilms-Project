@@ -10,6 +10,7 @@ data class Cliente(
     val dni: String,
     val email: String,
     val numSocio: String,
+    val password: String,
     val createdAt: LocalDate = LocalDate.now(),
     val updatedAt: LocalDate = LocalDate.now(),
     val isDeleted: Boolean = false
