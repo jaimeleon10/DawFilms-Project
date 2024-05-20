@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.PantallaDeCargaController">
+
+   <ImageView fitHeight="350.0" fitWidth="350.0" layoutX="285.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+   </ImageView>
+
+   <HBox alignment="CENTER" layoutX="110.0" layoutY="389.0" prefHeight="60.0" prefWidth="700.0" style="-fx-spacing: 20;">
+      <Hyperlink fx:id="githubJaimeLink" alignment="CENTER" prefHeight="42.0" prefWidth="118.0" style="-fx-text-fill: cyan; -fx-visited-color: cyan; -fx-border-color: transparent;" text="GitHub Jaime">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../dawfilmsinterface/icons/github.png" />
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="githubNataliaLink" alignment="CENTER" prefHeight="42.0" prefWidth="128.0" style="-fx-text-fill: cyan; -fx-visited-color: cyan; -fx-border-color: transparent;" text="GitHub Natalia">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../dawfilmsinterface/icons/github.png" />
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="githubJavierLink" alignment="CENTER" prefHeight="42.0" prefWidth="122.0" style="-fx-text-fill: cyan; -fx-visited-color: cyan; -fx-border-color: transparent;" text="GitHub Javier">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../dawfilmsinterface/icons/github.png" />
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="githubAlbaLink" alignment="CENTER" prefHeight="42.0" prefWidth="110.0" style="-fx-text-fill: cyan; -fx-visited-color: cyan; -fx-border-color: transparent;" text="GitHub Alba">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../dawfilmsinterface/icons/github.png" />
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="githubGermanLink" alignment="CENTER" prefHeight="42.0" prefWidth="130.0" style="-fx-text-fill: cyan; -fx-visited-color: cyan; -fx-border-color: transparent;" text="GitHub Germán">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <Image url="@../../dawfilmsinterface/icons/github.png" />
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Hyperlink>
+   </HBox>
+
+   <ProgressBar fx:id="progressBar" layoutX="110.0" layoutY="532.0" prefHeight="26.0" prefWidth="700.0" progress="0.34" style="-fx-accent: ffbd2e;" />
+
+   <Label fx:id="cargandoLabel" layoutX="410.0" layoutY="571.0" prefHeight="27.0" prefWidth="100.0" text="Cargando..." textFill="#ffd757">
+      <font>
+         <Font name="System Bold Italic" size="18.0" />
+      </font>
+
+   </Label>
+
+   <Line endX="350.0" layoutX="460.0" layoutY="449.0" startX="-350.0" stroke="#ffbd2e" />
+   <Line endX="350.0" layoutX="460.0" layoutY="389.0" startX="-350.0" stroke="#ffbd2e" />
+
+   <ImageView fitHeight="125.0" fitWidth="120.0" layoutX="103.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true" rotate="-12.1">
+      <Image url="@../../dawfilmsinterface/icons/ticket.png" />
+   </ImageView>
+
+   <ImageView fitHeight="100.0" fitWidth="125.0" layoutX="697.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true" rotate="18.4">
+      <Image url="@../../dawfilmsinterface/icons/claqueta.png" />
+   </ImageView>
+</AnchorPane>
