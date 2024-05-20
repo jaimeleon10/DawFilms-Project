@@ -3,7 +3,6 @@ package org.example.dawfilmsinterface.productos.repositories.butacas
 import org.example.dawfilmsinterface.clientes.mappers.toCliente
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.mappers.toButaca
-import org.example.dawfilmsinterface.productos.mappers.toButacaDto
 import org.example.dawfilmsinterface.productos.mappers.toProducto
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.lighthousegames.logging.logging
@@ -34,6 +33,7 @@ class ButacaRepositoryImpl(
             db.insertButaca(
                 id = item.id,
                 tipo_producto = item.tipoProducto,
+                imagen = item.imagen,
                 fila_butaca = item.fila.toLong(),
                 columna_butaca = item.columna.toLong(),
                 precio = item.tipoButaca.precio,
