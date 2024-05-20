@@ -20,11 +20,11 @@ private const val CONFIG_FILE_NAME = "application.properties"
  */
 class Config {
 
-    val APP_PATH = System.getProperty("user.dir")
+    private val actualDirectory = System.getProperty("user.dir")
 
     val imagesDirectory by lazy {
         val path = readProperty("app.images") ?: "imagenes"
-        "$APP_PATH${File.separator}$path"
+        "$actualDirectory${File.separator}$path"
     }
 
     val dataBaseUrl: String by lazy {
