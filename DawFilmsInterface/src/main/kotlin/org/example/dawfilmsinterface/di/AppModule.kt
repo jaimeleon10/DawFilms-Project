@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.di
 
+
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
@@ -9,8 +10,8 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepositoryImpl
-import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepositoryImpl
+import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
@@ -45,6 +46,7 @@ val appModule = module {
         bind<ButacaRepository>()
     }
 
+    //Complemento
     singleOf(::ComplementoRepositoryImpl) {
         bind<ComplementoRepository>()
     }
