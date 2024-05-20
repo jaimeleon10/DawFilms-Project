@@ -76,7 +76,7 @@ class ProductoServiceImplTest {
     @Test
     fun getComplementoById() {
         val id = "1"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockProductosCache.get(id)).thenReturn(Ok(complemento))
 
@@ -93,7 +93,7 @@ class ProductoServiceImplTest {
     @Test
     fun `getComplementoById when isError`() {
         val id = "1"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
         val message = "No existe el valor en la cache"
 
         Mockito.`when`(mockProductosCache.get(id)).thenReturn(Err(CacheError(message)))
@@ -112,7 +112,7 @@ class ProductoServiceImplTest {
     @Test
     fun getComplementoByNombre() {
         val nombre = "Palomitas"
-        val complemento = Complemento("1", "Complemento", nombre, 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento("1", "Complemento", "futura_imagen.png", nombre, 3.0, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoRepository.findByNombre(nombre)).thenReturn(complemento)
 
@@ -128,7 +128,7 @@ class ProductoServiceImplTest {
     @Test
     fun `getComplementoByNombre when isError`() {
         val nombre = "Palomitas"
-        val complemento = Complemento("1", "Complemento", nombre, 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento("1", "Complemento", "futura_imagen.png", nombre, 3.0, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoRepository.findByNombre(nombre)).thenReturn(null)
 
@@ -149,7 +149,7 @@ class ProductoServiceImplTest {
     @Test
     fun saveComplemento() {
         val id = "2"
-        val complemento = Complemento(id, "Complemento", "Agua", 2.0, 20, CategoriaComplemento.BEBIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Agua", 2.0, 20, CategoriaComplemento.BEBIDA)
 
         Mockito.`when`(mockComplementoValidator.validate(complemento)).thenReturn(Ok(complemento))
         Mockito.`when`(mockComplementoRepository.save(complemento)).thenReturn(complemento)
@@ -172,7 +172,7 @@ class ProductoServiceImplTest {
     @Test
     fun updateComplemento() {
         val id = "1"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.5, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Palomitas", 3.5, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoValidator.validate(complemento)).thenReturn(Ok(complemento))
         Mockito.`when`(mockComplementoRepository.update(id, complemento)).thenReturn(complemento)
@@ -191,7 +191,7 @@ class ProductoServiceImplTest {
     @Test
     fun `updateComplemento when isError`() {
         val id = "5"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.5, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Palomitas", 3.5, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoValidator.validate(complemento)).thenReturn(Ok(complemento))
         Mockito.`when`(mockComplementoRepository.update(id, complemento)).thenReturn(null)
@@ -214,7 +214,7 @@ class ProductoServiceImplTest {
     @Test
     fun deleteComplemento() {
         val id = "1"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoRepository.delete(id)).thenReturn(complemento)
         Mockito.`when`(mockProductosCache.remove(id)).thenReturn(Ok(complemento))
@@ -231,7 +231,7 @@ class ProductoServiceImplTest {
     @Test
     fun `deleteComplemento when isError`() {
         val id = "5"
-        val complemento = Complemento(id, "Complemento", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA)
 
         Mockito.`when`(mockComplementoRepository.delete(id)).thenReturn(null)
 
