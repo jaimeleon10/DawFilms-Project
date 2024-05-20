@@ -55,6 +55,7 @@ class ButacaRepositoryImpl(
 
         db.updateButaca(
             tipo_producto = item.tipoProducto,
+            imagen = item.imagen,
             precio = item.tipoButaca.precio,
             fila_butaca = item.fila.toLong(),
             columna_butaca = item.columna.toLong(),

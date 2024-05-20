@@ -108,10 +108,10 @@ INSERT INTO ProductoEntity (id, tipo_producto, imagen, precio, nombre_complement
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 updateButaca:
-UPDATE ProductoEntity SET tipo_producto = ?, precio = ?, fila_butaca = ?, columna_butaca = ?, tipo_butaca = ?, estado_butaca = ?, ocupacion_butaca = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+UPDATE ProductoEntity SET tipo_producto = ?, imagen = ?, precio = ?, fila_butaca = ?, columna_butaca = ?, tipo_butaca = ?, estado_butaca = ?, ocupacion_butaca = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
 
 updateComplemento:
-UPDATE ProductoEntity SET tipo_producto = ?, precio = ?, nombre_complemento = ?, stock_complemento = ?, categoria_complemento = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+UPDATE ProductoEntity SET tipo_producto = ?, imagen = ?, precio = ?, nombre_complemento = ?, stock_complemento = ?, categoria_complemento = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
 
 deleteLogicoButaca:
 UPDATE ProductoEntity SET updated_at = ?, is_deleted = 1 WHERE id = ? AND tipo_producto = 'Butaca';
