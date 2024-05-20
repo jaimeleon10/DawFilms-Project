@@ -103,10 +103,10 @@ class ButacaRepositoryImplTest {
     @Order(5)
     fun update() {
         val butaca = butacaRepository.update(
-            "A3up",
+            "A1",
             Butaca(
-                id = "A3",
-                tipoProducto = "Butaca",
+                id = "A1",
+                tipoProducto = "Butaca_update",
                 imagen = "futura_imagen2.png",
                 fila = 1,
                 columna = 1,
@@ -116,8 +116,8 @@ class ButacaRepositoryImplTest {
             )
         )
 
-        assertEquals("A3up", butaca?.id)
-        assertEquals("Butaca", butaca?.tipoProducto)
+        assertEquals("A1", butaca?.id)
+        assertEquals("Butaca_update", butaca?.tipoProducto)
         assertEquals("futura_imagen2.png", butaca?.imagen)
         assertEquals(1, butaca?.fila)
         assertEquals(1, butaca?.columna)
@@ -149,9 +149,9 @@ class ButacaRepositoryImplTest {
     @Test
     @Order(7)
     fun delete() {
-        val butaca= butacaRepository.delete("A1")
+        val butaca = butacaRepository.delete("A2")
 
-        assertEquals("A1", butaca?.id)
+        assertEquals("A2", butaca?.id)
     }
 
     @Test

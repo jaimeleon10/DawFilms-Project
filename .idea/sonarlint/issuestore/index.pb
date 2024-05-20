@@ -21,3 +21,9 @@ X
 (src/main/sqldelight/database/Database.sq,1\9\1963e783fb164049e4983dcf643bc40cc5ad1bb5
 •
 esrc/test/kotlin/org/example/dawfilmsinterface/productos/services/productos/ProductoServiceImplTest.kt,0\7\077831fc3d2847f7ffde886875e697121141dfde
+…
+Usrc/main/kotlin/org/example/dawfilmsinterface/productos/validators/ButacaValidator.kt,1\9\192a35e1b3d87bb3cdca51aaa9548d7fb2fba7cb
+Š
+Zsrc/main/kotlin/org/example/dawfilmsinterface/productos/validators/ComplementoValidator.kt,7\6\7620eb8c3f4ab838777013cf0cb8719f7228e95f
+†
+Vsrc/main/kotlin/org/example/dawfilmsinterface/productos/service/ProductoServiceImpl.kt,d\8\d8132baf24040b55cdabb89eed1f30e80ab82388
