@@ -25,7 +25,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "12345678X",
             email = "cliente_nombre.clientea_apellido@mail.com",
-            numSocio = "001"
+            numSocio = "001",
+            password = "password"
         )
 
         cache.put(1, cliente)
@@ -56,7 +57,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "12345678X",
             email = "cliente_nombre.clientea_apellido@mail.com",
-            numSocio = "001"
+            numSocio = "001",
+            password = "password"
         )
 
         cache.put(1, cliente)
@@ -87,7 +89,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "12345678X",
             email = "cliente_nombre.clientea_apellido@mail.com",
-            numSocio = "001"
+            numSocio = "001",
+            password = "password"
         )
         cache.put(1,cliente)
         cache.clear()
@@ -105,7 +108,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "12345678X",
             email = "cliente_nombre1.clientea_apellido1@mail.com",
-            numSocio = "001"
+            numSocio = "001",
+            password = "password"
         )
 
         val cliente2 = Cliente(
@@ -115,7 +119,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "22345678X",
             email = "cliente_nombre2.clientea_apellido2@mail.com",
-            numSocio = "002"
+            numSocio = "002",
+            password = "password"
         )
 
         val cliente3 = Cliente(
@@ -125,7 +130,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "32345678X",
             email = "cliente_nombre3.clientea_apellido3@mail.com",
-            numSocio = "003"
+            numSocio = "003",
+            password = "password"
         )
 
         val cliente4 = Cliente(
@@ -135,7 +141,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "42345678X",
             email = "cliente_nombre4.clientea_apellido4@mail.com",
-            numSocio = "004"
+            numSocio = "004",
+            password = "password"
         )
 
         val cliente5 = Cliente(
@@ -145,7 +152,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "22345678X",
             email = "cliente_nombre5.clientea_apellido5@mail.com",
-            numSocio = "005"
+            numSocio = "005",
+            password = "password"
         )
         val cliente6 = Cliente(
             id = 6,
@@ -154,7 +162,8 @@ class CacheImplTest {
             fechaNacimiento = LocalDate.of(1990, 1, 1),
             dni = "62345678X",
             email = "cliente_nombre6.clientea_apellido6@mail.com",
-            numSocio = "006"
+            numSocio = "006",
+            password = "password"
         )
 
         cache.put(1,cliente1)

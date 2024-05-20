@@ -44,6 +44,7 @@ class ClienteServiceImplTest {
                 dni = "12345678Z",
                 email = "ejemplo@si.com",
                 numSocio = "123",
+                password = "password",
                 createdAt = LocalDate.now(),
                 updatedAt = LocalDate.now(),
                 isDeleted = false
@@ -72,6 +73,7 @@ class ClienteServiceImplTest {
             dni = "12345678Z",
             email = "ejemplo@si.com",
             numSocio = "123",
+            password = "password",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
             isDeleted = false
@@ -103,6 +105,7 @@ class ClienteServiceImplTest {
             dni = "12345678Z",
             email = "ejemplo@si.com",
             numSocio = "123",
+            password = "password",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
             isDeleted = false
