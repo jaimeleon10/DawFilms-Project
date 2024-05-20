@@ -17,4 +17,6 @@ interface ProductosStorage {
     fun deleteImage(fileImage: File): Result<Unit, ProductoError>
     fun deleteAllImages(): Result<Long, ProductoError>
     fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError>
+    fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError>
+    fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError>
 }

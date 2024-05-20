@@ -8,6 +8,7 @@ import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
+import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
@@ -20,7 +21,8 @@ class ProductosStorageImpl(
     private val storageCsv: StorageCsv,
     private val storageJson: StorageJson,
     private val storageXml: StorageXml,
-    private val storageImage: StorageImage
+    private val storageImage: StorageImage,
+    private val storageZip: StorageZip
 ) : ProductosStorage {
     init {
         logger.debug{ "Creando directorio de imagenes si no existe" }
@@ -80,5 +82,15 @@ class ProductosStorageImpl(
     override fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError> {
         logger.debug { "Actualizando la imagen $imageName" }
         return storageImage.updateImage(imageName, newFileImage)
+    }
+
+    override fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError> {
+        logger.debug { "Exportando a ZIP $fileToZip" }
+        return storageZip.exportToZip(fileToZip, data)
+    }
+
+    override fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError> {
+        logger.debug { "Importando desde ZIP $fileToUnzip" }
+        return storageZip.loadFromZip(fileToUnzip)
     }
 }
