@@ -28,7 +28,9 @@ class ComplementoValidatorTest {
 
     @Test
     fun validate() {
-        complementoValidator.validate(complemento)
+        val result = complementoValidator.validate(complemento)
+
+        assertTrue(result.isOk)
     }
 
     @Test
