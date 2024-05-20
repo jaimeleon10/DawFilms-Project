@@ -7,6 +7,7 @@ import org.example.dawfilmsinterface.productos.models.producto.Producto
 data class ProductoDto (
     val id: String,
     val tipoProducto: String,
+    val imagen : String,
     val filaButaca: Int?,
     val columnaButaca: Int?,
     val tipoButaca: String?,

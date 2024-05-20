@@ -78,6 +78,7 @@ fun Producto.toProductoDto(): ProductoDto {
         is Butaca -> ProductoDto(
             id = this.id,
             tipoProducto = "Butaca",
+            imagen = this.imagen,
             filaButaca = this.fila,
             columnaButaca = this.columna,
             tipoButaca = this.tipoButaca.toString(),
@@ -95,6 +96,7 @@ fun Producto.toProductoDto(): ProductoDto {
         is Complemento -> ProductoDto(
             id = this.id.toString(),
             tipoProducto = "Complemento",
+            imagen = this.imagen,
             filaButaca = null,
             columnaButaca = null,
             tipoButaca = null,

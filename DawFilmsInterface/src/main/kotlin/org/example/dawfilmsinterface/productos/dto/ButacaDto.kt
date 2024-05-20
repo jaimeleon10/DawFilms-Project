@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class ButacaDto(
     val id: String,
     val tipoProducto: String,
+    val imagen: String,
     val fila: Int,
     val columna: Int,
     val tipoButaca: String,
