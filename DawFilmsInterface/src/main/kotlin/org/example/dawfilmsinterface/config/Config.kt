@@ -1,6 +1,7 @@
 package org.example.dawfilmsinterface.config
 
 import org.lighthousegames.logging.logging
+import java.io.File
 import java.io.InputStream
 import java.util.*
 
@@ -18,6 +19,13 @@ private const val CONFIG_FILE_NAME = "application.properties"
  * @since 1.0.0
  */
 class Config {
+
+    val APP_PATH = System.getProperty("user.dir")
+
+    val imagesDirectory by lazy {
+        val path = readProperty("app.images") ?: "imagenes"
+        "$APP_PATH${File.separator}$path"
+    }
 
     val dataBaseUrl: String by lazy {
         readProperty("app.database.url") ?: "jdbc:sqlite:defaultdawfilms.db"

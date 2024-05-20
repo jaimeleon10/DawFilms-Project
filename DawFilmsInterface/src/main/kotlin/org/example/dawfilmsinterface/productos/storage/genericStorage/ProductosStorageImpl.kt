@@ -5,6 +5,7 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
+import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
 import org.lighthousegames.logging.logging
@@ -18,7 +19,8 @@ class ProductosStorageImpl(
     private val config: Config,
     private val storageCsv: StorageCsv,
     private val storageJson: StorageJson,
-    private val storageXml: StorageXml
+    private val storageXml: StorageXml,
+    private val storageImage: StorageImage
 ) : ProductosStorage {
     init {
         logger.debug{ "Creando directorio de imagenes si no existe" }
@@ -53,5 +55,30 @@ class ProductosStorageImpl(
     override fun loadXml(file: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }
         return storageXml.loadXml(file)
+    }
+
+    override fun saveImage(fileName: File): Result<File, ProductoError> {
+        logger.debug { "Guardando imagen $fileName" }
+        return storageImage.saveImage(fileName)
+    }
+
+    override fun loadImage(fileName: String): Result<File, ProductoError> {
+        logger.debug { "Cargando imagen $fileName" }
+        return storageImage.loadImage(fileName)
+    }
+
+    override fun deleteImage(fileImage: File): Result<Unit, ProductoError> {
+        logger.debug { "Borrando imagen $fileImage" }
+        return storageImage.deleteImage(fileImage)
+    }
+
+    override fun deleteAllImages(): Result<Long, ProductoError> {
+        logger.debug { "Borrando todas las imagenes" }
+        return storageImage.deleteAllImages()
+    }
+
+    override fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError> {
+        logger.debug { "Actualizando la imagen $imageName" }
+        return storageImage.updateImage(imageName, newFileImage)
     }
 }

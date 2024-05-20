@@ -79,3 +79,5 @@ Qsrc/main/kotlin/org/example/dawfilmsinterface/productos/mappers/ProductoMapper.
 \src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImage.kt,b\b\bba9185c3048b8c0fc4d5a658f2fa59bc60cb833
 
 `src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImpl.kt,8\7\87628f9f0f66eebd7c542d981f36f0f802f805b4
+n
+>src/main/kotlin/org/example/dawfilmsinterface/config/Config.kt,5\5\55d071a6216694c96a7da345e3c5c989c11f69d5
