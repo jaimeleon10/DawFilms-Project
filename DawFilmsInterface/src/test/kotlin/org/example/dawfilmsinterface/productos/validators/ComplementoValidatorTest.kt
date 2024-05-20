@@ -3,7 +3,6 @@ package org.example.dawfilmsinterface.productos.validators
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -46,7 +45,7 @@ class ComplementoValidatorTest {
 
         val error = complementoValidator.validate(complementoInvalido).error
 
-        assertTrue(error is ProductoError.ProductoNoValido)
+        assertTrue(error is ProductoError.ProductoValidationError)
     }
 
     @Test
@@ -62,7 +61,7 @@ class ComplementoValidatorTest {
 
         val error = complementoValidator.validate(complementoInvalido).error
 
-        assertTrue(error is ProductoError.ProductoNoValido)
+        assertTrue(error is ProductoError.ProductoValidationError)
     }
 
     @Test
@@ -78,6 +77,6 @@ class ComplementoValidatorTest {
 
         val error = complementoValidator.validate(complementoInvalido).error
 
-        assertTrue(error is ProductoError.ProductoNoValido)
+        assertTrue(error is ProductoError.ProductoValidationError)
     }
 }

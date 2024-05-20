@@ -81,3 +81,11 @@ Qsrc/main/kotlin/org/example/dawfilmsinterface/productos/mappers/ProductoMapper.
 `src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImpl.kt,8\7\87628f9f0f66eebd7c542d981f36f0f802f805b4
 n
 >src/main/kotlin/org/example/dawfilmsinterface/config/Config.kt,5\5\55d071a6216694c96a7da345e3c5c989c11f69d5
+è
+_src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/MenuClienteController.kt,a\8\a8e784d17677b6eba91918843089c571ea33818a
+|
+Lsrc/main/kotlin/org/example/dawfilmsinterface/clientes/cache/ClienteCache.kt,7\0\7056364afff0198defeb8d482182aaa045e00516
+Ö
+Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/services/ClienteServiceImpl.kt,3\b\3bf13c29a389c589522e9e5393113b6dfe6f10ad
+Ö
+Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/validators/ClienteValidator.kt,3\2\32574455f6d25c770e8404bdbf9899ff78d9be0a

@@ -12,8 +12,8 @@ class ComplementoValidator {
         val regexNombreComplemento = Regex("^[A-Za-z]$")
 
         return when {
-            complemento.nombre.isBlank() -> Err(ProductoError.ProductoNoValido("El nombre no puede estar vacío"))
-            !complemento.nombre.matches(regexNombreComplemento) -> Err(ProductoError.ProductoNoValido("El nombre no puede contener números o carácteres especiales"))
+            complemento.nombre.isBlank() -> Err(ProductoError.ProductoValidationError("El nombre no puede estar vacío"))
+            !complemento.nombre.matches(regexNombreComplemento) -> Err(ProductoError.ProductoValidationError("El nombre no puede contener números o carácteres especiales"))
             else -> Ok(complemento)
         }
     }
