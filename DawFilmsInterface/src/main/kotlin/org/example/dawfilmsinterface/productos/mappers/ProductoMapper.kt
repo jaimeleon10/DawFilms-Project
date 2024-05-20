@@ -18,6 +18,7 @@ fun ProductoEntity.toProducto(): Producto {
         "Butaca" -> Butaca(
             id = this.id,
             tipoProducto = this.tipo_producto,
+            imagen = this.imagen,
             fila = this.fila_butaca!!.toInt(),
             columna = this.columna_butaca!!.toInt(),
             tipoButaca = TipoButaca.valueOf(this.tipo_butaca!!.uppercase()),
@@ -31,6 +32,7 @@ fun ProductoEntity.toProducto(): Producto {
         "Complemento" -> Complemento(
             id = this.id,
             tipoProducto = this.tipo_producto,
+            imagen = this.imagen,
             nombre = this.nombre_complemento!!,
             precio = this.precio,
             stock = this.stock_complemento!!.toInt(),
@@ -48,6 +50,7 @@ fun ProductoEntity.toComplemento(): Complemento {
     return Complemento(
         id = this.id,
         tipoProducto = this.tipo_producto,
+        imagen = this.imagen,
         nombre = this.nombre_complemento!!,
         precio = this.precio,
         stock = this.stock_complemento!!.toInt(),
@@ -62,6 +65,7 @@ fun ProductoEntity.toButaca(): Butaca {
     return Butaca(
         id = this.id,
         tipoProducto = this.tipo_producto,
+        imagen = this.imagen,
         fila = this.fila_butaca!!.toInt(),
         columna = this.columna_butaca!!.toInt(),
         tipoButaca = TipoButaca.valueOf(this.tipo_butaca!!.uppercase()),
@@ -94,7 +98,7 @@ fun Producto.toProductoDto(): ProductoDto {
         )
 
         is Complemento -> ProductoDto(
-            id = this.id.toString(),
+            id = this.id,
             tipoProducto = "Complemento",
             imagen = this.imagen,
             filaButaca = null,
@@ -119,6 +123,7 @@ fun ProductoDto.toButaca(): Butaca {
     return Butaca(
         id = this.id,
         tipoProducto = this.tipoProducto,
+        imagen = this.imagen,
         fila = this.filaButaca!!.toInt(),
         columna = this.columnaButaca!!.toInt(),
         tipoButaca = TipoButaca.valueOf(this.tipoButaca!!.uppercase()),
@@ -134,6 +139,7 @@ fun ProductoDto.toComplemento(): Complemento {
     return Complemento(
         id = this.id,
         tipoProducto = this.tipoProducto,
+        imagen = this.imagen,
         nombre = this.nombreComplemento!!,
         precio = this.precioComplemento!!,
         stock = this.stockComplemento!!.toInt(),
