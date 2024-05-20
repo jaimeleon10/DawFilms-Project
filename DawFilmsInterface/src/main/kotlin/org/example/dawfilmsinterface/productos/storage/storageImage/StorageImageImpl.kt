@@ -17,7 +17,7 @@ private val logger = logging()
 class StorageImageImpl(
     private val config: Config
 ): StorageImage {
-    private fun getImageName(newFileImage: File): String{
+    private fun getImageName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
         return "${Instant.now().toEpochMilli()}.$extension"
