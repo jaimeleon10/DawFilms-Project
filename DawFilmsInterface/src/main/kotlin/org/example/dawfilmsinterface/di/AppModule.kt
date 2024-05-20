@@ -15,6 +15,14 @@ import org.example.dawfilmsinterface.productos.repositories.complementos.Complem
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
+import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
+import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsvImpl
+import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
+import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImageImpl
+import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
+import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
+import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
+import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXmlImpl
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -44,6 +52,22 @@ val appModule = module {
     //Productos
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
+    }
+
+    singleOf(::StorageCsvImpl) {
+        bind<StorageCsv>()
+    }
+
+    singleOf(::StorageImageImpl) {
+        bind<StorageImage>()
+    }
+
+    singleOf(::StorageJsonImpl) {
+        bind<StorageJson>()
+    }
+
+    singleOf(::StorageXmlImpl) {
+        bind<StorageXml>()
     }
 
     //Complemento

@@ -21,7 +21,6 @@ import java.time.LocalDate
 @ExtendWith(MockitoExtension::class)
 class ClienteServiceImplTest {
 
-
     @Mock
     private lateinit var mockRepo: ClienteRepository
 
@@ -33,6 +32,7 @@ class ClienteServiceImplTest {
 
     @InjectMocks
     private lateinit var service: ClienteServiceImpl
+
     @Test
     fun getAll() {
         val mockCliente = listOf(

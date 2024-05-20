@@ -4,6 +4,7 @@ import org.example.dawfilmsinterface.productos.dto.ProductoDto
 import org.example.dawfilmsinterface.productos.mappers.toProductoList
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.junit.jupiter.api.*
 
 import org.junit.jupiter.api.Assertions.*
@@ -31,9 +32,8 @@ class StorageJsonImplTest {
     @Order(1)
     @Test
     fun storeJson() {
-        val data = listOf(
-            Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
-                LocalDate.now(), LocalDate.now(),false)
+        val data = listOf<Producto>(
+            Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA, LocalDate.now(), LocalDate.now(),false)
         )
 
         val result = storageJson.storeJson(myFile, data)
@@ -45,9 +45,8 @@ class StorageJsonImplTest {
     @Order(2)
     @Test
     fun loadJson() {
-        val data = listOf(
-            Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA,
-                LocalDate.now(), LocalDate.now(),false)
+        val data = listOf<Producto>(
+            Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA, LocalDate.now(), LocalDate.now(),false)
         )
 
         storageJson.storeJson(myFile, data)
