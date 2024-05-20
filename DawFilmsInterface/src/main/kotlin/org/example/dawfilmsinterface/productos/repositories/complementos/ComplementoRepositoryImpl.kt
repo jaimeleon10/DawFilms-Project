@@ -3,7 +3,6 @@ package org.example.dawfilmsinterface.productos.repositories.complementos
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.mappers.toComplemento
 import org.example.dawfilmsinterface.productos.mappers.toProducto
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.lighthousegames.logging.logging
 import java.time.LocalDate
