@@ -59,3 +59,7 @@ bsrc/main/kotlin/org/example/dawfilmsinterface/productos/storage/genericStorage/
 ^src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJsonImpl.kt,7\4\744264b66c76324cf7e87451f721ddc1a0c2e0e4
 I
 data/butacasIniciales.csv,8\7\875e2e7dbe5249dc7db5a03620787952f7623ea2
+ˆ
+Xsrc/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageCsv/StorageCsv.kt,e\1\e155f1754fe3d9c5d8ae97c8c2c1e2e503a18ab9
+Š
+Zsrc/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJson.kt,6\8\688d2cbf9bf8027ae785601066a8955092fbc97c
