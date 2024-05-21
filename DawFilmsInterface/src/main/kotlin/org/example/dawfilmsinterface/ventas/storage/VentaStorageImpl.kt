@@ -8,6 +8,7 @@ import kotlinx.serialization.json.Json
 import org.example.dawfilmsinterface.ventas.dto.VentaDto
 import org.example.dawfilmsinterface.ventas.errors.VentaError
 import org.example.dawfilmsinterface.ventas.mappers.toVentaDtoList
+import org.example.dawfilmsinterface.ventas.mappers.toVentaList
 import org.example.dawfilmsinterface.ventas.models.Venta
 import org.lighthousegames.logging.logging
 import java.io.File
@@ -21,6 +22,7 @@ class VentaStorageImpl : VentaStorage {
             val json = Json {
                 prettyPrint = true
                 ignoreUnknownKeys = true
+                coerceInputValues = true
             }
             val jsonString = json.encodeToString<List<VentaDto>>(data.toVentaDtoList())
             file.writeText(jsonString)
@@ -35,11 +37,12 @@ class VentaStorageImpl : VentaStorage {
         val json = Json {
             prettyPrint = true
             ignoreUnknownKeys = true
+            coerceInputValues = true
         }
         return try {
             val jsonString = file.readText()
-            val data = json.decodeFromString<List<Venta>>(jsonString)
-            Ok(data)
+            val data = json.decodeFromString<List<VentaDto>>(jsonString)
+            Ok(data.toVentaList())
         }catch (e: Exception) {
             Err(VentaError.VentaStorageError("Error al leer el JSON ${e.message}"))
         }

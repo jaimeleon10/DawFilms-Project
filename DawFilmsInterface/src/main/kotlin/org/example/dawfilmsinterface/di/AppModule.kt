@@ -6,6 +6,8 @@ import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.clientes.services.ClienteServiceImpl
+import org.example.dawfilmsinterface.clientes.storage.ClienteStorage
+import org.example.dawfilmsinterface.clientes.storage.ClienteStorageImpl
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
@@ -27,6 +29,8 @@ import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.example.dawfilmsinterface.ventas.services.VentaServiceImpl
+import org.example.dawfilmsinterface.ventas.storage.VentaStorage
+import org.example.dawfilmsinterface.ventas.storage.VentaStorageImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -48,11 +52,25 @@ val appModule = module {
 
     singleOf(::ClienteCache)
 
+    singleOf(::ClienteStorageImpl) {
+        bind<ClienteStorage>()
+    }
+
 
     //Productos
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
+
+    singleOf(::ComplementoRepositoryImpl) {
+        bind<ComplementoRepository>()
+    }
+
+    singleOf(::ProductoServiceImpl) {
+        bind<ProductoService>()
+    }
+
+    singleOf(::ProductosCache)
 
     singleOf(::StorageCsvImpl) {
         bind<StorageCsv>()
@@ -70,18 +88,6 @@ val appModule = module {
         bind<StorageXml>()
     }
 
-    //Complemento
-    singleOf(::ComplementoRepositoryImpl) {
-        bind<ComplementoRepository>()
-    }
-
-    //Productos
-    singleOf(::ProductoServiceImpl) {
-        bind<ProductoService>()
-    }
-
-    singleOf(::ProductosCache)
-
 
     //Ventas
     singleOf(::VentaRepositoryImpl) {
@@ -90,5 +96,9 @@ val appModule = module {
 
     singleOf(::VentaServiceImpl) {
         bind<VentaService>()
+    }
+
+    singleOf(::VentaStorageImpl) {
+        bind<VentaStorage>()
     }
 }
