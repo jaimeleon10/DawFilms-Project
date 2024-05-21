@@ -5,6 +5,9 @@ import database.VentaEntity
 import org.example.dawfilmsinterface.clientes.mappers.toCliente
 import org.example.dawfilmsinterface.clientes.mappers.toClienteDto
 import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.productos.dto.ButacaDto
+import org.example.dawfilmsinterface.productos.mappers.toButaca
+import org.example.dawfilmsinterface.productos.mappers.toComplemento
 import org.example.dawfilmsinterface.productos.mappers.toProductoDto
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
@@ -69,6 +72,36 @@ fun LineaVenta.toLineaVentaDto(): LineaVentaDto {
     }
 }
 
+fun LineaVentaDto.toLineaVenta(): LineaVenta {
+    return when (this.producto.tipoProducto) {
+        "Butaca" -> {
+            LineaVenta(
+                id = UUID.fromString(this.id),
+                producto = this.producto.toButaca(),
+                tipoProducto = "Butaca",
+                cantidad = this.cantidad,
+                precio = this.precio,
+                createdAt = LocalDate.parse(this.createdAt),
+                updatedAt = LocalDate.parse(this.updatedAt),
+            )
+        }
+
+        "Complemento" -> {
+            LineaVenta(
+                id = UUID.fromString(this.id),
+                producto = this.producto.toComplemento(),
+                tipoProducto = "Complemento",
+                cantidad = this.cantidad,
+                precio = this.precio,
+                createdAt = LocalDate.parse(this.createdAt),
+                updatedAt = LocalDate.parse(this.updatedAt),
+            )
+        }
+
+        else -> throw IllegalArgumentException("Tipo de producto no soportado")
+    }
+}
+
 fun Venta.toVentaDto(): VentaDto {
     return VentaDto(
         id = this.id.toString(),
@@ -86,7 +119,7 @@ fun VentaDto.toVenta(): Venta{
     return Venta(
         id = UUID.fromString(this.id),
         cliente = this.cliente.toCliente(),
-        lineas = this.lineas,
+        lineas = this.lineas.toLineaVentaList(),
         fechaCompra = LocalDate.parse(this.fechaCompra),
         createdAt = LocalDate.parse(this.createdAt),
         updatedAt = LocalDate.parse(this.updatedAt),
@@ -100,4 +133,8 @@ fun List<Venta>.toVentaDtoList(): List<VentaDto>{
 
 fun List<VentaDto>.toVentaList(): List<Venta>{
     return map { it.toVenta()}
+}
+
+fun List<LineaVentaDto>.toLineaVentaList(): List<LineaVenta>{
+    return map {it.toLineaVenta()}
 }

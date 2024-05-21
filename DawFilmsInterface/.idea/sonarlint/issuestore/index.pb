@@ -111,3 +111,7 @@ Psrc/main/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorageImpl.k
 Ksrc/main/kotlin/org/example/dawfilmsinterface/ventas/mappers/VentaMapper.kt,4\0\40243d9967fe61c49a08389f3c48d4d997c362d4
 t
 Dsrc/main/kotlin/org/example/dawfilmsinterface/ventas/models/Venta.kt,f\a\fa013bc4ff178cc9cd5b52ccdf506f4627c3f56d
+y
+Isrc/main/kotlin/org/example/dawfilmsinterface/ventas/dto/LineaVentaDto.kt,7\4\74810b9efc572c5b7f9d280e3ea90527c6373b9e
+y
+Isrc/main/kotlin/org/example/dawfilmsinterface/ventas/models/LineaVenta.kt,5\0\509e4e2dd37a769f43740af3fd396f1f6b25a02a
