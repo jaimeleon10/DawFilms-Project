@@ -3,13 +3,12 @@ package org.example.dawfilmsinterface.clientes.storage
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.example.dawfilmsinterface.clientes.dto.ClienteDto
 import org.example.dawfilmsinterface.clientes.errors.ClienteError
+import org.example.dawfilmsinterface.clientes.mappers.toClienteDtoList
 import org.example.dawfilmsinterface.clientes.models.Cliente
-import org.example.dawfilmsinterface.productos.dto.ProductoDto
-import org.example.dawfilmsinterface.productos.errors.ProductoError
-import org.example.dawfilmsinterface.productos.mappers.toProductoList
 import org.lighthousegames.logging.logging
 import java.io.File
 
@@ -23,7 +22,7 @@ class ClienteStorageJsonImpl: ClienteStorageJson {
                 prettyPrint = true
                 ignoreUnknownKeys = true
             }
-            val jsonString = json.encodeToString<List<ClienteDto>>(data)
+            val jsonString = json.encodeToString<List<ClienteDto>>(data.toClienteDtoList())
             file.writeText(jsonString)
             Ok(data.size.toLong())
         }catch(e:Exception){
