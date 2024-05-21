@@ -41,7 +41,8 @@ class StorageZipImpl(
                 }
             }
             storageJson.storeJson(File("$tempDir/data.json"), data)
-            Files.walk(tempDir).forEach { logger.debug { it } }
+            Files.walk(tempDir)
+                .forEach { logger.debug { it } }
             val archivos = Files.walk(tempDir)
                 .filter { Files.isRegularFile(it) }
                 .toList()
