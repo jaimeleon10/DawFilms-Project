@@ -135,11 +135,7 @@ class VentaRepositoryImplTest {
             createdAt = LocalDate.of(2024,5,18),
             updatedAt = LocalDate.of(2024,5,18)
         )
-
-//        VALUES ('27c712fb-5531-4f33-a744-0fdb65cd9dcf', '37c712fb-5531-4f33-a744-0fdb65cd9dcf', '1', 'Complemento', 1, 3.0, '2024-05-18', '2024-05-18', 0);
-
     }
-
 
     @AfterAll
     fun tearDown(){
@@ -169,8 +165,8 @@ class VentaRepositoryImplTest {
         assertEquals(2,venta?.cliente?.id)
         assertEquals(8, venta?.total?.toLong())
         assertEquals(LocalDate.of(2024,5,18), venta?.fechaCompra )
-
     }
+
     @Test
     @Order(3)
     fun findByIdNotFound() {
@@ -198,8 +194,6 @@ class VentaRepositoryImplTest {
         assertEquals(lineaVentaMuestra1,ventaSaved.lineas[0])
         assertEquals(lineaVentaMuestra2,ventaSaved.lineas[1])
         assertEquals(LocalDate.of(2024,5,18),ventaSaved.fechaCompra)
-
-
     }
 
     @Test
@@ -221,8 +215,8 @@ class VentaRepositoryImplTest {
         assertEquals(lineaVentaMuestra2, ventaUpdated.lineas[1])
         assertEquals(lineaVentaMuestra3, ventaUpdated.lineas[2])
         assertEquals(LocalDate.of(2023,1,19),ventaUpdated.fechaCompra)
-
     }
+
     @Test
     @Order(6)
     fun updateNotFound() {
@@ -236,9 +230,8 @@ class VentaRepositoryImplTest {
             )
         )
         assertEquals(null,ventaUpdated)
-
-
     }
+
     @Test
     fun delete() {
         val ventaDeleted = ventaRepository.delete(UUID.fromString("37c712fb-5531-4f33-a744-0fdb65cd9dcf"))
@@ -251,7 +244,6 @@ class VentaRepositoryImplTest {
         val ventaDeleted = ventaRepository.delete(UUID.fromString("666712fb-5531-4f33-a744-0fdb65cd9dcf"))
 
         assertEquals(null, ventaDeleted)
-
     }
 
     @Test
@@ -263,7 +255,6 @@ class VentaRepositoryImplTest {
 
         assertTrue(cliente.isOk)
         assertEquals ( clienteMuestra, cliente.value)
-
     }
 
     @Test
@@ -286,17 +277,12 @@ class VentaRepositoryImplTest {
         logger.debug { cliente }
 
         assertTrue(cliente.isErr)
-
     }
-
 
     @Test
     fun validateLineas() {
 
         val lista = listOf(lineaVentaMuestra1, lineaVentaMuestra2, lineaVentaMuestra3)
-
-        //whenever( butacaRepository.findById(butacaMuestra.id)).thenReturn(butacaMuestra)
-        //whenever( complementoRepository.findById(complementoMuestra.id)).thenReturn(complementoMuestra)
 
         val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaMuestra2, lineaVentaMuestra3))
 
@@ -331,12 +317,7 @@ class VentaRepositoryImplTest {
             updatedAt = LocalDate.of(2024,5,18)
         )
 
-
-
         val lista = listOf(lineaVentaButacaNoValid, lineaVentaMuestra2, lineaVentaMuestra3)
-
-        //whenever( butacaRepository.findById(butacaMuestra.id)).thenReturn(butacaMuestra)
-        //whenever( complementoRepository.findById(complementoMuestra.id)).thenReturn(complementoMuestra)
 
         val result = ventaRepository.validateLineas(listOf(lineaVentaButacaNoValid, lineaVentaMuestra2, lineaVentaMuestra3))
 
@@ -374,13 +355,9 @@ class VentaRepositoryImplTest {
 
         val lista = listOf(lineaVentaMuestra1, lineaVentaProductoNoValid, lineaVentaMuestra3)
 
-        //whenever( butacaRepository.findById(butacaMuestra.id)).thenReturn(butacaMuestra)
-        //whenever( complementoRepository.findById(complementoMuestra.id)).thenReturn(complementoMuestra)
-
         val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaProductoNoValid, lineaVentaMuestra3))
 
         assertTrue(result.isErr)
         assertFalse(lista == result.value)
     }
-
 }
