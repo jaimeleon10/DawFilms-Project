@@ -117,3 +117,5 @@ y
 Isrc/main/kotlin/org/example/dawfilmsinterface/ventas/models/LineaVenta.kt,5\0\509e4e2dd37a769f43740af3fd396f1f6b25a02a
 „
 Tsrc/test/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorageImplTest.kt,0\b\0b00c4b742e6b0ade7d1c51b16c1af2e97e7e382
+Œ
+\src/test/kotlin/org/example/dawfilmsinterface/clientes/storage/ClienteStorageJsonImplTest.kt,b\7\b740bba5e71975ca6ded1737b258b152ea74ea3a
