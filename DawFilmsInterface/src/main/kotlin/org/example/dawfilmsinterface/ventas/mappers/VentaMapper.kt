@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.ventas.mappers
 
 import database.LineaVentaEntity
 import database.VentaEntity
+import org.example.dawfilmsinterface.clientes.mappers.toCliente
 import org.example.dawfilmsinterface.clientes.mappers.toClienteDto
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.productos.mappers.toProductoDto
@@ -79,4 +80,24 @@ fun Venta.toVentaDto(): VentaDto {
         updatedAt = this.updatedAt.toString(),
         isDeleted = this.isDeleted
     )
+}
+
+fun VentaDto.toVenta(): Venta{
+    return Venta(
+        id = UUID.fromString(this.id),
+        cliente = this.cliente.toCliente(),
+        lineas = this.lineas,
+        fechaCompra = LocalDate.parse(this.fechaCompra),
+        createdAt = LocalDate.parse(this.createdAt),
+        updatedAt = LocalDate.parse(this.updatedAt),
+        isDeleted = this.isDeleted
+    )
+}
+
+fun List<Venta>.toVentaDtoList(): List<VentaDto>{
+    return map { it.toVentaDto() }
+}
+
+fun List<VentaDto>.toVentaList(): List<Venta>{
+    return map { it.toVenta()}
 }

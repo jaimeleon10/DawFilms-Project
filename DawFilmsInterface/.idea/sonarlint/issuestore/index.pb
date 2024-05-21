@@ -107,3 +107,7 @@ Osrc/main/kotlin/org/example/dawfilmsinterface/clientes/mappers/ClienteMapper.kt
 Lsrc/main/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorage.kt,a\c\acb54e2408c6268191f62956a3bbdb0fcb571012
 €
 Psrc/main/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorageImpl.kt,b\d\bda48b98493b3ff377b3879f379426404ab94a51
+{
+Ksrc/main/kotlin/org/example/dawfilmsinterface/ventas/mappers/VentaMapper.kt,4\0\40243d9967fe61c49a08389f3c48d4d997c362d4
+t
+Dsrc/main/kotlin/org/example/dawfilmsinterface/ventas/models/Venta.kt,f\a\fa013bc4ff178cc9cd5b52ccdf506f4627c3f56d
