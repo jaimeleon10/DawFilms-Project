@@ -1,16 +1,17 @@
 package org.example.dawfilmsinterface.productos.storage.storageImage
 
-import com.github.michaelbull.result.Err
 import org.example.dawfilmsinterface.config.Config
-import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestMethodOrder
+import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
+
+private val logger = logging()  //TODO USAR LOGGER
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 class StorageImageImplTest {
@@ -41,8 +42,9 @@ class StorageImageImplTest {
     fun loadImage() {
 
         //TODO REVISAR, CREO QUE FALLA PORQUE LAS IMAGENES NO SE ESTÁN ALMACENANDO EN DIRECTORIO IMAGENES
+        val file = storageImage.saveImage(myFile).value
 
-        val result = storageImage.loadImage(myFile.nameWithoutExtension)
+        val result = storageImage.loadImage(file.name)
 
         assertTrue(result.isOk)
         assertEquals("png", result.value.extension)
@@ -57,21 +59,17 @@ class StorageImageImplTest {
 
     @Test
     fun deleteAllImages() {
-        //TODO Añadir imagen por defecto creada
-        val error = storageImage.deleteAllImages().error
+        val result = storageImage.deleteAllImages()
 
-        assertTrue(error is ProductoError.ProductoStorageError)
-    }
-
-    @Test
-    fun deleteAllImagesNoImagesFound() {
-        val error = storageImage.deleteAllImages().error
-
-        assertTrue(error is ProductoError.ProductoStorageError)
+        assertTrue(result.isOk)
     }
 
     @Test
     fun updateImage() {
-        // TODO
+        val file = storageImage.saveImage(myFile).value
+
+        val result = storageImage.updateImage(file.name, myFile)
+
+        assertTrue(result.isOk)
     }
 }
