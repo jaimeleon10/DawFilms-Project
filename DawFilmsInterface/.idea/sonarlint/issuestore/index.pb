@@ -93,3 +93,13 @@ bsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/Sto
 `src/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageXml/StorageXmlImplTest.kt,2\3\23a4cf05ad96d2ea0ab37a5f441bccc0a5f7b16c
 î
 dsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImplTest.kt,f\1\f1ad62eebaff672aa18eab55fbbad2713685e7ba
+ç
+]src/main/kotlin/org/example/dawfilmsinterface/clientes/services/storage/ClienteStorageJson.kt,5\0\50486c66c97404934932053cda043f9cc23ca8b0
+ë
+asrc/main/kotlin/org/example/dawfilmsinterface/clientes/services/storage/ClienteStorageJsonImpl.kt,5\7\57e442f583a0511d24b04dee14b1b7f1eeb9ea19
+à
+Xsrc/main/kotlin/org/example/dawfilmsinterface/clientes/storage/ClienteStorageJsonImpl.kt,2\f\2feeee2c31fdcbd89ae7da358f09ce39c0e16deb
+Ñ
+Tsrc/main/kotlin/org/example/dawfilmsinterface/clientes/storage/ClienteStorageJson.kt,f\a\fa7ff4848e7a9587d7a0236f7ffc2c19a5b660ce
+
+Osrc/main/kotlin/org/example/dawfilmsinterface/clientes/mappers/ClienteMapper.kt,6\7\673df909467049bb42f9df48c3e92e700b23e1d7
