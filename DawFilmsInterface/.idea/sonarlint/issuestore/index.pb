@@ -103,3 +103,7 @@ Xsrc/main/kotlin/org/example/dawfilmsinterface/clientes/storage/ClienteStorageJs
 Tsrc/main/kotlin/org/example/dawfilmsinterface/clientes/storage/ClienteStorageJson.kt,f\a\fa7ff4848e7a9587d7a0236f7ffc2c19a5b660ce
 
 Osrc/main/kotlin/org/example/dawfilmsinterface/clientes/mappers/ClienteMapper.kt,6\7\673df909467049bb42f9df48c3e92e700b23e1d7
+|
+Lsrc/main/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorage.kt,a\c\acb54e2408c6268191f62956a3bbdb0fcb571012
+€
+Psrc/main/kotlin/org/example/dawfilmsinterface/ventas/storage/VentaStorageImpl.kt,b\d\bda48b98493b3ff377b3879f379426404ab94a51
