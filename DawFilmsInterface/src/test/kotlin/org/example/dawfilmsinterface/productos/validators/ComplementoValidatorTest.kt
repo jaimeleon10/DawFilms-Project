@@ -23,7 +23,15 @@ class ComplementoValidatorTest {
     @BeforeEach
     fun setUp() {
         complementoValidator = ComplementoValidator()
-        complemento = Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 50, CategoriaComplemento.COMIDA)
+        complemento = Complemento(
+            "1",
+            "Complemento",
+            "futura_imagen.png",
+            "Palomitas",
+            3.0,
+            50,
+            CategoriaComplemento.COMIDA,
+        )
     }
 
     @Test
