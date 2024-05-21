@@ -36,3 +36,27 @@ fun Cliente.toClienteDto(): ClienteDto {
         isDeleted = this.isDeleted
     )
 }
+
+fun ClienteDto.toCliente(): Cliente{
+    return Cliente(
+        id = this.id,
+        nombre = this.nombre,
+        apellido = this.apellido,
+        fechaNacimiento = LocalDate.parse(this.fechaNacimiento),
+        dni = this.dni,
+        email = this.email,
+        numSocio = this.numSocio,
+        password = this.password,
+        createdAt = LocalDate.parse(this.createdAt),
+        updatedAt = LocalDate.parse(this.updatedAt),
+        isDeleted = this.isDeleted
+    )
+}
+
+fun List<Cliente>.toClienteDtoList(): List<ClienteDto>{
+    return map { it.toClienteDto() }
+}
+
+fun List<ClienteDto>.toClienteList(): List<Cliente>{
+    return map{ it.toCliente() }
+}
