@@ -92,6 +92,7 @@ class VentaRepositoryImpl(
         result = result.copy(
             cliente = venta.cliente,
             lineas = venta.lineas,
+            fechaCompra = venta.fechaCompra,
             updatedAt = timeStamp
         )
 
