@@ -8,6 +8,6 @@ import org.example.dawfilmsinterface.ventas.models.Venta
 import java.io.File
 
 interface CineStorageZip {
-    fun exportToZip(fileToZip: File, dataProducto: List<Producto>, dataCliente: List<Cliente>, dataVentas: List<Venta>): Result<File, CineError>
+    fun exportToZip(fileToZip: File, dataProducto: List<Producto>, dataCliente: List<Cliente>): Result<File, CineError> //dataVentas: List<Venta>
     fun loadFromZip(fileToUnzip: File): Result<List<Any>, CineError>
 }

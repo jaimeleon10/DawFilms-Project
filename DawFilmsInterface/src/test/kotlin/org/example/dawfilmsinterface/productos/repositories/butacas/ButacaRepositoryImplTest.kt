@@ -6,8 +6,6 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
-import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
-import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 
