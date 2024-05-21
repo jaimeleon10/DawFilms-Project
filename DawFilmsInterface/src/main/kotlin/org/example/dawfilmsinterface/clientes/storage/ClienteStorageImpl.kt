@@ -8,13 +8,14 @@ import kotlinx.serialization.json.Json
 import org.example.dawfilmsinterface.clientes.dto.ClienteDto
 import org.example.dawfilmsinterface.clientes.errors.ClienteError
 import org.example.dawfilmsinterface.clientes.mappers.toClienteDtoList
+import org.example.dawfilmsinterface.clientes.mappers.toClienteList
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.lighthousegames.logging.logging
 import java.io.File
 
 private val logger = logging()
 
-class ClienteStorageJsonImpl: ClienteStorageJson {
+class ClienteStorageImpl: ClienteStorage {
     override fun storeJson(file: File, data: List<Cliente>): Result<Long, ClienteError> {
         logger.debug { "Guardando datos en fichero $file" }
         return try {
@@ -38,8 +39,8 @@ class ClienteStorageJsonImpl: ClienteStorageJson {
         }
         return try {
             val jsonString = file.readText()
-            val data = json.decodeFromString<List<Cliente>>(jsonString)
-            Ok(data)
+            val data = json.decodeFromString<List<ClienteDto>>(jsonString)
+            Ok(data.toClienteList())
         }catch (e: Exception) {
             Err(ClienteError.ClienteStorageError("Error al leer el JSON: ${e.message}"))
         }

@@ -47,7 +47,6 @@ class StorageJsonImplTest {
         )
 
         storageJson.storeJson(myFile, data)
-        println("Datos escritos en el fichero: $myFile")
 
         val result = storageJson.loadJson(myFile)
 

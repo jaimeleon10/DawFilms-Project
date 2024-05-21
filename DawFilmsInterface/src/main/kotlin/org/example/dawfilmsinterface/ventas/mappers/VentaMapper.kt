@@ -132,7 +132,7 @@ fun List<Venta>.toVentaDtoList(): List<VentaDto>{
 }
 
 fun List<VentaDto>.toVentaList(): List<Venta>{
-    return map { it.toVenta()}
+    return map { it.toVenta() }
 }
 
 fun List<LineaVentaDto>.toLineaVentaList(): List<LineaVenta>{

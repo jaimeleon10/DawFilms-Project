@@ -5,7 +5,7 @@ import org.example.dawfilmsinterface.clientes.errors.ClienteError
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import java.io.File
 
-interface ClienteStorageJson {
+interface ClienteStorage {
     fun storeJson(file: File, data: List<Cliente>): Result<Long, ClienteError>
     fun loadJson(file: File): Result<List<Cliente>, ClienteError>
 }

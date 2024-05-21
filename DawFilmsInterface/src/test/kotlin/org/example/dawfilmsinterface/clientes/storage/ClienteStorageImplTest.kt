@@ -1,23 +1,22 @@
 package org.example.dawfilmsinterface.clientes.storage
 
 import org.example.dawfilmsinterface.clientes.models.Cliente
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.*
 
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import java.io.File
 import java.nio.file.Files
 import java.time.LocalDate
 
-class ClienteStorageJsonImplTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
+class ClienteStorageImplTest {
 
-    private lateinit var storageJson: ClienteStorageJsonImpl
+    private lateinit var storageJson: ClienteStorageImpl
     private lateinit var myFile: File
 
     @BeforeEach
     fun setUp() {
-        storageJson = ClienteStorageJsonImpl()
+        storageJson = ClienteStorageImpl()
         myFile = Files.createTempFile("clientes", ".json").toFile()
     }
 
@@ -26,6 +25,7 @@ class ClienteStorageJsonImplTest {
         Files.deleteIfExists(myFile.toPath())
     }
 
+    @Order(1)
     @Test
     fun storeJson() {
         val data = listOf(
@@ -38,6 +38,7 @@ class ClienteStorageJsonImplTest {
         assertEquals(data.size.toLong(), result.value)
     }
 
+    @Order(2)
     @Test
     fun loadJson() {
         val data = listOf(
@@ -49,6 +50,6 @@ class ClienteStorageJsonImplTest {
         val result = storageJson.loadJson(myFile)
 
         assertTrue(result.isOk)
-        assertEquals(data.size.toLong(), result.value)
+        assertEquals(data, result.value)
     }
 }
