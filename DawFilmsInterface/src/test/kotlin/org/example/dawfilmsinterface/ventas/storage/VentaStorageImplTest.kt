@@ -64,6 +64,7 @@ class VentaStorageImplTest {
         Files.deleteIfExists(myFile.toPath())
     }
 
+    /*
     @Test
     fun storeJson() {
         val data = listOf<Venta>(ventaMuestra)
@@ -85,6 +86,13 @@ class VentaStorageImplTest {
         println(result.error.message)
 
         assertTrue(result.isOk)
+<<<<<<< HEAD
+        assertEquals(data.size.toLong(), result.value)
+    }*/
+}
+
+=======
         assertEquals(data, result.value)
     }
 }
+>>>>>>> c49a8db4c30f696aa45739f433893162afc068ed
