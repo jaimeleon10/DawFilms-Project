@@ -17,6 +17,18 @@ private val logger = logging()
 class StorageImageImpl(
     private val config: Config
 ): StorageImage {
+    init {
+        try {
+            val imagesPath = Paths.get(config.imagesDirectory)
+            if (Files.notExists(imagesPath)) {
+                Files.createDirectories(imagesPath)
+                logger.debug { "Carpeta de imágenes creada en: ${config.imagesDirectory}" }
+            }
+        } catch (e: Exception) {
+            logger.error { "Error al crear la carpeta de imágenes: ${e.message}" }
+        }
+    }
+
     private fun getImageName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
@@ -26,7 +38,8 @@ class StorageImageImpl(
     override fun saveImage(fileName: File): Result<File, ProductoError> {
         logger.debug { "Guardando imagen $fileName" }
         return try {
-            val newFileImage = File(config.imagesDirectory + getImageName(fileName))
+            val newFileName = getImageName(fileName)
+            val newFileImage = Paths.get(config.imagesDirectory, newFileName).toFile()
             Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
             Ok(newFileImage)
         }catch (e : Exception){
@@ -36,7 +49,7 @@ class StorageImageImpl(
 
     override fun loadImage(fileName: String): Result<File, ProductoError> {
         logger.debug { "Cargando imagen $fileName" }
-        val file = File(config.imagesDirectory + fileName)
+        val file = Paths.get(config.imagesDirectory, fileName).toFile()
         return if(file.exists()){
             Ok(file)
         }else{
@@ -45,8 +58,12 @@ class StorageImageImpl(
     }
 
     override fun deleteImage(fileName: File): Result<Unit, ProductoError> {
-        Files.deleteIfExists(fileName.toPath())
-        return Ok(Unit)
+        return try {
+            Files.deleteIfExists(fileName.toPath())
+            Ok(Unit)
+        }catch (e : Exception){
+            Err(ProductoError.ProductoStorageError("Error al eliminar la imagen: ${e.message}"))
+        }
     }
 
     override fun deleteAllImages(): Result<Long, ProductoError> {
@@ -64,7 +81,7 @@ class StorageImageImpl(
     override fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError> {
         logger.debug { "Actualizando imagen $imageName" }
         return try {
-            val newUpdateImage = File(config.imagesDirectory + imageName)
+            val newUpdateImage = Paths.get(config.imagesDirectory, imageName).toFile()
             Files.copy(newFileImage.toPath(), newUpdateImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
             Ok(newUpdateImage)
         }catch (e : Exception){

@@ -39,8 +39,6 @@ m
 Ssrc/main/kotlin/org/example/dawfilmsinterface/productos/models/producto/Producto.kt,e\0\e0a028a121278fa1e28bb8d5586ddc5a1391536b
 `
 0src/main/sqldelight/database/DatabaseInitData.sq,9\c\9c6d5b0e9125ea51afa790d02522a133752dbaa7
-ï
-esrc/test/kotlin/org/example/dawfilmsinterface/productos/services/productos/ProductoServiceImplTest.kt,0\7\077831fc3d2847f7ffde886875e697121141dfde
 x
 Hsrc/main/kotlin/org/example/dawfilmsinterface/cache/errors/CacheError.kt,4\1\41d2b5cdfa33b7df587a49f70d192649141f641a
 Ü
@@ -89,9 +87,9 @@ Lsrc/main/kotlin/org/example/dawfilmsinterface/clientes/cache/ClienteCache.kt,7
 Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/services/ClienteServiceImpl.kt,3\b\3bf13c29a389c589522e9e5393113b6dfe6f10ad
 Ö
 Usrc/main/kotlin/org/example/dawfilmsinterface/clientes/validators/ClienteValidator.kt,3\2\32574455f6d25c770e8404bdbf9899ff78d9be0a
-î
-dsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImplTest.kt,f\1\f1ad62eebaff672aa18eab55fbbad2713685e7ba
 í
 bsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJsonImplTest.kt,0\e\0e19dd3771882e80db6f5ce167a577509600a8be
 ê
 `src/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageXml/StorageXmlImplTest.kt,2\3\23a4cf05ad96d2ea0ab37a5f441bccc0a5f7b16c
+î
+dsrc/test/kotlin/org/example/dawfilmsinterface/productos/storage/storageImage/StorageImageImplTest.kt,f\1\f1ad62eebaff672aa18eab55fbbad2713685e7ba
