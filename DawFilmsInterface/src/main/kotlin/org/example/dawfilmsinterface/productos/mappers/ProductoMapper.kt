@@ -130,7 +130,7 @@ fun ProductoDto.toButaca(): Butaca {
         estadoButaca = EstadoButaca.valueOf(this.estadoButaca!!.uppercase()),
         ocupacionButaca = OcupacionButaca.valueOf(this.ocupacionButaca!!.uppercase()),
         createdAt = LocalDate.parse(this.createdAt),
-        updatedAt = this.updatedAt.let { LocalDate.parse(it) },
+        updatedAt = LocalDate.parse(this.updatedAt),
         isDeleted = this.isDeleted
     )
 }
@@ -145,7 +145,7 @@ fun ProductoDto.toComplemento(): Complemento {
         stock = this.stockComplemento!!.toInt(),
         categoria = CategoriaComplemento.valueOf(this.categoriaComplemento!!.uppercase()),
         createdAt = LocalDate.parse(this.createdAt),
-        updatedAt = this.updatedAt.let { LocalDate.parse(it) },
+        updatedAt = LocalDate.parse(this.updatedAt),
         isDeleted = this.isDeleted
     )
 }

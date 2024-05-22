@@ -12,7 +12,7 @@ class Complemento (
     val stock: Int,
     val categoria: CategoriaComplemento,
     createdAt: LocalDate = LocalDate.now(),
-    updatedAt: LocalDate? = null,
+    updatedAt: LocalDate? = LocalDate.now(),
     isDeleted: Boolean? = false
 ): Producto(id, tipoProducto, imagen, createdAt, updatedAt, isDeleted) {
 
