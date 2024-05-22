@@ -10,6 +10,7 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.ventas.models.Venta
+import org.example.dawfilmsinterface.ventas.storage.VentaStorage
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
@@ -25,15 +26,21 @@ private val logger = logging()
 class CineStorageZipImpl (
     private val config: Config,
     private val storageJsonProductos: StorageJson,
-    private val storageJsonClientes: ClienteStorage
+    private val storageJsonClientes: ClienteStorage,
+    private val storageJsonVentas: VentaStorage
 ): CineStorageZip {
-    private val tempDirName = "productosClientes"
+    private val tempDirName = "zipVentasClienteProductos"
 
-    override fun exportToZip(fileToZip: File, dataProducto: List<Producto>, dataCliente: List<Cliente>): Result<File, CineError> { //dataVentas: List<Venta>
+    override fun exportToZip(
+        fileToZip: File,
+        dataProductos: List<Producto>,
+        dataClientes: List<Cliente>,
+        dataVentas: List<Venta>
+    ): Result<File, CineError> { //dataVentas: List<Venta>
         logger.debug { "Exportando a ZIP $fileToZip" }
         val tempDir = Files.createTempDirectory(tempDirName)
         return try {
-            dataProducto.forEach {
+            dataProductos.forEach {
                 val file = File(config.imagesDirectory + it.imagen)
                 if (file.exists()) {
                     Files.copy(
@@ -43,31 +50,45 @@ class CineStorageZipImpl (
                     )
                 }
             }
-            storageJsonProductos.storeJson(File("$tempDir/dataProducto.json"), dataProducto)
+            storageJsonProductos.storeJson(File("$tempDir/dataProducto.json"), dataProductos)
             Files.walk(tempDir)
                 .forEach { logger.debug { it } }
-            val archivosProducto = Files.walk(tempDir)
+            val archivosProductos = Files.walk(tempDir)
                 .filter { Files.isRegularFile(it) }
                 .toList()
             ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
-                archivosProducto.forEach { archivoProd ->
-                    val entradaZip = ZipEntry(tempDir.relativize(archivoProd).toString())
+                archivosProductos.forEach { archivoProducto ->
+                    val entradaZip = ZipEntry(tempDir.relativize(archivoProducto).toString())
                     zip.putNextEntry(entradaZip)
-                    Files.copy(archivoProd, zip)
+                    Files.copy(archivoProducto, zip)
                     zip.closeEntry()
                 }
             }
-            storageJsonClientes.storeJson(File("$tempDir/dataCliente.json"), dataCliente)
+            storageJsonClientes.storeJson(File("$tempDir/dataCliente.json"), dataClientes)
             Files.walk(tempDir)
                 .forEach { logger.debug { it } }
-            val archivosCliente = Files.walk(tempDir)
+            val archivosClientes = Files.walk(tempDir)
                 .filter { Files.isRegularFile(it) }
                 .toList()
             ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
-                archivosCliente.forEach { archivoClient ->
-                    val entradaZip = ZipEntry(tempDir.relativize(archivoClient).toString())
+                archivosClientes.forEach { archivoCliente ->
+                    val entradaZip = ZipEntry(tempDir.relativize(archivoCliente).toString())
                     zip.putNextEntry(entradaZip)
-                    Files.copy(archivoClient, zip)
+                    Files.copy(archivoCliente, zip)
+                    zip.closeEntry()
+                }
+            }
+            storageJsonVentas.storeJson(File("$tempDir/dataVentas.json"), dataVentas)
+            Files.walk(tempDir)
+                .forEach { logger.debug { it } }
+            val archivosVentas = Files.walk(tempDir)
+                .filter { Files.isRegularFile(it) }
+                .toList()
+            ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
+                archivosVentas.forEach { archivoVenta ->
+                    val entradaZip = ZipEntry(tempDir.relativize(archivoVenta).toString())
+                    zip.putNextEntry(entradaZip)
+                    Files.copy(archivoVenta, zip)
                     zip.closeEntry()
                 }
             }
@@ -104,9 +125,11 @@ class CineStorageZipImpl (
             }
             val dataProductos = storageJsonProductos.loadJson(File("$tempDir/dataProducto.json"))
             val dataClientes = storageJsonClientes.loadJson(File("$tempDir/dataCliente.json"))
+            val dataVentas = storageJsonVentas.loadJson(File("$tempDir/dataVentas.json"))
             val listado: MutableList<Any> = mutableListOf()
             dataClientes.value.forEach { listado.add(it) }
             dataProductos.value.forEach { listado.add(it) }
+            dataVentas.value.forEach { listado.add(it) }
             tempDir.toFile().deleteRecursively()
             return Ok(listado.toList())
         } catch (e: Exception) {
