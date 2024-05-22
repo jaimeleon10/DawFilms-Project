@@ -22,7 +22,7 @@ class ClienteStorageImplTest {
 
     @AfterEach
     fun tearDown() {
-        Files.deleteIfExists(myFile.toPath())
+       Files.deleteIfExists(myFile.toPath())
     }
 
     @Order(1)
