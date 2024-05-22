@@ -13,7 +13,7 @@ class Butaca (
     val estadoButaca: EstadoButaca,
     val ocupacionButaca: OcupacionButaca,
     createdAt: LocalDate = LocalDate.now(),
-    updatedAt: LocalDate? = null,
+    updatedAt: LocalDate? = LocalDate.now(),
     isDeleted: Boolean? = false
 ): Producto(id, tipoProducto, imagen, createdAt, updatedAt, isDeleted) {
 

@@ -82,8 +82,6 @@ class VentaStorageImplTest {
 
         val result = storageJson.loadJson(myFile)
 
-        println(result.error.message)
-
         assertTrue(result.isOk)
         assertEquals(data, result.value)
     }
