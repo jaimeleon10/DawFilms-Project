@@ -79,7 +79,11 @@ class ActualizarButacaController : KoinComponent {
     lateinit var acercaDeMenuButton: MenuItem
 
     @FXML
+<<<<<<< HEAD
     lateinit var butacaTable: TableView<Any>
+=======
+    lateinit var butacaTable: TableView<Butaca>
+>>>>>>> 42a4071a0cc03a1580ec22c43fe50efcb2431bd2
 
     @FXML
     lateinit var idColumnTable : TableColumn<Butaca, String>
@@ -167,6 +171,12 @@ class ActualizarButacaController : KoinComponent {
 
          */
 
+<<<<<<< HEAD
+=======
+        butacaTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
+        }
+>>>>>>> 42a4071a0cc03a1580ec22c43fe50efcb2431bd2
     }
 
     private fun onComboSelected(newValue: String) {

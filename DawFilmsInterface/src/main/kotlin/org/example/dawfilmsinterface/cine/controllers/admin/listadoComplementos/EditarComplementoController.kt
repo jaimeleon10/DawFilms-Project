@@ -8,6 +8,23 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para la edición de las butacas a través de la IU
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @see org.example.dawfilmsinterface.productos.models.complementos
+ * @property categoriaComboBox Combo box que nos indicara la categoria del complemento
+ * @property precioSpinner Spinner para la seleccion del precio del complemento
+ * @property stockSpinner Spinner para la seleccion del stock del complemento
+ * @property nombreField Campo de texto que nos indicara el nombre del complemento.
+ * @property idField Campo de texto que nos indicará el id del complemento
+ * @property saveButton Botón que nos guardara los cambios realizados
+ * @property cleanButton Botón que eliminara toda la información de los campos
+ * @property cancelButton Botón para cancelar la edición y volver a la vista anterior
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores
+ * @property backMenuMenuButton Botón que nos llevara de regreso al menú
+ * @property tituloLabel Label que nos indica la accion que estamos realizando
+ */
 class EditarComplementoController {
     @FXML
     lateinit var categoriaComboBox: ComboBox<Any>
@@ -46,7 +63,11 @@ class EditarComplementoController {
     fun setStage(stage: Stage) {
         this.stage = stage
     }
-
+    /**
+     * Función que inicializa la vista de editar los complementos
+     * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }

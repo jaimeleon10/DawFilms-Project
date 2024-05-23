@@ -1,12 +1,20 @@
 package org.example.dawfilmsinterface.productos.repositories.complementos
 
+import database.DatabaseQueries
+import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.extension.ExtendWith
 import org.lighthousegames.logging.logging
+import org.mockito.Mock
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.junit.jupiter.MockitoSettings
+import org.mockito.kotlin.whenever
+import org.mockito.quality.Strictness
 
 private val logger = logging()
 
@@ -16,27 +24,31 @@ private val logger = logging()
  * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
  * @since 1.0.0
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension::class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class ComplementoRepositoryImplTest {
-    private lateinit var dbManager : SqlDeLightManager
+    @Mock
+    lateinit var config: Config
+
+    private lateinit var dbManager: SqlDeLightManager
+    private lateinit var databaseQueries: DatabaseQueries
     private lateinit var complementoRepository : ComplementoRepositoryImpl
 
-    @BeforeAll
-    fun setUpAll() {
-        logger.debug { "Iniciando tests..." }
-        dbManager = SqlDeLightManager(Config())
-        complementoRepository = ComplementoRepositoryImpl(dbManager)
-    }
+    @BeforeEach
+    fun setUp() {
+        whenever(config.dataBaseUrl).thenReturn("jdbc:sqlite::memory:")
+        whenever(config.dataBaseInMemory).thenReturn(true)
+        whenever(config.databaseInitData).thenReturn(true)
+        whenever(config.databaseRemoveData).thenReturn(true)
 
-    @AfterAll
-    fun tearDown() {
-        dbManager.clearData()
-        dbManager.insertSampleData()
+        dbManager = SqlDeLightManager(config)
+        databaseQueries = dbManager.databaseQueries
+        complementoRepository = ComplementoRepositoryImpl(dbManager)
+
+        dbManager.initialize()
     }
 
     @Test
-    @Order(1)
     fun findAll() {
         val complementos = complementoRepository.findAll()
 
@@ -44,7 +56,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(2)
     fun findById() {
         val complemento = complementoRepository.findById("1")
 
@@ -58,7 +69,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(3)
     fun findByIdNotFound() {
         val complemento = complementoRepository.findById("5")
 
@@ -66,7 +76,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(4)
     fun save() {
         val complemento = complementoRepository.save(
             Complemento(
@@ -90,7 +99,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(5)
     fun update() {
         val complemento = complementoRepository.update(
             "1",
@@ -115,7 +123,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(6)
     fun updateNotFound() {
         val complemento = complementoRepository.update(
             "15",
@@ -134,7 +141,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(7)
     fun delete() {
         val complemento = complementoRepository.delete("1")
 
@@ -142,7 +148,6 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
-    @Order(8)
     fun deleteNotFound() {
         val complemento = complementoRepository.delete("20")
 

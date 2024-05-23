@@ -12,4 +12,5 @@ data class LineaVenta(
     val precio: Double,
     val createdAt: LocalDate = LocalDate.now(),
     val updatedAt: LocalDate = LocalDate.now(),
+    val isDeleted: Boolean = false
 )

@@ -9,6 +9,19 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para el menú del cliente a través de la IU.
+ * Gestiona las acciones y eventos relacionados con las diferentes funcionalidades del menú del cliente en la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property usernameField Etiqueta que muestra el nombre de usuario.
+ * @property complementsListButton Botón para acceder al listado de complementos disponibles.
+ * @property exitMenuButton Botón de menú para salir de la aplicación.
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores.
+ * @property exitButton Botón para cerrar la sesión y regresar a la vista de login.
+ * @property showCinemaButton Botón para mostrar el estado del cine.
+ * @property buyTicketButton Botón para comprar entradas.
+ */
 class MenuClienteController {
     @FXML
     lateinit var usernameField: Label
@@ -31,6 +44,12 @@ class MenuClienteController {
     @FXML
     lateinit var buyTicketButton: Button
 
+    /**
+     * Función que inicializa la vista del menú del cliente.
+     * Asigna las acciones a los botones y elementos de menú.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         exitButton.setOnAction {

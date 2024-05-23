@@ -12,6 +12,19 @@ import kotlin.concurrent.thread
 
 private val logger = logging()
 
+/**
+ * Clase controller para la pantalla de carga durante el inicio de la aplicación.
+ * Gestiona las acciones y eventos relacionados con la visualización de la barra de progreso y los enlaces de GitHub de los desarrolladores.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property progressBar Barra de progreso que indica el estado de carga.
+ * @property cargandoLabel Etiqueta que muestra el estado de carga.
+ * @property githubGermanLink Enlace a GitHub del desarrollador German Fernández.
+ * @property githubAlbaLink Enlace a GitHub de la desarrolladora Alba García.
+ * @property githubJavierLink Enlace a GitHub del desarrollador Javier Ruiz.
+ * @property githubNataliaLink Enlace a GitHub de la desarrolladora Natalia González.
+ * @property githubJaimeLink Enlace a GitHub del desarrollador Jaime León.
+ */
 class PantallaDeCargaController {
     @FXML
     lateinit var progressBar: ProgressBar
@@ -34,6 +47,10 @@ class PantallaDeCargaController {
     @FXML
     lateinit var githubJaimeLink: Hyperlink
 
+    /**
+     * Función que inicializa la pantalla de carga.
+     * Asigna las acciones a los enlaces de GitHub de los desarrolladores y maneja la barra de progreso durante la carga.
+     */
     @FXML
     private fun initialize() {
         githubJaimeLink.setOnAction {
@@ -60,11 +77,18 @@ class PantallaDeCargaController {
         thread { cargaProgressBar() }
     }
 
+    /**
+     * Abre el navegador web en el enlace proporcionado.
+     * @param url URL del enlace a abrir en el navegador.
+     */
     private fun abrirNavegador(url: String) {
         logger.debug { "Abriendo navegador en el link: $url" }
         Open.open(url)
     }
 
+    /**
+     * Simula el progreso de carga en la barra de progreso.
+     */
     private fun cargaProgressBar() {
         progressBar.progress = 0.0
         for (i in 0..100) {
@@ -80,6 +104,10 @@ class PantallaDeCargaController {
         }
     }
 
+    /**
+     * Actualiza el texto de la etiqueta de estado de carga.
+     * @param i Número para controlar el cambio de estado de carga.
+     */
     private fun updateCargandoLabel(i: Int) {
         when {
             i % 3 == 0 -> cargandoLabel.text = "Cargando."

@@ -10,6 +10,24 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para el menú de administración a través de la IU.
+ * Gestiona las acciones y eventos relacionados con las diferentes funcionalidades del menú de administración en la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property exitMenuButton Botón de menú para salir de la aplicación.
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores.
+ * @property usernameField Label que muestra el nombre de usuario.
+ * @property complementListButton Botón para acceder al listado de complementos.
+ * @property showCineButton Botón para mostrar el estado del cine.
+ * @property backUpButton Botón para realizar un respaldo de datos.
+ * @property getRaisingButton Botón para obtener la recaudación.
+ * @property importComplementsButton Botón para importar complementos desde un fichero externo.
+ * @property exportCineButton Botón para exportar el estado del cine.
+ * @property updateSeatButton Botón para actualizar las butacas.
+ * @property importSeatsButton Botón para importar butacas desde un fichero externo.
+ * @property exitButton Botón para cerrar la sesión y regresar a la vista de login.
+ */
 class MenuAdminController {
     @FXML
     lateinit var exitMenuButton: MenuItem
@@ -47,6 +65,12 @@ class MenuAdminController {
     @FXML
     lateinit var exitButton: Button
 
+    /**
+     * Función que inicializa la vista del menú de administración.
+     * Asigna las acciones a los botones y elementos de menú.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         exitButton.setOnAction {
