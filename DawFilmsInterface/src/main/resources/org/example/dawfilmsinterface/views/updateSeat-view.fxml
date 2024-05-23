@@ -22,10 +22,10 @@
       </ImageView>
       <TableView fx:id="complementosTable" layoutX="40.0" layoutY="230.0" prefHeight="410.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="88.0" style="-fx-font-size: 15;" text="ID Butaca" />
-            <TableColumn minWidth="0.0" prefWidth="122.0" style="-fx-font-size: 15;" text="Estado" />
-          <TableColumn prefWidth="115.0" style="-fx-font-size: 15;" text="Tipo" />
-            <TableColumn prefWidth="148.0" style="-fx-font-size: 15;" text="Ocupación" />
+          <TableColumn fx:id="idColumnTable" prefWidth="88.0" style="-fx-font-size: 15;" text="ID Butaca" />
+            <TableColumn fx:id="estadoColumnTable" minWidth="0.0" prefWidth="122.0" style="-fx-font-size: 15;" text="Estado" />
+          <TableColumn fx:id="tipoColumnTable" prefWidth="115.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn fx:id="ocupacionColumnTable" prefWidth="148.0" style="-fx-font-size: 15;" text="Ocupación" />
         </columns>
       </TableView>
       <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
