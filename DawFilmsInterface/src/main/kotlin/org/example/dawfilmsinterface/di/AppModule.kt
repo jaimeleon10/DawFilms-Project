@@ -19,7 +19,8 @@ import org.example.dawfilmsinterface.productos.repositories.complementos.Complem
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
-import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
+import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorageImpl
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsvImpl
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
@@ -28,6 +29,8 @@ import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXmlImpl
+import org.example.dawfilmsinterface.productos.validators.ButacaValidator
+import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
@@ -37,6 +40,7 @@ import org.example.dawfilmsinterface.ventas.storage.VentaStorage
 import org.example.dawfilmsinterface.ventas.storage.VentaStorageImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val appModule = module {
@@ -54,7 +58,7 @@ val appModule = module {
         bind<ClienteService>()
     }
 
-    singleOf(::ClienteCache){
+    singleOf(::ClienteCache) {
         bind<Cache<Long, Cliente>>()
     }
 
@@ -72,17 +76,21 @@ val appModule = module {
         bind<ComplementoRepository>()
     }
 
-    singleOf(::ProductoServiceImpl) {
-        bind<ProductoService>()
-    }
+    single {
+        ProductoServiceImpl(get(), get(), get(), get(), get())
+    } bind ProductoService::class
 
-    singleOf(::ProductosCache){
-        bind<Cache<String,Producto>>()
-    }
+    single { ProductosCache(Config().cacheSize) } bind Cache::class
 
     singleOf(::StorageCsvImpl) {
         bind<StorageCsv>()
     }
+
+    single { ButacaValidator }
+
+    singleOf(::ComplementoValidator)
+
+    singleOf(::ProductosStorageImpl) { bind<ProductosStorage>() }
 
     singleOf(::StorageImageImpl) {
         bind<StorageImage>()

@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.productos.viewmodels
 
+import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
@@ -50,7 +51,7 @@ class ActualizarButacaViewModel(
         )
     }
 
-    private fun butacasFilteredList(tipo: String) : List<Butaca>{
+    fun butacasFilteredList(tipo: String) : List<Butaca>{
         logger.debug { "Filtrando lista de Butacas: $tipo" }
 
         return state.value.butacas
@@ -111,10 +112,11 @@ class ActualizarButacaViewModel(
                     butacas = state.value.butacas.toMutableList().apply { this[index] = it }
                 )
                 updateActualState()
-                com.github.michaelbull.result.Ok(it)
+                Ok(it)
             }
         }
     }
+
      */
 
     private fun updateImageButacaOperacion(fileImage: File){
