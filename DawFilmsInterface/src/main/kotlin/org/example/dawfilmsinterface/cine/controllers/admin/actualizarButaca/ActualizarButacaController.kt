@@ -12,10 +12,12 @@ import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
+<<<<<<< HEAD
 
 class ActualizarButacaController : KoinComponent {
     val viewModel : ActualizarButacaViewModel by inject()
 
+=======
 /**
  * Clase controller para la actualización de las butacas a través de la IU
  * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
@@ -79,6 +81,7 @@ class ActualizarButacaController : KoinComponent {
     lateinit var acercaDeMenuButton: MenuItem
 
     @FXML
+<<<<<<< HEAD
     lateinit var complementosTable: TableView<Butaca>
 
     @FXML

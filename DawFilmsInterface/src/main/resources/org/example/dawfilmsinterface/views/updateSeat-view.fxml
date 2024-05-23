@@ -20,7 +20,7 @@
             <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
          </image>
       </ImageView>
-      <TableView fx:id="complementosTable" layoutX="40.0" layoutY="230.0" prefHeight="410.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+      <TableView fx:id="butacaTable" layoutX="40.0" layoutY="230.0" prefHeight="410.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
           <TableColumn fx:id="idColumnTable" prefWidth="88.0" style="-fx-font-size: 15;" text="ID Butaca" />
             <TableColumn fx:id="estadoColumnTable" minWidth="0.0" prefWidth="122.0" style="-fx-font-size: 15;" text="Estado" />
