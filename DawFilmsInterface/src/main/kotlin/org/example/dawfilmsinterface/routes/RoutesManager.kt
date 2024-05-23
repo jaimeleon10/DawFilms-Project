@@ -225,12 +225,12 @@ object RoutesManager {
         myStage.scene = scene
     }
 
-    private fun getResource(resource: String): URL {
+    fun getResource(resource: String): URL {
         return app::class.java.getResource(resource)
             ?: throw RuntimeException("No se ha encontrado el recurso: $resource")
     }
 
-    private fun getResourceAsStream(resource: String): InputStream {
+    fun getResourceAsStream(resource: String): InputStream {
         return app::class.java.getResourceAsStream(resource)
             ?: throw RuntimeException("No se ha encontrado el recurso como stream: $resource")
     }
