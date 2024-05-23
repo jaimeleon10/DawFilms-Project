@@ -65,7 +65,7 @@ class ActualizarButacaViewModel(
             }
     }
 
-    private fun updateButacaSeleccionada(butaca: Butaca){
+    fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
         var imagen = Image(RoutesManager.getResourceAsStream("images/sin-imagen.png"))

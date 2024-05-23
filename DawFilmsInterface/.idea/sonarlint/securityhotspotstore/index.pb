@@ -139,8 +139,6 @@ Qsrc/main/kotlin/org/example/dawfilmsinterface/ventas/services/VentaServiceImpl.
 Xsrc/main/kotlin/org/example/dawfilmsinterface/ventas/repositories/VentaRepositoryImpl.kt,6\1\6147676f9dccc63985321c5c937835f16912eb6a
 †
 Vsrc/main/kotlin/org/example/dawfilmsinterface/productos/models/butacas/EstadoButaca.kt,b\7\b7a73145dc7c74ff62018c0a2d2646becebae469
-Š
-Zsrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/ActualizarButacaViewModel.kt,5\9\5982932eb821dd63fe7145c2445f021e2ca4efc6
 u
 Esrc/main/kotlin/org/example/dawfilmsinterface/routes/RoutesManager.kt,d\7\d7ea3056d3316344a6d9bdb731ea66186a28786e
 £

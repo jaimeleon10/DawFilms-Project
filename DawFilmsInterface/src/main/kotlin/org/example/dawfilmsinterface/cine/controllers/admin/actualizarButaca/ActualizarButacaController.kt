@@ -3,6 +3,8 @@ package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
@@ -57,7 +59,19 @@ class ActualizarButacaController : KoinComponent {
     lateinit var acercaDeMenuButton: MenuItem
 
     @FXML
-    lateinit var complementosTable: TableView<Any>
+    lateinit var complementosTable: TableView<Butaca>
+
+    @FXML
+    lateinit var idColumnTable : TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var estadoColumnTable: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var tipoColumnTable: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var ocupacionColumnTable: TableColumn<Butaca, String>
 
     @FXML
     private fun initialize() {
@@ -101,7 +115,10 @@ class ActualizarButacaController : KoinComponent {
 
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
 
-
+        idColumnTable.cellValueFactory = PropertyValueFactory("id")
+        estadoColumnTable.cellValueFactory = PropertyValueFactory("estado")
+        tipoColumnTable.cellValueFactory = PropertyValueFactory("tipo")
+        ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacion")
     }
 
     private fun initEventos() {
@@ -115,5 +132,34 @@ class ActualizarButacaController : KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
         editButton.setOnAction { RoutesManager.initEditarButaca() }
+
+        /*
+        idFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+            newValue?.let { onComboSelected(newValue) }
+        }
+
+         */
+
+        complementosTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
+        }
+    }
+
+    private fun onComboSelected(newValue: String) {
+        logger.debug { "onComboSelected: $newValue"}
+        //filterDataTable()
+    }
+
+    /*
+    private fun filterDataTable(){
+        logger.debug { "filterDataTable" }
+        complementosTable.items=
+            FXCollections.observableList(viewModel.butacasFilteredList(idFilterComboBox.value))
+    }
+    */
+
+    private fun onTablaSelected(newValue: Butaca){
+        logger.debug { "onTablaSelected: $newValue" }
+        viewModel.updateButacaSeleccionada(newValue)
     }
 }
