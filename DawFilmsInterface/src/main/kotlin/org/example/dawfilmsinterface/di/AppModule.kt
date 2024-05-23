@@ -1,9 +1,11 @@
 package org.example.dawfilmsinterface.di
 
 
+import org.example.dawfilmsinterface.cache.Cache
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
+import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.clientes.services.ClienteServiceImpl
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorage
@@ -17,6 +19,7 @@ import org.example.dawfilmsinterface.productos.repositories.complementos.Complem
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.service.ProductoServiceImpl
 import org.example.dawfilmsinterface.productos.cache.ProductosCache
+import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsvImpl
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
@@ -25,6 +28,7 @@ import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXmlImpl
+import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -50,7 +54,9 @@ val appModule = module {
         bind<ClienteService>()
     }
 
-    singleOf(::ClienteCache)
+    singleOf(::ClienteCache){
+        bind<Cache<Long, Cliente>>()
+    }
 
     singleOf(::ClienteStorageImpl) {
         bind<ClienteStorage>()
@@ -70,7 +76,9 @@ val appModule = module {
         bind<ProductoService>()
     }
 
-    singleOf(::ProductosCache)
+    singleOf(::ProductosCache){
+        bind<Cache<String,Producto>>()
+    }
 
     singleOf(::StorageCsvImpl) {
         bind<StorageCsv>()
@@ -101,4 +109,6 @@ val appModule = module {
     singleOf(::VentaStorageImpl) {
         bind<VentaStorage>()
     }
+
+    single { ActualizarButacaViewModel(get(), get()) }
 }

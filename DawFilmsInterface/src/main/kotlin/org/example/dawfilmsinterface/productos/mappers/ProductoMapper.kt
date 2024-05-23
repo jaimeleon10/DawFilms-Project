@@ -1,8 +1,6 @@
 package org.example.dawfilmsinterface.productos.mappers
 
 import database.ProductoEntity
-import org.example.dawfilmsinterface.productos.dto.ButacaDto
-import org.example.dawfilmsinterface.productos.dto.ComplementoDto
 import org.example.dawfilmsinterface.productos.dto.ProductoDto
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
@@ -11,6 +9,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel.ButacaState
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {
@@ -159,4 +158,20 @@ fun List<ProductoDto>.toProductoList(): List<Producto> {
         if (it.tipoProducto == "Butaca") it.toButaca()
         else it.toComplemento()
     }
+}
+
+fun ButacaState.toModel(): Butaca {
+    return Butaca(
+        id = this.id,
+        tipoProducto = "Butaca",
+        imagen = this.fileImage?.name ?: "sin-imagen.png",
+        fila = 0,
+        columna = 0,
+        tipoButaca = TipoButaca.valueOf(this.tipo.uppercase()),
+        estadoButaca = EstadoButaca.valueOf(this.estado.uppercase()),
+        ocupacionButaca = OcupacionButaca.valueOf(this.ocupacion.uppercase()),
+        createdAt = LocalDate.now(),
+        updatedAt = LocalDate.now(),
+        isDeleted = false
+    )
 }
