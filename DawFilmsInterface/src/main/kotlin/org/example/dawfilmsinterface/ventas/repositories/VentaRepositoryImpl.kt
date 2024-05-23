@@ -28,7 +28,7 @@ class VentaRepositoryImpl(
     private val clienteRepository: ClienteRepository
 ) : VentaRepository {
 
-    private val db = dbManager.dbQueries
+    private val db = dbManager.databaseQueries
 
     override fun findAll(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra: LocalDate): List<Venta> {
         logger.debug { "Buscando todas las ventas" }
@@ -63,7 +63,8 @@ class VentaRepositoryImpl(
                 total = venta.total,
                 fecha_compra = LocalDate.now().toString(),
                 created_at = venta.createdAt.toString(),
-                updated_at = venta.updatedAt.toString()
+                updated_at = venta.updatedAt.toString(),
+                is_deleted = 0
             )
         }
 
@@ -77,7 +78,8 @@ class VentaRepositoryImpl(
                     cantidad = it.cantidad.toLong(),
                     precio = it.precio,
                     created_at = it.createdAt.toString(),
-                    updated_at = it.updatedAt.toString()
+                    updated_at = it.updatedAt.toString(),
+                    is_deleted = 0
                 )
             }
         }

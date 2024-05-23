@@ -31,12 +31,16 @@ class Config {
         readProperty("app.database.url") ?: "jdbc:sqlite:defaultdawfilms.db"
     }
 
-    val databaseInit: Boolean by lazy {
+    val databaseInitData: Boolean by lazy {
         readProperty("app.database.init")?.toBoolean() ?: false
     }
 
     val databaseRemoveData: Boolean by lazy {
         readProperty("app.database.removedata")?.toBoolean() ?: false
+    }
+
+    val dataBaseInMemory: Boolean by lazy {
+        readProperty("app.database.inMemory")?.toBoolean() ?: false
     }
 
     val cacheSize: Int by lazy {

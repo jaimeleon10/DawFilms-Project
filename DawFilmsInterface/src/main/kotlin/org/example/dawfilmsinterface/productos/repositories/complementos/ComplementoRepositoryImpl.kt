@@ -14,7 +14,7 @@ class ComplementoRepositoryImpl(
     private val dbManager: SqlDeLightManager
 ) : ComplementoRepository {
 
-    private val db = dbManager.dbQueries
+    private val db = dbManager.databaseQueries
 
     override fun findAll(): List<Complemento> {
         logger.debug { "Buscando todos las complementos" }
