@@ -7,6 +7,25 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para la administración de complementos a través de la IU.
+ * Gestiona las acciones y eventos relacionados con la vista de administración de complementos en la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @see org.example.dawfilmsinterface.productos.models.complementos
+ * @property backMenuButton Botón para regresar al menú anterior.
+ * @property deleteButton Botón para eliminar un complemento.
+ * @property editButton Botón para editar un complemento.
+ * @property addButton Botón para añadir un nuevo complemento.
+ * @property stockSelectedField Campo de texto para el stock del complemento seleccionado.
+ * @property precioSelectedField Campo de texto para el precio del complemento seleccionado.
+ * @property nombreSelectedField Campo de texto para el nombre del complemento seleccionado.
+ * @property idSelectedField Campo de texto para el ID del complemento seleccionado.
+ * @property usernameField Etiqueta que muestra el nombre de usuario.
+ * @property acercaDeMenuButton Elemento de menú para la opción "Acerca de".
+ * @property backMenuMenuButton Elemento de menú para regresar al menú anterior.
+ * @property complementosTable Tabla que muestra los complementos.
+ */
 class ListadoComplementosAdminController {
     @FXML
     lateinit var backMenuButton: Button
@@ -44,6 +63,12 @@ class ListadoComplementosAdminController {
     @FXML
     lateinit var complementosTable: TableView<Any>
 
+    /**
+     * Función que inicializa la vista de administración de complementos.
+     * Asigna las acciones a los botones y elementos de menú.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }

@@ -10,6 +10,16 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para exportar el estado del cine a través de la IU.
+ * Gestiona las acciones y eventos relacionados con la exportación de datos del cine en la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property exportButton Botón para iniciar la exportación del estado del cine.
+ * @property exportDatePicker Selector de fecha para especificar la fecha de exportación.
+ * @property backMenuButton Botón para regresar al menú anterior.
+ * @property stage Escenario actual de la vista.
+ */
 class ExportarEstadoCineController {
     @FXML
     lateinit var exportButton: Button
@@ -20,11 +30,20 @@ class ExportarEstadoCineController {
     @FXML
     lateinit var backMenuButton: Button
 
+    /**
+     * Establece el escenario actual para la vista.
+     * @param stage Escenario a establecer.
+     */
     private lateinit var stage: Stage
     fun setStage(stage: Stage) {
         this.stage = stage
     }
-
+    /**
+     * Función que inicializa la vista de exportación del estado del cine.
+     * Asigna las acciones a los botones de exportación y regreso al menú.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         exportButton.setOnAction {
