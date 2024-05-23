@@ -9,7 +9,7 @@ import org.lighthousegames.logging.logging
 private val logger = logging()
 
 /**
- * Clase controller para la actualización de las butacas a través de la IU
+ * Clase controller para la edición de las butacas a través de la IU
  * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
  * @since 1.0.0
  * @see org.example.dawfilmsinterface.productos.models.butacas
@@ -60,7 +60,11 @@ class EditarButacaController {
     fun setStage(stage: Stage) {
         this.stage = stage
     }
-
+    /**
+     * Función que inicializa la vista de editar butaca
+     * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         saveButton.setOnAction {
