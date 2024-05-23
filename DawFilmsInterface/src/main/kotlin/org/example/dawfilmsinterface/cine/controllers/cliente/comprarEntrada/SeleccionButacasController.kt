@@ -10,6 +10,52 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para la selección de butacas a través de la IU.
+ * Gestiona las acciones y eventos relacionados con la selección de butacas en la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property usernameField Etiqueta que muestra el nombre de usuario.
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores.
+ * @property backMenuMenuButton Botón de menú para regresar al menú principal.
+ * @property selectedButacasLabel Etiqueta que muestra las butacas seleccionadas.
+ * @property continueButton Botón para continuar con el proceso de compra.
+ * @property butacaE7Button Botón de selección para la butaca E7.
+ * @property butacaD7Button Botón de selección para la butaca D7.
+ * @property butacaC7Button Botón de selección para la butaca C7.
+ * @property butacaB7Button Botón de selección para la butaca B7.
+ * @property butacaA7Button Botón de selección para la butaca A7.
+ * @property butacaE6Button Botón de selección para la butaca E6.
+ * @property butacaD6Button Botón de selección para la butaca D6.
+ * @property butacaC6Button Botón de selección para la butaca C6.
+ * @property butacaB6Button Botón de selección para la butaca B6.
+ * @property butacaA6Button Botón de selección para la butaca A6.
+ * @property butacaE5Button Botón de selección para la butaca E5.
+ * @property butacaD5Button Botón de selección para la butaca D5.
+ * @property butacaC5Button Botón de selección para la butaca C5.
+ * @property butacaB5Button Botón de selección para la butaca B5.
+ * @property butacaA5Button Botón de selección para la butaca A5.
+ * @property butacaE4Button Botón de selección para la butaca E4.
+ * @property butacaD4Button Botón de selección para la butaca D4.
+ * @property butacaC4Button Botón de selección para la butaca C4.
+ * @property butacaB4Button Botón de selección para la butaca B4.
+ * @property butacaA4Button Botón de selección para la butaca A4.
+ * @property butacaE3Button Botón de selección para la butaca E3.
+ * @property butacaD3Button Botón de selección para la butaca D3.
+ * @property butacaC3Button Botón de selección para la butaca C3.
+ * @property butacaB3Button Botón de selección para la butaca B3.
+ * @property butacaA3Button Botón de selección para la butaca A3.
+ * @property butacaE2Button Botón de selección para la butaca E2.
+ * @property butacaD2Button Botón de selección para la butaca D2.
+ * @property butacaC2Button Botón de selección para la butaca C2.
+ * @property butacaB2Button Botón de selección para la butaca B2.
+ * @property butacaA2Button Botón de selección para la butaca A2.
+ * @property butacaE1Button Botón de selección para la butaca E1.
+ * @property butacaD1Button Botón de selección para la butaca D1.
+ * @property butacaC1Button Botón de selección para la butaca C1.
+ * @property butacaB1Button Botón de selección para la butaca B1.
+ * @property butacaA1Button Botón de selección para la butaca A1.
+ */
 class SeleccionButacasController {
     @FXML
     lateinit var usernameField: Label
@@ -130,7 +176,12 @@ class SeleccionButacasController {
 
     @FXML
     lateinit var butacaA1Button: ToggleButton
-
+    /**
+     * Función que inicializa la vista de selección de butacas.
+     * Asigna las acciones a los botones y elementos de menú.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     @FXML
     private fun initialize() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }

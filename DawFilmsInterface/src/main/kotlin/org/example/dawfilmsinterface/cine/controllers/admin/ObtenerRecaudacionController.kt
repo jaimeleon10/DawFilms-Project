@@ -17,7 +17,7 @@ private val logger = logging()
  * @property dateFilterDatePicker Selector de fecha para filtrar la recaudación por fecha.
  * @property backMenuButton Botón para regresar al menú anterior.
  * @property usernameField Etiqueta que muestra el nombre de usuario.
- * @property acercaDeMenuButton Botón de menú que muestra información "Acerca de".
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores.
  * @property backMenuMenuButton Botón de menú para regresar al menú principal.
  * @property productosTable Tabla que muestra los productos y su recaudación.
  */
