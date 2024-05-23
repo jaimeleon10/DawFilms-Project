@@ -16,6 +16,26 @@ private val logger = logging()
 class ActualizarButacaController : KoinComponent {
     val viewModel : ActualizarButacaViewModel by inject()
 
+/**
+ * Clase controller para la actualización de las butacas a través de la IU
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property backMenuMenuButton Botón que nos llevara de regreso al menú
+ * @property precioSelectedField Campo de texto que nos indicara el precio de la butaca
+ * @property ocupacionSelectedField Campo de texto que nos indicara la ocupación de la butaca
+ * @property tipoSelectedField Campo de texto que nos indicará el tipo de la butaca
+ * @property estadoSelectedField Campo de texto que nos indicará el estado de la butaca
+ * @property idSelectedField Campo de texto que nos indicará el id de la butaca
+ * @property editButton Botón que nos llevara a la opción de editar butaca
+ * @property idFilterComboBox Combo box que nos ayudará a la selección
+ * @property ocupacionFilterComboBox Combo box que filtrara las butacas dependiendo de si están ocupadas o no
+ * @property tipoFilterComboBox Combo box que filtrara las butacas dependiendo de su tipo
+ * @property estadoFilterComboBox Combo box que filtrara las butacas dependiendo de su estado
+ * @property backMenuButton Botón que nos devolverá al menu anterior
+ * @property usernameField Label que nos mostrará el nombre de usuario
+ * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores
+ * @property butacaTable Tabla donde se nos mostrará la información relativa a los complementos
+ */
     @FXML
     lateinit var backMenuMenuButton: MenuItem
 
@@ -72,7 +92,15 @@ class ActualizarButacaController : KoinComponent {
 
     @FXML
     lateinit var ocupacionColumnTable: TableColumn<Butaca, String>
+=======
+    lateinit var butacaTable: TableView<Any>
+>>>>>>> 04ac4f7f830f2bd22713dccc3a2e21d3144e3010
 
+    /**
+     * Función que inicializa la vista de actualizar butaca
+     * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+    */
     @FXML
     private fun initialize() {
         logger.debug { "Inicializando ActualizarButacaController FXML" }
