@@ -14,7 +14,7 @@ class ButacaRepositoryImpl(
     private val dbManager: SqlDeLightManager
 ) : ButacaRepository {
 
-    private val db = dbManager.dbQueries
+    private val db = dbManager.databaseQueries
 
     override fun findAll(): List<Butaca> {
         logger.debug { "Buscando todas las butacas" }

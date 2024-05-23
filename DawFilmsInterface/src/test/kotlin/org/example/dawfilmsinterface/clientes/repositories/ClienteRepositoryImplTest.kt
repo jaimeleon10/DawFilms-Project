@@ -1,59 +1,68 @@
 package org.example.dawfilmsinterface.clientes.repositories
 
+import database.DatabaseQueries
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.junit.jupiter.api.*
 import org.lighthousegames.logging.logging
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.junit.jupiter.MockitoSettings
+import org.mockito.kotlin.whenever
+import org.mockito.quality.Strictness
 import java.time.LocalDate
 
 private val logger = logging()
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension::class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class ClienteRepositoryImplTest {
+    @Mock
+    lateinit var config: Config
+
     private lateinit var dbManager: SqlDeLightManager
+    private lateinit var databaseQueries: DatabaseQueries
     private lateinit var clienteRepository: ClienteRepositoryImpl
 
-    @BeforeAll
-    fun setUpAll() {
-        logger.debug { "Iniciando tests..." }
-        dbManager = SqlDeLightManager(Config())
-        clienteRepository = ClienteRepositoryImpl(dbManager)
-    }
+    @BeforeEach
+    fun setUp() {
+        whenever(config.dataBaseUrl).thenReturn("jdbc:sqlite::memory:")
+        whenever(config.dataBaseInMemory).thenReturn(true)
+        whenever(config.databaseInitData).thenReturn(true)
+        whenever(config.databaseRemoveData).thenReturn(true)
 
-    @AfterAll
-    fun tearDown() {
-        dbManager.clearData()
-        dbManager.insertSampleData()
+        dbManager = SqlDeLightManager(config)
+        databaseQueries = dbManager.databaseQueries
+        clienteRepository = ClienteRepositoryImpl(dbManager)
+
+        dbManager.initialize()
     }
 
     @Test
-    @Order(1)
     fun findAll() {
         val clientes = clienteRepository.findAll()
 
-        assertEquals(2, clientes.size)
+        assertEquals(1, clientes.size)
     }
 
     @Test
-    @Order(2)
     fun findById() {
         val cliente = clienteRepository.findById(1)
 
         assertEquals(1,cliente?.id)
-        assertEquals("admin", cliente?.nombre)
-        assertEquals("admin", cliente?.apellido)
-        assertEquals(LocalDate.parse("2024-01-01"), cliente?.fechaNacimiento)
-        assertEquals("11111111A", cliente?.dni)
-        assertEquals("admin@admin.com", cliente?.email)
+        assertEquals("Jaime", cliente?.nombre)
+        assertEquals("Leon", cliente?.apellido)
+        assertEquals(LocalDate.parse("2000-05-10"), cliente?.fechaNacimiento)
+        assertEquals("12345678A", cliente?.dni)
+        assertEquals("jleon@gmail.com", cliente?.email)
         assertEquals("AAA111", cliente?.numSocio)
-        assertEquals("admin", cliente?.password)
+        assertEquals("password", cliente?.password)
     }
 
     @Test
-    @Order(3)
     fun findByIdNotFound() {
         val cliente = clienteRepository.findById(5)
 
@@ -61,7 +70,6 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
-    @Order(4)
     fun save() {
         val cliente = clienteRepository.save(
             Cliente(
@@ -76,7 +84,7 @@ class ClienteRepositoryImplTest {
             )
         )
 
-        assertEquals(3,cliente.id)
+        assertEquals(2,cliente.id)
         assertEquals("test", cliente.nombre)
         assertEquals("test", cliente.apellido)
         assertEquals(LocalDate.parse("2024-05-05"), cliente.fechaNacimiento)
@@ -87,9 +95,8 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
-    @Order(5)
     fun update() {
-        val cliente = clienteRepository.update(2, Cliente(
+        val cliente = clienteRepository.update(1, Cliente(
             nombre = "test-update",
             apellido = "test-update",
             fechaNacimiento = LocalDate.parse("2024-06-06"),
@@ -99,7 +106,7 @@ class ClienteRepositoryImplTest {
             password = "0000")
         )
 
-        assertEquals(2,cliente?.id)
+        assertEquals(1,cliente?.id)
         assertEquals("test-update", cliente?.nombre)
         assertEquals("test-update", cliente?.apellido)
         assertEquals(LocalDate.parse("2024-06-06"), cliente?.fechaNacimiento)
@@ -110,7 +117,6 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
-    @Order(6)
     fun updateNotFound() {
         val cliente = clienteRepository.update(
             5,
@@ -130,7 +136,6 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
-    @Order(7)
     fun delete() {
         val cliente = clienteRepository.delete(1)
 
@@ -138,7 +143,6 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
-    @Order(8)
     fun deleteNotFound() {
         val cliente = clienteRepository.delete(5)
 

@@ -23,7 +23,7 @@ class ButacaValidatorTest {
 
     @BeforeEach
     fun setUp() {
-        butacaValidator = ButacaValidator()
+        butacaValidator = ButacaValidator
         butaca = Butaca(
             "A1",
             "Butaca",

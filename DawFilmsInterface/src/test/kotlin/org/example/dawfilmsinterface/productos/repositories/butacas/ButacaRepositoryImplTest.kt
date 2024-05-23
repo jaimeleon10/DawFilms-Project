@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.productos.repositories.butacas
 
+import database.DatabaseQueries
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
@@ -8,6 +9,12 @@ import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mock
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.junit.jupiter.MockitoSettings
+import org.mockito.kotlin.whenever
+import org.mockito.quality.Strictness
 
 /**
  * Tests para comprobar el correcto funcionamiento del repositorio de Butaca
@@ -15,26 +22,31 @@ import org.junit.jupiter.api.Assertions.assertEquals
  * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
  * @since 1.0.0
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@ExtendWith(MockitoExtension::class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class ButacaRepositoryImplTest {
-    private lateinit var dbManager : SqlDeLightManager
-    private lateinit var butacaRepository : ButacaRepositoryImpl
+    @Mock
+    lateinit var config: Config
 
-    @BeforeAll
-    fun setUpAll() {
-        println("Iniciando tests...")
-        dbManager = SqlDeLightManager(Config())
+    private lateinit var dbManager: SqlDeLightManager
+    private lateinit var databaseQueries: DatabaseQueries
+    private lateinit var butacaRepository: ButacaRepositoryImpl
+
+    @BeforeEach
+    fun setUp() {
+        whenever(config.dataBaseUrl).thenReturn("jdbc:sqlite::memory:")
+        whenever(config.dataBaseInMemory).thenReturn(true)
+        whenever(config.databaseInitData).thenReturn(true)
+        whenever(config.databaseRemoveData).thenReturn(true)
+
+        dbManager = SqlDeLightManager(config)
+        databaseQueries = dbManager.databaseQueries
         butacaRepository = ButacaRepositoryImpl(dbManager)
+
+        dbManager.initialize()
     }
 
-    @AfterAll
-    fun tearDown() {
-        dbManager.clearData()
-        dbManager.insertSampleData()
-    }
     @Test
-    @Order(1)
     fun findAll() {
         val butaca = butacaRepository.findAll()
 
@@ -42,7 +54,6 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(2)
     fun findById() {
         val butaca = butacaRepository.findById("A1")
 
@@ -59,7 +70,6 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(3)
     fun findByIdNotFound() {
         val butaca = butacaRepository.findById("5")
 
@@ -67,7 +77,6 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(4)
     fun save() {
         val butaca = butacaRepository.save(
             Butaca(
@@ -93,7 +102,6 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(5)
     fun update() {
         val butaca = butacaRepository.update(
             "A1",
@@ -120,7 +128,6 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(6)
     fun updateNotFound() {
         val butaca = butacaRepository.update(
             "15",
@@ -140,15 +147,13 @@ class ButacaRepositoryImplTest {
     }
 
     @Test
-    @Order(7)
     fun delete() {
-        val butaca = butacaRepository.delete("A2")
+        val butaca = butacaRepository.delete("A1")
 
-        assertEquals("A2", butaca?.id)
+        assertEquals("A1", butaca?.id)
     }
 
     @Test
-    @Order(8)
     fun deleteNotFound() {
         val butaca = butacaRepository.delete("20")
 

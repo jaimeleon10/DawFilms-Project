@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.ventas.repositories
 
+import database.DatabaseQueries
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
@@ -24,7 +25,9 @@ import org.lighthousegames.logging.logging
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.junit.jupiter.MockitoSettings
 import org.mockito.kotlin.whenever
+import org.mockito.quality.Strictness
 import java.time.LocalDate
 import java.util.*
 
@@ -36,14 +39,13 @@ import java.util.*
  */
 
 private val logger = logging()
-@TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@ExtendWith(MockitoExtension::class)
-class VentaRepositoryImplTest {
-    private lateinit var dbManager: SqlDeLightManager
 
-    @InjectMocks
-    private lateinit var ventaRepository: VentaRepositoryImpl
+@ExtendWith(MockitoExtension::class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+class VentaRepositoryImplTest {
+
+    @Mock
+    lateinit var config: Config
 
     @Mock
     private lateinit var butacaRepository: ButacaRepository
@@ -54,6 +56,13 @@ class VentaRepositoryImplTest {
     @Mock
     private lateinit var clienteRepository: ClienteRepository
 
+    @Mock
+    private lateinit var dbManager: SqlDeLightManager
+
+    @InjectMocks
+    private lateinit var ventaRepository: VentaRepositoryImpl
+
+    private lateinit var databaseQueries: DatabaseQueries
     private lateinit var clienteMuestra: Cliente
     private lateinit var complementoMuestra: Complemento
     private lateinit var butacaMuestra: Butaca
@@ -61,92 +70,32 @@ class VentaRepositoryImplTest {
     private lateinit var lineaVentaMuestra2: LineaVenta
     private lateinit var lineaVentaMuestra3: LineaVenta
 
-    @BeforeAll
-    fun setUpAll(){
-        println("Iniciando tests...")
-        dbManager= SqlDeLightManager(Config())
-        butacaRepository=ButacaRepositoryImpl(dbManager)
-        complementoRepository= ComplementoRepositoryImpl(dbManager)
-        clienteRepository= ClienteRepositoryImpl(dbManager)
+    @BeforeEach
+    fun setUp(){
+        whenever(config.dataBaseUrl).thenReturn("jdbc:sqlite::memory:")
+        whenever(config.dataBaseInMemory).thenReturn(true)
+        whenever(config.databaseInitData).thenReturn(true)
+        whenever(config.databaseRemoveData).thenReturn(true)
+
+        dbManager= SqlDeLightManager(config)
+        databaseQueries = dbManager.databaseQueries
+        butacaRepository = ButacaRepositoryImpl(dbManager)
+        complementoRepository = ComplementoRepositoryImpl(dbManager)
+        clienteRepository = ClienteRepositoryImpl(dbManager)
         ventaRepository = VentaRepositoryImpl(dbManager, butacaRepository, complementoRepository, clienteRepository)
 
-        clienteMuestra = Cliente(
-            id=2,
-            nombre="Jaime",
-            apellido = "Leon",
-            fechaNacimiento = LocalDate.of(2002,4,10),
-            dni="12345678A",
-            email = "jaime@gmail.com",
-            numSocio = "AAA112",
-            password = "password",
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18),
-            isDeleted = false
-        )
-        complementoMuestra = Complemento(
-            id="1",
-            tipoProducto = "Complemento",
-            imagen = "'futura_imagen.png",
-            nombre = "Palomitas",
-            precio = 3.0,
-            stock =  20,
-            categoria = CategoriaComplemento.COMIDA,
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18),
-            isDeleted = false
-        )
-        butacaMuestra = Butaca(
-            id="A1",
-            tipoProducto = "Butaca",
-            imagen = "futura_imagen.png",
-            fila= 0,
-            columna = 0,
-            tipoButaca = TipoButaca.NORMAL,
-            estadoButaca = EstadoButaca.ACTIVA,
-            ocupacionButaca = OcupacionButaca.LIBRE,
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18),
-            isDeleted = false
-        )
-        lineaVentaMuestra1 = LineaVenta(
-            id= UUID.fromString("000712fb-5531-4f33-a744-0fdb65cd9dcf"),
-            producto = butacaMuestra,
-            tipoProducto = "Butaca",
-            cantidad = 1,
-            precio = 5.0,
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18)
-        )
-        lineaVentaMuestra2 = LineaVenta(
-            id= UUID.fromString ("111712fb-5531-4f33-a744-0fdb65cd9dcf"),
-            producto = complementoMuestra,
-            tipoProducto = "Complemento",
-            cantidad = 1,
-            precio = 3.0,
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18)
-        )
-        lineaVentaMuestra3 = LineaVenta(
-            id= UUID.fromString ("333712fb-5531-4f33-a744-0fdb65cd9dcf"),
-            producto = complementoMuestra,
-            tipoProducto = "Complemento",
-            cantidad = 2,
-            precio = 3.0,
-            createdAt = LocalDate.of(2024,5,18),
-            updatedAt = LocalDate.of(2024,5,18)
-        )
-    }
+        dbManager.initialize()
 
-    @AfterAll
-    fun tearDown(){
-        dbManager.clearData()
-        dbManager.insertSampleData()
+        clienteMuestra = Cliente(1, "Jaime", "Leon", LocalDate.parse("2000-05-10"), "12345678A", "jleon@gmail.com", "AAA111", "password", LocalDate.now(), LocalDate.now(), false)
+        complementoMuestra = Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA, LocalDate.now(), LocalDate.now(), false)
+        butacaMuestra = Butaca("A1","Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE, LocalDate.now(), LocalDate.now(), false)
+        lineaVentaMuestra1 = LineaVenta(UUID.fromString("21c712fb-5531-4f33-a744-0fdb65cd9dcf"), butacaMuestra, butacaMuestra.tipoProducto, 1, butacaMuestra.tipoButaca.precio, LocalDate.now(), LocalDate.now(), false)
+        lineaVentaMuestra2 = LineaVenta(UUID.fromString("22c712fb-5531-4f33-a744-0fdb65cd9dcf"), complementoMuestra, complementoMuestra.tipoProducto, 1, complementoMuestra.precio, LocalDate.now(), LocalDate.now(), false)
     }
 
     @Test
-    @Order(1)
     fun findAll(){
-        val ventas=ventaRepository.findAll(
+        val ventas = ventaRepository.findAll(
             clienteMuestra,
             listOf(lineaVentaMuestra1,lineaVentaMuestra2),
             LocalDate.of(2024,5,18))
@@ -155,20 +104,18 @@ class VentaRepositoryImplTest {
     }
 
     @Test
-    @Order(2)
     fun findById() {
         val venta=ventaRepository.findById(
             UUID.fromString("37c712fb-5531-4f33-a744-0fdb65cd9dcf")
         )
 
         assertEquals("37c712fb-5531-4f33-a744-0fdb65cd9dcf", venta?.id.toString())
-        assertEquals(2,venta?.cliente?.id)
+        assertEquals(1,venta?.cliente?.id)
         assertEquals(8, venta?.total?.toLong())
-        assertEquals(LocalDate.of(2024,5,18), venta?.fechaCompra )
+        assertEquals(LocalDate.of(2024,5,20), venta?.fechaCompra )
     }
 
     @Test
-    @Order(3)
     fun findByIdNotFound() {
         val venta = ventaRepository.findById(
             UUID.fromString("00c712fb-1111-4f33-a744-0fdb65cd9dcf")
@@ -178,7 +125,6 @@ class VentaRepositoryImplTest {
     }
 
     @Test
-    @Order(4)
     fun save() {
         val ventaSaved = ventaRepository.save(
             Venta(
@@ -197,14 +143,13 @@ class VentaRepositoryImplTest {
     }
 
     @Test
-    @Order(5)
     fun update() {
         val ventaUpdated = ventaRepository.update(
             UUID.fromString("37c712fb-5531-4f33-a744-0fdb65cd9dcf"),
             Venta(
                 id = UUID.fromString("37c712fb-5531-4f33-a744-0fdb65cd9dcf"),
                 cliente=clienteMuestra,
-                listOf(lineaVentaMuestra1,lineaVentaMuestra2,lineaVentaMuestra3),
+                listOf(lineaVentaMuestra1,lineaVentaMuestra2),
                 LocalDate.of(2023,1,19)
             )
         )
@@ -213,19 +158,17 @@ class VentaRepositoryImplTest {
         assertEquals(clienteMuestra,ventaUpdated?.cliente)
         assertEquals(lineaVentaMuestra1,ventaUpdated!!.lineas[0])
         assertEquals(lineaVentaMuestra2, ventaUpdated.lineas[1])
-        assertEquals(lineaVentaMuestra3, ventaUpdated.lineas[2])
         assertEquals(LocalDate.of(2023,1,19),ventaUpdated.fechaCompra)
     }
 
     @Test
-    @Order(6)
     fun updateNotFound() {
         val ventaUpdated = ventaRepository.update(
             UUID.fromString("000712fb-5531-4f33-a744-0fdb65cd9dcf"),
             Venta(
                 id = UUID.fromString("000712fb-5531-4f33-a744-0fdb65cd9dcf"),
                 cliente=clienteMuestra,
-                listOf(lineaVentaMuestra1,lineaVentaMuestra2,lineaVentaMuestra3),
+                listOf(lineaVentaMuestra1,lineaVentaMuestra2),
                 LocalDate.of(2023,1,19)
             )
         )
@@ -254,7 +197,7 @@ class VentaRepositoryImplTest {
         logger.debug { cliente }
 
         assertTrue(cliente.isOk)
-        assertEquals ( clienteMuestra, cliente.value)
+        assertEquals (clienteMuestra, cliente.value)
     }
 
     @Test
@@ -282,9 +225,9 @@ class VentaRepositoryImplTest {
     @Test
     fun validateLineas() {
 
-        val lista = listOf(lineaVentaMuestra1, lineaVentaMuestra2, lineaVentaMuestra3)
+        val lista = listOf(lineaVentaMuestra1, lineaVentaMuestra2)
 
-        val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaMuestra2, lineaVentaMuestra3))
+        val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaMuestra2))
 
         assertTrue(result.isOk)
         assertEquals(lista, result.value)
@@ -317,9 +260,9 @@ class VentaRepositoryImplTest {
             updatedAt = LocalDate.of(2024,5,18)
         )
 
-        val lista = listOf(lineaVentaButacaNoValid, lineaVentaMuestra2, lineaVentaMuestra3)
+        val lista = listOf(lineaVentaButacaNoValid, lineaVentaMuestra2)
 
-        val result = ventaRepository.validateLineas(listOf(lineaVentaButacaNoValid, lineaVentaMuestra2, lineaVentaMuestra3))
+        val result = ventaRepository.validateLineas(listOf(lineaVentaButacaNoValid, lineaVentaMuestra2))
 
         assertTrue(result.isErr)
         assertFalse(lista == result.value)
@@ -353,9 +296,9 @@ class VentaRepositoryImplTest {
 
 
 
-        val lista = listOf(lineaVentaMuestra1, lineaVentaProductoNoValid, lineaVentaMuestra3)
+        val lista = listOf(lineaVentaMuestra1, lineaVentaProductoNoValid)
 
-        val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaProductoNoValid, lineaVentaMuestra3))
+        val result = ventaRepository.validateLineas(listOf(lineaVentaMuestra1, lineaVentaProductoNoValid))
 
         assertTrue(result.isErr)
         assertFalse(lista == result.value)

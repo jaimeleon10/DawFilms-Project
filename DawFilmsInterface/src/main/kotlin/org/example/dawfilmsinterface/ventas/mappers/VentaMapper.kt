@@ -53,6 +53,7 @@ fun LineaVenta.toLineaVentaDto(): LineaVentaDto {
                 precio = this.precio,
                 createdAt = this.createdAt.toString(),
                 updatedAt = this.updatedAt.toString(),
+                isDeleted = this.isDeleted
             )
         }
 
@@ -65,6 +66,7 @@ fun LineaVenta.toLineaVentaDto(): LineaVentaDto {
                 precio = this.precio,
                 createdAt = this.createdAt.toString(),
                 updatedAt = this.updatedAt.toString(),
+                isDeleted = this.isDeleted
             )
         }
 

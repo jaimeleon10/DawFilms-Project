@@ -25,29 +25,27 @@ class StorageImageImplTest {
         myFile = Files.createTempFile("image", ".png").toFile()
     }
 
-    @AfterEach
-    fun tearDown() {
-        Files.deleteIfExists(myFile.toPath())
-    }
-
     @Test
     fun saveImage() {
         val result = storageImage.saveImage(myFile)
 
         assertTrue { result.isOk }
         assertEquals("png", result.value.extension)
+
+        Files.deleteIfExists(result.value.toPath())
     }
 
     @Test
     fun loadImage() {
 
-        //TODO REVISAR, CREO QUE FALLA PORQUE LAS IMAGENES NO SE ESTÁN ALMACENANDO EN DIRECTORIO IMAGENES
         val file = storageImage.saveImage(myFile).value
 
         val result = storageImage.loadImage(file.name)
 
         assertTrue(result.isOk)
         assertEquals("png", result.value.extension)
+
+        Files.deleteIfExists(file.toPath())
     }
 
     @Test
@@ -71,5 +69,7 @@ class StorageImageImplTest {
         val result = storageImage.updateImage(file.name, myFile)
 
         assertTrue(result.isOk)
+
+        Files.deleteIfExists(result.value.toPath())
     }
 }

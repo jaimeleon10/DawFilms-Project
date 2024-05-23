@@ -11,5 +11,6 @@ data class LineaVentaDto(
     val cantidad: Int,
     val precio: Double,
     val createdAt: String,
-    val updatedAt: String
+    val updatedAt: String,
+    val isDeleted: Boolean
 )

@@ -18,7 +18,7 @@ private val logger = logging()
 class ClienteRepositoryImpl(
     private val dbManager: SqlDeLightManager
 ) : ClienteRepository {
-    private val db = dbManager.dbQueries
+    private val db = dbManager.databaseQueries
 
     override fun findAll(): List<Cliente> {
         logger.debug { "Buscando todos los clientes" }
@@ -44,6 +44,7 @@ class ClienteRepositoryImpl(
                 password = cliente.password,
                 created_at = timeStamp,
                 updated_at = timeStamp,
+                is_deleted = 0
             )
         }
         return db.selectClienteLastInserted().executeAsOne().toCliente()

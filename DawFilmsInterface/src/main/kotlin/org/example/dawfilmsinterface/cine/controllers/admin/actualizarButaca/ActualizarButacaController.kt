@@ -12,12 +12,7 @@ import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
-<<<<<<< HEAD
 
-class ActualizarButacaController : KoinComponent {
-    val viewModel : ActualizarButacaViewModel by inject()
-
-=======
 /**
  * Clase controller para la actualización de las butacas a través de la IU
  * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
@@ -38,6 +33,9 @@ class ActualizarButacaController : KoinComponent {
  * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores
  * @property butacaTable Tabla donde se nos mostrará la información relativa a los complementos
  */
+class ActualizarButacaController : KoinComponent {
+    val viewModel : ActualizarButacaViewModel by inject()
+
     @FXML
     lateinit var backMenuMenuButton: MenuItem
 
@@ -81,8 +79,7 @@ class ActualizarButacaController : KoinComponent {
     lateinit var acercaDeMenuButton: MenuItem
 
     @FXML
-<<<<<<< HEAD
-    lateinit var complementosTable: TableView<Butaca>
+    lateinit var butacaTable: TableView<Butaca>
 
     @FXML
     lateinit var idColumnTable : TableColumn<Butaca, String>
@@ -95,9 +92,6 @@ class ActualizarButacaController : KoinComponent {
 
     @FXML
     lateinit var ocupacionColumnTable: TableColumn<Butaca, String>
-=======
-    lateinit var butacaTable: TableView<Any>
->>>>>>> 04ac4f7f830f2bd22713dccc3a2e21d3144e3010
 
     /**
      * Función que inicializa la vista de actualizar butaca
@@ -126,8 +120,8 @@ class ActualizarButacaController : KoinComponent {
 
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
-            if (complementosTable.items != newValue.butacas){
-                complementosTable.items = FXCollections.observableArrayList(newValue.butacas)
+            if (butacaTable.items != newValue.butacas){
+                butacaTable.items = FXCollections.observableArrayList(newValue.butacas)
             }
         }
     }
@@ -144,7 +138,7 @@ class ActualizarButacaController : KoinComponent {
         ocupacionFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesOcupacion)
         estadoFilterComboBox.selectionModel.selectFirst()
 
-        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
+        butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
 
         idColumnTable.cellValueFactory = PropertyValueFactory("id")
         estadoColumnTable.cellValueFactory = PropertyValueFactory("estado")
@@ -171,7 +165,7 @@ class ActualizarButacaController : KoinComponent {
 
          */
 
-        complementosTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
+        butacaTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
             newValue?.let { onTablaSelected(newValue) }
         }
     }
