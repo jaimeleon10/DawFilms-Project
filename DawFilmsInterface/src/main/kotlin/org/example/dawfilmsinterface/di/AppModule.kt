@@ -37,6 +37,7 @@ import org.example.dawfilmsinterface.ventas.storage.VentaStorage
 import org.example.dawfilmsinterface.ventas.storage.VentaStorageImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val appModule = module {
@@ -76,9 +77,7 @@ val appModule = module {
         bind<ProductoService>()
     }
 
-    singleOf(::ProductosCache){
-        bind<Cache<String,Producto>>()
-    }
+    single { ProductosCache(5) } bind Cache::class
 
     singleOf(::StorageCsvImpl) {
         bind<StorageCsv>()

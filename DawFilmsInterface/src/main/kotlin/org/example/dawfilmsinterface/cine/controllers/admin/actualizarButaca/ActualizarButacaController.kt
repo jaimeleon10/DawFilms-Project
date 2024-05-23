@@ -12,12 +12,7 @@ import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
-<<<<<<< HEAD
 
-class ActualizarButacaController : KoinComponent {
-    val viewModel : ActualizarButacaViewModel by inject()
-
-=======
 /**
  * Clase controller para la actualización de las butacas a través de la IU
  * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
@@ -38,6 +33,9 @@ class ActualizarButacaController : KoinComponent {
  * @property acercaDeMenuButton Botón de menú que nos mostrará la información relevante de los desarrolladores
  * @property butacaTable Tabla donde se nos mostrará la información relativa a los complementos
  */
+class ActualizarButacaController : KoinComponent {
+    val viewModel : ActualizarButacaViewModel by inject()
+
     @FXML
     lateinit var backMenuMenuButton: MenuItem
 
@@ -81,8 +79,7 @@ class ActualizarButacaController : KoinComponent {
     lateinit var acercaDeMenuButton: MenuItem
 
     @FXML
-<<<<<<< HEAD
-    lateinit var complementosTable: TableView<Butaca>
+    lateinit var butacaTable: TableView<Any>
 
     @FXML
     lateinit var idColumnTable : TableColumn<Butaca, String>
@@ -95,9 +92,6 @@ class ActualizarButacaController : KoinComponent {
 
     @FXML
     lateinit var ocupacionColumnTable: TableColumn<Butaca, String>
-=======
-    lateinit var butacaTable: TableView<Any>
->>>>>>> 04ac4f7f830f2bd22713dccc3a2e21d3144e3010
 
     /**
      * Función que inicializa la vista de actualizar butaca
@@ -112,8 +106,6 @@ class ActualizarButacaController : KoinComponent {
         initBindings()
 
         initEventos()
-
-
     }
 
     private fun initBindings() {
@@ -122,12 +114,12 @@ class ActualizarButacaController : KoinComponent {
         estadoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.estado })
         tipoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.tipo})
         ocupacionSelectedField.textProperty().bind(viewModel.state.map { it.butaca.ocupacion })
-        //precioSelectedField.textProperty().bind(viewModel.state.map { it.butaca.precio })
+        precioSelectedField.textProperty().bind(viewModel.state.map { it.butaca.precio.toString() })
 
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
-            if (complementosTable.items != newValue.butacas){
-                complementosTable.items = FXCollections.observableArrayList(newValue.butacas)
+            if (butacaTable.items != newValue.butacas){
+                butacaTable.items = FXCollections.observableArrayList(newValue.butacas)
             }
         }
     }
@@ -144,7 +136,7 @@ class ActualizarButacaController : KoinComponent {
         ocupacionFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesOcupacion)
         estadoFilterComboBox.selectionModel.selectFirst()
 
-        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
+        butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
 
         idColumnTable.cellValueFactory = PropertyValueFactory("id")
         estadoColumnTable.cellValueFactory = PropertyValueFactory("estado")
@@ -164,30 +156,30 @@ class ActualizarButacaController : KoinComponent {
         }
         editButton.setOnAction { RoutesManager.initEditarButaca() }
 
-        /*
         idFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
-            newValue?.let { onComboSelected(newValue) }
+            newValue?.let { onComboSelected(newValue.toString()) }
+        }
+
+        /*
+        butacaTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
         }
 
          */
 
-        complementosTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
-            newValue?.let { onTablaSelected(newValue) }
-        }
     }
 
     private fun onComboSelected(newValue: String) {
         logger.debug { "onComboSelected: $newValue"}
-        //filterDataTable()
+        filterDataTable()
     }
 
-    /*
+
     private fun filterDataTable(){
         logger.debug { "filterDataTable" }
-        complementosTable.items=
-            FXCollections.observableList(viewModel.butacasFilteredList(idFilterComboBox.value))
+        butacaTable.items=
+            FXCollections.observableList(viewModel.butacasFilteredList(idFilterComboBox.value.toString()))
     }
-    */
 
     private fun onTablaSelected(newValue: Butaca){
         logger.debug { "onTablaSelected: $newValue" }
