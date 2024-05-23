@@ -147,3 +147,5 @@ ssrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizar
 _src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/ActualizarButacaViewModel.kt,1\9\19f75ca8c195499fc93002599701c2095537fc7a
 Ÿ
 osrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizarButaca/EditarButacaController.kt,b\7\b757263dc4a78bad240db95217c8be98ef39f151
+˜
+hsrc/test/kotlin/org/example/dawfilmsinterface/productos/repositories/butacas/ButacaRepositoryImplTest.kt,7\b\7badb167b8e5c04cdb2bf57b1b896ecc82be454d
