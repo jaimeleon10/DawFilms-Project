@@ -47,4 +47,7 @@ module org.example.dawfilmsinterface {
 
     opens org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada to javafx.fxml;
     exports org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada;
+
+    opens org.example.dawfilmsinterface.productos.models.producto to javafx.base;
+    exports org.example.dawfilmsinterface.productos.viewmodels;
 }

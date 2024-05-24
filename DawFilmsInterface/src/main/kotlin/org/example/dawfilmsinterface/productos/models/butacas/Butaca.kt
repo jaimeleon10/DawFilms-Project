@@ -50,4 +50,20 @@ class Butaca (
         result = 31 * result + ocupacionButaca.hashCode()
         return result
     }
+
+    fun copy(
+        id: String = this.id,
+        tipoProducto: String = this.tipoProducto,
+        imagen: String = this.imagen,
+        fila: Int = this.fila,
+        columna: Int = this.columna,
+        tipoButaca: TipoButaca = this.tipoButaca,
+        estadoButaca: EstadoButaca = this.estadoButaca,
+        ocupacionButaca: OcupacionButaca = this.ocupacionButaca,
+        createdAt: LocalDate = this.createdAt,
+        updatedAt: LocalDate? = this.updatedAt,
+        isDeleted: Boolean? = this.isDeleted
+    ) : Butaca{
+        return Butaca(id, tipoProducto, imagen, fila, columna, tipoButaca, estadoButaca, ocupacionButaca, createdAt, updatedAt, isDeleted)
+    }
 }

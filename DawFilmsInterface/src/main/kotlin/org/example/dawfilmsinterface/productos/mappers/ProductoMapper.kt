@@ -164,7 +164,7 @@ fun ButacaState.toModel(): Butaca {
     return Butaca(
         id = this.id,
         tipoProducto = "Butaca",
-        imagen = this.fileImage?.name ?: "sin-imagen.png",
+        imagen = this.fileImage?.name ?: "octogatoNatalia.png",
         fila = 0,
         columna = 0,
         tipoButaca = TipoButaca.valueOf(this.tipo.uppercase()),
