@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.productos.viewmodels
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
@@ -11,6 +12,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
+import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -51,6 +53,7 @@ class ActualizarButacaViewModel(
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Gestión" }
         state.value = state.value.copy(
+            typesEstado = state.value.butacas.map { it.estadoButaca.toString() },
             butaca = ButacaState()
         )
     }
@@ -83,6 +86,25 @@ class ActualizarButacaViewModel(
             }
     }
 
+    fun loadButacasFromCsv(file: File): Result<List<Producto>, ProductoError> {
+        logger.debug { "Cargando butacas de CSV" }
+        return storage.deleteAllImages().andThen {
+            storage.loadCsv(file).onSuccess { parts ->
+               Butaca(
+                   id = parts[0].toString(),
+                   imagen = parts[1].toString(),
+                   fila = parts[2].toString().toInt(),
+                   columna = parts[3].toString().toInt(),
+                   tipoButaca = TipoButaca.valueOf(parts[4].toString()),
+                   estadoButaca = EstadoButaca.valueOf(parts[5].toString()),
+                   ocupacionButaca = OcupacionButaca.valueOf(parts[6].toString())
+               )
+            }
+        }
+    }
+
+
+
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
@@ -96,6 +118,7 @@ class ActualizarButacaViewModel(
 
         state.value = state.value.copy(
             butaca = ButacaState(
+                id = butaca.id,
                 estado = butaca.estadoButaca.name,
                 tipo = butaca.tipoButaca.name,
                 ocupacion = butaca.ocupacionButaca.name,

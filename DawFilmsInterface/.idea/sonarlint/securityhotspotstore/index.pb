@@ -151,3 +151,5 @@ N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
 ‰
 Ysrc/main/kotlin/org/example/dawfilmsinterface/productos/models/butacas/OcupacionButaca.kt,e\a\ea81e15cb8dae84aa51e63528f027181c607b7c4
+‚
+Rsrc/main/kotlin/org/example/dawfilmsinterface/productos/service/ProductoService.kt,d\1\d1555227e112e026c607a53db9c0eed257dc0f6a

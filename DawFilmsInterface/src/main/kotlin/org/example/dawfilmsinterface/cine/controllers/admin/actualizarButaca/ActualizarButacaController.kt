@@ -1,15 +1,24 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
+import javafx.scene.Cursor
 import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.stage.FileChooser
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
+import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorageImpl
 import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.io.File
+import java.nio.file.Paths
 
 private val logger = logging()
 
@@ -111,6 +120,7 @@ class ActualizarButacaController : KoinComponent {
     private fun initBindings() {
         logger.debug { "Inicializando bindings"}
 
+        idSelectedField.textProperty().bind(viewModel.state.map { it.butaca.id })
         estadoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.estado })
         tipoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.tipo})
         ocupacionSelectedField.textProperty().bind(viewModel.state.map { it.butaca.ocupacion })
@@ -142,9 +152,11 @@ class ActualizarButacaController : KoinComponent {
         butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
 
         idColumnTable.cellValueFactory = PropertyValueFactory("id")
-        estadoColumnTable.cellValueFactory = PropertyValueFactory("estado")
-        tipoColumnTable.cellValueFactory = PropertyValueFactory("tipo")
-        ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacion")
+        estadoColumnTable.cellValueFactory = PropertyValueFactory("estadoButaca")
+        tipoColumnTable.cellValueFactory = PropertyValueFactory("tipoButaca")
+        ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacionButaca")
+
+        viewModel.loadButacasFromCsv(File(Paths.get("data/butacasIniciales.csv").toAbsolutePath().toString()))
     }
 
     private fun initEventos() {
@@ -198,9 +210,44 @@ class ActualizarButacaController : KoinComponent {
 
     private fun onEditarAction(){
         logger.debug { "onEditarAction" }
-        if (butacaTable.selectionModel.selectedItem == null){
-            return
-        }
         RoutesManager.initEditarButaca()
+    }
+
+    private fun onImportarAction(){
+        logger.debug { "onImportarAction" }
+        FileChooser().run {
+            title = "Importar butacas"
+            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            logger.debug { "onAbrirAction: $it" }
+            showAlertOperacion(
+                AlertType.INFORMATION,
+                "Importando datos",
+                "Importando datos..."
+            )
+            RoutesManager.activeStage.scene.cursor = Cursor.WAIT
+            viewModel.loadButacasFromCsv(it)
+                .onSuccess {
+                    showAlertOperacion(
+                        title= "Datos importados",
+                        mensaje= "Datos importados..."
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje= error.message)
+                }
+            RoutesManager.activeStage.scene.cursor = Cursor.DEFAULT
+        }
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = ""
+    ){
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText =mensaje
+        }.showAndWait()
     }
 }
