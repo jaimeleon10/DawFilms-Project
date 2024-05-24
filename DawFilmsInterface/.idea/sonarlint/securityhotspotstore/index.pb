@@ -37,8 +37,6 @@ m
 =src/main/kotlin/org/example/dawfilmsinterface/di/AppModule.kt,3\f\3f57df8a9ff3039d2b91a23a29e71c4f389322f0
 ƒ
 Ssrc/main/kotlin/org/example/dawfilmsinterface/productos/models/producto/Producto.kt,e\0\e0a028a121278fa1e28bb8d5586ddc5a1391536b
-`
-0src/main/sqldelight/database/DatabaseInitData.sq,9\c\9c6d5b0e9125ea51afa790d02522a133752dbaa7
 x
 Hsrc/main/kotlin/org/example/dawfilmsinterface/cache/errors/CacheError.kt,4\1\41d2b5cdfa33b7df587a49f70d192649141f641a
 †
@@ -149,3 +147,5 @@ _src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/ActualizarBu
 osrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizarButaca/EditarButacaController.kt,b\7\b757263dc4a78bad240db95217c8be98ef39f151
 ˜
 hsrc/test/kotlin/org/example/dawfilmsinterface/productos/repositories/butacas/ButacaRepositoryImplTest.kt,7\b\7badb167b8e5c04cdb2bf57b1b896ecc82be454d
+N
+src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7

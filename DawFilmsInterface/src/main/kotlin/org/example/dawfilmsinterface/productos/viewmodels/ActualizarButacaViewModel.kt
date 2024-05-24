@@ -1,13 +1,8 @@
 package org.example.dawfilmsinterface.productos.viewmodels
 
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
-import org.example.dawfilmsinterface.productos.validators.ButacaValidator.validate
-import org.example.dawfilmsinterface.productos.errors.ProductoError
-import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.service.ProductoService
@@ -69,8 +64,8 @@ class ActualizarButacaViewModel(
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("images/sin-imagen.png"))
-        var fileImage = File(RoutesManager.getResource("images/sin-imagen.png").toURI())
+        var imagen = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png"))
+        var fileImage = File(RoutesManager.getResource("images/octogatoNatalia.png").toURI())
 
         storage.loadImage(butaca.imagen).onSuccess {
             imagen = Image(it.absoluteFile.toURI().toString())
@@ -166,7 +161,7 @@ class ActualizarButacaViewModel(
         val tipo : String = "",
         val ocupacion : String = "",
         val precio : Double = 5.00,
-        val imagen : Image = Image(RoutesManager.getResourceAsStream("image/sin-imagen")),
+        val imagen : Image = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png")),
         val fileImage : File? = null,
         val oldFileImage : File? = null
     )
@@ -176,7 +171,7 @@ class ActualizarButacaViewModel(
     }
 
     enum class TipoImagen(val value : String){
-        SIN_IMAGEN("sin-imagen.png"), EMPTY("")
+        SIN_IMAGEN("octogatoNatalia.png"), EMPTY("")
     }
 
     enum class TipoFiltroEstado(val value : String){
