@@ -1,3 +1,6 @@
 
-dkotlin:S1128"Remove this unused import.(ºˆœáùÿÿÿÿ8šœâĞú1J$95bb636e-9125-4af5-8ef4-1adf56818042
-dkotlin:S1128"Remove this unused import.(±‚ª¡ùÿÿÿÿ8›œâĞú1J$7dc81c78-8456-4d25-bcf3-8878e7787520
+{kotlin:S6619”"0Remove this useless null check, it always fails.(«™ÔÁıÿÿÿÿ8¯˜—æú1J$c4134d54-4cf7-4e48-a8a6-eac83d968419
+dkotlin:S1128"Remove this unused import.(ºˆœáùÿÿÿÿ8Ì¹Šæú1J$f2e16dcd-8ee4-4c2e-be65-21640506f83a
+dkotlin:S1128"Remove this unused import.(±‚ª¡ùÿÿÿÿ8Í¹Šæú1J$c5b75a89-69c3-4f24-8dcb-c49736d19d24
+˜kotlin:S1192‹"RDefine a constant instead of duplicating this literal "Butaca no salvada" 3 times.(™¡ƒ°8º˜—æú1J$3ba8af3a-64bc-4e26-9b18-eceda177b0b7
+ˆkotlin:S6511ˆ"=Merge chained "if" statements into a single "when" statement.(÷—°ıÿÿÿÿ8¾˜—æú1J$fbed8f71-6f3a-429d-ae56-0a4ec4d77865

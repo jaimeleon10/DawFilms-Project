@@ -13,10 +13,12 @@ interface ProductoService {
     fun getButacaById(id: String): Result<Butaca, ProductoError>
     fun getComplementoById(id: String): Result<Complemento, ProductoError>
     fun getComplementoByNombre(nombre: String): Result<Complemento, ProductoError>
+    fun saveAllButacas(butacas: List<Butaca>): Result<List<Butaca>, ProductoError>
     fun saveButaca(item: Butaca): Result<Butaca, ProductoError>
     fun saveComplemento(item: Complemento): Result<Complemento, ProductoError>
     fun updateButaca(id: String, item: Butaca): Result<Butaca, ProductoError>
     fun updateComplemento(id: String, item: Complemento): Result<Complemento, ProductoError>
+    fun deleteAllProductos(): Result<Unit, ProductoError>
     fun deleteButaca(id: String): Result<Butaca, ProductoError>
     fun deleteComplemento(id: String): Result<Complemento, ProductoError>
 }

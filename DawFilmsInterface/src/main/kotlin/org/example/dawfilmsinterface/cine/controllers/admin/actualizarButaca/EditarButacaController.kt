@@ -95,9 +95,16 @@ class EditarButacaController : KoinComponent {
         logger.debug { "InitValues" }
         idSelectedField.text = viewModel.state.value.butaca.id
         estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado)
+        estadoComboBox.value = viewModel.state.value.butaca.estado
+
         tipoComboBox.items = FXCollections.observableList(viewModel.state.value.typesTipo)
+        tipoComboBox.value = viewModel.state.value.butaca.tipo
+
         ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion)
+        ocupacionComboBox.value = viewModel.state.value.butaca.ocupacion
+
         precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
+        imagenImage.image = viewModel.state.value.butaca.imagen
     }
 
     private fun initEventos(){
@@ -126,14 +133,25 @@ class EditarButacaController : KoinComponent {
             EDITAR -> viewModel.editarButaca()
         }
 
-        logger.debug { "Butaca salvada correctamente" }
-        showAlertOperacion(
-            AlertType.INFORMATION,
-            "Butaca salvada",
-            "Butaca salvada"
-        )
-        stage.close()
-
+        if (estadoComboBox.value == null) {
+            showAlertOperacion(
+                AlertType.ERROR,
+                "Butaca no salvada",
+                "El estado no puede estar vacío"
+            )
+        }else if (tipoComboBox.value == null) {
+            showAlertOperacion(
+                AlertType.ERROR,
+                "Butaca no salvada",
+                "El tipo no puede estar vacío"
+            )
+        }else if (ocupacionComboBox == null) {
+            showAlertOperacion(
+                AlertType.ERROR,
+                "Butaca no salvada",
+                "La ocupación no puede estar vacía"
+            )
+        }
     }
 
     private fun onCancelarAction() {
@@ -151,7 +169,7 @@ class EditarButacaController : KoinComponent {
         estadoComboBox.selectionModel.selectFirst()
         tipoComboBox.selectionModel.selectFirst()
         ocupacionComboBox.selectionModel.selectFirst()
-        precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 0.0)
+        precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
     }
 
     private fun showAlertOperacion(

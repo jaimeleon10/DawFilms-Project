@@ -26,6 +26,11 @@ class ButacaRepositoryImpl(
         return db.selectButacaById(id).executeAsOneOrNull()?.toButaca()
     }
 
+    override fun saveAll(butacas: List<Butaca>): List<Butaca> {
+        logger.debug { "Guardando todas las butacas" }
+        return butacas.map { save(it) }
+    }
+
     override fun save(item: Butaca): Butaca {
         logger.debug { "Guardando Butaca: $item" }
         val timeStamp = LocalDate.now().toString()
@@ -81,5 +86,10 @@ class ButacaRepositoryImpl(
         )
 
         return this.findById(id)
+    }
+
+    override fun deleteAll() {
+        logger.debug { "Borrando todos los datos" }
+        return db.deleteAllProductos()
     }
 }

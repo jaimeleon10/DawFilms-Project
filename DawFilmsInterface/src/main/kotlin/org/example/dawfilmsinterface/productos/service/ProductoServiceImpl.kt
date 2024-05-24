@@ -78,6 +78,14 @@ class ProductoServiceImpl(
             ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con nombre: $nombre"))
     }
 
+    override fun saveAllButacas(butacas: List<Butaca>): Result<List<Butaca>, ProductoError> {
+        logger.debug { "Guardando productos" }
+        butacaRepository.saveAll(butacas).also {
+            productosCache.clear()
+            return Ok(it)
+        }
+    }
+
     override fun saveButaca(item: Butaca): Result<Butaca, ProductoError> {
         logger.debug { "Guardando butaca: $item" }
         return butacaValidator.validate(item).andThen {
@@ -117,6 +125,14 @@ class ProductoServiceImpl(
                 ?: Err(ProductoError.ProductoNoActualizado("Complemento no actualizado con id: $id"))
         }.andThen {
             productosCache.put(id, it) as Result<Complemento, ProductoError>
+        }
+    }
+
+    override fun deleteAllProductos(): Result<Unit, ProductoError> {
+        logger.debug { "Borrando todos los productos" }
+        butacaRepository.deleteAll().also {
+            productosCache.clear()
+            return Ok(it)
         }
     }
 
