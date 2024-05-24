@@ -149,3 +149,5 @@ osrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizar
 hsrc/test/kotlin/org/example/dawfilmsinterface/productos/repositories/butacas/ButacaRepositoryImplTest.kt,7\b\7badb167b8e5c04cdb2bf57b1b896ecc82be454d
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
+‰
+Ysrc/main/kotlin/org/example/dawfilmsinterface/productos/models/butacas/OcupacionButaca.kt,e\a\ea81e15cb8dae84aa51e63528f027181c607b7c4

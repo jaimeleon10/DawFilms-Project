@@ -114,32 +114,25 @@ class EditarButacaController : KoinComponent {
     private fun onGuardarAction(){
         logger.debug { "onGuardarAction" }
 
-            viewModel.updateDataButacaOperacion(
-                estado = estadoComboBox.value,
-                tipo = tipoComboBox.value,
-                ocupacion = ocupacionComboBox.value,
-                precio = precioSpinner.value,
-                imagen = imagenImage.image
-            )
+        viewModel.updateDataButacaOperacion(
+            estado = estadoComboBox.value,
+            tipo = tipoComboBox.value,
+            ocupacion = ocupacionComboBox.value,
+            precio = precioSpinner.value,
+            imagen = imagenImage.image
+        )
 
-            when(viewModel.state.value.tipoOperacion){
-                EDITAR -> viewModel.editarButaca()
-            }
+        when(viewModel.state.value.tipoOperacion){
+            EDITAR -> viewModel.editarButaca()
+        }
 
-            logger.debug { "Butaca salvada correctamente" }
-            showAlertOperacion(
-                AlertType.INFORMATION,
-                "Butaca salvada",
-                "Butaca salvada"
-            )
-            stage.close()
-
-            logger.error { "Error al salvar butaca: ${it.message}" }
-            showAlertOperacion(
-                AlertType.ERROR,
-                "Error al salvar butaca",
-                "Error al salvar butaca"
-            )
+        logger.debug { "Butaca salvada correctamente" }
+        showAlertOperacion(
+            AlertType.INFORMATION,
+            "Butaca salvada",
+            "Butaca salvada"
+        )
+        stage.close()
 
     }
 

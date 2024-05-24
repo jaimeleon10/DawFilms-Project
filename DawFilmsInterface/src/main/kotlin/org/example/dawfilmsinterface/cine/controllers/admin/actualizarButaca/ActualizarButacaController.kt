@@ -127,6 +127,9 @@ class ActualizarButacaController : KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
+        idFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesId)
+        idFilterComboBox.selectionModel.selectFirst()
+
         tipoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesTipo)
         tipoFilterComboBox.selectionModel.selectFirst()
 
@@ -134,7 +137,7 @@ class ActualizarButacaController : KoinComponent {
         estadoFilterComboBox.selectionModel.selectFirst()
 
         ocupacionFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesOcupacion)
-        estadoFilterComboBox.selectionModel.selectFirst()
+        ocupacionFilterComboBox.selectionModel.selectFirst()
 
         butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
 
