@@ -1,8 +1,12 @@
 package org.example.dawfilmsinterface.productos.viewmodels
 
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
+import org.example.dawfilmsinterface.productos.errors.ProductoError
+import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.service.ProductoService
@@ -83,8 +87,7 @@ class ActualizarButacaViewModel(
         )
     }
 
-    /*
-    private fun editarButaca() : Result<Butaca, ProductoError> {
+    fun editarButaca() : Result<Butaca, ProductoError> {
         logger.debug{ "Editando Butaca" }
 
         val updatedButacaTemp = state.value.butaca.copy()
@@ -112,8 +115,6 @@ class ActualizarButacaViewModel(
         }
     }
 
-     */
-
     private fun updateImageButacaOperacion(fileImage: File){
         logger.debug { "Actualizando imagen: $fileImage" }
         state.value = state.value.copy(
@@ -125,7 +126,7 @@ class ActualizarButacaViewModel(
         )
     }
 
-    private fun updateDataButacaOperacion(
+    fun updateDataButacaOperacion(
         estado: String,
         tipo: String,
         ocupacion: String,
