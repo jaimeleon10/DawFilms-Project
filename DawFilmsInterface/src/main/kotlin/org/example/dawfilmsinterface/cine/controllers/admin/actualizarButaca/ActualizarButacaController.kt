@@ -188,7 +188,7 @@ class ActualizarButacaController : KoinComponent {
     private fun filterDataTable(){
         logger.debug { "filterDataTable" }
         butacaTable.items=
-            FXCollections.observableList(viewModel.butacasFilteredList(idFilterComboBox.value.toString()))
+            FXCollections.observableList(viewModel.butacasFilteredList(estadoFilterComboBox.value.toString(), tipoFilterComboBox.value.toString(), ocupacionFilterComboBox.value.toString()))
     }
 
     private fun onTablaSelected(newValue: Butaca){

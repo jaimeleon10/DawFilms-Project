@@ -9,6 +9,8 @@ import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -53,7 +55,7 @@ class ActualizarButacaViewModel(
         )
     }
 
-    fun butacasFilteredList(estado: String) : List<Butaca>{
+    fun butacasFilteredList(estado: String, tipo: String, ocupacion: String) : List<Butaca>{
         logger.debug { "Filtrando lista de Butacas: $estado" }
 
         return state.value.butacas
@@ -63,6 +65,19 @@ class ActualizarButacaViewModel(
                     TipoFiltroEstado.ACTIVA.value -> butaca.estadoButaca == EstadoButaca.ACTIVA
                     TipoFiltroEstado.MANTENIMIENTO.value -> butaca.estadoButaca == EstadoButaca.MANTENIMIENTO
                     TipoFiltroEstado.FUERASERVICIO.value -> butaca.estadoButaca == EstadoButaca.FUERASERVICIO
+                    else -> true
+                }
+                when (tipo){
+                    TipoFiltroTipo.TODAS.value -> true
+                    TipoFiltroTipo.NORMAL.value -> butaca.tipoButaca == TipoButaca.NORMAL
+                    TipoFiltroTipo.VIP.value -> butaca.tipoButaca == TipoButaca.VIP
+                    else -> true
+                }
+                when (ocupacion){
+                    TipoFiltroOcupacion.TODAS.value -> true
+                    TipoFiltroOcupacion.LIBRE.value -> butaca.ocupacionButaca == OcupacionButaca.LIBRE
+                    TipoFiltroOcupacion.ENRESERVA.value -> butaca.ocupacionButaca == OcupacionButaca.ENRESERVA
+                    TipoFiltroOcupacion.OCUPADA.value -> butaca.ocupacionButaca == OcupacionButaca.OCUPADA
                     else -> true
                 }
             }
