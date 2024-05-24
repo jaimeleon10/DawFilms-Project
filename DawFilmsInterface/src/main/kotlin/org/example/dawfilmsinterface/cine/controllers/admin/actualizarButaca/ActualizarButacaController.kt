@@ -159,9 +159,18 @@ class ActualizarButacaController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        editButton.setOnAction { RoutesManager.initEditarButaca() }
+        editButton.setOnAction { onEditarAction() }
 
         idFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+            newValue?.let { onComboSelected(newValue.toString()) }
+        }
+        estadoFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+            newValue?.let { onComboSelected(newValue.toString()) }
+        }
+        tipoFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+            newValue?.let { onComboSelected(newValue.toString())}
+        }
+        ocupacionFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
             newValue?.let { onComboSelected(newValue.toString()) }
         }
 
@@ -185,5 +194,13 @@ class ActualizarButacaController : KoinComponent {
     private fun onTablaSelected(newValue: Butaca){
         logger.debug { "onTablaSelected: $newValue" }
         viewModel.updateButacaSeleccionada(newValue)
+    }
+
+    private fun onEditarAction(){
+        logger.debug { "onEditarAction" }
+        if (butacaTable.selectionModel.selectedItem == null){
+            return
+        }
+        RoutesManager.initEditarButaca()
     }
 }
