@@ -22,10 +22,10 @@
       </ImageView>
       <TableView fx:id="complementosTable" layoutX="40.0" layoutY="166.0" prefHeight="471.0" prefWidth="416.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="147.20001220703125" style="-fx-font-size: 14;" text="Nombre" />
-            <TableColumn minWidth="0.0" prefWidth="77.60006713867188" style="-fx-font-size: 14;" text="Precio" />
-            <TableColumn minWidth="0.0" prefWidth="60.7999267578125" style="-fx-font-size: 14;" text="Stock" />
-          <TableColumn prefWidth="129.5999755859375" style="-fx-font-size: 14;" text="Disponibilidad" />
+          <TableColumn fx:id="nombreColumnTable" prefWidth="147.20001220703125" style="-fx-font-size: 14;" text="Nombre" />
+            <TableColumn fx:id="precioColumnTable" minWidth="0.0" prefWidth="77.60006713867188" style="-fx-font-size: 14;" text="Precio" />
+            <TableColumn fx:id="stockColumnTable" minWidth="0.0" prefWidth="60.7999267578125" style="-fx-font-size: 14;" text="Stock" />
+          <TableColumn fx:id="disponibilidadColumnTable" prefWidth="129.5999755859375" style="-fx-font-size: 14;" text="Disponibilidad" />
         </columns>
       </TableView>
       <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">

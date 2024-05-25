@@ -1,8 +1,14 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -26,7 +32,9 @@ private val logger = logging()
  * @property backMenuMenuButton Elemento de menú para regresar al menú anterior.
  * @property complementosTable Tabla que muestra los complementos.
  */
-class ListadoComplementosAdminController {
+class ListadoComplementosAdminController : KoinComponent {
+    private val viewModel: GestionComplementosViewModel by inject()
+
     @FXML
     lateinit var backMenuButton: Button
 
@@ -63,6 +71,18 @@ class ListadoComplementosAdminController {
     @FXML
     lateinit var complementosTable: TableView<Any>
 
+    @FXML
+    lateinit var nombreColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var precioColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var stockColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var disponibilidadColumnTable: TableColumn<Complemento, String>
+
     /**
      * Función que inicializa la vista de administración de complementos.
      * Asigna las acciones a los botones y elementos de menú.
@@ -71,6 +91,43 @@ class ListadoComplementosAdminController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando ListadoComplementosAdminController FXML" }
+        initDefaultValues()
+
+        initBindings()
+
+        initEventos()
+    }
+
+    private fun initBindings() {
+        logger.debug { "Inicializando bindings"}
+
+        idSelectedField.textProperty().bind(viewModel.state.map { it.complemento.id })
+        nombreSelectedField.textProperty().bind(viewModel.state.map { it.complemento.nombre })
+        precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toString() })
+        stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
+
+        viewModel.state.addListener { _, _, newValue ->
+            logger.debug { "Actualizando datos de la vista" }
+            if (complementosTable.items != newValue.complementos){
+                complementosTable.items = FXCollections.observableArrayList(newValue.complementos)
+            }
+        }
+    }
+
+    private fun initDefaultValues() {
+        logger.debug { "Inicializando valores por defecto" }
+
+        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
+        complementosTable.columns.forEach {it.isResizable = false}
+
+        nombreColumnTable.cellValueFactory = PropertyValueFactory("nombre")
+        precioColumnTable.cellValueFactory = PropertyValueFactory("precio")
+        stockColumnTable.cellValueFactory = PropertyValueFactory("stock")
+    }
+
+    @FXML
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
