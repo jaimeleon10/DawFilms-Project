@@ -23,8 +23,8 @@
       <TableView fx:id="butacaTable" layoutX="40.0" layoutY="230.0" prefHeight="410.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
           <TableColumn fx:id="idColumnTable" prefWidth="88.0" style="-fx-font-size: 15;" text="ID Butaca" />
-            <TableColumn fx:id="estadoColumnTable" minWidth="0.0" prefWidth="122.0" style="-fx-font-size: 15;" text="Estado" />
-          <TableColumn fx:id="tipoColumnTable" prefWidth="115.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn fx:id="estadoColumnTable" minWidth="0.0" prefWidth="140.0" style="-fx-font-size: 15;" text="Estado" />
+          <TableColumn fx:id="tipoColumnTable" prefWidth="97.0" style="-fx-font-size: 15;" text="Tipo" />
             <TableColumn fx:id="ocupacionColumnTable" prefWidth="148.0" style="-fx-font-size: 15;" text="Ocupación" />
         </columns>
       </TableView>
@@ -68,42 +68,33 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label alignment="CENTER" layoutX="163.0" layoutY="148.0" prefHeight="35.0" prefWidth="100.0" text="Estado" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="62.0" layoutY="153.0" prefHeight="35.0" prefWidth="100.0" text="Estado" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="289.0" layoutY="148.0" prefHeight="35.0" prefWidth="100.0" text="Tipo" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="228.0" layoutY="152.0" prefHeight="35.0" prefWidth="100.0" text="Tipo" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="415.0" layoutY="148.0" prefHeight="35.0" prefWidth="100.0" text="Ocupación" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="396.0" layoutY="152.0" prefHeight="35.0" prefWidth="100.0" text="Ocupación" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="estadoFilterComboBox" layoutX="163.0" layoutY="191.0" prefHeight="25.0" prefWidth="100.0">
+      <ComboBox fx:id="estadoFilterComboBox" layoutX="62.0" layoutY="196.0" prefHeight="25.0" prefWidth="100.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <ComboBox fx:id="tipoFilterComboBox" layoutX="289.0" layoutY="191.0" prefHeight="25.0" prefWidth="100.0">
+      <ComboBox fx:id="tipoFilterComboBox" layoutX="228.0" layoutY="195.0" prefHeight="25.0" prefWidth="100.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <ComboBox fx:id="ocupacionFilterComboBox" layoutX="415.0" layoutY="191.0" prefHeight="25.0" prefWidth="100.0">
+      <ComboBox fx:id="ocupacionFilterComboBox" layoutX="396.0" layoutY="195.0" prefHeight="25.0" prefWidth="100.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <ComboBox fx:id="idFilterComboBox" layoutX="40.0" layoutY="191.0" prefHeight="25.0" prefWidth="100.0">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></ComboBox>
-      <Label alignment="CENTER" layoutX="40.0" layoutY="148.0" prefHeight="35.0" prefWidth="100.0" text="ID" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
       <Button fx:id="editButton" alignment="CENTER" layoutX="573.0" layoutY="597.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="95.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Editar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
