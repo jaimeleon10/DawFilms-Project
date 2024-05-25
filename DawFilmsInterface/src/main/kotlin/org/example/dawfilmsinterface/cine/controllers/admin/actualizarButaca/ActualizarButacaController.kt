@@ -156,7 +156,7 @@ class ActualizarButacaController : KoinComponent {
         tipoColumnTable.cellValueFactory = PropertyValueFactory("tipoButaca")
         ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacionButaca")
 
-        viewModel.loadButacasFromCsv(File(Paths.get("data/butacasIniciales.csv").toAbsolutePath().toString()))
+        viewModel.loadButacasFromCsv(File(Paths.get("data/productosIniciales.csv").toAbsolutePath().toString()))
     }
 
     private fun initEventos() {

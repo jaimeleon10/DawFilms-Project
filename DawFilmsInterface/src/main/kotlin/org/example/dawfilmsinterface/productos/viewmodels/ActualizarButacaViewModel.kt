@@ -1,9 +1,6 @@
 package org.example.dawfilmsinterface.productos.viewmodels
 
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.andThen
-import com.github.michaelbull.result.onSuccess
+import com.github.michaelbull.result.*
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import org.example.dawfilmsinterface.productos.errors.ProductoError
@@ -12,6 +9,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
@@ -86,24 +84,18 @@ class ActualizarButacaViewModel(
             }
     }
 
+    /* TODO -> USAR EN IMPORTAR BUTACAS (AQUÍ NO HACE NADA)
     fun loadButacasFromCsv(file: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Cargando butacas de CSV" }
         return storage.deleteAllImages().andThen {
-            storage.loadCsv(file).onSuccess { parts ->
-               Butaca(
-                   id = parts[0].toString(),
-                   imagen = parts[1].toString(),
-                   fila = parts[2].toString().toInt(),
-                   columna = parts[3].toString().toInt(),
-                   tipoButaca = TipoButaca.valueOf(parts[4].toString()),
-                   estadoButaca = EstadoButaca.valueOf(parts[5].toString()),
-                   ocupacionButaca = OcupacionButaca.valueOf(parts[6].toString())
-               )
+            storage.loadCsv(file).onSuccess { listaProductos ->
+                val listaButacas: List<Producto> = listaProductos.filterIsInstance<Butaca>()
+                Ok(listaButacas)
+            }.onFailure {
+                Err(ProductoError.ProductoStorageError(it.message))
             }
         }
-    }
-
-
+    }*/
 
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
