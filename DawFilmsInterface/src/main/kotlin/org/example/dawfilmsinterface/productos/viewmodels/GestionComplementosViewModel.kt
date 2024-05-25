@@ -2,15 +2,12 @@ package org.example.dawfilmsinterface.productos.viewmodels
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.mappers.toModel
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
-import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
-import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
-import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
@@ -128,6 +125,27 @@ class GestionComplementosViewModel(
                 oldFileImage = state.value.complemento.fileImage
             )
         )
+    }
+
+    fun createComplemento(): Result<Complemento, ProductoError>{
+        logger.debug { "Creando Complemento"}
+        val newComplementoTemp = state.value.complemento.copy()
+        var newComplemento = newComplementoTemp.toModel().copy()
+
+        newComplementoTemp.fileImage?.let { newFileImage ->
+            storage.saveImage(newFileImage).onSuccess {
+                newComplemento = newComplemento.copy(imagen = it.name)
+            }
+        }
+
+        return service.saveComplemento(newComplemento).andThen {
+            state.value = state.value.copy(
+                complementos = state.value.complementos + it
+            )
+            updateActualState()
+            Ok(it)
+        }
+
     }
 
     fun updateDataComplementoOperacion(

@@ -89,7 +89,7 @@ val appModule = module {
         bind<StorageCsv>()
     }
 
-    single { ButacaValidator }
+    singleOf(:: ButacaValidator)
 
     singleOf(::ComplementoValidator)
 
@@ -127,5 +127,5 @@ val appModule = module {
 
     singleOf(::ActualizarButacaViewModel)
 
-    single { GestionComplementosViewModel(get(), get()) }
+    singleOf(::GestionComplementosViewModel)
 }

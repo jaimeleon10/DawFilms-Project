@@ -89,6 +89,7 @@ class EditarButacaController : KoinComponent {
         initEventos()
     }
 
+    @FXML
     private fun initValues() {
         logger.debug { "InitValues" }
         idSelectedField.text = viewModel.state.value.butaca.id
@@ -107,6 +108,7 @@ class EditarButacaController : KoinComponent {
         imagenImage.image = viewModel.state.value.butaca.imagen
     }
 
+    @FXML
     private fun initEventos(){
         saveButton.setOnAction { onGuardarAction() }
         cancelButton.setOnAction {onCancelarAction()}
@@ -118,6 +120,7 @@ class EditarButacaController : KoinComponent {
         }
     }
 
+    @FXML
     private fun onGuardarAction(){
         logger.debug { "onGuardarAction" }
 
@@ -154,16 +157,19 @@ class EditarButacaController : KoinComponent {
         }
     }
 
+    @FXML
     private fun onCancelarAction() {
         logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
         stage.close()
     }
 
+    @FXML
     private fun onLimpiarAction() {
         logger.debug { "onLimpiarAction" }
         limpiarFormulario()
     }
 
+    @FXML
     private fun limpiarFormulario() {
         logger.debug { "limpiarFormulario" }
         estadoComboBox.selectionModel.selectFirst()
@@ -172,6 +178,7 @@ class EditarButacaController : KoinComponent {
         precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
     }
 
+    @FXML
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
         title: String = "",
