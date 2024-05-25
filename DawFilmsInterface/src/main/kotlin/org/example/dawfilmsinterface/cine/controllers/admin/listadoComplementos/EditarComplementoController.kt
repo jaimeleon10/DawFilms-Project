@@ -114,7 +114,10 @@ class EditarComplementoController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             stage.close()
         }
-        saveButton.setOnAction { onGuardarAction() }
+        saveButton.setOnAction {
+            onGuardarAction()
+            stage.close()
+        }
         cancelButton.setOnAction { onCancelarAction() }
         cleanButton.setOnAction { onLimpiarAction() }
     }

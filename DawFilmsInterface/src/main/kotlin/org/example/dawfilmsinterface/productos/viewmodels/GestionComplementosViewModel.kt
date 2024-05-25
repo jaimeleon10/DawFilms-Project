@@ -181,7 +181,7 @@ class GestionComplementosViewModel(
                 complemento = state.value.complemento.copy(),
                 tipoOperacion = newValue
             )
-        }else{
+        } else {
             logger.debug { "Limpiando estado de Complemento Operacion" }
             state.value = state.value.copy(
                 complemento = ComplementoState(),
