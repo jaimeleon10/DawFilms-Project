@@ -46,6 +46,8 @@ class SqlDeLightManager(
     private fun initDataExamples() {
         databaseQueries.transaction {
             databaseQueries.insertButaca("A1","Butaca", "futura_imagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("B2","Butaca", "futura_imagen.png", 8.0, 0, 0, TipoButaca.VIP.toString(), EstadoButaca.MANTENIMIENTO.toString(), OcupacionButaca.OCUPADA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("C3","Butaca", "futura_imagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.FUERASERVICIO.toString(), OcupacionButaca.ENRESERVA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("1", "Complemento", "futura_imagen.png", 3.0, "Palomitas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertCliente("Jaime", "Leon", "2000-05-10", "12345678A", "jleon@gmail.com", "AAA111", "password", LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertLineaVenta("27c712fb-5531-4f33-a744-0fdb65cd9dcf", "37c712fb-5531-4f33-a744-0fdb65cd9dcf", "A1", "Butaca", 1, 5.0, LocalDate.now().toString(), LocalDate.now().toString(), 0)
