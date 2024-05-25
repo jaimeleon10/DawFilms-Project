@@ -157,3 +157,5 @@ Rsrc/main/kotlin/org/example/dawfilmsinterface/productos/service/ProductoService
 bsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionComplementosViewModel.kt,2\e\2eb055b6de3ae493458ad151c81a901d66c5cedc
 ®
 ~src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/ListadoComplementosAdminController.kt,c\1\c16dbbb11e218e72b320bb5f1e7cea0cf6b72a33
+§
+wsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/EditarComplementoController.kt,c\5\c526c54cfa37ac7971f30a2002e7dfa46ede474f

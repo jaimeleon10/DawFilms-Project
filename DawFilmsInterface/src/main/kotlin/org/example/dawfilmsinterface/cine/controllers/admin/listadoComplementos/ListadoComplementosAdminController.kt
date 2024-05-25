@@ -4,6 +4,7 @@ import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -137,13 +138,20 @@ class ListadoComplementosAdminController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
             RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
         }
-        editButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
-            RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
-        }
+        editButton.setOnAction {onEditarAction()}
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
+    }
+
+    private fun onTablaSelected(newValue: Complemento){
+        logger.debug { "onTablaSelected: $newValue" }
+        viewModel.updateComplementoSeleccionado(newValue)
+    }
+
+    private fun onEditarAction(){
+        logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
+        RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
     }
 }
