@@ -101,4 +101,14 @@ class ClienteRepositoryImpl(
         )
         return result.copy(isDeleted = true, updatedAt = timeStamp)
     }
+
+    override fun validate(email: String, password: String): Cliente? {
+        logger.debug { "Validando email y password de cliente con email: $email" }
+        return db.selectClienteByEmailAndPassword(email,password).executeAsOneOrNull()?.toCliente()
+    }
+
+    override fun findByEmail(email: String): Cliente? {
+        logger.debug { "Buscando cliente por email: $email" }
+        return db.selectClienteByEmail(email).executeAsOneOrNull()?.toCliente()
+    }
 }

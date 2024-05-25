@@ -5,7 +5,10 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.stage.FileChooser
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -28,7 +31,10 @@ private val logger = logging()
  * @property importSeatsButton Botón para importar butacas desde un fichero externo.
  * @property exitButton Botón para cerrar la sesión y regresar a la vista de login.
  */
-class MenuAdminController {
+class MenuAdminController: KoinComponent {
+
+    val viewModel: LoginViewModel by inject()
+
     @FXML
     lateinit var exitMenuButton: MenuItem
 
@@ -119,5 +125,9 @@ class MenuAdminController {
         complementListButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN) }
+        initValues()
+    }
+    private fun initValues() {
+        usernameField.text = viewModel.state.value.currentAdmin
     }
 }

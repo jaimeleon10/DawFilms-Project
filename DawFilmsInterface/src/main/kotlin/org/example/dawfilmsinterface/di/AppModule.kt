@@ -128,4 +128,6 @@ val appModule = module {
     singleOf(::ActualizarButacaViewModel)
 
     singleOf(::GestionComplementosViewModel)
+
+    singleOf(::LoginViewModel)
 }
