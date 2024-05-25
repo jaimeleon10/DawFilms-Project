@@ -35,9 +35,6 @@ class EditarButacaController : KoinComponent {
     val viewModel: GestionButacaViewModel by inject()
 
     @FXML
-    lateinit var precioSpinner: Spinner<Double>
-
-    @FXML
     lateinit var ocupacionComboBox: ComboBox<String>
 
     @FXML
@@ -100,7 +97,6 @@ class EditarButacaController : KoinComponent {
         ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion)
         ocupacionComboBox.value = viewModel.state.value.butaca.ocupacion
 
-        precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
         imagenImage.image = viewModel.state.value.butaca.imagen
     }
 
@@ -127,7 +123,7 @@ class EditarButacaController : KoinComponent {
             estado = estadoComboBox.value,
             tipo = tipoComboBox.value,
             ocupacion = ocupacionComboBox.value,
-            precio = precioSpinner.value,
+            precio = 5.0,
             imagen = imagenImage.image
         )
 
@@ -155,6 +151,5 @@ class EditarButacaController : KoinComponent {
         estadoComboBox.selectionModel.selectFirst()
         tipoComboBox.selectionModel.selectFirst()
         ocupacionComboBox.selectionModel.selectFirst()
-        precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
     }
 }

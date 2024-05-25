@@ -67,8 +67,8 @@ class GestionComplementosViewModel(
     fun updateComplementoSeleccionado(complemento: Complemento){
         logger.debug { "Actualizando estado de Complemento: $complemento" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png"))
-        var fileImage = File(RoutesManager.getResource("images/octogatoNatalia.png").toURI())
+        var imagen = Image(RoutesManager.getResourceAsStream("icons/${complemento.imagen}"))
+        var fileImage = File(RoutesManager.getResource("icons/${complemento.imagen}").toURI())
 
         storage.loadImage(complemento.imagen).onSuccess {
             imagen = Image(it.absoluteFile.toURI().toString())
@@ -225,7 +225,7 @@ class GestionComplementosViewModel(
         val precio : Double = 3.00,
         val stock : Int = 20,
         val categoria : String = "",
-        val imagen : Image = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png")),
+        val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
         val fileImage : File? = null,
         val oldFileImage : File? = null
     )

@@ -39,6 +39,7 @@ class LoginController: KoinComponent {
 
     @FXML
     private fun initialize(){
+        userNameField.requestFocus()
         continueButton.setOnAction { cargarMenu() }
         exitMenuButton.setOnAction { RoutesManager.onAppExit() }
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
