@@ -69,4 +69,16 @@ class ClienteServiceImpl(
             } ?: Err(ClienteError.ClienteNoEliminado("Butaca no eliminada con id: $id"))
     }
 
+    override fun validateCliente(email: String, encryptedPassword: String): Result<Cliente, ClienteError> {
+        logger.debug { "Validando email y password del cliente con email $email" }
+        return clienteRepository.validate(email,encryptedPassword)
+            ?.let { Ok(it) }
+            ?: Err(ClienteError.ClienteValidationError("Login o password incorrectos"))
+    }
+    override fun getByEmail(email: String): Result<Cliente, ClienteError> {
+        logger.debug { "Validando email y password del cliente con email $email" }
+        return clienteRepository.findByEmail(email)
+            ?.let { Ok(it) }
+            ?: Err(ClienteError.ClienteValidationError("Login o password incorrectos"))
+    }
 }

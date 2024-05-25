@@ -4,7 +4,10 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -22,7 +25,10 @@ private val logger = logging()
  * @property showCinemaButton Botón para mostrar el estado del cine.
  * @property buyTicketButton Botón para comprar entradas.
  */
-class MenuClienteController {
+class MenuClienteController: KoinComponent {
+
+    val viewModel: LoginViewModel by inject()
+
     @FXML
     lateinit var usernameField: Label
 
@@ -70,5 +76,10 @@ class MenuClienteController {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MOSTRAR_ESTADO_CINE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MOSTRAR_ESTADO_CINE)
         }
+
+        initValues()
+    }
+    private fun initValues() {
+        usernameField.text = viewModel.state.value.currentCliente.nombre
     }
 }

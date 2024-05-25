@@ -8,4 +8,6 @@ interface ClienteRepository {
     fun save(cliente: Cliente): Cliente
     fun update(id: Long, cliente: Cliente): Cliente?
     fun delete(id: Long): Cliente?
+    fun validate(email: String, password: String): Cliente?
+    fun findByEmail(email: String): Cliente?
 }

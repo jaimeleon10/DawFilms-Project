@@ -54,4 +54,7 @@ module org.example.dawfilmsinterface {
     opens org.example.dawfilmsinterface.productos.models.butacas to javafx.base;
 
     opens org.example.dawfilmsinterface.productos.models.complementos to javafx.base;
+
+    opens org.example.dawfilmsinterface.cine.viewModels to javafx.fxml;
+    exports org.example.dawfilmsinterface.cine.viewModels;
 }
