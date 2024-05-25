@@ -13,6 +13,7 @@ import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import javafx.scene.image.*
 import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
@@ -191,6 +192,8 @@ class SeleccionButacasController: KoinComponent {
     lateinit var butacaA1Button: ToggleButton
 
     val botonesButacas: MutableList<ToggleButton> = mutableListOf()
+    val butacasSeleccionadas: MutableList<String> = mutableListOf()
+    var contadorButacasSeleccionadas = 0
 
     /**
      * Función que inicializa la vista de selección de butacas.
@@ -252,26 +255,37 @@ class SeleccionButacasController: KoinComponent {
 
         for (boton in botonesButacas) {
             boton.setOnAction {
-                logger.warn { "${boton.isDisabled}" }
-                if (!boton.isDisable)
-                changeButtonIcon(boton, boton.isSelected)
+                if (!boton.isDisable) {
+                    changeButtonIcon(boton, boton.isSelected)
+                    if (butacasSeleccionadas.isEmpty()) selectedButacasLabel.text = "Butacas seleccionadas: "
+                    else selectedButacasLabel.text = "Butacas seleccionadas: $butacasSeleccionadas"
+                    viewModel.state.value.listadoButacasSeleccionadas = butacasSeleccionadas
+                }
             }
         }
     }
 
     private fun changeButtonIcon(boton: ToggleButton, seleccionado: Boolean) {
         if (seleccionado) {
-            viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
-            viewModel.cambiarIcono()
-            val newIcon = ImageView(viewModel.state.value.icono)
-            newIcon.fitWidth = 24.0
-            newIcon.fitHeight = 24.0
-            boton.graphic = newIcon
+            if (contadorButacasSeleccionadas in 0..4) {
+                viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
+                viewModel.cambiarIcono()
+                val newIcon = ImageView(viewModel.state.value.icono)
+                newIcon.fitWidth = 24.0
+                newIcon.fitHeight = 24.0
+                boton.graphic = newIcon
+                butacasSeleccionadas.add(boton.id.substring(6, boton.id.length - 6))
+                contadorButacasSeleccionadas += 1
+            } else {
+                boton.isSelected = false
+            }
         } else {
             val newIcon = ImageView(Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")))
             newIcon.fitWidth = 24.0
             newIcon.fitHeight = 24.0
             boton.graphic = newIcon
+            butacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
+            contadorButacasSeleccionadas -= 1
         }
     }
 }

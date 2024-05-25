@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.productos.viewmodels
 
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
@@ -59,6 +60,7 @@ class SeleccionarButacaViewModel (
         var icono: Image = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")),
         var tipoButaca: TipoButaca = TipoButaca.NORMAL,
         var estadoButaca: EstadoButaca = EstadoButaca.ACTIVA,
-        var ocupacionButaca: OcupacionButaca = OcupacionButaca.LIBRE
+        var ocupacionButaca: OcupacionButaca = OcupacionButaca.LIBRE,
+        var listadoButacasSeleccionadas: MutableList<String> = mutableListOf()
     )
 }
