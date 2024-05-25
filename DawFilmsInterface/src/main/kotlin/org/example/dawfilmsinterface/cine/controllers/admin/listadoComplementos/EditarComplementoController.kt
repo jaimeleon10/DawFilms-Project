@@ -95,7 +95,6 @@ class EditarComplementoController : KoinComponent {
     private fun initValues() {
         logger.debug { "InitValues" }
         idField.text = viewModel.state.value.complemento.id
-        idField.isEditable = false
 
         nombreField.text = viewModel.state.value.complemento.nombre
 
@@ -103,7 +102,7 @@ class EditarComplementoController : KoinComponent {
         categoriaComboBox.value = viewModel.state.value.complemento.categoria
 
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
-        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 3.0)
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00)
 
         imagenImage.image = viewModel.state.value.complemento.imagen
     }
