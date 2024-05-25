@@ -92,7 +92,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA1Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,7 +108,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB1Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -124,7 +124,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC1Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -140,7 +140,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD1Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -156,7 +156,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE1Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE1Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -176,7 +176,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA2Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -192,7 +192,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB2Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -208,7 +208,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC2Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -224,7 +224,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD2Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -240,7 +240,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE2Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE2Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -260,7 +260,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA3Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA3Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -276,7 +276,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB3Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -292,7 +292,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC3Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -308,7 +308,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD3Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD3Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -324,7 +324,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE3Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE3Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -344,7 +344,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA4Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA4Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -360,7 +360,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB4Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -376,7 +376,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC4Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -392,7 +392,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD4Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD4Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -408,7 +408,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE4Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE4Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -428,7 +428,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA5Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA5Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -444,7 +444,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB5Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -460,7 +460,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC5Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -476,7 +476,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD5Button" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD5Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -492,7 +492,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE5Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE5Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -512,7 +512,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA6Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -528,7 +528,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB6Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -544,7 +544,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC6Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -560,7 +560,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD6Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -576,7 +576,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE6Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE6Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -596,7 +596,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaA7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaA7Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -612,7 +612,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaB7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaB7Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -628,7 +628,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaC7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaC7Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -644,7 +644,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaD7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaD7Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -660,7 +660,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton fx:id="butacaE7Button" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
+                  <ToggleButton fx:id="butacaE7Button" mnemonicParsing="false" style="-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

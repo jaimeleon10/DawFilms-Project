@@ -11,6 +11,11 @@ import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import javafx.scene.image.*
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 
 private val logger = logging()
 
@@ -62,6 +67,8 @@ private val logger = logging()
  */
 class SeleccionButacasController: KoinComponent {
     val viewModel: SeleccionarButacaViewModel by inject()
+
+    val viewModelLogin: LoginViewModel by inject()
 
     @FXML
     lateinit var usernameField: Label
@@ -216,7 +223,15 @@ class SeleccionButacasController: KoinComponent {
         for (boton in botonesButacas) {
             viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
             viewModel.iconoPorDefecto()
-            val newIcon = viewModel.state.value.icono
+
+            if (viewModel.state.value.tipoButaca == TipoButaca.VIP) boton.style = "-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;"
+            else boton.style = "-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;"
+
+            if (viewModel.state.value.estadoButaca == EstadoButaca.MANTENIMIENTO || viewModel.state.value.estadoButaca == EstadoButaca.FUERASERVICIO || viewModel.state.value.ocupacionButaca == OcupacionButaca.OCUPADA || viewModel.state.value.ocupacionButaca == OcupacionButaca.ENRESERVA) {
+                boton.isDisable = true
+            }
+
+            val newIcon = ImageView(viewModel.state.value.icono)
             newIcon.fitWidth = 24.0
             newIcon.fitHeight = 24.0
             boton.graphic = newIcon
@@ -233,19 +248,30 @@ class SeleccionButacasController: KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
         }
+        usernameField.text = viewModelLogin.state.value.currentCliente.nombre
 
         for (boton in botonesButacas) {
             boton.setOnAction {
-                changeButtonIcon(boton)
+                logger.warn { "${boton.isDisabled}" }
+                if (!boton.isDisable)
+                changeButtonIcon(boton, boton.isSelected)
             }
         }
     }
 
-    private fun changeButtonIcon(boton: ToggleButton) {
-        // TODO -> CAMBIO DE ICONO
-        // val imagePath = "path/to/your/image.png"
-        // val imagenNormal = Image(imagePath)
-        // val imageViewNormal = ImageView(imagenNormal)
-        // boton.graphic = imageViewNormal
+    private fun changeButtonIcon(boton: ToggleButton, seleccionado: Boolean) {
+        if (seleccionado) {
+            viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
+            viewModel.cambiarIcono()
+            val newIcon = ImageView(viewModel.state.value.icono)
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
+        } else {
+            val newIcon = ImageView(Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")))
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
+        }
     }
 }
