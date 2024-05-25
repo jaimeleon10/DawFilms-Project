@@ -193,6 +193,7 @@ class ListadoComplementosAdminController : KoinComponent {
 
     private fun onEditarAction(){
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
+        viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.EDITAR)
         RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
     }
 

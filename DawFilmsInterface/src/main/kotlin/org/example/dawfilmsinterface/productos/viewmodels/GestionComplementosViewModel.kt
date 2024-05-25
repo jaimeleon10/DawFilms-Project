@@ -67,8 +67,8 @@ class GestionComplementosViewModel(
     fun updateComplementoSeleccionado(complemento: Complemento){
         logger.debug { "Actualizando estado de Complemento: $complemento" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png"))
-        var fileImage = File(RoutesManager.getResource("images/octogatoNatalia.png").toURI())
+        var imagen = Image(RoutesManager.getResourceAsStream("icons/${complemento.imagen}"))
+        var fileImage = File(RoutesManager.getResource("icons/${complemento.imagen}").toURI())
 
         storage.loadImage(complemento.imagen).onSuccess {
             imagen = Image(it.absoluteFile.toURI().toString())
@@ -127,11 +127,12 @@ class GestionComplementosViewModel(
         val complemento = state.value.complemento.copy()
         val myId = complemento.id
 
-        complemento.fileImage?.let {
+        // TODO -> MIRAR PORQUE AL BORRAR SE "BORRAN" Y SALTA ERROR
+        /*complemento.fileImage?.let {
             if (it.name != TipoImagen.SIN_IMAGEN.value){
                 storage.deleteImage(it)
             }
-        }
+        }*/
 
         service.deleteComplemento(myId)
         state.value = state.value.copy(
@@ -181,7 +182,7 @@ class GestionComplementosViewModel(
                 complemento = state.value.complemento.copy(),
                 tipoOperacion = newValue
             )
-        }else{
+        } else {
             logger.debug { "Limpiando estado de Complemento Operacion" }
             state.value = state.value.copy(
                 complemento = ComplementoState(),
@@ -225,7 +226,7 @@ class GestionComplementosViewModel(
         val precio : Double = 3.00,
         val stock : Int = 20,
         val categoria : String = "",
-        val imagen : Image = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png")),
+        val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
         val fileImage : File? = null,
         val oldFileImage : File? = null
     )

@@ -52,9 +52,6 @@ class GestionButacaViewModel(
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Butaca" }
         state.value = state.value.copy(
-            typesEstado = state.value.butacas.map { it.estadoButaca.toString() },
-            typesTipo = state.value.butacas.map { it.tipoButaca.toString() },
-            typesOcupacion = state.value.butacas.map { it.ocupacionButaca.toString() },
             butaca = ButacaState()
         )
     }
@@ -87,7 +84,7 @@ class GestionButacaViewModel(
                     else -> true
                 }
             }
-        }
+    }
 
     /* TODO -> USAR EN IMPORTAR BUTACAS (AQUÍ NO HACE NADA)
     fun loadButacasFromCsv(file: File): Result<List<Producto>, ProductoError> {
@@ -116,9 +113,10 @@ class GestionButacaViewModel(
         state.value = state.value.copy(
             butaca = ButacaState(
                 id = butaca.id,
-                estado = butaca.estadoButaca.name,
+                estado = if (butaca.estadoButaca.name == "FUERASERVICIO") "FUERA DE SERVICIO" else butaca.estadoButaca.name,
                 tipo = butaca.tipoButaca.name,
-                ocupacion = butaca.ocupacionButaca.name,
+                ocupacion = if (butaca.ocupacionButaca.name == "ENRESERVA") "EN RESERVA" else butaca.ocupacionButaca.name,
+                precio = butaca.tipoButaca.precio,
                 imagen = imagen,
                 fileImage = fileImage
             )
@@ -211,7 +209,7 @@ class GestionButacaViewModel(
         val estado : String = "",
         val tipo : String = "",
         val ocupacion : String = "",
-        val precio : Double = 5.00,
+        val precio : Double = 5.0,
         val imagen : Image = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png")),
         val fileImage : File? = null,
         val oldFileImage : File? = null
