@@ -127,11 +127,11 @@ class GestionComplementosViewModel(
         val complemento = state.value.complemento.copy()
         val myId = complemento.id
 
-        complemento.fileImage?.let {
+        /*complemento.fileImage?.let {
             if (it.name != TipoImagen.SIN_IMAGEN.value){
                 storage.deleteImage(it)
             }
-        }
+        }*/
 
         service.deleteComplemento(myId)
         state.value = state.value.copy(
