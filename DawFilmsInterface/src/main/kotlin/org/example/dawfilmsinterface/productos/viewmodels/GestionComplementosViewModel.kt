@@ -127,6 +127,7 @@ class GestionComplementosViewModel(
         val complemento = state.value.complemento.copy()
         val myId = complemento.id
 
+        // TODO -> MIRAR PORQUE AL BORRAR SE "BORRAN" Y SALTA ERROR
         /*complemento.fileImage?.let {
             if (it.name != TipoImagen.SIN_IMAGEN.value){
                 storage.deleteImage(it)
