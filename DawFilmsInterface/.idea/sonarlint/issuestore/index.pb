@@ -53,8 +53,6 @@ bsrc/main/kotlin/org/example/dawfilmsinterface/productos/storage/genericStorage/
 \src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageCsv/StorageCsvImpl.kt,2\d\2d1ed3beb9422e561a5041961bf734fb67a6b082
 Ž
 ^src/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageJson/StorageJsonImpl.kt,7\4\744264b66c76324cf7e87451f721ddc1a0c2e0e4
-I
-data/butacasIniciales.csv,8\7\875e2e7dbe5249dc7db5a03620787952f7623ea2
 ˆ
 Xsrc/main/kotlin/org/example/dawfilmsinterface/productos/storage/storageCsv/StorageCsv.kt,e\1\e155f1754fe3d9c5d8ae97c8c2c1e2e503a18ab9
 Š
@@ -159,3 +157,5 @@ bsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionCompl
 ~src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/ListadoComplementosAdminController.kt,c\1\c16dbbb11e218e72b320bb5f1e7cea0cf6b72a33
 §
 wsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/EditarComplementoController.kt,c\5\c526c54cfa37ac7971f30a2002e7dfa46ede474f
+Œ
+\src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionButacaViewModel.kt,e\9\e944d9a444054c8e4e0df0bb103a89d8ef6edf5c

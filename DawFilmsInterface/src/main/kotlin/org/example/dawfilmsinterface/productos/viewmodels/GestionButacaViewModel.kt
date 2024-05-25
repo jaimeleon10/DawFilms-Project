@@ -14,7 +14,6 @@ import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosS
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
 import java.io.File
-import kotlin.math.log
 
 private val logger = logging()
 
@@ -32,9 +31,13 @@ class GestionButacaViewModel(
 
     private fun loadTypes() {
         logger.debug { "Cargando tipos" }
-        state.value = state.value.copy(typesEstado = TipoFiltroEstado.entries.map { it.value })
-        state.value = state.value.copy(typesTipo = TipoFiltroTipo.entries.map { it.value})
-        state.value = state.value.copy(typesOcupacion = TipoFiltroOcupacion.entries.map { it.value})
+        state.value = state.value.copy(typesEstadoFiltro = TipoFiltroEstado.entries.map { it.value })
+        state.value = state.value.copy(typesTipoFiltro = TipoFiltroTipo.entries.map { it.value})
+        state.value = state.value.copy(typesOcupacionFiltro = TipoFiltroOcupacion.entries.map { it.value})
+
+        state.value = state.value.copy(typesTipo = TipoTipo.entries.map { it.value})
+        state.value = state.value.copy(typesEstado = TipoEstado.entries.map { it.value})
+        state.value = state.value.copy(typesOcupacion = TipoOcupacion.entries.map { it.value})
     }
 
     private fun loadAllButacas(){
@@ -47,9 +50,11 @@ class GestionButacaViewModel(
     }
 
     private fun updateActualState() {
-        logger.debug { "Actualizando el estado de Gestión" }
+        logger.debug { "Actualizando el estado de Butaca" }
         state.value = state.value.copy(
             typesEstado = state.value.butacas.map { it.estadoButaca.toString() },
+            typesTipo = state.value.butacas.map { it.tipoButaca.toString() },
+            typesOcupacion = state.value.butacas.map { it.ocupacionButaca.toString() },
             butaca = ButacaState()
         )
     }
@@ -186,9 +191,14 @@ class GestionButacaViewModel(
     }
 
     data class GestionState(
+        val typesEstadoFiltro : List<String> = emptyList(),
+        val typesTipoFiltro : List<String> = emptyList(),
+        val typesOcupacionFiltro : List<String> = emptyList(),
+
         val typesEstado : List<String> = emptyList(),
         val typesTipo : List<String> = emptyList(),
         val typesOcupacion : List<String> = emptyList(),
+
         val butacas : List<Butaca> = emptyList(),
 
         val butaca : ButacaState = ButacaState(),
@@ -225,5 +235,17 @@ class GestionButacaViewModel(
 
     enum class TipoFiltroTipo(val value : String){
         TODAS("TODAS"), NORMAL("NORMAL"), VIP("VIP")
+    }
+
+    enum class TipoEstado(val value : String){
+        ACTIVA("ACTIVA"), MANTENIMIENTO("MANTENIMIENTO"), FUERASERVICIO("FUERA DE SERVICIO")
+    }
+
+    enum class TipoOcupacion(val value : String){
+        LIBRE("LIBRE"), ENRESERVA("EN RESERVA"), OCUPADA("OCUPADA")
+    }
+
+    enum class TipoTipo(val value : String){
+        NORMAL("NORMAL"), VIP("VIP")
     }
 }

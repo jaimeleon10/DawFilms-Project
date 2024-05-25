@@ -3,7 +3,6 @@ package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
@@ -92,13 +91,13 @@ class EditarButacaController : KoinComponent {
         idSelectedField.text = viewModel.state.value.butaca.id
         idSelectedField.isEditable = false
 
-        estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado.drop(1))
+        estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado)
         estadoComboBox.value = viewModel.state.value.butaca.estado
 
-        tipoComboBox.items = FXCollections.observableList(viewModel.state.value.typesTipo.drop(1))
+        tipoComboBox.items = FXCollections.observableList(viewModel.state.value.typesTipo)
         tipoComboBox.value = viewModel.state.value.butaca.tipo
 
-        ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion.drop(1))
+        ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion)
         ocupacionComboBox.value = viewModel.state.value.butaca.ocupacion
 
         precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
@@ -107,7 +106,10 @@ class EditarButacaController : KoinComponent {
 
     @FXML
     private fun initEventos(){
-        saveButton.setOnAction { onGuardarAction() }
+        saveButton.setOnAction {
+            onGuardarAction()
+            stage.close()
+        }
         cancelButton.setOnAction {onCancelarAction()}
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         cleanButton.setOnAction { onLimpiarAction() }
@@ -129,28 +131,9 @@ class EditarButacaController : KoinComponent {
             imagen = imagenImage.image
         )
 
-        when(viewModel.state.value.tipoOperacion){
-            EDITAR -> viewModel.editarButaca()
-        }
 
-        if (estadoComboBox.value == null) {
-            showAlertOperacion(
-                AlertType.ERROR,
-                "Butaca no salvada",
-                "El estado no puede estar vacío"
-            )
-        } else if (tipoComboBox.value == null) {
-            showAlertOperacion(
-                AlertType.ERROR,
-                "Butaca no salvada",
-                "El tipo no puede estar vacío"
-            )
-        } else if (ocupacionComboBox == null) {
-            showAlertOperacion(
-                AlertType.ERROR,
-                "Butaca no salvada",
-                "La ocupación no puede estar vacía"
-            )
+        if(viewModel.state.value.tipoOperacion == EDITAR){
+            viewModel.editarButaca()
         }
     }
 
@@ -173,17 +156,5 @@ class EditarButacaController : KoinComponent {
         tipoComboBox.selectionModel.selectFirst()
         ocupacionComboBox.selectionModel.selectFirst()
         precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
-    }
-
-    @FXML
-    private fun showAlertOperacion(
-        alerta: AlertType = AlertType.CONFIRMATION,
-        title: String = "",
-        mensaje: String = ""
-    ) {
-        val alert = Alert(alerta)
-        alert.title = title
-        alert.contentText = mensaje
-        alert.showAndWait()
     }
 }
