@@ -8,9 +8,11 @@ import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.mappers.toButaca
 import org.example.dawfilmsinterface.productos.mappers.toComplemento
 import org.example.dawfilmsinterface.productos.mappers.toProductoDto
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -18,10 +20,14 @@ class StorageCsvImpl: StorageCsv {
     override fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }
         return try {
-            file.writeText("ID,Tipo Producto,Imagen,Fila Butaca,Columna Butaca,Tipo Butaca,EstadoButaca,Ocupacion Butaca,Nombre Complemento,Precio Complemento,Categoria Complemento, Stock Complemento, CreatedAt, UpdatedAt, IsDeleted\n")
+            file.writeText("id,tipo producto,imagen,precio,fila butaca,columna butaca,tipo butaca,estado butaca,ocupacion butaca,nombre complemento,stock complemento,categoria complemento,created at,updated at,is deleted\n")
             data.map { it.toProductoDto() }
-                .forEach {
-                    file.appendText("${it.id},${it.tipoProducto},${it.imagen},${it.filaButaca},${it.columnaButaca},${it.tipoButaca},${it.estadoButaca},${it.ocupacionButaca},${it.nombreComplemento},${it.precioComplemento},${it.categoriaComplemento},${it.stockComplemento},${it.createdAt},${it.updatedAt},${it.isDeleted}\n")
+                .forEach { productoDto ->
+                    if (productoDto.tipoProducto == "Butaca") {
+                        file.appendText("${productoDto.id},${productoDto.tipoProducto},${productoDto.imagen},${TipoButaca.valueOf(productoDto.tipoButaca!!).precio},${productoDto.filaButaca},${productoDto.columnaButaca},${productoDto.tipoButaca},${productoDto.estadoButaca},${productoDto.ocupacionButaca},${productoDto.nombreComplemento},${productoDto.stockComplemento},${productoDto.categoriaComplemento},${productoDto.createdAt},${productoDto.updatedAt},${productoDto.isDeleted}\n")
+                    } else {
+                        file.appendText("${productoDto.id},${productoDto.tipoProducto},${productoDto.imagen},${productoDto.precioComplemento},${productoDto.filaButaca},${productoDto.columnaButaca},${productoDto.tipoButaca},${productoDto.estadoButaca},${productoDto.ocupacionButaca},${productoDto.nombreComplemento},${productoDto.stockComplemento},${productoDto.categoriaComplemento},${productoDto.createdAt},${productoDto.updatedAt},${productoDto.isDeleted}\n")
+                    }
                 }
             Ok(data.size.toLong())
         } catch (e: Exception) {
@@ -36,39 +42,43 @@ class StorageCsvImpl: StorageCsv {
             val productsList = file.readLines().drop(1)
                 .map {
                     val data = it.split(",")
-                    if (data[1] == "Butaca") ProductoDto(
-                        id = data[0],
-                        tipoProducto = data[1],
-                        imagen = data[2],
-                        filaButaca = data[3].toInt(),
-                        columnaButaca = data[4].toInt(),
-                        tipoButaca = data[5],
-                        estadoButaca = data[6],
-                        ocupacionButaca = data[7],
-                        nombreComplemento = null,
-                        precioComplemento = null,
-                        categoriaComplemento = null,
-                        stockComplemento = null,
-                        createdAt = data[12],
-                        updatedAt = data[13],
-                        isDeleted = data[14].toBoolean()
-                    ).toButaca() else ProductoDto(
-                        id = data[0],
-                        tipoProducto = data[1],
-                        imagen = data[2],
-                        filaButaca = null,
-                        columnaButaca = null,
-                        tipoButaca = null,
-                        estadoButaca = null,
-                        ocupacionButaca = null,
-                        nombreComplemento = data[8],
-                        precioComplemento = data[9].toDouble(),
-                        categoriaComplemento = data[10],
-                        stockComplemento = data[11].toInt(),
-                        createdAt = data[12],
-                        updatedAt = data[13],
-                        isDeleted = data[14].toBoolean()
-                    ).toComplemento()
+                    if (data[1] == "Butaca") {
+                        ProductoDto(
+                            id = data[0],
+                            tipoProducto = data[1],
+                            imagen = data[2],
+                            filaButaca = data[4].toInt(),
+                            columnaButaca = data[5].toInt(),
+                            tipoButaca = data[6],
+                            estadoButaca = data[7],
+                            ocupacionButaca = data[8],
+                            nombreComplemento = null,
+                            precioComplemento = null,
+                            categoriaComplemento = null,
+                            stockComplemento = null,
+                            createdAt = if (data[12].isNullOrEmpty()) LocalDate.now().toString() else data[12],
+                            updatedAt = if (data[13].isNullOrEmpty()) LocalDate.now().toString() else data[13],
+                            isDeleted = if (data[14].isEmpty()) false else data[14].toBoolean()
+                        ).toButaca()
+                    } else {
+                        ProductoDto(
+                            id = data[0],
+                            tipoProducto = data[1],
+                            imagen = data[2],
+                            filaButaca = null,
+                            columnaButaca = null,
+                            tipoButaca = null,
+                            estadoButaca = null,
+                            ocupacionButaca = null,
+                            nombreComplemento = data[9],
+                            precioComplemento = data[3].toDouble(),
+                            categoriaComplemento = data[11],
+                            stockComplemento = data[10].toInt(),
+                            createdAt = if (data[12].isNullOrEmpty()) LocalDate.now().toString() else data[12],
+                            updatedAt = if (data[13].isNullOrEmpty()) LocalDate.now().toString() else data[13],
+                            isDeleted = if (data[14].isEmpty()) false else data[14].toBoolean()
+                        ).toComplemento()
+                    }
                 }
             Ok(productsList)
         } catch (e: Exception) {
