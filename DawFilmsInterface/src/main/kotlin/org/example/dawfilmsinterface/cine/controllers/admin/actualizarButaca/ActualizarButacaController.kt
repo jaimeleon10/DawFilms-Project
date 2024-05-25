@@ -213,7 +213,7 @@ class ActualizarButacaController : KoinComponent {
         RoutesManager.initEditarButaca()
     }
 
-    private fun onImportarAction(){
+    /*private fun onImportarAction(){
         logger.debug { "onImportarAction" }
         FileChooser().run {
             title = "Importar butacas"
@@ -238,7 +238,7 @@ class ActualizarButacaController : KoinComponent {
                 }
             RoutesManager.activeStage.scene.cursor = Cursor.DEFAULT
         }
-    }
+    }*/
 
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
