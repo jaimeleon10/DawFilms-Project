@@ -1,9 +1,17 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
+import javafx.scene.image.ImageView
 import javafx.stage.Stage
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.TipoOperacion.EDITAR
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.TipoOperacion.NUEVO
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -25,7 +33,9 @@ private val logger = logging()
  * @property backMenuMenuButton Botón que nos llevara de regreso al menú
  * @property tituloLabel Label que nos indica la accion que estamos realizando
  */
-class EditarComplementoController {
+class EditarComplementoController : KoinComponent {
+    private val viewModel: GestionComplementosViewModel by inject()
+
     @FXML
     lateinit var categoriaComboBox: ComboBox<Any>
 
@@ -59,6 +69,9 @@ class EditarComplementoController {
     @FXML
     lateinit var tituloLabel: Label
 
+    @FXML
+    lateinit var imagenImage : ImageView
+
     private lateinit var stage: Stage
     fun setStage(stage: Stage) {
         this.stage = stage
@@ -68,23 +81,100 @@ class EditarComplementoController {
      * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
      * @since 1.0.0
      */
+
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando EditarComplementoController FXML en Modo: ${viewModel.state.value.tipoOperacion}" }
+
+        initValues()
+
+        initEventos()
+    }
+
+    @FXML
+    private fun initValues() {
+        logger.debug { "InitValues" }
+        idField.text = viewModel.state.value.complemento.id
+
+        nombreField.text = viewModel.state.value.complemento.nombre
+
+        categoriaComboBox.items = FXCollections.observableList(viewModel.state.value.typesCategoria)
+        categoriaComboBox.value = viewModel.state.value.complemento.categoria
+
+        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00)
+
+        imagenImage.image = viewModel.state.value.complemento.imagen
+    }
+
+    @FXML
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             stage.close()
         }
-        saveButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
-            stage.close()
+        saveButton.setOnAction { onGuardarAction() }
+        cancelButton.setOnAction { onCancelarAction() }
+        cleanButton.setOnAction { onLimpiarAction() }
+    }
+
+    @FXML
+    private fun onGuardarAction(){
+        logger.debug { "onGuardarAction" }
+
+        viewModel.updateDataComplementoOperacion(
+            nombre = nombreField.text,
+            categoria = categoriaComboBox.value.toString(),
+            stock = stockSpinner.value,
+            precio = priceSpinner.value,
+            imagen = imagenImage.image
+        )
+
+        when(viewModel.state.value.tipoOperacion){
+            NUEVO -> viewModel.createComplemento()
+            EDITAR -> viewModel.editarComplemento()
         }
-        cancelButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
-            stage.close()
+
+        if (nombreField.text == null || nombreField.text == "") {
+            showAlertOperacion(
+                AlertType.ERROR,
+                "Complemento no salvado",
+                "El nombre no puede estar vacío"
+            )
         }
-        cleanButton.setOnAction {
-            priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)
-        }
+    }
+
+    @FXML
+    private fun onCancelarAction() {
+        logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
+        stage.close()
+    }
+
+    @FXML
+    private fun onLimpiarAction() {
+        logger.debug { "onLimpiarAction" }
+        limpiarFormulario()
+    }
+
+    @FXML
+    private fun limpiarFormulario() {
+        logger.debug { "limpiarFormulario" }
+        nombreField.clear()
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 3.0)
+        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
+        categoriaComboBox.selectionModel.selectFirst()
+    }
+
+    @FXML
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = ""
+    ) {
+        val alert = Alert(alerta)
+        alert.title = title
+        alert.contentText = mensaje
+        alert.showAndWait()
     }
 }

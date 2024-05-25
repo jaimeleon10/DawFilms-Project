@@ -1,5 +1,9 @@
 package org.example.dawfilmsinterface.productos.models.complementos
 
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import java.time.LocalDate
 
@@ -22,6 +26,7 @@ class Complemento (
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
+        if (other == null || javaClass != other.javaClass) return false
 
         //Comparamos clase padre
         if (!super.equals(other)) return false
@@ -46,5 +51,20 @@ class Complemento (
         result = 31 * result + stock
         result = 31 * result + categoria.hashCode()
         return result
+    }
+
+    fun copy(
+        id: String = this.id,
+        tipoProducto: String = this.tipoProducto,
+        imagen: String = this.imagen,
+        nombre: String = this.nombre,
+        precio: Double = this.precio,
+        stock: Int = this.stock,
+        categoria: CategoriaComplemento = this.categoria,
+        createdAt: LocalDate = this.createdAt,
+        updatedAt: LocalDate? = this.updatedAt,
+        isDeleted: Boolean? = this.isDeleted
+    ) : Complemento {
+        return Complemento(id, tipoProducto, imagen, nombre, precio, stock, categoria, createdAt, updatedAt, isDeleted)
     }
 }

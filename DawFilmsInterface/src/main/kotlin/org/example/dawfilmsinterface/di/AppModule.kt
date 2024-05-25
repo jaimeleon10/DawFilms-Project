@@ -34,6 +34,7 @@ import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZipImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -88,7 +89,7 @@ val appModule = module {
         bind<StorageCsv>()
     }
 
-    single { ButacaValidator }
+    singleOf(:: ButacaValidator)
 
     singleOf(::ComplementoValidator)
 
@@ -125,4 +126,6 @@ val appModule = module {
     }
 
     singleOf(::ActualizarButacaViewModel)
+
+    singleOf(::GestionComplementosViewModel)
 }

@@ -6,7 +6,7 @@ import com.github.michaelbull.result.Result
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 
-object ButacaValidator {
+class ButacaValidator {
     fun validate(butaca: Butaca): Result<Butaca, ProductoError> {
         //SOLO VALIDO LOS CAMPOS QUE SE INTRODUCEN A MANO, EL RESTO QUEDAN VALIDADOS AL USAR COMBOBOX Y SPINNER
         val regexID = Regex("^[a-eA-E][1-7]$")

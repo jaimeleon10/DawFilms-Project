@@ -1,8 +1,17 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.control.Alert.AlertType
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -26,7 +35,9 @@ private val logger = logging()
  * @property backMenuMenuButton Elemento de menú para regresar al menú anterior.
  * @property complementosTable Tabla que muestra los complementos.
  */
-class ListadoComplementosAdminController {
+class ListadoComplementosAdminController : KoinComponent {
+    private val viewModel: GestionComplementosViewModel by inject()
+
     @FXML
     lateinit var backMenuButton: Button
 
@@ -61,7 +72,19 @@ class ListadoComplementosAdminController {
     lateinit var backMenuMenuButton: MenuItem
 
     @FXML
-    lateinit var complementosTable: TableView<Any>
+    lateinit var complementosTable: TableView<Complemento>
+
+    @FXML
+    lateinit var nombreColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var precioColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var stockColumnTable: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var disponibilidadColumnTable: TableColumn<Complemento, String>
 
     /**
      * Función que inicializa la vista de administración de complementos.
@@ -71,22 +94,116 @@ class ListadoComplementosAdminController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando ListadoComplementosAdminController FXML" }
+        initDefaultValues()
+
+        initBindings()
+
+        initEventos()
+    }
+
+    private fun initBindings() {
+        logger.debug { "Inicializando bindings"}
+
+        idSelectedField.textProperty().bind(viewModel.state.map { it.complemento.id })
+        nombreSelectedField.textProperty().bind(viewModel.state.map { it.complemento.nombre })
+        precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toString() })
+        stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
+
+        viewModel.state.addListener { _, _, newValue ->
+            logger.debug { "Actualizando datos de la vista" }
+            if (complementosTable.items != newValue.complementos){
+                complementosTable.items = FXCollections.observableArrayList(newValue.complementos)
+            }
+        }
+    }
+
+    private fun initDefaultValues() {
+        logger.debug { "Inicializando valores por defecto" }
+
+        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
+        complementosTable.columns.forEach {it.isResizable = false}
+
+        nombreColumnTable.cellValueFactory = PropertyValueFactory("nombre")
+        precioColumnTable.cellValueFactory = PropertyValueFactory("precio")
+        stockColumnTable.cellValueFactory = PropertyValueFactory("stock")
+    }
+
+    @FXML
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        addButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
-            RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
-        }
-        editButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
-            RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
-        }
+        addButton.setOnAction {onNuevoAction()}
+        editButton.setOnAction {onEditarAction()}
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
+        deleteButton.setOnAction { onEliminarAction() }
+
+        complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
+        }
+    }
+
+    private fun onEliminarAction(){
+        logger.debug { "onEliminarAction" }
+
+        if (complementosTable.selectionModel.selectedItem == null){
+            return
+        }
+        Alert(Alert.AlertType.CONFIRMATION).apply {
+            title = "¿Eliminar complemento?"
+            contentText = "¿Desea eliminar el complemento?"
+        }.showAndWait().ifPresent{
+            if(it == ButtonType.OK){
+                viewModel.eliminarComplemento().onSuccess {
+                    logger.debug { "Complemento eliminado correctamente" }
+                    showAlertOperacion(
+                        alerta= Alert.AlertType.INFORMATION,
+                        "Complemento eliminado",
+                        "Se ha eliminado el complemento"
+                    )
+                    complementosTable.selectionModel.clearSelection()
+                }.onFailure {
+                    logger.error { "Error al eliminar el complemento: ${it.message}" }
+                    showAlertOperacion(
+                        alerta= Alert.AlertType.ERROR,
+                        "Error al eliminar el complemento",
+                        "No se ha eliminado el complemento"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun onNuevoAction() {
+        logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
+        viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.NUEVO)
+        RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
+    }
+
+    private fun onTablaSelected(newValue: Complemento){
+        logger.debug { "onTablaSelected: $newValue" }
+        viewModel.updateComplementoSeleccionado(newValue)
+    }
+
+    private fun onEditarAction(){
+        logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
+        RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = ""
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText = mensaje
+        }.showAndWait()
     }
 }

@@ -85,44 +85,45 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="idField" layoutX="248.0" layoutY="130.0" prefHeight="30.0" prefWidth="200.0" />
-      <Label layoutX="95.0" layoutY="127.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
+      <TextField fx:id="idField" layoutX="190.0" layoutY="146.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="37.0" layoutY="143.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="95.0" layoutY="187.0" prefHeight="35.0" prefWidth="115.0" text="Nombre" textFill="WHITE">
+      <Label layoutX="37.0" layoutY="203.0" prefHeight="35.0" prefWidth="115.0" text="Nombre" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="95.0" layoutY="247.0" prefHeight="35.0" prefWidth="115.0" text="Precio" textFill="WHITE">
+      <Label layoutX="37.0" layoutY="263.0" prefHeight="35.0" prefWidth="115.0" text="Precio" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="95.0" layoutY="307.0" prefHeight="35.0" prefWidth="115.0" text="Stock" textFill="WHITE">
+      <Label layoutX="37.0" layoutY="323.0" prefHeight="35.0" prefWidth="115.0" text="Stock" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="nombreField" layoutX="248.0" layoutY="190.0" prefHeight="30.0" prefWidth="200.0" />
-      <Label layoutX="96.0" layoutY="367.0" prefHeight="35.0" prefWidth="115.0" text="Categoría" textFill="WHITE">
+      <TextField fx:id="nombreField" layoutX="190.0" layoutY="206.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="38.0" layoutY="383.0" prefHeight="35.0" prefWidth="115.0" text="Categoría" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Spinner fx:id="stockSpinner" layoutX="248.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0">
+      <Spinner fx:id="stockSpinner" layoutX="190.0" layoutY="326.0" prefHeight="30.0" prefWidth="200.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Spinner>
-      <Spinner fx:id="priceSpinner" layoutX="248.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0">
+      <Spinner fx:id="priceSpinner" layoutX="190.0" layoutY="266.0" prefHeight="30.0" prefWidth="200.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Spinner>
-      <ComboBox fx:id="categoriaComboBox" layoutX="249.0" layoutY="369.0" prefHeight="30.0" prefWidth="200.0">
+      <ComboBox fx:id="categoriaComboBox" layoutX="191.0" layoutY="385.0" prefHeight="30.0" prefWidth="200.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
+      <ImageView fx:id="imagenImage" fitHeight="109.0" fitWidth="115.0" layoutX="401.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
