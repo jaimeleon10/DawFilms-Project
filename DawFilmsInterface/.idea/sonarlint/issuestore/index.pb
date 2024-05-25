@@ -153,3 +153,7 @@ N
 Ysrc/main/kotlin/org/example/dawfilmsinterface/productos/models/butacas/OcupacionButaca.kt,e\a\ea81e15cb8dae84aa51e63528f027181c607b7c4
 ‚
 Rsrc/main/kotlin/org/example/dawfilmsinterface/productos/service/ProductoService.kt,d\1\d1555227e112e026c607a53db9c0eed257dc0f6a
+’
+bsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionComplementosViewModel.kt,2\e\2eb055b6de3ae493458ad151c81a901d66c5cedc
+®
+~src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/ListadoComplementosAdminController.kt,c\1\c16dbbb11e218e72b320bb5f1e7cea0cf6b72a33

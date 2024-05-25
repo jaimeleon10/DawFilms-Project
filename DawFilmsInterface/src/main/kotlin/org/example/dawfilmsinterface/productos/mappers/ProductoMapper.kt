@@ -10,6 +10,7 @@ import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComp
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel.ButacaState
+import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.ComplementoState
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {
@@ -170,6 +171,21 @@ fun ButacaState.toModel(): Butaca {
         tipoButaca = TipoButaca.valueOf(this.tipo.uppercase()),
         estadoButaca = EstadoButaca.valueOf(this.estado.uppercase()),
         ocupacionButaca = OcupacionButaca.valueOf(this.ocupacion.uppercase()),
+        createdAt = LocalDate.now(),
+        updatedAt = LocalDate.now(),
+        isDeleted = false
+    )
+}
+
+fun ComplementoState.toModel(): Complemento {
+    return Complemento(
+        id = this.id,
+        tipoProducto = "Complemento",
+        nombre = this.nombre,
+        precio = this.precio,
+        stock = this.stock,
+        categoria = CategoriaComplemento.valueOf(this.categoria),
+        imagen = this.fileImage?.name ?: "octogatoNatalia.png",
         createdAt = LocalDate.now(),
         updatedAt = LocalDate.now(),
         isDeleted = false

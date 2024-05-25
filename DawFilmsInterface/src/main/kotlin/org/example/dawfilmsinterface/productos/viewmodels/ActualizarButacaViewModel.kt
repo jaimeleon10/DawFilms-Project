@@ -187,7 +187,6 @@ class ActualizarButacaViewModel(
     }
 
     data class GestionState(
-        val typesId : List<String> = emptyList(),
         val typesEstado : List<String> = emptyList(),
         val typesTipo : List<String> = emptyList(),
         val typesOcupacion : List<String> = emptyList(),
