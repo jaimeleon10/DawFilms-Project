@@ -68,13 +68,15 @@ class ActualizarButacaViewModel(
                     TipoFiltroEstado.FUERASERVICIO.value -> butaca.estadoButaca == EstadoButaca.FUERASERVICIO
                     else -> true
                 }
-                when (tipo){
+            }.filter { butaca ->
+                when (tipo) {
                     TipoFiltroTipo.TODAS.value -> true
                     TipoFiltroTipo.NORMAL.value -> butaca.tipoButaca == TipoButaca.NORMAL
                     TipoFiltroTipo.VIP.value -> butaca.tipoButaca == TipoButaca.VIP
                     else -> true
                 }
-                when(ocupacion){
+            }.filter { butaca ->
+                when (ocupacion) {
                     TipoFiltroOcupacion.TODAS.value -> true
                     TipoFiltroOcupacion.LIBRE.value -> butaca.ocupacionButaca == OcupacionButaca.LIBRE
                     TipoFiltroOcupacion.ENRESERVA.value -> butaca.ocupacionButaca == OcupacionButaca.ENRESERVA
@@ -82,7 +84,7 @@ class ActualizarButacaViewModel(
                     else -> true
                 }
             }
-    }
+        }
 
     /* TODO -> USAR EN IMPORTAR BUTACAS (AQUÍ NO HACE NADA)
     fun loadButacasFromCsv(file: File): Result<List<Producto>, ProductoError> {
@@ -209,7 +211,7 @@ class ActualizarButacaViewModel(
     )
 
     enum class TipoOperacion(val value : String){
-        EDITAR("Editar")
+        EDITAR("EDITAR")
     }
 
     enum class TipoImagen(val value : String){
@@ -217,19 +219,20 @@ class ActualizarButacaViewModel(
     }
 
     enum class TipoFiltroEstado(val value : String){
-        TODAS("Todas"), ACTIVA("Activa"), MANTENIMIENTO("Mantenimiento"), FUERASERVICIO("Fuera de servicio")
+        TODAS("TODAS"), ACTIVA("ACTIVA"), MANTENIMIENTO("MANTENIMIENTO"), FUERASERVICIO("FUERA DE SERVICIO")
     }
 
     enum class TipoFiltroOcupacion(val value : String){
-        TODAS("Todas"), LIBRE("Libre"), ENRESERVA("En reserva"), OCUPADA("Ocupada")
+        TODAS("TODAS"), LIBRE("LIBRE"), ENRESERVA("EN RESERVA"), OCUPADA("OCUPADA")
     }
 
     enum class TipoFiltroTipo(val value : String){
-        TODAS("Todas"), NORMAL("Normal"), VIP("VIP")
+        TODAS("TODAS"), NORMAL("NORMAL"), VIP("VIP")
     }
 
     enum class TipoFiltroId(val value : String){
-        TODAS("Todas"), A1("A1"), A2("A2"), A3("A3"), A4("A4"), A5("A5"), A6("A6"), A7("A7"),
+        TODAS("TODAS"),
+        A1("A1"), A2("A2"), A3("A3"), A4("A4"), A5("A5"), A6("A6"), A7("A7"),
         B1("B1"), B2("B2"), B3("B3"), B4("B4"), B5("B5"), B6("B6"), B7("B7"),
         C1("C1"), C2("C2"), C3("C3"), C4("C4"), C5("C5"), C6("C6"), C7("C7"),
         D1("D1"), D2("D2"), D3("D3"), D4("D4"), D5("D5"), D6("D6"), D7("D7"),
