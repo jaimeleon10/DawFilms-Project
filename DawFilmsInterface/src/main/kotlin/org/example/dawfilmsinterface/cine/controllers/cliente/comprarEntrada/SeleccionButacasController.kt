@@ -1,12 +1,21 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.control.ToggleButton
+import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import javafx.scene.image.*
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 
 private val logger = logging()
 
@@ -56,7 +65,11 @@ private val logger = logging()
  * @property butacaB1Button Botón de selección para la butaca B1.
  * @property butacaA1Button Botón de selección para la butaca A1.
  */
-class SeleccionButacasController {
+class SeleccionButacasController: KoinComponent {
+    val viewModel: SeleccionarButacaViewModel by inject()
+
+    val viewModelLogin: LoginViewModel by inject()
+
     @FXML
     lateinit var usernameField: Label
 
@@ -176,6 +189,9 @@ class SeleccionButacasController {
 
     @FXML
     lateinit var butacaA1Button: ToggleButton
+
+    val botonesButacas: MutableList<ToggleButton> = mutableListOf()
+
     /**
      * Función que inicializa la vista de selección de butacas.
      * Asigna las acciones a los botones y elementos de menú.
@@ -184,6 +200,45 @@ class SeleccionButacasController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando ActualizarButacaController FXML" }
+
+        viewModel.state.set(SeleccionarButacaViewModel.ButacaSeleccionadaState())
+
+        initDefaultValues()
+
+        initEventos()
+    }
+
+    private fun initDefaultValues() {
+        botonesButacas.addAll(
+            listOf(
+                butacaA1Button, butacaA2Button, butacaA3Button, butacaA4Button, butacaA5Button, butacaA6Button, butacaA7Button,
+                butacaB1Button, butacaB2Button, butacaB3Button, butacaB4Button, butacaB5Button, butacaB6Button, butacaB7Button,
+                butacaC1Button, butacaC2Button, butacaC3Button, butacaC4Button, butacaC5Button, butacaC6Button, butacaC7Button,
+                butacaD1Button, butacaD2Button, butacaD3Button, butacaD4Button, butacaD5Button, butacaD6Button, butacaD7Button,
+                butacaE1Button, butacaE2Button, butacaE3Button, butacaE4Button, butacaE5Button, butacaE6Button, butacaE7Button
+            )
+        )
+
+        for (boton in botonesButacas) {
+            viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
+            viewModel.iconoPorDefecto()
+
+            if (viewModel.state.value.tipoButaca == TipoButaca.VIP) boton.style = "-fx-opacity: 1; -fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;"
+            else boton.style = "-fx-opacity: 1; -fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray;"
+
+            if (viewModel.state.value.estadoButaca == EstadoButaca.MANTENIMIENTO || viewModel.state.value.estadoButaca == EstadoButaca.FUERASERVICIO || viewModel.state.value.ocupacionButaca == OcupacionButaca.OCUPADA || viewModel.state.value.ocupacionButaca == OcupacionButaca.ENRESERVA) {
+                boton.isDisable = true
+            }
+
+            val newIcon = ImageView(viewModel.state.value.icono)
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
+        }
+    }
+
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
@@ -192,6 +247,31 @@ class SeleccionButacasController {
         continueButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
+        }
+        usernameField.text = viewModelLogin.state.value.currentCliente.nombre
+
+        for (boton in botonesButacas) {
+            boton.setOnAction {
+                logger.warn { "${boton.isDisabled}" }
+                if (!boton.isDisable)
+                changeButtonIcon(boton, boton.isSelected)
+            }
+        }
+    }
+
+    private fun changeButtonIcon(boton: ToggleButton, seleccionado: Boolean) {
+        if (seleccionado) {
+            viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
+            viewModel.cambiarIcono()
+            val newIcon = ImageView(viewModel.state.value.icono)
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
+        } else {
+            val newIcon = ImageView(Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")))
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
         }
     }
 }

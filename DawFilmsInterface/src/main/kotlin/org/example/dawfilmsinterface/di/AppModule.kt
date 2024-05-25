@@ -36,6 +36,7 @@ import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -135,4 +136,6 @@ val appModule = module {
     singleOf(::GestionComplementosViewModel)
 
     singleOf(::LoginViewModel)
+
+    singleOf(::SeleccionarButacaViewModel)
 }
