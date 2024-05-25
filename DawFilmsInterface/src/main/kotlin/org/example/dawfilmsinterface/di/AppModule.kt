@@ -5,7 +5,6 @@ import org.example.dawfilmsinterface.cache.Cache
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
-import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.validators.ClienteValidator
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.clientes.services.ClienteServiceImpl
@@ -35,7 +34,7 @@ import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
 import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZipImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
-import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
@@ -131,7 +130,7 @@ val appModule = module {
         bind<VentaStorage>()
     }
 
-    singleOf(::ActualizarButacaViewModel)
+    singleOf(::GestionButacaViewModel)
 
     singleOf(::GestionComplementosViewModel)
 

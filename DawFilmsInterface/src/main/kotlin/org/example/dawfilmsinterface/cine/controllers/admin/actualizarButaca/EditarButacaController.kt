@@ -1,20 +1,17 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import org.example.dawfilmsinterface.productos.errors.ProductoError
-import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel.TipoOperacion.EDITAR
+import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.TipoOperacion.EDITAR
 
 private val logger = logging()
 
@@ -36,7 +33,7 @@ private val logger = logging()
  */
 class EditarButacaController : KoinComponent {
 
-    val viewModel: ActualizarButacaViewModel by inject()
+    val viewModel: GestionButacaViewModel by inject()
 
     @FXML
     lateinit var precioSpinner: Spinner<Double>
@@ -142,13 +139,13 @@ class EditarButacaController : KoinComponent {
                 "Butaca no salvada",
                 "El estado no puede estar vacío"
             )
-        }else if (tipoComboBox.value == null) {
+        } else if (tipoComboBox.value == null) {
             showAlertOperacion(
                 AlertType.ERROR,
                 "Butaca no salvada",
                 "El tipo no puede estar vacío"
             )
-        }else if (ocupacionComboBox == null) {
+        } else if (ocupacionComboBox == null) {
             showAlertOperacion(
                 AlertType.ERROR,
                 "Butaca no salvada",
