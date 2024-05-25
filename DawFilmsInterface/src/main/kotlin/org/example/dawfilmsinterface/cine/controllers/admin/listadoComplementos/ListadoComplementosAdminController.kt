@@ -1,10 +1,12 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import javafx.scene.control.Alert.AlertType
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -70,7 +72,7 @@ class ListadoComplementosAdminController : KoinComponent {
     lateinit var backMenuMenuButton: MenuItem
 
     @FXML
-    lateinit var complementosTable: TableView<Any>
+    lateinit var complementosTable: TableView<Complemento>
 
     @FXML
     lateinit var nombreColumnTable: TableColumn<Complemento, String>
@@ -134,15 +136,54 @@ class ListadoComplementosAdminController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        addButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
-            RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
-        }
+        addButton.setOnAction {onNuevoAction()}
         editButton.setOnAction {onEditarAction()}
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
+        deleteButton.setOnAction { onEliminarAction() }
+
+        complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
+        }
+    }
+
+    private fun onEliminarAction(){
+        logger.debug { "onEliminarAction" }
+
+        if (complementosTable.selectionModel.selectedItem == null){
+            return
+        }
+        Alert(Alert.AlertType.CONFIRMATION).apply {
+            title = "¿Eliminar complemento?"
+            contentText = "¿Desea eliminar el complemento?"
+        }.showAndWait().ifPresent{
+            if(it == ButtonType.OK){
+                viewModel.eliminarComplemento().onSuccess {
+                    logger.debug { "Complemento eliminado correctamente" }
+                    showAlertOperacion(
+                        alerta= Alert.AlertType.INFORMATION,
+                        "Complemento eliminado",
+                        "Se ha eliminado el complemento"
+                    )
+                    complementosTable.selectionModel.clearSelection()
+                }.onFailure {
+                    logger.error { "Error al eliminar el complemento: ${it.message}" }
+                    showAlertOperacion(
+                        alerta= Alert.AlertType.ERROR,
+                        "Error al eliminar el complemento",
+                        "No se ha eliminado el complemento"
+                    )
+                }
+            }
+        }
+    }
+
+    private fun onNuevoAction() {
+        logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
+        viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.NUEVO)
+        RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
     }
 
     private fun onTablaSelected(newValue: Complemento){
@@ -153,5 +194,16 @@ class ListadoComplementosAdminController : KoinComponent {
     private fun onEditarAction(){
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
         RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = ""
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText = mensaje
+        }.showAndWait()
     }
 }

@@ -115,12 +115,9 @@ class EditarComplementoController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             stage.close()
         }
-        saveButton.setOnAction {
-            onGuardarAction()
-            stage.close()
-        }
-        cancelButton.setOnAction {onCancelarAction()}
-        cleanButton.setOnAction {onLimpiarAction()}
+        saveButton.setOnAction { onGuardarAction() }
+        cancelButton.setOnAction { onCancelarAction() }
+        cleanButton.setOnAction { onLimpiarAction() }
     }
 
     @FXML
@@ -140,7 +137,7 @@ class EditarComplementoController : KoinComponent {
             EDITAR -> viewModel.editarComplemento()
         }
 
-        if (nombreField.text == null) {
+        if (nombreField.text == null || nombreField.text == "") {
             showAlertOperacion(
                 AlertType.ERROR,
                 "Complemento no salvado",

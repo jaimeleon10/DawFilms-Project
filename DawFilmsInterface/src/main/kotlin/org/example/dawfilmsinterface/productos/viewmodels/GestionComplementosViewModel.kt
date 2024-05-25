@@ -11,6 +11,7 @@ import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
+import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel.*
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
 import java.io.File
@@ -26,6 +27,12 @@ class GestionComplementosViewModel(
     init {
         logger.debug { "Inicializando GestionComplementosViewModel" }
         loadAllComplementos()
+        loadTypes()
+    }
+
+    private fun loadTypes() {
+        logger.debug { "Cargando tipos" }
+        state.value = state.value.copy(typesCategoria = TipoCategoria.entries.map { it.value })
     }
 
     private fun loadAllComplementos(){
@@ -40,6 +47,7 @@ class GestionComplementosViewModel(
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Complemento" }
         state.value = state.value.copy(
+            typesCategoria = state.value.complementos.map { it.categoria.toString() },
             complemento = ComplementoState()
         )
     }
@@ -74,7 +82,7 @@ class GestionComplementosViewModel(
                 nombre = complemento.nombre,
                 precio = complemento.precio,
                 stock = complemento.stock,
-                categoria = complemento.categoria.toString(),
+                categoria = complemento.categoria.name,
                 imagen = imagen,
                 fileImage = fileImage
             )
@@ -115,6 +123,24 @@ class GestionComplementosViewModel(
         }
     }
 
+    fun eliminarComplemento(): Result<Unit, ProductoError>{
+        logger.debug { "Eliminando Complemento" }
+        val complemento = state.value.complemento.copy()
+        val myId = complemento.id
+
+        complemento.fileImage?.let {
+            if (it.name != TipoImagen.SIN_IMAGEN.value){
+                storage.deleteImage(it)
+            }
+        }
+
+        service.deleteComplemento(myId)
+        state.value = state.value.copy(
+            complementos = state.value.complementos.toMutableList().apply { this.removeIf{ it.id == myId} }
+        )
+        updateActualState()
+        return Ok(Unit)
+    }
 
     private fun updateImageComplementoOperacion(fileImage: File){
         logger.debug { "Actualizando imagen: $fileImage" }
@@ -146,6 +172,23 @@ class GestionComplementosViewModel(
             Ok(it)
         }
 
+    }
+
+    fun changeComplementoOperacion(newValue: TipoOperacion){
+        logger.debug { "Cambiando tipo de operacion: $newValue" }
+        if (newValue == TipoOperacion.EDITAR){
+            logger.debug { "Copiando estado de Complemento seleccionado a Operacion"}
+            state.value = state.value.copy(
+                complemento = state.value.complemento.copy(),
+                tipoOperacion = newValue
+            )
+        }else{
+            logger.debug { "Limpiando estado de Complemento Operacion" }
+            state.value = state.value.copy(
+                complemento = ComplementoState(),
+                tipoOperacion = newValue
+            )
+        }
     }
 
     fun updateDataComplementoOperacion(
