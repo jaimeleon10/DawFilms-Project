@@ -6,10 +6,12 @@ import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
 import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.clientes.validators.ClienteValidator
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.clientes.services.ClienteServiceImpl
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorage
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorageImpl
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
@@ -61,9 +63,13 @@ val appModule = module {
         bind<ClienteService>()
     }
 
-    singleOf(::ClienteCache) {
+    /*singleOf(::ClienteCache) {
         bind<Cache<Long, Cliente>>()
-    }
+    }*/
+
+    single { ClienteCache (Config().cacheSize) } bind Cache::class
+
+    singleOf(::ClienteValidator)
 
     singleOf(::ClienteStorageImpl) {
         bind<ClienteStorage>()
