@@ -58,6 +58,7 @@ DELETE FROM UsuarioEntity;
 
 selectClienteByEmailAndPassword:
 SELECT * FROM UsuarioEntity WHERE email = ? AND password = ?;
+
 selectClienteByEmail:
 SELECT * FROM UsuarioEntity WHERE email = ?;
 

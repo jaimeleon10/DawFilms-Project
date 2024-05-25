@@ -1,24 +1,16 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 
-import com.github.michaelbull.result.onFailure
-import com.github.michaelbull.result.onSuccess
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.Cursor
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.cell.PropertyValueFactory
-import javafx.stage.FileChooser
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
-import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
-import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorageImpl
-import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import java.io.File
-import java.nio.file.Paths
 
 private val logger = logging()
 
@@ -43,7 +35,7 @@ private val logger = logging()
  * @property butacaTable Tabla donde se nos mostrará la información relativa a los complementos
  */
 class ActualizarButacaController : KoinComponent {
-    val viewModel : ActualizarButacaViewModel by inject()
+    val viewModel : GestionButacaViewModel by inject()
 
     @FXML
     lateinit var backMenuMenuButton: MenuItem
@@ -107,6 +99,7 @@ class ActualizarButacaController : KoinComponent {
     @FXML
     private fun initialize() {
         logger.debug { "Inicializando ActualizarButacaController FXML" }
+
         initDefaultValues()
 
         initBindings()

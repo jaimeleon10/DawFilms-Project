@@ -9,8 +9,9 @@ import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.viewmodels.ActualizarButacaViewModel.ButacaState
+import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.ButacaState
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.ComplementoState
+import org.lighthousegames.logging.logging
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {
@@ -169,8 +170,8 @@ fun ButacaState.toModel(): Butaca {
         fila = 0,
         columna = 0,
         tipoButaca = TipoButaca.valueOf(this.tipo.uppercase()),
-        estadoButaca = EstadoButaca.valueOf(this.estado.uppercase()),
-        ocupacionButaca = OcupacionButaca.valueOf(this.ocupacion.uppercase()),
+        estadoButaca = if (this.estado.uppercase() == "FUERA DE SERVICIO") EstadoButaca.valueOf("FUERASERVICIO") else EstadoButaca.valueOf(this.estado.uppercase()),
+        ocupacionButaca = if (this.ocupacion.uppercase() == "EN RESERVA") OcupacionButaca.valueOf("ENRESERVA") else OcupacionButaca.valueOf(this.ocupacion.uppercase()),
         createdAt = LocalDate.now(),
         updatedAt = LocalDate.now(),
         isDeleted = false

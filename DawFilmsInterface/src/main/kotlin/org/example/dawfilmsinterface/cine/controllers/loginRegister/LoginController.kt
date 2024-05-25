@@ -55,7 +55,7 @@ class LoginController: KoinComponent {
             viewModel.changeAdmin()
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         } else {
-            val encryptedPassword=encryptPassword(passwordField.text)
+            val encryptedPassword = encryptPassword(passwordField.text)
             viewModel.validarCliente(userNameField.text, encryptedPassword).onSuccess {
                 logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
                 RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)

@@ -9,17 +9,16 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
-import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
 import java.io.File
+import kotlin.math.log
 
 private val logger = logging()
 
-class ActualizarButacaViewModel(
+class GestionButacaViewModel(
     private val service : ProductoService,
     private val storage : ProductosStorage
 ) {
