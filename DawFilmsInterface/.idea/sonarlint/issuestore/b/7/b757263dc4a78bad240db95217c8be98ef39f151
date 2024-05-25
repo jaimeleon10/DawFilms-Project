@@ -1,6 +1,6 @@
 
-{kotlin:S6619”"0Remove this useless null check, it always fails.(«™ÔÁıÿÿÿÿ8ì˜üú1J$b0096339-099d-4040-bcfb-92e5c10a6f57
-dkotlin:S1128"Remove this unused import.(ºˆœáùÿÿÿÿ8ªì˜üú1J$7e3582a9-f704-486c-9952-efbe5531c317
-dkotlin:S1128"Remove this unused import.(±‚ª¡ùÿÿÿÿ8«ì˜üú1J$cc138afc-85b1-48f7-8574-36f43b2455a0
-˜kotlin:S1192‹"RDefine a constant instead of duplicating this literal "Butaca no salvada" 3 times.(™¡ƒ°8¬ì˜üú1J$55658b3c-5782-4782-9ca3-0766952af900
-ˆkotlin:S6511ˆ"=Merge chained "if" statements into a single "when" statement.(÷—°ıÿÿÿÿ8´ì˜üú1J$4e5d4e9c-de66-4fe1-9bc6-fd1ca5a3b0f6
+{kotlin:S6619”"0Remove this useless null check, it always fails.(«™ÔÁıÿÿÿÿ8ì˜üú1J$da5c5743-1be6-4862-be13-8f0218712a0d
+dkotlin:S1128"Remove this unused import.(ºˆœáùÿÿÿÿ8ªì˜üú1J$c1cabd16-c69a-48cb-801c-cf78527bfa22
+dkotlin:S1128"Remove this unused import.(±‚ª¡ùÿÿÿÿ8«ì˜üú1J$e51f4ef1-c2f3-458f-b94e-0b116554f17a
+˜kotlin:S1192‹"RDefine a constant instead of duplicating this literal "Butaca no salvada" 3 times.(™¡ƒ°8¬ì˜üú1J$1a8606c2-4be8-4a15-a77f-58c03677da17
+ˆkotlin:S6511ˆ"=Merge chained "if" statements into a single "when" statement.(÷—°ıÿÿÿÿ8´ì˜üú1J$35c11033-1c9e-4a92-9ddd-7620670ffb2d

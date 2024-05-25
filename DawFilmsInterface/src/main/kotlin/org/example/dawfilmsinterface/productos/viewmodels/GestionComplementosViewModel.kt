@@ -150,6 +150,8 @@ class GestionComplementosViewModel(
     }
 
     data class GestionState(
+        val typesCategoria: List<String> = emptyList(),
+
         val complementos : List<Complemento> = emptyList(),
 
         val complemento : ComplementoState = ComplementoState(),
@@ -174,5 +176,9 @@ class GestionComplementosViewModel(
 
     enum class TipoImagen(val value : String){
         SIN_IMAGEN("octogatoNatalia.png"), EMPTY("")
+    }
+
+    enum class TipoCategoria(val value : String){
+        BEBIDA("BEBIDA"), COMIDA("COMIDA")
     }
 }

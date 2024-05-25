@@ -84,8 +84,6 @@ class EditarButacaController : KoinComponent {
     private fun initialize() {
         logger.debug { "Inicializando EditarButacaController FXML en Modo: ${viewModel.state.value.tipoOperacion}" }
 
-        idSelectedField.isEditable = false
-
         initValues()
 
         initEventos()
@@ -94,6 +92,8 @@ class EditarButacaController : KoinComponent {
     private fun initValues() {
         logger.debug { "InitValues" }
         idSelectedField.text = viewModel.state.value.butaca.id
+        idSelectedField.isEditable = false
+
         estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado.drop(1))
         estadoComboBox.value = viewModel.state.value.butaca.estado
 
