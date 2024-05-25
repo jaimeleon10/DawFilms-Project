@@ -61,7 +61,7 @@ class ActualizarButacaViewModel(
 
         return state.value.butacas
             .filter { butaca ->
-                when(estado) {
+                when (estado) {
                     TipoFiltroEstado.TODAS.value -> true
                     TipoFiltroEstado.ACTIVA.value -> butaca.estadoButaca == EstadoButaca.ACTIVA
                     TipoFiltroEstado.MANTENIMIENTO.value -> butaca.estadoButaca == EstadoButaca.MANTENIMIENTO
@@ -74,7 +74,7 @@ class ActualizarButacaViewModel(
                     TipoFiltroTipo.VIP.value -> butaca.tipoButaca == TipoButaca.VIP
                     else -> true
                 }
-                when (ocupacion){
+                when(ocupacion){
                     TipoFiltroOcupacion.TODAS.value -> true
                     TipoFiltroOcupacion.LIBRE.value -> butaca.ocupacionButaca == OcupacionButaca.LIBRE
                     TipoFiltroOcupacion.ENRESERVA.value -> butaca.ocupacionButaca == OcupacionButaca.ENRESERVA
@@ -136,7 +136,7 @@ class ActualizarButacaViewModel(
                 storage.updateImage(fileNameTemp, newFileImage)
             }
 
-            service.saveButaca(updatedButaca).onSuccess {
+            service.updateButaca(state.value.butaca.id, updatedButaca).onSuccess {
                 val index = state.value.butacas.indexOfFirst { b -> b.id == it.id }
                 state.value = state.value.copy(
                     butacas = state.value.butacas.toMutableList().apply { this[index] = it }
@@ -144,7 +144,7 @@ class ActualizarButacaViewModel(
                 updateActualState()
                 Ok(it)
             }
-        } ?: service.saveButaca(updatedButaca).onSuccess {
+        } ?: service.updateButaca(state.value.butaca.id, updatedButaca).onSuccess {
             val index = state.value.butacas.indexOfFirst { b -> b.id == it.id }
             state.value = state.value.copy(
                 butacas = state.value.butacas.toMutableList().apply { this[index] = it }
