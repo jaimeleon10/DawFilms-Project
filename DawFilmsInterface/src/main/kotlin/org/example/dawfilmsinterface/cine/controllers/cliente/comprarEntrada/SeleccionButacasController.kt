@@ -1,11 +1,15 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.control.ToggleButton
+import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -56,7 +60,9 @@ private val logger = logging()
  * @property butacaB1Button Botón de selección para la butaca B1.
  * @property butacaA1Button Botón de selección para la butaca A1.
  */
-class SeleccionButacasController {
+class SeleccionButacasController: KoinComponent {
+    val viewModel: SeleccionarButacaViewModel by inject()
+
     @FXML
     lateinit var usernameField: Label
 
@@ -176,6 +182,9 @@ class SeleccionButacasController {
 
     @FXML
     lateinit var butacaA1Button: ToggleButton
+
+    val botonesButacas: MutableList<ToggleButton> = mutableListOf()
+
     /**
      * Función que inicializa la vista de selección de butacas.
      * Asigna las acciones a los botones y elementos de menú.
@@ -184,6 +193,37 @@ class SeleccionButacasController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando ActualizarButacaController FXML" }
+
+        viewModel.state.set(SeleccionarButacaViewModel.ButacaSeleccionadaState())
+
+        initDefaultValues()
+
+        initEventos()
+    }
+
+    private fun initDefaultValues() {
+        botonesButacas.addAll(
+            listOf(
+                butacaA1Button, butacaA2Button, butacaA3Button, butacaA4Button, butacaA5Button, butacaA6Button, butacaA7Button,
+                butacaB1Button, butacaB2Button, butacaB3Button, butacaB4Button, butacaB5Button, butacaB6Button, butacaB7Button,
+                butacaC1Button, butacaC2Button, butacaC3Button, butacaC4Button, butacaC5Button, butacaC6Button, butacaC7Button,
+                butacaD1Button, butacaD2Button, butacaD3Button, butacaD4Button, butacaD5Button, butacaD6Button, butacaD7Button,
+                butacaE1Button, butacaE2Button, butacaE3Button, butacaE4Button, butacaE5Button, butacaE6Button, butacaE7Button
+            )
+        )
+
+        for (boton in botonesButacas) {
+            viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
+            viewModel.iconoPorDefecto()
+            val newIcon = viewModel.state.value.icono
+            newIcon.fitWidth = 24.0
+            newIcon.fitHeight = 24.0
+            boton.graphic = newIcon
+        }
+    }
+
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
@@ -193,5 +233,19 @@ class SeleccionButacasController {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
         }
+
+        for (boton in botonesButacas) {
+            boton.setOnAction {
+                changeButtonIcon(boton)
+            }
+        }
+    }
+
+    private fun changeButtonIcon(boton: ToggleButton) {
+        // TODO -> CAMBIO DE ICONO
+        // val imagePath = "path/to/your/image.png"
+        // val imagenNormal = Image(imagePath)
+        // val imageViewNormal = ImageView(imagenNormal)
+        // boton.graphic = imageViewNormal
     }
 }
