@@ -94,13 +94,13 @@ class EditarButacaController : KoinComponent {
     private fun initValues() {
         logger.debug { "InitValues" }
         idSelectedField.text = viewModel.state.value.butaca.id
-        estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado)
+        estadoComboBox.items = FXCollections.observableList(viewModel.state.value.typesEstado.drop(1))
         estadoComboBox.value = viewModel.state.value.butaca.estado
 
-        tipoComboBox.items = FXCollections.observableList(viewModel.state.value.typesTipo)
+        tipoComboBox.items = FXCollections.observableList(viewModel.state.value.typesTipo.drop(1))
         tipoComboBox.value = viewModel.state.value.butaca.tipo
 
-        ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion)
+        ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion.drop(1))
         ocupacionComboBox.value = viewModel.state.value.butaca.ocupacion
 
         precioSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 5.0)

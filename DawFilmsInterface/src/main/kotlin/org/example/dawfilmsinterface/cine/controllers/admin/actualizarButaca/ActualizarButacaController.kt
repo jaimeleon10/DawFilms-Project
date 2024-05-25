@@ -67,9 +67,6 @@ class ActualizarButacaController : KoinComponent {
     lateinit var editButton: Button
 
     @FXML
-    lateinit var idFilterComboBox: ComboBox<Any>
-
-    @FXML
     lateinit var ocupacionFilterComboBox: ComboBox<Any>
 
     @FXML
@@ -137,9 +134,6 @@ class ActualizarButacaController : KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
-        idFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesId)
-        idFilterComboBox.selectionModel.selectFirst()
-
         tipoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesTipo)
         tipoFilterComboBox.selectionModel.selectFirst()
 
@@ -150,6 +144,7 @@ class ActualizarButacaController : KoinComponent {
         ocupacionFilterComboBox.selectionModel.selectFirst()
 
         butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
+        butacaTable.columns.forEach {it.isResizable = false}
 
         idColumnTable.cellValueFactory = PropertyValueFactory("id")
         estadoColumnTable.cellValueFactory = PropertyValueFactory("estadoButaca")
@@ -173,9 +168,6 @@ class ActualizarButacaController : KoinComponent {
         }
         editButton.setOnAction { onEditarAction() }
 
-        idFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
-            newValue?.let { onComboSelected(newValue.toString()) }
-        }
         estadoFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
             newValue?.let { onComboSelected(newValue.toString()) }
         }
