@@ -7,9 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.SeleccionButacasController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.SeleccionButacasController">
    <children>
       <Label alignment="CENTER" layoutX="326.0" layoutY="35.0" prefHeight="60.0" prefWidth="263.0" text="ELIGE TUS BUTACAS" textFill="WHITE">
          <font>
@@ -686,7 +684,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="selectedButacasLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="BUTACAS SELECCIONADAS (vacío y se va escribiendo al seleccionar butacas)" textFill="WHITE">
+            <Label fx:id="selectedButacasLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="Butacas seleccionadas: " textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
