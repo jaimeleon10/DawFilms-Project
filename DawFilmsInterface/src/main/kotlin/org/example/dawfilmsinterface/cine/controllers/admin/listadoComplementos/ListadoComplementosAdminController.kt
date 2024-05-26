@@ -155,7 +155,7 @@ class ListadoComplementosAdminController : KoinComponent {
         if (complementosTable.selectionModel.selectedItem == null){
             return
         }
-        Alert(Alert.AlertType.CONFIRMATION).apply {
+        Alert(AlertType.CONFIRMATION).apply {
             title = "¿Eliminar complemento?"
             contentText = "¿Desea eliminar el complemento?"
         }.showAndWait().ifPresent{
@@ -163,7 +163,7 @@ class ListadoComplementosAdminController : KoinComponent {
                 viewModel.eliminarComplemento().onSuccess {
                     logger.debug { "Complemento eliminado correctamente" }
                     showAlertOperacion(
-                        alerta= Alert.AlertType.INFORMATION,
+                        alerta = AlertType.INFORMATION,
                         "Complemento eliminado",
                         "Se ha eliminado el complemento"
                     )
@@ -171,7 +171,7 @@ class ListadoComplementosAdminController : KoinComponent {
                 }.onFailure {
                     logger.error { "Error al eliminar el complemento: ${it.message}" }
                     showAlertOperacion(
-                        alerta= Alert.AlertType.ERROR,
+                        alerta = AlertType.ERROR,
                         "Error al eliminar el complemento",
                         "No se ha eliminado el complemento"
                     )

@@ -1,8 +1,17 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.image.ImageView
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.productos.mappers.toModel
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -23,7 +32,11 @@ private val logger = logging()
  * @property continueButton Botón para continuar con el proceso de compra.
  * @property selectedComplementosQuantityLabel Etiqueta que muestra la cantidad de complementos seleccionados.
  */
-class SeleccionComplementosController {
+class SeleccionComplementosController: KoinComponent {
+    val viewModel: SeleccionarComplementoViewModel by inject()
+
+    val viewModelLogin: LoginViewModel by inject()
+
     @FXML
     lateinit var addComplementButton: Button
 
@@ -40,10 +53,10 @@ class SeleccionComplementosController {
     lateinit var backMenuMenuButton: MenuItem
 
     @FXML
-    lateinit var quantityComplementSpinner: Spinner<Double>
+    lateinit var quantityComplementSpinner: Spinner<Int>
 
     @FXML
-    lateinit var complementosTable: TableView<Any>
+    lateinit var complementosTable: TableView<Complemento>
 
     @FXML
     lateinit var selectedComplementosLabel: Label
@@ -54,6 +67,23 @@ class SeleccionComplementosController {
     @FXML
     lateinit var selectedComplementosQuantityLabel: Label
 
+    @FXML
+    lateinit var stockColumn: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var precioColumn: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var nombreColumn: TableColumn<Complemento, String>
+
+    @FXML
+    lateinit var imagenImage: ImageView
+
+    @FXML
+    lateinit var removeComplementButton: Button
+
+    var complementosSeleccionados = 0
+
     /**
      * Función que inicializa la vista de selección de complementos.
      * Asigna las acciones a los botones y elementos de menú.
@@ -62,6 +92,42 @@ class SeleccionComplementosController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando SeleccionComplementosController FXML" }
+
+        initDefaultValues()
+
+        initBindings()
+
+        initEventos()
+    }
+
+    private fun initBindings() {
+        logger.debug { "Inicializando bindings"}
+
+        complementField.textProperty().bind(viewModel.state.map { it.complemento.nombre })
+        imagenImage.imageProperty().bind(viewModel.state.map { it.complemento.icono })
+        viewModel.state.addListener { _, _, newValue ->
+            logger.debug { "Actualizando datos de la vista" }
+            if (complementosTable.items != newValue.complementos){
+                complementosTable.items = FXCollections.observableArrayList(newValue.complementos)
+            }
+        }
+    }
+
+    private fun initDefaultValues() {
+        logger.debug { "Inicializando valores por defecto" }
+
+        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
+        complementosTable.columns.forEach { it.isResizable = false }
+        complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+
+        nombreColumn.cellValueFactory = PropertyValueFactory("nombre")
+        precioColumn.cellValueFactory = PropertyValueFactory("precio")
+        stockColumn.cellValueFactory = PropertyValueFactory("stock")
+    }
+
+    private fun initEventos() {
         continueButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.CONFIRMAR_COMPRA}" }
             RoutesManager.changeScene(view = RoutesManager.View.CONFIRMAR_COMPRA)
@@ -71,6 +137,53 @@ class SeleccionComplementosController {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
+        usernameField.text = viewModelLogin.state.value.currentCliente.nombre
+        complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onTableSelected(newValue) }
+        }
+        addComplementButton.setOnAction { onAñadirAction() }
+        removeComplementButton.setOnAction { onEliminarAction() }
+    }
 
+    private fun onAñadirAction() {
+        logger.debug { "Añadiendo complemento seleccionado" }
+
+        if (quantityComplementSpinner.value > 0) {
+            if (viewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
+                logger.debug { "Reemplazando cantidad seleccionada del complemento ${viewModel.state.value.complemento.nombre}" }
+                viewModel.state.value.listadoComplementosSeleccionados[viewModel.state.value.complemento.nombre] =
+                    quantityComplementSpinner.value
+            } else {
+                logger.debug { "Añadiendo complemento seleccionado al listado" }
+                viewModel.state.value.listadoComplementosSeleccionados.put(
+                    viewModel.state.value.complemento.nombre,
+                    quantityComplementSpinner.value
+                )
+                complementosSeleccionados += 1
+            }
+        }
+
+        selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
+        selectedComplementosLabel.text = viewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
+    }
+
+    private fun onEliminarAction() {
+        logger.debug { "Eliminando complemento seleccionado" }
+
+        if (viewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
+            logger.debug { "Eliminando complemento ${viewModel.state.value.complemento.nombre}" }
+            viewModel.state.value.listadoComplementosSeleccionados.remove(viewModel.state.value.complemento.nombre)
+            complementosSeleccionados -= 1
+        }
+
+        selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
+        if (viewModel.state.value.listadoComplementosSeleccionados.isEmpty()) selectedComplementosLabel.text = ""
+        else selectedComplementosLabel.text = viewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
+    }
+
+    private fun onTableSelected(newValue: Complemento) {
+        logger.debug { "onTablaSelected: $newValue" }
+        viewModel.updateComplementoSeleccionado(newValue)
+        quantityComplementSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, viewModel.state.value.complemento.toModel().stock, 1)
     }
 }
