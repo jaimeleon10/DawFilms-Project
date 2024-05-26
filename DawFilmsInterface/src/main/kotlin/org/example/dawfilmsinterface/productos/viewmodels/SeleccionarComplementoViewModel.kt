@@ -69,7 +69,6 @@ class SeleccionarComplementoViewModel (
         val complementos: List<Complemento> = emptyList(),
         val complemento: ComplementoSeleccionadoState = ComplementoSeleccionadoState(),
         val typesComplementCategory: List<String> = emptyList(),
-        var listadoComplementosSeleccionados: MutableMap<String, Int> = mutableMapOf()
     )
 
     data class ComplementoSeleccionadoState(

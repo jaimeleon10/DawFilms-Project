@@ -684,7 +684,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="selectedButacasLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="Butacas seleccionadas: " textFill="WHITE">
+            <Label fx:id="selectedButacasLabel" contentDisplay="CENTER" layoutX="35.0" layoutY="29.0" prefHeight="43.0" prefWidth="424.0" text="Butacas seleccionadas: " textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

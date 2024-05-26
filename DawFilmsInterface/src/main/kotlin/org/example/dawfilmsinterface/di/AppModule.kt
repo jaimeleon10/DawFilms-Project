@@ -38,6 +38,7 @@ import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -141,4 +142,6 @@ val appModule = module {
     singleOf(::SeleccionarButacaViewModel)
 
     singleOf(::SeleccionarComplementoViewModel)
+
+    singleOf(::CarritoViewModel)
 }
