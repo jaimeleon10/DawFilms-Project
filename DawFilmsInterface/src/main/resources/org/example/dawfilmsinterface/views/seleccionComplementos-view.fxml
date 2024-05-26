@@ -35,7 +35,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="selectedComplementosLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="40.0" layoutY="29.0" prefHeight="43.0" prefWidth="455.0" text="COMPLEMENTOS SELECCIONADOS (vacio y se va escribiendo id-cantidad)" textFill="WHITE">
+            <Label fx:id="selectedComplementosLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="29.0" prefHeight="43.0" prefWidth="565.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -49,14 +49,12 @@
       </ImageView>
       <TableView fx:id="complementosTable" layoutX="86.0" layoutY="186.0" prefHeight="329.0" prefWidth="384.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="151.20004272460938" style="-fx-font-size: 15;" text="Nombre" />
-            <TableColumn prefWidth="103.20001220703125" style="-fx-font-size: 15;" text="Precio" visible="false" />
-            <TableColumn prefWidth="101.5999755859375" style="-fx-font-size: 15;" text="Categoría" />
-            <TableColumn prefWidth="125.0" style="-fx-font-size: 15;" text="Stock" visible="false" />
-          <TableColumn prefWidth="128.0" style="-fx-font-size: 15;" text="Disponibilidad" />
+          <TableColumn fx:id="nombreColumn" prefWidth="181.0" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn fx:id="precioColumn" prefWidth="79.0" style="-fx-font-size: 15;" text="Precio" />
+          <TableColumn fx:id="stockColumn" prefWidth="122.0" style="-fx-font-size: 15;" text="Disponibilidad" />
         </columns>
       </TableView>
-      <Spinner fx:id="quantityComplementSpinner" layoutX="562.0" layoutY="340.0" prefHeight="30.0" prefWidth="200.0">
+      <Spinner fx:id="quantityComplementSpinner" layoutX="562.0" layoutY="340.0" prefHeight="30.0" prefWidth="210.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Spinner>
@@ -102,12 +100,12 @@
             </ImageView>
          </graphic>
       </Label>
-      <TextField fx:id="complementField" editable="false" layoutX="562.0" layoutY="260.0" prefHeight="30.0" prefWidth="200.0">
+      <TextField fx:id="complementField" editable="false" layoutX="562.0" layoutY="260.0" prefHeight="31.0" prefWidth="210.0">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </TextField>
-      <Button fx:id="addComplementButton" alignment="CENTER" layoutX="562.0" layoutY="407.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="200.0" style="-fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Añadir complemento" textFill="WHITE">
+      <Button fx:id="addComplementButton" alignment="CENTER" layoutX="562.0" layoutY="404.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" style="-fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Añadir complemento" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -115,5 +113,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="removeComplementButton" alignment="CENTER" layoutX="562.0" layoutY="461.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="210.0" style="-fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;" text="Eliminar complemento" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fx:id="imagenImage" fitHeight="109.0" fitWidth="115.0" layoutX="783.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

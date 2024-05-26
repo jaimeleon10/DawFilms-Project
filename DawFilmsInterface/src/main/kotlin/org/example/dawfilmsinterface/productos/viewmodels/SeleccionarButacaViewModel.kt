@@ -2,7 +2,6 @@ package org.example.dawfilmsinterface.productos.viewmodels
 
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca

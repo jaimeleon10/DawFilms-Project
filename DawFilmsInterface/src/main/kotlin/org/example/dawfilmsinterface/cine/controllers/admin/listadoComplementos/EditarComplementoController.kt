@@ -102,7 +102,7 @@ class EditarComplementoController : KoinComponent {
         categoriaComboBox.value = viewModel.state.value.complemento.categoria
 
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
-        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00)
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00, 0.5)
 
         imagenImage.image = viewModel.state.value.complemento.imagen
     }
