@@ -11,7 +11,7 @@ import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.ButacaState
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.ComplementoState
-import org.lighthousegames.logging.logging
+import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel.ComplementoSeleccionadoState
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {
@@ -186,7 +186,22 @@ fun ComplementoState.toModel(): Complemento {
         precio = this.precio,
         stock = this.stock,
         categoria = CategoriaComplemento.valueOf(this.categoria),
-        imagen = this.fileImage?.name ?: "octogatoNatalia.png",
+        imagen = this.fileImage?.name ?: "sinImagen.png",
+        createdAt = LocalDate.now(),
+        updatedAt = LocalDate.now(),
+        isDeleted = false
+    )
+}
+
+fun ComplementoSeleccionadoState.toModel(): Complemento {
+    return Complemento(
+        id = this.id,
+        tipoProducto = "Complemento",
+        nombre = this.nombre,
+        precio = this.precio,
+        stock = this.stock,
+        categoria = CategoriaComplemento.valueOf(this.categoria),
+        imagen = this.icono.toString(),
         createdAt = LocalDate.now(),
         updatedAt = LocalDate.now(),
         isDeleted = false
