@@ -6,7 +6,6 @@ import javafx.scene.image.Image
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.ComplementoState
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
 
@@ -20,12 +19,6 @@ class SeleccionarComplementoViewModel (
 
     init {
         loadAllComplementos()
-        loadTypes()
-    }
-
-    private fun loadTypes() {
-        logger.debug { "Cargando tipos" }
-        state.value = state.value.copy(typesComplementCategory = TypesComplementCategory.entries.map { it.value })
     }
 
     private fun loadAllComplementos(){
@@ -40,7 +33,6 @@ class SeleccionarComplementoViewModel (
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Complemento" }
         state.value = state.value.copy(
-            typesComplementCategory = state.value.complementos.map { it.categoria.toString() },
             complemento = ComplementoSeleccionadoState()
         )
     }
@@ -68,7 +60,6 @@ class SeleccionarComplementoViewModel (
     data class GestionComplementosState(
         val complementos: List<Complemento> = emptyList(),
         val complemento: ComplementoSeleccionadoState = ComplementoSeleccionadoState(),
-        val typesComplementCategory: List<String> = emptyList(),
     )
 
     data class ComplementoSeleccionadoState(
@@ -79,8 +70,4 @@ class SeleccionarComplementoViewModel (
         val categoria: String = "",
         var icono: Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
     )
-
-    enum class TypesComplementCategory(val value: String) {
-        COMIDA("COMIDA"), BEBIDA("BEBIDA")
-    }
 }

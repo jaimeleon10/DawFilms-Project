@@ -120,6 +120,12 @@ class SeleccionComplementosController: KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
+        val complementos = carritoViewModel.state.value.listadoComplementosSeleccionados.toList()
+        complementos.forEach { carritoViewModel.state.value.listadoComplementosSeleccionados.remove(it.first) }
+
+        addComplementButton.isDisable = true
+        addComplementButton.style = "-fx-opacity: 1; -fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;"
+
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
         complementosTable.columns.forEach { it.isResizable = false }
         complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
@@ -185,6 +191,7 @@ class SeleccionComplementosController: KoinComponent {
     }
 
     private fun onTableSelected(newValue: Complemento) {
+        addComplementButton.isDisable = false
         logger.debug { "onTablaSelected: $newValue" }
         viewModel.updateComplementoSeleccionado(newValue)
         quantityComplementSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, viewModel.state.value.complemento.toModel().stock, 1)

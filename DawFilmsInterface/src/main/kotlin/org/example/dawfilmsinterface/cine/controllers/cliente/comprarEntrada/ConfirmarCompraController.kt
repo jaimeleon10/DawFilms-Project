@@ -1,12 +1,22 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleStringProperty
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.Label
-import javafx.scene.control.MenuItem
-import javafx.scene.control.TableView
+import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.locale.toDefaultDateString
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -25,7 +35,13 @@ private val logger = logging()
  * @property cantidadButacasLabel Etiqueta que muestra la cantidad de butacas seleccionadas.
  * @property cantidadComplementosLabel Etiqueta que muestra la cantidad de complementos seleccionados.
  */
-class ConfirmarCompraController {
+class ConfirmarCompraController: KoinComponent {
+    val viewModel: ConfirmarCompraViewModel by inject()
+
+    val carritoViewModel: CarritoViewModel by inject()
+
+    val loginViewModel: LoginViewModel by inject()
+
     @FXML
     lateinit var acercaDeMenuButton: MenuItem
 
@@ -34,12 +50,6 @@ class ConfirmarCompraController {
 
     @FXML
     lateinit var usernameField: Label
-
-    @FXML
-    lateinit var butacasTable: TableView<Any>
-
-    @FXML
-    lateinit var complementosTable: TableView<Any>
 
     @FXML
     lateinit var cancelarCompraButton: Button
@@ -53,6 +63,39 @@ class ConfirmarCompraController {
     @FXML
     lateinit var cantidadComplementosLabel: Label
 
+    @FXML
+    lateinit var butacasTable: TableView<Butaca>
+
+    @FXML
+    lateinit var precioButacasColumn: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var columnaButacasColumn: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var filaButacasColumn: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var tipoButacasColumn: TableColumn<Butaca, String>
+
+    @FXML
+    lateinit var complementosTable: TableView<Pair<Complemento, Int>>
+
+    @FXML
+    lateinit var cantidadComplementosColumn: TableColumn<Pair<Complemento, Int>, String>
+
+    @FXML
+    lateinit var precioComplementosColumn: TableColumn<Pair<Complemento, Int>, String>
+
+    @FXML
+    lateinit var nombreComplementosColumn: TableColumn<Pair<Complemento, Int>, String>
+
+    @FXML
+    lateinit var fechaLabel: Label
+
+    @FXML
+    lateinit var precioTotalLabel: Label
+
     /**
      * Función que inicializa la vista de confirmación de compra.
      * Asigna las acciones a los botones y elementos de menú.
@@ -61,6 +104,65 @@ class ConfirmarCompraController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando ConfirmarCompraController FXML" }
+
+        initDefaultValues()
+
+        initEventos()
+    }
+
+    private fun initDefaultValues() {
+        val complementosList = viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados).toList()
+        complementosTable.items = FXCollections.observableArrayList(complementosList)
+        nombreComplementosColumn.setCellValueFactory { cellData ->
+            val nombre = cellData.value.first.nombre
+            SimpleStringProperty(nombre)
+        }
+        precioComplementosColumn.setCellValueFactory { cellData ->
+            val precio = cellData.value.first.precio.toString()
+            SimpleStringProperty(precio)
+        }
+        cantidadComplementosColumn.setCellValueFactory { cellData ->
+            val cantidad = cellData.value.second
+            SimpleStringProperty(cantidad.toString())
+        }
+        complementosTable.columns.forEach {
+            it.isResizable = false
+            it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        }
+
+        val butacasList = viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
+        butacasTable.items = FXCollections.observableArrayList(butacasList)
+        tipoButacasColumn.cellValueFactory = PropertyValueFactory("tipoButaca")
+        filaButacasColumn.setCellValueFactory { cellData ->
+            val indice = cellData.value.fila
+            val filaLetra = filaALetra(indice)
+            SimpleStringProperty(filaLetra)
+        }
+        columnaButacasColumn.setCellValueFactory { cellData ->
+            val indice = cellData.value.columna + 1
+            SimpleStringProperty(indice.toString())
+        }
+        precioButacasColumn.setCellValueFactory { cellData ->
+            val precio = cellData.value.tipoButaca.precio
+            SimpleStringProperty(precio.toString())
+        }
+        butacasTable.columns.forEach {
+            it.isResizable = false
+            it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        }
+
+        cantidadButacasLabel.text = "Butacas seleccionadas: ${butacasList.size}"
+        cantidadComplementosLabel.text = "Complementos seleccionados: ${complementosList.size}"
+        fechaLabel.text = "Fecha de compra: ${LocalDate.now().toDefaultDateString()}"
+        var total = 0.0
+        butacasList.forEach { total += it.tipoButaca.precio }
+        complementosList.forEach { total += it.first.precio }
+        precioTotalLabel.text = "Precio total: $total €"
+        usernameField.text = loginViewModel.state.value.currentCliente.nombre
+    }
+
+    private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
@@ -73,6 +175,16 @@ class ConfirmarCompraController {
         cancelarCompraButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
+        }
+    }
+
+    private fun filaALetra(fila: Int): String {
+        return when (fila) {
+            0 -> "A"
+            1 -> "B"
+            2 -> "C"
+            3 -> "D"
+            else -> "E"
         }
     }
 }
