@@ -215,6 +215,10 @@ class SeleccionButacasController: KoinComponent {
     }
 
     private fun initDefaultValues() {
+
+        val butacas = carritoViewModel.state.value.listadoButacasSeleccionadas.toList()
+        butacas.forEach { carritoViewModel.state.value.listadoButacasSeleccionadas.remove(it) }
+
         botonesButacas.addAll(
             listOf(
                 butacaA1Button, butacaA2Button, butacaA3Button, butacaA4Button, butacaA5Button, butacaA6Button, butacaA7Button,
