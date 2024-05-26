@@ -7,8 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.ConfirmarCompraController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.ConfirmarCompraController">
    <children>
       <Label alignment="CENTER" layoutX="300.0" layoutY="36.0" prefHeight="60.0" prefWidth="320.0" text="DATOS DE COMPRA" textFill="WHITE">
          <font>
@@ -65,19 +64,19 @@
             </Button>
          </children>
       </AnchorPane>
-      <TableView fx:id="complementosTable" layoutX="521.0" layoutY="188.0" prefHeight="320.0" prefWidth="295.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+      <TableView fx:id="complementosTable" layoutX="496.0" layoutY="188.0" prefHeight="320.0" prefWidth="320.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="115.0" style="-fx-font-size: 15;" text="Nombre" />
-            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Precio" />
-            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Cantidad" />
+          <TableColumn prefWidth="170.0" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn prefWidth="67.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn prefWidth="81.0" style="-fx-font-size: 15;" text="Cantidad" />
         </columns>
       </TableView>
-      <TableView fx:id="butacasTable" layoutX="102.0" layoutY="188.0" prefHeight="320.0" prefWidth="385.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+      <TableView fx:id="butacasTable" layoutX="102.0" layoutY="188.0" prefHeight="320.0" prefWidth="368.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
          <columns>
-            <TableColumn prefWidth="115.0" style="-fx-font-size: 15;" text="Tipo" />
-            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Fila" />
-            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Columna" />
-            <TableColumn prefWidth="90.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn prefWidth="126.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn prefWidth="73.0" style="-fx-font-size: 15;" text="Fila" />
+            <TableColumn prefWidth="84.0" style="-fx-font-size: 15;" text="Columna" />
+            <TableColumn prefWidth="83.0" style="-fx-font-size: 15;" text="Precio" />
          </columns>
       </TableView>
       <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="70.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">

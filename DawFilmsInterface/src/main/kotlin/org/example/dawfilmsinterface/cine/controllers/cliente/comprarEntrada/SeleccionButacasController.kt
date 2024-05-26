@@ -17,6 +17,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
+import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
 
 private val logger = logging()
 
@@ -70,6 +71,8 @@ class SeleccionButacasController: KoinComponent {
     val viewModel: SeleccionarButacaViewModel by inject()
 
     val viewModelLogin: LoginViewModel by inject()
+
+    val carritoViewModel: CarritoViewModel by inject()
 
     @FXML
     lateinit var usernameField: Label
@@ -192,7 +195,6 @@ class SeleccionButacasController: KoinComponent {
     lateinit var butacaA1Button: ToggleButton
 
     val botonesButacas: MutableList<ToggleButton> = mutableListOf()
-    val butacasSeleccionadas: MutableList<String> = mutableListOf()
     var contadorButacasSeleccionadas = 0
 
     /**
@@ -257,9 +259,8 @@ class SeleccionButacasController: KoinComponent {
             boton.setOnAction {
                 if (!boton.isDisable) {
                     changeButtonIcon(boton, boton.isSelected)
-                    if (butacasSeleccionadas.isEmpty()) selectedButacasLabel.text = "Butacas seleccionadas: "
-                    else selectedButacasLabel.text = "Butacas seleccionadas: $butacasSeleccionadas"
-                    viewModel.state.value.listadoButacasSeleccionadas = butacasSeleccionadas
+                    if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) selectedButacasLabel.text = "Butacas seleccionadas: "
+                    else selectedButacasLabel.text = "Butacas seleccionadas: ${carritoViewModel.state.value.listadoButacasSeleccionadas}"
                 }
             }
         }
@@ -274,7 +275,7 @@ class SeleccionButacasController: KoinComponent {
                 newIcon.fitWidth = 24.0
                 newIcon.fitHeight = 24.0
                 boton.graphic = newIcon
-                butacasSeleccionadas.add(boton.id.substring(6, boton.id.length - 6))
+                carritoViewModel.state.value.listadoButacasSeleccionadas.add(boton.id.substring(6, boton.id.length - 6))
                 contadorButacasSeleccionadas += 1
             } else {
                 boton.isSelected = false
@@ -284,7 +285,7 @@ class SeleccionButacasController: KoinComponent {
             newIcon.fitWidth = 24.0
             newIcon.fitHeight = 24.0
             boton.graphic = newIcon
-            butacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
+            carritoViewModel.state.value.listadoButacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
             contadorButacasSeleccionadas -= 1
         }
     }

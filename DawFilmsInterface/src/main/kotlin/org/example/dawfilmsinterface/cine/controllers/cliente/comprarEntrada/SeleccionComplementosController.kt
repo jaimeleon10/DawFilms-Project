@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView
 import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
@@ -36,6 +37,8 @@ class SeleccionComplementosController: KoinComponent {
     val viewModel: SeleccionarComplementoViewModel by inject()
 
     val viewModelLogin: LoginViewModel by inject()
+
+    val carritoViewModel: CarritoViewModel by inject()
 
     @FXML
     lateinit var addComplementButton: Button
@@ -149,13 +152,13 @@ class SeleccionComplementosController: KoinComponent {
         logger.debug { "Añadiendo complemento seleccionado" }
 
         if (quantityComplementSpinner.value > 0) {
-            if (viewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
+            if (carritoViewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
                 logger.debug { "Reemplazando cantidad seleccionada del complemento ${viewModel.state.value.complemento.nombre}" }
-                viewModel.state.value.listadoComplementosSeleccionados[viewModel.state.value.complemento.nombre] =
+                carritoViewModel.state.value.listadoComplementosSeleccionados[viewModel.state.value.complemento.nombre] =
                     quantityComplementSpinner.value
             } else {
                 logger.debug { "Añadiendo complemento seleccionado al listado" }
-                viewModel.state.value.listadoComplementosSeleccionados.put(
+                carritoViewModel.state.value.listadoComplementosSeleccionados.put(
                     viewModel.state.value.complemento.nombre,
                     quantityComplementSpinner.value
                 )
@@ -164,21 +167,21 @@ class SeleccionComplementosController: KoinComponent {
         }
 
         selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
-        selectedComplementosLabel.text = viewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
+        selectedComplementosLabel.text = carritoViewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
     }
 
     private fun onEliminarAction() {
         logger.debug { "Eliminando complemento seleccionado" }
 
-        if (viewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
+        if (carritoViewModel.state.value.listadoComplementosSeleccionados.containsKey(viewModel.state.value.complemento.nombre)) {
             logger.debug { "Eliminando complemento ${viewModel.state.value.complemento.nombre}" }
-            viewModel.state.value.listadoComplementosSeleccionados.remove(viewModel.state.value.complemento.nombre)
+            carritoViewModel.state.value.listadoComplementosSeleccionados.remove(viewModel.state.value.complemento.nombre)
             complementosSeleccionados -= 1
         }
 
         selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
-        if (viewModel.state.value.listadoComplementosSeleccionados.isEmpty()) selectedComplementosLabel.text = ""
-        else selectedComplementosLabel.text = viewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
+        if (carritoViewModel.state.value.listadoComplementosSeleccionados.isEmpty()) selectedComplementosLabel.text = ""
+        else selectedComplementosLabel.text = carritoViewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
     }
 
     private fun onTableSelected(newValue: Complemento) {

@@ -60,6 +60,5 @@ class SeleccionarButacaViewModel (
         var tipoButaca: TipoButaca = TipoButaca.NORMAL,
         var estadoButaca: EstadoButaca = EstadoButaca.ACTIVA,
         var ocupacionButaca: OcupacionButaca = OcupacionButaca.LIBRE,
-        var listadoButacasSeleccionadas: MutableList<String> = mutableListOf()
     )
 }
