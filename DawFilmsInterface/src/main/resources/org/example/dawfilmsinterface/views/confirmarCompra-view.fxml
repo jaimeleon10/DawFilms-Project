@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada.ConfirmarCompraController">
    <children>
-      <Label alignment="CENTER" layoutX="300.0" layoutY="36.0" prefHeight="60.0" prefWidth="320.0" text="DATOS DE COMPRA" textFill="WHITE">
+      <Label alignment="CENTER" layoutX="300.0" layoutY="36.0" prefHeight="60.0" prefWidth="320.0" text="RESUMEN DE COMPRA" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -18,12 +18,17 @@
       <Line endX="420.0" layoutX="460.0" layoutY="165.0" startX="-420.0" stroke="#ffbd2e" />
       <HBox alignment="CENTER" layoutX="72.0" layoutY="113.0" prefHeight="50.0" prefWidth="778.0" style="-fx-spacing: 50;">
          <children>
-            <Label fx:id="cantidadComplementosLabel" alignment="CENTER" graphicTextGap="10.0" text="Complementos seleccionados: 0" textFill="WHITE">
+            <Label fx:id="fechaLabel" alignment="CENTER" graphicTextGap="10.0" layoutX="160.0" layoutY="25.0" prefHeight="21.0" prefWidth="206.0" text="Fecha de compra: 01-01-2000" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="cantidadButacasLabel" graphicTextGap="10.0" prefHeight="21.0" prefWidth="215.0" text="Butacas seleccionadas: 0" textFill="WHITE">
+            <Label fx:id="cantidadButacasLabel" alignment="CENTER" graphicTextGap="10.0" prefHeight="21.0" prefWidth="185.0" text="Butacas seleccionadas: 0" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="cantidadComplementosLabel" alignment="CENTER" graphicTextGap="10.0" prefHeight="21.0" prefWidth="233.0" text="Complementos seleccionados: 0" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
@@ -64,19 +69,19 @@
             </Button>
          </children>
       </AnchorPane>
-      <TableView fx:id="complementosTable" layoutX="496.0" layoutY="188.0" prefHeight="320.0" prefWidth="320.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+      <TableView fx:id="complementosTable" layoutX="496.0" layoutY="188.0" prefHeight="275.0" prefWidth="320.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="170.0" style="-fx-font-size: 15;" text="Nombre" />
-            <TableColumn prefWidth="67.0" style="-fx-font-size: 15;" text="Precio" />
-            <TableColumn prefWidth="81.0" style="-fx-font-size: 15;" text="Cantidad" />
+          <TableColumn fx:id="nombreComplementosColumn" prefWidth="170.0" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn fx:id="precioComplementosColumn" prefWidth="60.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn fx:id="cantidadComplementosColumn" prefWidth="88.0" style="-fx-font-size: 15;" text="Cantidad" />
         </columns>
       </TableView>
-      <TableView fx:id="butacasTable" layoutX="102.0" layoutY="188.0" prefHeight="320.0" prefWidth="368.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+      <TableView fx:id="butacasTable" layoutX="102.0" layoutY="188.0" prefHeight="275.0" prefWidth="366.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
          <columns>
-            <TableColumn prefWidth="126.0" style="-fx-font-size: 15;" text="Tipo" />
-            <TableColumn prefWidth="73.0" style="-fx-font-size: 15;" text="Fila" />
-            <TableColumn prefWidth="84.0" style="-fx-font-size: 15;" text="Columna" />
-            <TableColumn prefWidth="83.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn fx:id="tipoButacasColumn" prefWidth="110.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn fx:id="filaButacasColumn" prefWidth="77.0" style="-fx-font-size: 15;" text="Fila" />
+            <TableColumn fx:id="columnaButacasColumn" prefWidth="89.0" style="-fx-font-size: 15;" text="Columna" />
+            <TableColumn fx:id="precioButacasColumn" prefWidth="90.0" style="-fx-font-size: 15;" text="Precio" />
          </columns>
       </TableView>
       <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="70.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
@@ -116,5 +121,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MenuBar>
+      <Label fx:id="precioTotalLabel" alignment="CENTER" graphicTextGap="10.0" layoutX="319.0" layoutY="477.0" prefHeight="48.0" prefWidth="285.0" text="Precio total: 50 €" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
