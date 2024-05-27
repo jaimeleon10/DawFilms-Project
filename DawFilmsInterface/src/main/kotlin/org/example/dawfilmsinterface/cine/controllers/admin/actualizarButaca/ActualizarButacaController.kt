@@ -5,7 +5,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.cell.PropertyValueFactory
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager

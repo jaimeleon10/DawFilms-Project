@@ -1,6 +1,5 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
-import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -12,8 +11,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import javafx.scene.image.*
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca

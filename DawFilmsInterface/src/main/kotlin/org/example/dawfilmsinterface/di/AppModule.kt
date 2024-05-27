@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.di
 
 
 import org.example.dawfilmsinterface.cache.Cache
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
@@ -10,7 +11,6 @@ import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.clientes.services.ClienteServiceImpl
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorage
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorageImpl
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
@@ -40,6 +40,7 @@ import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewM
 import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
 import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -147,4 +148,6 @@ val appModule = module {
     singleOf(::CarritoViewModel)
 
     singleOf(::ConfirmarCompraViewModel)
+
+    singleOf(::ObtenerRecaudacionViewModel)
 }

@@ -33,7 +33,10 @@ class ClienteServiceImpl(
             failure = {
                 logger.debug { "Cliente no encontrado en cache" }
                 clienteRepository.findById(id)
-                    ?.let { Ok(it) }
+                    ?.let { Ok(it) }?.andThen {
+                        logger.debug { "Guardando en la cache" }
+                        clienteCache.put(id, it)
+                    }
                     ?: Err(ClienteError.ClienteNoEncontrado("Cliente no encontrado con id: $id"))
             }
         )
@@ -56,6 +59,7 @@ class ClienteServiceImpl(
                 ?.let { Ok(it) }
                 ?: Err(ClienteError.ClienteNoActualizado("Cliente no actualizado con id: $id"))
         }.andThen {
+            logger.debug { "Guardando en la cache" }
             clienteCache.put(id, it)
         }
     }
@@ -64,6 +68,7 @@ class ClienteServiceImpl(
         logger.debug { "Borrando cliente con id: $id" }
         return clienteRepository.delete(id)
             ?.let {
+                logger.debug { "Eliminando de la cache" }
                 clienteCache.remove(id)
                 Ok(it)
             } ?: Err(ClienteError.ClienteNoEliminado("Butaca no eliminada con id: $id"))
