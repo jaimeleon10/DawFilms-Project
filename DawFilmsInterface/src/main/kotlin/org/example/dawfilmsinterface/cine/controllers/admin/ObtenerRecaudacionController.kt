@@ -98,6 +98,9 @@ class ObtenerRecaudacionController : KoinComponent {
 
          */
 
+        var total = 0.0
+        totalRecaudacionField.text = total.toString()
+
         tipoProductoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesProducto)
         tipoProductoFilterComboBox.selectionModel.selectFirst()
 
