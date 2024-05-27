@@ -3,6 +3,8 @@ package org.example.dawfilmsinterface.productos.storage.genericStorage
 import com.github.michaelbull.result.Result
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.ventas.errors.VentaError
+import org.example.dawfilmsinterface.ventas.models.Venta
 import java.io.File
 
 interface ProductosStorage {
@@ -19,4 +21,5 @@ interface ProductosStorage {
     fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError>
     fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError>
     fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError>
+    fun exportHtml(venta: Venta, file: File): Result<Unit, VentaError>
 }
