@@ -3,7 +3,7 @@ package org.example.dawfilmsinterface.productos.viewmodels
 import com.github.michaelbull.result.onFailure
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.control.Alert
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel.*
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel.*
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
@@ -28,26 +28,50 @@ class ConfirmarCompraViewModel(
     val state: SimpleObjectProperty<GestionCompraState> = SimpleObjectProperty(GestionCompraState())
 
     lateinit var venta: Venta
-    val lineas: MutableList<LineaVenta> = mutableListOf()
 
-    fun updateToComplementosList(listado: MutableMap<String, Int>): MutableMap<Complemento, Int> {
-        val newList: MutableMap<Complemento, Int> = mutableMapOf()
-        listado.keys.forEach { newList.put(serviceProducto.getComplementoByNombre(it).value, listado.getValue(it)) }
-        return newList
+    fun updateToComplementosList(listado: MutableMap<String, Int>) {
+        listado.keys.forEach { state.value.complementos.put(serviceProducto.getComplementoByNombre(it).value, listado.getValue(it)) }
     }
 
-    fun updateToButacasList(listado: MutableList<String>): MutableList<Butaca> {
-        val newList: MutableList<Butaca> = mutableListOf()
-        listado.forEach { newList.add(serviceProducto.getButacaById(it).value) }
-        return newList
+    fun updateToButacasList(listado: MutableList<String>) {
+        listado.forEach { state.value.butacas.add(serviceProducto.getButacaById(it).value) }
     }
 
     fun realizarCompra(cliente: ClienteState) {
+        state.value.butacas.forEach {
+            state.value.lineas.add(
+                LineaVenta(
+                    id = UUID.randomUUID(),
+                    producto = it,
+                    tipoProducto = it.tipoProducto,
+                    cantidad = 1,
+                    precio = it.tipoButaca.precio,
+                    createdAt = LocalDate.now(),
+                    updatedAt = LocalDate.now(),
+                    isDeleted = false
+                )
+            )
+        }
+        state.value.complementos.forEach {
+            state.value.lineas.add(
+                LineaVenta(
+                    id = UUID.randomUUID(),
+                    producto = it.key,
+                    tipoProducto = it.key.tipoProducto,
+                    cantidad = it.value,
+                    precio = it.key.precio,
+                    createdAt = LocalDate.now(),
+                    updatedAt = LocalDate.now(),
+                    isDeleted = false
+                )
+            )
+        }
+
         val clienteCompra = clienteService.getById(cliente.id.toLong()).value
         val compra = Venta(
             id = UUID.randomUUID(),
             cliente = clienteCompra,
-            lineas = lineas,
+            lineas = state.value.lineas,
             fechaCompra = LocalDate.now(),
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
@@ -60,7 +84,6 @@ class ConfirmarCompraViewModel(
                 this.contentText = "Volviendo al menú"
             }.showAndWait()
         }
-
         venta = compra
     }
 
@@ -72,7 +95,8 @@ class ConfirmarCompraViewModel(
     }
 
     data class GestionCompraState (
-        val complementos: List<Complemento> = listOf(),
-        val butacas: List<Butaca> = listOf(),
+        val lineas: MutableList<LineaVenta> = mutableListOf(),
+        val complementos: MutableMap<Complemento, Int> = mutableMapOf(),
+        val butacas: MutableList<Butaca> = mutableListOf(),
     )
 }
