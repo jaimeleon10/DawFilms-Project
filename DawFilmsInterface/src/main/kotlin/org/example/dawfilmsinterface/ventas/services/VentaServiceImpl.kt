@@ -5,6 +5,7 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.andThen
 import org.example.dawfilmsinterface.ventas.errors.VentaError
+import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.models.Venta
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.lighthousegames.logging.logging
@@ -27,5 +28,10 @@ class VentaServiceImpl(
         return ventaRepository.validateCliente(venta.cliente)
             .andThen { ventaRepository.validateLineas(venta.lineas) }
             .andThen { Ok(ventaRepository.save(venta)) }
+    }
+
+    override fun getAllLineas(): List<LineaVenta> {
+        logger.debug { "Obteniendo linas de ventas" }
+        return ventaRepository.findAllLineas()
     }
 }

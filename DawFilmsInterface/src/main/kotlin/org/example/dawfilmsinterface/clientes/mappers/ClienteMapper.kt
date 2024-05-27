@@ -1,6 +1,7 @@
 package org.example.dawfilmsinterface.clientes.mappers
 
 import database.UsuarioEntity
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel.ClienteState
 import org.example.dawfilmsinterface.clientes.dto.ClienteDto
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import java.time.LocalDate
