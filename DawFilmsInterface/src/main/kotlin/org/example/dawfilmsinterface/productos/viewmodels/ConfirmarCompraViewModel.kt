@@ -1,6 +1,5 @@
 package org.example.dawfilmsinterface.productos.viewmodels
 
-import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
