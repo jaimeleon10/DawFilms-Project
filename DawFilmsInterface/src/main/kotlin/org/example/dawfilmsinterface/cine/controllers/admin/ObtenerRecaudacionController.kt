@@ -1,9 +1,19 @@
 package org.example.dawfilmsinterface.cine.controllers.admin
 
+import javafx.beans.property.SimpleDoubleProperty
+import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
+import org.example.dawfilmsinterface.database.SqlDeLightManager
+import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import kotlin.math.ceil
 
 private val logger = logging()
 
@@ -21,7 +31,13 @@ private val logger = logging()
  * @property backMenuMenuButton Botón de menú para regresar al menú principal.
  * @property productosTable Tabla que muestra los productos y su recaudación.
  */
-class ObtenerRecaudacionController {
+class ObtenerRecaudacionController : KoinComponent {
+    private val viewModel : ObtenerRecaudacionViewModel by inject()
+
+    private val loginViewModel : LoginViewModel by inject()
+
+    private val database : SqlDeLightManager by inject()
+
     @FXML
     lateinit var totalRecaudacionField: TextField
 
@@ -46,6 +62,18 @@ class ObtenerRecaudacionController {
     @FXML
     lateinit var productosTable: TableView<Any>
 
+    @FXML
+    lateinit var productoColumnTable: TableColumn<Producto, String>
+
+    @FXML
+    lateinit var fechaColumnTable: TableColumn<Producto, String>
+
+    @FXML
+    lateinit var cantidadColumnTable: TableColumn<Producto, Int>
+
+    @FXML
+    lateinit var precioColumnTable: TableColumn<Producto, Double>
+
     /**
      * Función que inicializa la vista de obtención de recaudación.
      * Asigna las acciones a los botones y elementos de menú.
@@ -54,6 +82,35 @@ class ObtenerRecaudacionController {
      */
     @FXML
     private fun initialize() {
+        logger.debug { "Inicializando Obtener Recaudacion Controller" }
+
+        initDefaultValues()
+        initEvents()
+        initBindings()
+    }
+
+    @FXML
+    private fun initDefaultValues(){
+        /*
+        precioColumnTable.setCellValueFactory { cellData ->
+            val precio = cellData.value
+            SimpleDoubleProperty(precio)
+        }
+
+         */
+
+        productosTable.items = FXCollections.observableArrayList(database.databaseQueries.selectAllLineasVentas())
+
+        usernameField.text = loginViewModel.state.value.currentAdmin
+    }
+
+    @FXML
+    private fun initBindings() {
+
+    }
+
+    @FXML
+    private fun initEvents() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }

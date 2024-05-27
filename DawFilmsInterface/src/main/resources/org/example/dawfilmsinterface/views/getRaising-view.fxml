@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.dawfilmsinterface.cine.controllers.admin.ObtenerRecaudacionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.admin.ObtenerRecaudacionController">
    <children>
       <Label alignment="CENTER" layoutX="280.0" layoutY="40.0" prefHeight="60.0" prefWidth="360.0" text="RECAUDACIÓN" textFill="WHITE">
          <font>
@@ -34,10 +22,10 @@
       </ImageView>
       <TableView fx:id="productosTable" layoutX="184.0" layoutY="221.0" prefHeight="346.0" prefWidth="550.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="202.39999389648438" style="-fx-font-size: 14;" text="Producto" />
-            <TableColumn minWidth="0.0" prefWidth="157.5999755859375" style="-fx-font-size: 14;" text="Fecha de compra" />
-            <TableColumn minWidth="0.0" prefWidth="96.0" style="-fx-font-size: 14;" text="Cantidad" />
-          <TableColumn prefWidth="93.5999755859375" style="-fx-font-size: 14;" text="Precio" />
+          <TableColumn fx:id="productoColumnTable" prefWidth="202.39999389648438" style="-fx-font-size: 14;" text="Producto" />
+            <TableColumn fx:id="fechaColumnTable" minWidth="0.0" prefWidth="157.5999755859375" style="-fx-font-size: 14;" text="Fecha de compra" />
+            <TableColumn fx:id="cantidadColumnTable" minWidth="0.0" prefWidth="96.0" style="-fx-font-size: 14;" text="Cantidad" />
+          <TableColumn fx:id="precioColumnTable" prefWidth="93.5999755859375" style="-fx-font-size: 14;" text="Precio" />
         </columns>
       </TableView>
       <MenuBar layoutX="34.0" layoutY="46.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
