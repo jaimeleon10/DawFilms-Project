@@ -5,6 +5,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.cell.PropertyValueFactory
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -36,6 +37,8 @@ private val logger = logging()
  */
 class ActualizarButacaController : KoinComponent {
     val viewModel : GestionButacaViewModel by inject()
+
+    val loginViewModel : LoginViewModel by inject()
 
     @FXML
     lateinit var backMenuMenuButton: MenuItem
@@ -145,6 +148,8 @@ class ActualizarButacaController : KoinComponent {
         ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacionButaca")
 
         //viewModel.loadButacasFromCsv(File(Paths.get("data/productosIniciales.csv").toAbsolutePath().toString()))
+
+        usernameField.text = loginViewModel.state.value.currentAdmin
     }
 
     private fun initEventos() {
