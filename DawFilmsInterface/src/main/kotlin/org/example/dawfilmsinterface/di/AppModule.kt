@@ -103,7 +103,7 @@ val appModule = module {
     singleOf(::ComplementoValidator)
 
     single {
-        ProductosStorageImpl(get(), get(), get(), get(), get(), get())
+        ProductosStorageImpl(get(), get(), get(), get(), get(), get(), get())
     } bind ProductosStorage::class
 
     singleOf(::StorageImageImpl) {
