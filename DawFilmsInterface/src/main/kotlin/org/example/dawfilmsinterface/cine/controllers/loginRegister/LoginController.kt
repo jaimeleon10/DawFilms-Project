@@ -66,6 +66,7 @@ class LoginController: KoinComponent {
         if (userNameField.text == "admin" && passwordField.text == "admin") {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             viewModel.changeAdmin()
+            viewModel.state.value.isAdmin = true
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         } else {
             val encryptedPassword = encryptPassword(passwordField.text)

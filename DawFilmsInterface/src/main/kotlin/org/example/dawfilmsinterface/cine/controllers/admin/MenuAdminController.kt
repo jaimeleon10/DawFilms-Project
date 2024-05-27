@@ -33,7 +33,7 @@ private val logger = logging()
  */
 class MenuAdminController: KoinComponent {
 
-    val viewModel: LoginViewModel by inject()
+    val loginViewModel: LoginViewModel by inject()
 
     @FXML
     lateinit var exitMenuButton: MenuItem
@@ -119,15 +119,13 @@ class MenuAdminController: KoinComponent {
             }
         }
         showCineButton.setOnAction {
+            loginViewModel.state.value.isAdmin = true
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MOSTRAR_ESTADO_CINE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MOSTRAR_ESTADO_CINE)
         }
         complementListButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN) }
-        initValues()
-    }
-    private fun initValues() {
-        usernameField.text = viewModel.state.value.currentAdmin
+        usernameField.text = loginViewModel.state.value.currentAdmin
     }
 }

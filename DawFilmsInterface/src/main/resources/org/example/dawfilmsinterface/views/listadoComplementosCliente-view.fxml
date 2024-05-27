@@ -7,9 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.ListadoComplementosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.cliente.ListadoComplementosController">
    <children>
       <Label alignment="CENTER" layoutX="288.0" layoutY="40.0" prefHeight="60.0" prefWidth="344.0" text="LISTADO DE COMPLEMENTOS" textFill="WHITE">
          <font>
@@ -24,11 +22,9 @@
       </ImageView>
       <TableView fx:id="complementosTable" layoutX="223.0" layoutY="198.0" prefHeight="320.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
         <columns>
-          <TableColumn prefWidth="212.0" style="-fx-font-size: 15;" text="Nombre" />
-            <TableColumn minWidth="0.0" prefWidth="88.0" style="-fx-font-size: 15;" text="Precio" />
-            <TableColumn minWidth="0.0" prefWidth="0.0" style="-fx-font-size: 15;" text="Categoría" visible="false" />
-            <TableColumn minWidth="0.0" prefWidth="36.0" style="-fx-font-size: 15;" text="Stock" visible="false" />
-          <TableColumn prefWidth="173.0" style="-fx-font-size: 15;" text="Disponibilidad" />
+          <TableColumn fx:id="nombreColumn" prefWidth="212.0" style="-fx-font-size: 15;" text="Nombre" />
+            <TableColumn fx:id="precioColumn" minWidth="0.0" prefWidth="126.0" style="-fx-font-size: 15;" text="Precio" />
+            <TableColumn fx:id="stockColumn" minWidth="0.0" prefWidth="135.0" style="-fx-font-size: 15;" text="Stock" />
         </columns>
       </TableView>
       <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">

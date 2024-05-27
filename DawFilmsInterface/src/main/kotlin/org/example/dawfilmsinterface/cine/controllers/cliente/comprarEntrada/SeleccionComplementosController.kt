@@ -8,8 +8,8 @@ import javafx.scene.image.ImageView
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -129,7 +129,10 @@ class SeleccionComplementosController: KoinComponent {
         addComplementButton.style = "-fx-opacity: 1; -fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;"
 
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
-        complementosTable.columns.forEach { it.isResizable = false }
+        complementosTable.columns.forEach {
+            it.isResizable = false
+            it.isReorderable = false
+        }
         complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
         complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 

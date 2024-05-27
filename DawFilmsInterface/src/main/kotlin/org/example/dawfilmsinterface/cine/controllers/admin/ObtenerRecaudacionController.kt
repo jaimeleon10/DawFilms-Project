@@ -5,7 +5,6 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.example.dawfilmsinterface.ventas.services.VentaService

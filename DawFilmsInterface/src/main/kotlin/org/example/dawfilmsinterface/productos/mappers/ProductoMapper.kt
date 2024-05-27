@@ -9,9 +9,9 @@ import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.complementos.CategoriaComplemento
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.ButacaState
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.ComplementoState
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel.ComplementoSeleccionadoState
+import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel.ButacaState
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.ComplementoState
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewModel.ComplementoSeleccionadoState
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {

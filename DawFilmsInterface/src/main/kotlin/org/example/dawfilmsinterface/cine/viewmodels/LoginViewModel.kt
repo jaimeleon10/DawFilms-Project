@@ -29,20 +29,6 @@ class LoginViewModel (
                 changeCliente(it)
                 Ok(Unit)
             }
-
-
-            /*return try {
-                clienteService.validateCliente(email,encryptedPassword).andThen {
-                    changeCliente(it)
-                    Ok(Unit)
-                }
-                Ok(Unit)
-            }
-            catch (e:Exception){
-                Err(ClienteError.ClienteValidationError("Cliente no válido ${e.message}"))
-            }*/
-
-
         }
 
         private fun changeCliente(newCliente: Cliente) {
@@ -58,19 +44,18 @@ class LoginViewModel (
                     numSocio = newCliente.numSocio
                 )
             )
-
             state.value =state.value.copy(currentAdmin = "")
-
         }
 
         fun changeAdmin(){
             logger.debug { "Cambiando usuario a Admin" }
-            state.value= state.value.copy(currentAdmin = "Admin")
+            state.value = state.value.copy(currentAdmin = "Admin")
         }
 
         data class LoginState(
-            val currentAdmin:String="",
-            val currentCliente: ClienteState = ClienteState()
+            val currentAdmin: String= "",
+            val currentCliente: ClienteState = ClienteState(),
+            var isAdmin: Boolean = false
         )
 
         data class ClienteState(

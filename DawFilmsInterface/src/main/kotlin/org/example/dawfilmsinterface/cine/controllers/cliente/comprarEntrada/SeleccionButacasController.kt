@@ -5,7 +5,7 @@ import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.control.ToggleButton
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -15,7 +15,7 @@ import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
 
 private val logger = logging()
 
@@ -204,8 +204,6 @@ class SeleccionButacasController: KoinComponent {
     @FXML
     private fun initialize() {
         logger.debug { "Inicializando ActualizarButacaController FXML" }
-
-        viewModel.state.set(SeleccionarButacaViewModel.ButacaSeleccionadaState())
 
         initDefaultValues()
 

@@ -47,7 +47,7 @@ class ClienteServiceImpl(
         return clienteValidator.validate(cliente).andThen {
             Ok(clienteRepository.save(it))
         }.andThen { c ->
-            println("Guardando en cache")
+            logger.debug { "Guardando en cache" }
             clienteCache.put(c.id, c)
         }
     }
