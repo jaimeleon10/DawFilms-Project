@@ -2,25 +2,20 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
-import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
-import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
-import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.service.ProductoService
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.*
+import org.example.dawfilmsinterface.ventas.models.LineaVenta
+import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
-import kotlin.math.log
 
 private val logger = logging()
 
 class ObtenerRecaudacionViewModel(
-    private val service : ProductoService
+    private val service : VentaService
 ){
     val state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
 
     init {
         logger.debug { "Inicializando ObtenerRecaudacionViewModel" }
-        loadAllProductos()
+        loadAllLineasVenta()
         loadTypes()
     }
 
@@ -29,31 +24,30 @@ class ObtenerRecaudacionViewModel(
         state.value = state.value.copy(typesProducto = TipoFiltroProducto.entries.map { it.value })
     }
 
-    private fun loadAllProductos(){
+    private fun loadAllLineasVenta(){
         logger.debug { "Cargando productos del repositorio" }
-        service.getAllProductos().onSuccess {
+        service.getAllLineas().onSuccess {
             logger.debug { "Cargando productos del repositorio: ${it.size}" }
-            state.value = state.value.copy(productos = it)
+            state.value = state.value.copy(lineasVentas = it)
             updateActualState()
         }
     }
 
     private fun updateActualState() {
-        logger.debug { "Actualizando el estado de Producto" }
+        logger.debug { "Actualizando el estado de Linea de venta" }
         state.value = state.value.copy(
-            producto = ProductoState()
+            lineaVenta = LineaVentaState()
         )
     }
 
-    fun productosFilteredList(tipoProducto: String) : List<Producto>{
-        logger.debug { "Filtrando lista de Productos: $tipoProducto" }
+    fun lineasFilteredList(tipoProducto: String) : List<LineaVenta>{
+        logger.debug { "Filtrando lista de Lineas de venta: $tipoProducto" }
 
-        return state.value.productos
-            .filter { producto ->
+        return state.value.lineasVentas.filter { lineaVenta ->
                 when (tipoProducto) {
                     TipoFiltroProducto.TODOS.value -> true
-                    TipoFiltroProducto.BUTACAS.value -> producto.tipoProducto == "Butaca"
-                    TipoFiltroProducto.COMPLEMENTOS.value -> producto.tipoProducto == "Complemento"
+                    TipoFiltroProducto.BUTACAS.value -> lineaVenta.tipoProducto == "Butaca"
+                    TipoFiltroProducto.COMPLEMENTOS.value -> lineaVenta.tipoProducto == "Complemento"
                     else -> true
                 }
             }
@@ -63,15 +57,14 @@ class ObtenerRecaudacionViewModel(
         val typesProducto : List<String> = emptyList(),
 
         val cantidad : Int = 3,
-        val precioUnitario : Double = 5.00,
-        val precioTotal : Double = 10.0,
 
-        val producto: ProductoState = ProductoState(),
+        val lineaVenta: LineaVentaState = LineaVentaState(),
 
-        val productos : List<Producto> = emptyList()
+        val lineasVentas : List<LineaVenta> = emptyList()
     )
 
-    data class ProductoState(
+    data class LineaVentaState(
+        val id : String = "",
         val precio : Double = 5.00,
     )
 

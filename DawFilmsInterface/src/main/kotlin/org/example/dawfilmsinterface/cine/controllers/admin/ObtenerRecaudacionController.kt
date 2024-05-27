@@ -1,17 +1,22 @@
 package org.example.dawfilmsinterface.cine.controllers.admin
 
+import javafx.beans.property.SimpleObjectProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -34,8 +39,6 @@ class ObtenerRecaudacionController : KoinComponent {
     private val viewModel : ObtenerRecaudacionViewModel by inject()
 
     private val loginViewModel : LoginViewModel by inject()
-
-    private val ventaService : VentaService by inject()
 
     @FXML
     lateinit var totalRecaudacionField: TextField
@@ -62,16 +65,16 @@ class ObtenerRecaudacionController : KoinComponent {
     lateinit var productosTable: TableView<Any>
 
     @FXML
-    lateinit var productoColumnTable: TableColumn<Producto, String>
+    lateinit var productoColumnTable: TableColumn<LineaVenta, String>
 
     @FXML
-    lateinit var fechaColumnTable: TableColumn<Producto, String>
+    lateinit var fechaColumnTable: TableColumn<LineaVenta, String>
 
     @FXML
-    lateinit var cantidadColumnTable: TableColumn<Producto, Int>
+    lateinit var cantidadColumnTable: TableColumn<LineaVenta, Int>
 
     @FXML
-    lateinit var precioColumnTable: TableColumn<Producto, Double>
+    lateinit var precioColumnTable: TableColumn<LineaVenta, Double>
 
     /**
      * Función que inicializa la vista de obtención de recaudación.
@@ -86,36 +89,42 @@ class ObtenerRecaudacionController : KoinComponent {
         initDefaultValues()
         initEvents()
         initBindings()
+        actualizarTotal()
     }
 
     @FXML
     private fun initDefaultValues(){
-        /*
+        productoColumnTable.cellValueFactory = PropertyValueFactory("producto.id")
+        fechaColumnTable.cellValueFactory = PropertyValueFactory("createdAt")
+        cantidadColumnTable.cellValueFactory = PropertyValueFactory("cantidad")
         precioColumnTable.setCellValueFactory { cellData ->
-            val precio = cellData.value
-            SimpleDoubleProperty(precio)
+            SimpleObjectProperty(cellData.value.precio)
         }
 
-         */
-
-        var total = 0.0
-        totalRecaudacionField.text = total.toString()
+        actualizarTotal()
 
         tipoProductoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesProducto)
         tipoProductoFilterComboBox.selectionModel.selectFirst()
 
-        productosTable.items = FXCollections.observableArrayList(ventaService.getAllLineas())
+        productosTable.items = FXCollections.observableArrayList(viewModel.state.value.lineasVentas)
+        productosTable.columns.forEach { it.isResizable = false }
+        productosTable.columns.forEach { it.isReorderable = false }
 
         usernameField.text = loginViewModel.state.value.currentAdmin
+    }
+
+    @FXML
+    private fun actualizarTotal(){
+        val total = productosTable.items.sumOf { (it as LineaVenta).precio * it.cantidad }
+        totalRecaudacionField.text = total.toString()
     }
 
     @FXML
     private fun initBindings() {
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
-            if (productosTable.items != newValue.productos){
-                productosTable.items = FXCollections.observableArrayList(newValue.productos)
-            }
+            productosTable.items = FXCollections.observableArrayList(newValue.lineasVentas)
+            actualizarTotal()
         }
     }
 
@@ -123,6 +132,10 @@ class ObtenerRecaudacionController : KoinComponent {
     private fun initEvents() {
         tipoProductoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let {onComboSelected(newValue.toString())}
+        }
+
+        dateFilterDatePicker.valueProperty().addListener{ _, _, newValue ->
+            newValue?.let {onDateSelected(newValue)}
         }
 
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
@@ -136,6 +149,11 @@ class ObtenerRecaudacionController : KoinComponent {
         }
     }
 
+    private fun onDateSelected(newDate : LocalDate){
+        logger.debug { "onDateSelected : $newDate" }
+        filterDataTable()
+    }
+
     private fun onComboSelected(newValue: String) {
         logger.debug { "onComboSelected: $newValue"}
         filterDataTable()
@@ -144,7 +162,15 @@ class ObtenerRecaudacionController : KoinComponent {
 
     private fun filterDataTable(){
         logger.debug { "filterDataTable" }
-        productosTable.items =
-            FXCollections.observableList(viewModel.productosFilteredList(tipoProductoFilterComboBox.value.toString()))
+        val tipoProducto = tipoProductoFilterComboBox.value.toString()
+        val selectedDate = dateFilterDatePicker.value
+
+        val filteredList = viewModel.lineasFilteredList(tipoProducto).filter { lineaVenta ->
+            selectedDate == null || lineaVenta.createdAt == selectedDate
+        }
+
+        productosTable.items = FXCollections.observableArrayList(filteredList)
+
+        actualizarTotal()
     }
 }

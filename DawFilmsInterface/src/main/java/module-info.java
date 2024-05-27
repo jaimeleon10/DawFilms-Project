@@ -57,4 +57,6 @@ module org.example.dawfilmsinterface {
 
     opens org.example.dawfilmsinterface.cine.viewmodels to javafx.fxml;
     exports org.example.dawfilmsinterface.cine.viewmodels;
+
+    opens org.example.dawfilmsinterface.ventas.models to javafx.base;
 }
