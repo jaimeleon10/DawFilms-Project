@@ -45,10 +45,10 @@ class SqlDeLightManager(
 
     private fun initDataExamples() {
         databaseQueries.transaction {
-            databaseQueries.insertButaca("A1","Butaca", "sinImagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.MANTENIMIENTO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("A2","Butaca", "sinImagen.png", 5.0, 0, 1, TipoButaca.NORMAL.toString(), EstadoButaca.FUERASERVICIO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("A3","Butaca", "sinImagen.png", 5.0, 0, 2, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.OCUPADA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("A4","Butaca", "sinImagen.png", 5.0, 0, 3, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.ENRESERVA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("A1","Butaca", "sinImagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("A2","Butaca", "sinImagen.png", 5.0, 0, 1, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("A3","Butaca", "sinImagen.png", 5.0, 0, 2, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("A4","Butaca", "sinImagen.png", 5.0, 0, 3, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("A5","Butaca", "sinImagen.png", 5.0, 0, 4, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("A6","Butaca", "sinImagen.png", 5.0, 0, 5, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("A7","Butaca", "sinImagen.png", 5.0, 0, 6, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
@@ -74,12 +74,12 @@ class SqlDeLightManager(
             databaseQueries.insertButaca("D6","Butaca", "sinImagen.png", 5.0, 3, 5, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("D7","Butaca", "sinImagen.png", 5.0, 3, 6, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E1","Butaca", "sinImagen.png", 5.0, 4, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("E2","Butaca", "sinImagen.png", 5.0, 4, 1, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("E2","Butaca", "sinImagen.png", 5.0, 4, 1, TipoButaca.NORMAL.toString(), EstadoButaca.FUERASERVICIO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E3","Butaca", "sinImagen.png", 5.0, 4, 2, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E4","Butaca", "sinImagen.png", 5.0, 4, 3, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E5","Butaca", "sinImagen.png", 5.0, 4, 4, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("E6","Butaca", "sinImagen.png", 5.0, 4, 5, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("E7","Butaca", "sinImagen.png", 5.0, 4, 6, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("E6","Butaca", "sinImagen.png", 5.0, 4, 5, TipoButaca.NORMAL.toString(), EstadoButaca.MANTENIMIENTO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("E7","Butaca", "sinImagen.png", 5.0, 4, 6, TipoButaca.NORMAL.toString(), EstadoButaca.MANTENIMIENTO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
 
             databaseQueries.insertComplemento("1", "Complemento", "agua.png", 2.0, "Agua", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("2", "Complemento", "soda.png", 3.0, "Refresco", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
