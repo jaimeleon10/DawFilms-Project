@@ -169,3 +169,17 @@ Vsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/CarritoViewM
 `src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/SeleccionarButacaViewModel.kt,f\b\fb6ca09d6363bddaa8f71b8a70bf2553ba4d1066
 ¢
 rsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarEntrada/ConfirmarCompraController.kt,7\9\79c7ac3d5d06261bbd4b14e0804bdb587780c293
+
+Osrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/LoginViewModel.kt,a\e\ae290f32a02f33fa73808e0a1a2eedf2e6e3b006
+t
+Dsrc/main/kotlin/org/example/dawfilmsinterface/cine/LoginViewModel.kt,b\9\b9d1529f0b5c88edf0a2ec36e2c733286e5fb419
+v
+Fsrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/Login.kt,d\3\d3da2245dc3fbb42db38e66048c64b37a67a8977
+ã
+[src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/MenuAdminController.kt,6\1\61d1f70b2c2cae9ee28c53e3f6ebaad0a5f23800
+£
+ssrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarEntrada/SeleccionButacasController.kt,3\6\36919f20ee993a0648e3f555945e55dc35dc2f1f
+®
+xsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarEntrada/SeleccionComplementosController.kt,2\2\220e96f0b378c965b03d2b5a69f21479d07301d1
+è
+_src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/loginRegister/LoginController.kt,3\4\34ba74adb93f0364d7fbafe7e7fdf7017cd72b32

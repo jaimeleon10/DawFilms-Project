@@ -1,19 +1,17 @@
 package org.example.dawfilmsinterface.cine.controllers.admin
 
-import javafx.beans.property.SimpleDoubleProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
-import org.example.dawfilmsinterface.database.SqlDeLightManager
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import kotlin.math.ceil
 
 private val logger = logging()
 
@@ -32,11 +30,12 @@ private val logger = logging()
  * @property productosTable Tabla que muestra los productos y su recaudación.
  */
 class ObtenerRecaudacionController : KoinComponent {
+
     private val viewModel : ObtenerRecaudacionViewModel by inject()
 
     private val loginViewModel : LoginViewModel by inject()
 
-    private val database : SqlDeLightManager by inject()
+    private val ventaService : VentaService by inject()
 
     @FXML
     lateinit var totalRecaudacionField: TextField
@@ -99,18 +98,33 @@ class ObtenerRecaudacionController : KoinComponent {
 
          */
 
-        productosTable.items = FXCollections.observableArrayList(database.databaseQueries.selectAllLineasVentas())
+        var total = 0.0
+        totalRecaudacionField.text = total.toString()
+
+        tipoProductoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesProducto)
+        tipoProductoFilterComboBox.selectionModel.selectFirst()
+
+        productosTable.items = FXCollections.observableArrayList(ventaService.getAllLineas())
 
         usernameField.text = loginViewModel.state.value.currentAdmin
     }
 
     @FXML
     private fun initBindings() {
-
+        viewModel.state.addListener { _, _, newValue ->
+            logger.debug { "Actualizando datos de la vista" }
+            if (productosTable.items != newValue.productos){
+                productosTable.items = FXCollections.observableArrayList(newValue.productos)
+            }
+        }
     }
 
     @FXML
     private fun initEvents() {
+        tipoProductoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let {onComboSelected(newValue.toString())}
+        }
+
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
@@ -120,5 +134,17 @@ class ObtenerRecaudacionController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
+    }
+
+    private fun onComboSelected(newValue: String) {
+        logger.debug { "onComboSelected: $newValue"}
+        filterDataTable()
+    }
+
+
+    private fun filterDataTable(){
+        logger.debug { "filterDataTable" }
+        productosTable.items =
+            FXCollections.observableList(viewModel.productosFilteredList(tipoProductoFilterComboBox.value.toString()))
     }
 }
