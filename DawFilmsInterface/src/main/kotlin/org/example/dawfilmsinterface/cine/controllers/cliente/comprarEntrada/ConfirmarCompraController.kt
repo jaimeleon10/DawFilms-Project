@@ -152,6 +152,7 @@ class ConfirmarCompraController: KoinComponent {
         butacasTable.columns.forEach {
             it.isResizable = false
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+            it.isReorderable = false
         }
 
         cantidadButacasLabel.text = "Butacas seleccionadas: ${viewModel.state.value.butacas.size}"
