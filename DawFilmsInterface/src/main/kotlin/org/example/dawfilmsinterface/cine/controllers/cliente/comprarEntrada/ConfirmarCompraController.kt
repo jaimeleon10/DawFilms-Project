@@ -1,6 +1,5 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
-import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
@@ -169,6 +168,8 @@ class ConfirmarCompraController: KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
         confirmarCompraButton.setOnAction {
+            viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
+            viewModel.imprimirHtml()
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
