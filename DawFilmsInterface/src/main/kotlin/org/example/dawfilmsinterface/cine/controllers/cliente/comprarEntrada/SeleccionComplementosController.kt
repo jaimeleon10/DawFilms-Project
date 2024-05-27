@@ -120,6 +120,8 @@ class SeleccionComplementosController: KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
+        viewModel.loadAllComplementos()
+
         val complementos = carritoViewModel.state.value.listadoComplementosSeleccionados.toList()
         complementos.forEach { carritoViewModel.state.value.listadoComplementosSeleccionados.remove(it.first) }
 

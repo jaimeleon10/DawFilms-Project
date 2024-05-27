@@ -17,11 +17,7 @@ class SeleccionarComplementoViewModel (
 ) {
     val state: SimpleObjectProperty<GestionComplementosState> = SimpleObjectProperty(GestionComplementosState())
 
-    init {
-        loadAllComplementos()
-    }
-
-    private fun loadAllComplementos(){
+    fun loadAllComplementos(){
         logger.debug { "Cargando complementos del repositorio" }
         service.getAllComplementos().onSuccess {
             logger.debug { "Cargando complementos del repositorio: ${it.size}" }

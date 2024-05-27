@@ -40,6 +40,18 @@ class LoginController: KoinComponent {
     @FXML
     private fun initialize(){
         userNameField.requestFocus()
+        userNameField.setOnKeyPressed { event ->
+            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
+        passwordField.setOnKeyPressed { event ->
+            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
         continueButton.setOnAction { cargarMenu() }
         exitMenuButton.setOnAction { RoutesManager.onAppExit() }
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }

@@ -29,7 +29,7 @@ class StorageHtmlImpl: StorageHtml {
                     <div class="container">
                         <h1><span style="text-decoration: underline; color: #3366ff;">Ticket Cines DAWFILMS</span> 🍿🎥</h1>
                         <ul>
-                            <li style="font-size: larger;"><strong>Identificador de compra: </strong>${venta.id}</li>
+                            <li style="font-size: larger;"><strong>Identificador de compra: </strong>${venta.fechaCompra.dayOfMonth}${venta.fechaCompra.monthValue}${venta.fechaCompra.year}_${venta.total}_${venta.cliente.numSocio}</li>
                             <li style="font-size: larger;"><strong>Nombre: </strong>${venta.cliente.nombre}</li>
                             <li style="font-size: larger;"><strong>Número de Socio: </strong>${venta.cliente.numSocio}</li>
                             <li style="font-size: larger;"><strong>Fecha de compra: </strong>${venta.fechaCompra.toDefaultDateString()}</li>

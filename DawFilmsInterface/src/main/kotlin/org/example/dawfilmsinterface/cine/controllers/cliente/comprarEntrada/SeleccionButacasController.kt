@@ -217,6 +217,8 @@ class SeleccionButacasController: KoinComponent {
         val butacas = carritoViewModel.state.value.listadoButacasSeleccionadas.toList()
         butacas.forEach { carritoViewModel.state.value.listadoButacasSeleccionadas.remove(it) }
 
+        continueButton.isDisable = true
+
         botonesButacas.addAll(
             listOf(
                 butacaA1Button, butacaA2Button, butacaA3Button, butacaA4Button, butacaA5Button, butacaA6Button, butacaA7Button,
@@ -282,6 +284,7 @@ class SeleccionButacasController: KoinComponent {
             } else {
                 boton.isSelected = false
             }
+            if (continueButton.isDisable) continueButton.isDisable = false
         } else {
             val newIcon = ImageView(Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")))
             newIcon.fitWidth = 24.0
@@ -289,6 +292,7 @@ class SeleccionButacasController: KoinComponent {
             boton.graphic = newIcon
             carritoViewModel.state.value.listadoButacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
             contadorButacasSeleccionadas -= 1
+            if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) continueButton.isDisable = true
         }
     }
 }

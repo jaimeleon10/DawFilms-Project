@@ -6,7 +6,7 @@ class CarritoViewModel {
     val state: SimpleObjectProperty<CarritoState> = SimpleObjectProperty(CarritoState())
 
     data class CarritoState(
-        val listadoButacasSeleccionadas: MutableList<String> = mutableListOf(),
-        val listadoComplementosSeleccionados: MutableMap<String, Int> = mutableMapOf()
+        var listadoButacasSeleccionadas: MutableList<String> = mutableListOf(),
+        var listadoComplementosSeleccionados: MutableMap<String, Int> = mutableMapOf()
     )
 }
