@@ -8,6 +8,7 @@ import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
 import org.example.dawfilmsinterface.ventas.errors.VentaError
@@ -22,7 +23,7 @@ import java.util.*
 private val logger = logging()
 
 class VentaRepositoryImpl(
-    val dbManager: SqlDeLightManager,
+    private val dbManager: SqlDeLightManager,
     private val butacaRepository: ButacaRepository,
     private val complementoRepository: ComplementoRepository,
     private val clienteRepository: ClienteRepository
@@ -33,6 +34,14 @@ class VentaRepositoryImpl(
     override fun findAll(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra: LocalDate): List<Venta> {
         logger.debug { "Buscando todas las ventas" }
         return db.selectAllVentas().executeAsList().map { it.toVenta(cliente, lineas, fechaCompra) }
+    }
+
+    override fun findAllLineas(): List<LineaVenta> {
+        logger.debug { "Buscando todas las lineas" }
+        return db.selectAllLineasVentas().executeAsList().map {
+            if (it.producto_tipo == "Butaca") it.toLineaVenta(butacaRepository.findById(it.producto_id) as Producto)
+            else it.toLineaVenta(complementoRepository.findById(it.producto_id) as Producto)
+        }
     }
 
     override fun findById(id: UUID): Venta? {
