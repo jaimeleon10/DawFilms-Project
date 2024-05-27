@@ -73,7 +73,7 @@ class SqlDeLightManager(
             databaseQueries.insertButaca("D5","Butaca", "sinImagen.png", 5.0, 3, 4, TipoButaca.VIP.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("D6","Butaca", "sinImagen.png", 5.0, 3, 5, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("D7","Butaca", "sinImagen.png", 5.0, 3, 6, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertButaca("E1","Butaca", "sinImagen.png", 5.0, 4, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertButaca("E1","Butaca", "sinImagen.png", 5.0, 4, 0, TipoButaca.NORMAL.toString(), EstadoButaca.FUERASERVICIO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E2","Butaca", "sinImagen.png", 5.0, 4, 1, TipoButaca.NORMAL.toString(), EstadoButaca.FUERASERVICIO.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E3","Butaca", "sinImagen.png", 5.0, 4, 2, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("E4","Butaca", "sinImagen.png", 5.0, 4, 3, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
@@ -92,7 +92,7 @@ class SqlDeLightManager(
             databaseQueries.insertLineaVenta("27c712fb-5531-4f33-a744-0fdb65cd9dcf", "37c712fb-5531-4f33-a744-0fdb65cd9dcf", "A1", "Butaca", 1, 5.0, LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertLineaVenta("25c712fb-5531-4f33-a744-0fdb65cd9dcf", "37c712fb-5531-4f33-a744-0fdb65cd9dcf", "1", "Complemento", 1, 3.0, LocalDate.now().toString(), LocalDate.now().toString(), 0)
 
-            databaseQueries.insertVenta("37c712fb-5531-4f33-a744-0fdb65cd9dcf", 1, 8.0, "2024-05-20", LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertVenta("37c712fb-5531-4f33-a744-0fdb65cd9dcf", 1, 7.0, LocalDate.now().toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
         }
     }
 
