@@ -30,8 +30,8 @@ class VentaServiceImpl(
             .andThen { Ok(ventaRepository.save(venta)) }
     }
 
-    override fun getAllLineas(): List<LineaVenta> {
+    override fun getAllLineas(): Result<List<LineaVenta>, VentaError> {
         logger.debug { "Obteniendo linas de ventas" }
-        return ventaRepository.findAllLineas()
+        return Ok(ventaRepository.findAllLineas())
     }
 }

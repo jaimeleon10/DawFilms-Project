@@ -183,3 +183,5 @@ ssrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarE
 xsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarEntrada/SeleccionComplementosController.kt,2\2\220e96f0b378c965b03d2b5a69f21479d07301d1
 è
 _src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/loginRegister/LoginController.kt,3\4\34ba74adb93f0364d7fbafe7e7fdf7017cd72b32
+}
+Msrc/main/kotlin/org/example/dawfilmsinterface/ventas/services/VentaService.kt,9\1\91819a89748534c157b51229f7bda33155af50dd

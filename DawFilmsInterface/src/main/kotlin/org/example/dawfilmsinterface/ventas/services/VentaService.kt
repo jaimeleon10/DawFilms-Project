@@ -9,5 +9,5 @@ import java.util.*
 interface VentaService {
     fun getById(id: UUID): Result<Venta, VentaError>
     fun createVenta(venta: Venta): Result<Venta, VentaError>
-    fun getAllLineas(): List<LineaVenta>
+    fun getAllLineas(): Result<List<LineaVenta>, VentaError>
 }
