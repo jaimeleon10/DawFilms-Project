@@ -5,6 +5,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -98,6 +99,7 @@ class ObtenerRecaudacionController : KoinComponent {
          */
 
         tipoProductoFilterComboBox.items = FXCollections.observableArrayList(viewModel.state.value.typesProducto)
+        tipoProductoFilterComboBox.selectionModel.selectFirst()
 
         productosTable.items = FXCollections.observableArrayList(ventaService.getAllLineas())
 
@@ -106,11 +108,20 @@ class ObtenerRecaudacionController : KoinComponent {
 
     @FXML
     private fun initBindings() {
-
+        viewModel.state.addListener { _, _, newValue ->
+            logger.debug { "Actualizando datos de la vista" }
+            if (productosTable.items != newValue.productos){
+                productosTable.items = FXCollections.observableArrayList(newValue.productos)
+            }
+        }
     }
 
     @FXML
     private fun initEvents() {
+        tipoProductoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let {onComboSelected(newValue.toString())}
+        }
+
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
@@ -120,5 +131,17 @@ class ObtenerRecaudacionController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
+    }
+
+    private fun onComboSelected(newValue: String) {
+        logger.debug { "onComboSelected: $newValue"}
+        filterDataTable()
+    }
+
+
+    private fun filterDataTable(){
+        logger.debug { "filterDataTable" }
+        productosTable.items =
+            FXCollections.observableList(viewModel.productosFilteredList(tipoProductoFilterComboBox.value.toString()))
     }
 }
