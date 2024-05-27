@@ -10,7 +10,7 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.ventas.models.Venta
-import org.example.dawfilmsinterface.ventas.storage.VentaStorage
+import org.example.dawfilmsinterface.ventas.storage.storageVenta.VentaStorage
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files

@@ -111,8 +111,8 @@ class ConfirmarCompraController: KoinComponent {
     }
 
     private fun initDefaultValues() {
-        val complementosList = viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados).toList()
-        complementosTable.items = FXCollections.observableArrayList(complementosList)
+        viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados)
+        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos.toList())
         nombreComplementosColumn.setCellValueFactory { cellData ->
             val nombre = cellData.value.first.nombre
             SimpleStringProperty(nombre)
@@ -130,8 +130,8 @@ class ConfirmarCompraController: KoinComponent {
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
         }
 
-        val butacasList = viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
-        butacasTable.items = FXCollections.observableArrayList(butacasList)
+        viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
+        butacasTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
         tipoButacasColumn.cellValueFactory = PropertyValueFactory("tipoButaca")
         filaButacasColumn.setCellValueFactory { cellData ->
             val indice = cellData.value.fila
@@ -151,12 +151,12 @@ class ConfirmarCompraController: KoinComponent {
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
         }
 
-        cantidadButacasLabel.text = "Butacas seleccionadas: ${butacasList.size}"
-        cantidadComplementosLabel.text = "Complementos seleccionados: ${complementosList.size}"
+        cantidadButacasLabel.text = "Butacas seleccionadas: ${viewModel.state.value.butacas.size}"
+        cantidadComplementosLabel.text = "Complementos seleccionados: ${viewModel.state.value.complementos.size}"
         fechaLabel.text = "Fecha de compra: ${LocalDate.now().toDefaultDateString()}"
         var total = 0.0
-        butacasList.forEach { total += it.tipoButaca.precio }
-        complementosList.forEach { total += it.first.precio }
+        viewModel.state.value.butacas.forEach { total += it.tipoButaca.precio }
+        viewModel.state.value.complementos.toList().forEach { total += it.first.precio }
         precioTotalLabel.text = "Precio total: $total €"
         usernameField.text = loginViewModel.state.value.currentCliente.nombre
     }

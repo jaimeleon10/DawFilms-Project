@@ -14,7 +14,7 @@ import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.models.Venta
-import org.example.dawfilmsinterface.ventas.storage.VentaStorageImpl
+import org.example.dawfilmsinterface.ventas.storage.storageVenta.VentaStorageImpl
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.*
 import java.io.File

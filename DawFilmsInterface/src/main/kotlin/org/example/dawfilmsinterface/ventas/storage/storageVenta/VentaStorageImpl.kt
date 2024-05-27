@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.ventas.storage
+package org.example.dawfilmsinterface.ventas.storage.storageVenta
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok

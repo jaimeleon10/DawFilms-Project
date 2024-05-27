@@ -45,8 +45,10 @@ import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.example.dawfilmsinterface.ventas.services.VentaServiceImpl
-import org.example.dawfilmsinterface.ventas.storage.VentaStorage
-import org.example.dawfilmsinterface.ventas.storage.VentaStorageImpl
+import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtml
+import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtmlImpl
+import org.example.dawfilmsinterface.ventas.storage.storageVenta.VentaStorage
+import org.example.dawfilmsinterface.ventas.storage.storageVenta.VentaStorageImpl
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -58,7 +60,7 @@ val appModule = module {
     singleOf(::SqlDeLightManager)
 
 
-    //Cliente
+    // Cliente
     singleOf(::ClienteRepositoryImpl) {
         bind<ClienteRepository>()
     }
@@ -66,10 +68,6 @@ val appModule = module {
     singleOf(::ClienteServiceImpl) {
         bind<ClienteService>()
     }
-
-    /*singleOf(::ClienteCache) {
-        bind<Cache<Long, Cliente>>()
-    }*/
 
     single { ClienteCache (Config().cacheSize) } bind Cache::class
 
@@ -80,7 +78,7 @@ val appModule = module {
     }
 
 
-    //Productos
+    // Productos
     singleOf(::ButacaRepositoryImpl) {
         bind<ButacaRepository>()
     }
@@ -99,12 +97,12 @@ val appModule = module {
         bind<StorageCsv>()
     }
 
-    singleOf(:: ButacaValidator)
+    singleOf(::ButacaValidator)
 
     singleOf(::ComplementoValidator)
 
     single {
-        ProductosStorageImpl(get(), get(), get(), get(), get(), get(), get())
+        ProductosStorageImpl(get(), get(), get(), get(), get(), get())
     } bind ProductosStorage::class
 
     singleOf(::StorageImageImpl) {
@@ -122,7 +120,7 @@ val appModule = module {
     single { StorageZipImpl(get(), get()) } bind StorageZip::class
 
 
-    //Ventas
+    // Ventas
     singleOf(::VentaRepositoryImpl) {
         bind<VentaRepository>()
     }
@@ -135,6 +133,11 @@ val appModule = module {
         bind<VentaStorage>()
     }
 
+    singleOf(::StorageHtmlImpl) {
+        bind<StorageHtml>()
+    }
+
+    // ViewModels
     singleOf(::GestionButacaViewModel)
 
     singleOf(::GestionComplementosViewModel)
