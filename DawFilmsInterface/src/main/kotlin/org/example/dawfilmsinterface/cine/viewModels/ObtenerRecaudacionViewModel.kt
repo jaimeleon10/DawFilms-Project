@@ -1,13 +1,10 @@
 package org.example.dawfilmsinterface.cine.viewmodels
 
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import javafx.beans.property.SimpleObjectProperty
 import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.service.ProductoService
 
-class ObtenerRecaudacionViewModel(
-    private val service : ProductoService
-) {
-    val state : RecaudacionState = RecaudacionState()
+class ObtenerRecaudacionViewModel{
+    val state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
 
     data class RecaudacionState(
         val typesProducto : List<String> = emptyList(),
