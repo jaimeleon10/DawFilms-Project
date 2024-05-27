@@ -21,5 +21,4 @@ interface ProductosStorage {
     fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError>
     fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError>
     fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError>
-    fun exportHtml(venta: Venta, file: File): Result<Unit, VentaError>
 }

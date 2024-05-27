@@ -5,7 +5,7 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
-import org.example.dawfilmsinterface.productos.storage.storageHtml.StorageHtml
+import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtml
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
@@ -26,7 +26,6 @@ class ProductosStorageImpl(
     private val storageXml: StorageXml,
     private val storageImage: StorageImage,
     private val storageZip: StorageZip,
-    private val storageHtml: StorageHtml
 ) : ProductosStorage {
     init {
         logger.debug{ "Creando directorio de imagenes si no existe" }
@@ -96,10 +95,5 @@ class ProductosStorageImpl(
     override fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError> {
         logger.debug { "Importando desde ZIP $fileToUnzip" }
         return storageZip.loadFromZip(fileToUnzip)
-    }
-
-    override fun exportHtml(venta: Venta, file: File): Result<Unit, VentaError> {
-        logger.debug { "Exportando HTML $file" }
-        return storageHtml.exportHtml(venta, file)
     }
 }
