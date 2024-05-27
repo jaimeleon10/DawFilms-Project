@@ -7,6 +7,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.control.Alert.AlertType
+import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -37,6 +38,8 @@ private val logger = logging()
  */
 class ListadoComplementosAdminController : KoinComponent {
     private val viewModel: GestionComplementosViewModel by inject()
+
+    private val loginViewModel : LoginViewModel by inject()
 
     @FXML
     lateinit var backMenuButton: Button
@@ -127,6 +130,8 @@ class ListadoComplementosAdminController : KoinComponent {
         nombreColumnTable.cellValueFactory = PropertyValueFactory("nombre")
         precioColumnTable.cellValueFactory = PropertyValueFactory("precio")
         stockColumnTable.cellValueFactory = PropertyValueFactory("stock")
+
+        usernameField.text = loginViewModel.state.value.currentAdmin
     }
 
     @FXML

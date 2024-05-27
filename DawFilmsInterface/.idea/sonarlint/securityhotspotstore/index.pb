@@ -139,8 +139,6 @@ u
 Esrc/main/kotlin/org/example/dawfilmsinterface/routes/RoutesManager.kt,d\7\d7ea3056d3316344a6d9bdb731ea66186a28786e
 £
 ssrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizarButaca/ActualizarButacaController.kt,9\b\9bf2648428bcf7e8da75e276c277b7c949887224
-è
-_src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/ActualizarButacaViewModel.kt,1\9\19f75ca8c195499fc93002599701c2095537fc7a
 ü
 osrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/actualizarButaca/EditarButacaController.kt,b\7\b757263dc4a78bad240db95217c8be98ef39f151
 ò
@@ -159,3 +157,15 @@ bsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionCompl
 wsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/listadoComplementos/EditarComplementoController.kt,c\5\c526c54cfa37ac7971f30a2002e7dfa46ede474f
 å
 \src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/GestionButacaViewModel.kt,e\9\e944d9a444054c8e4e0df0bb103a89d8ef6edf5c
+å
+\src/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/ObtenerRecaudacionViewModel.kt,b\c\bc602785ee9f8d59d6dd69e9a44e7d0c49383f20
+î
+dsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/admin/ObtenerRecaudacionController.kt,b\a\ba834b0f88bae52ae7871471e43ab9f6eddfd7f1
+Ü
+Vsrc/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/CarritoViewModel.kt,6\e\6eac116d83e8303b10bb00ec802343769febd6b9
+é
+^src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/ConfirmarCompraViewModel.kt,b\e\be472f6e18e5d22564c47fd520cd07dbab54521d
+ê
+`src/main/kotlin/org/example/dawfilmsinterface/productos/viewmodels/SeleccionarButacaViewModel.kt,f\b\fb6ca09d6363bddaa8f71b8a70bf2553ba4d1066
+¢
+rsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarEntrada/ConfirmarCompraController.kt,7\9\79c7ac3d5d06261bbd4b14e0804bdb587780c293
