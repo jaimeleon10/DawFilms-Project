@@ -49,7 +49,10 @@ class ProductoServiceImpl(
             failure = {
                 logger.debug { "Producto no encontrado en cache" }
                 butacaRepository.findById(id)
-                    ?.let { Ok(it) }
+                    ?.let { Ok(it) }?.andThen { p ->
+                        println("Guardando en cache")
+                        productosCache.put(p.id, p) as Result<Butaca, ProductoError>
+                    }
                     ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con id: $id"))
             }
         )
@@ -65,7 +68,10 @@ class ProductoServiceImpl(
             failure = {
                 logger.debug { "Producto no encontrado en cache" }
                 complementoRepository.findById(id)
-                    ?.let { Ok(it) }
+                    ?.let { Ok(it) }?.andThen { p ->
+                        println("Guardando en cache")
+                        productosCache.put(p.id, p) as Result<Complemento, ProductoError>
+                    }
                     ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con id: $id"))
             }
         )
@@ -74,7 +80,10 @@ class ProductoServiceImpl(
     override fun getComplementoByNombre(nombre: String): Result<Complemento, ProductoError> {
         logger.debug { "Obteniendo complemento con nombre: $nombre" }
         return complementoRepository.findByNombre(nombre)
-            ?.let { Ok(it) }
+            ?.let { Ok(it) }?.andThen { p ->
+                println("Guardando en cache")
+                productosCache.put(p.id, p) as Result<Complemento, ProductoError>
+            }
             ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con nombre: $nombre"))
     }
 
@@ -124,6 +133,7 @@ class ProductoServiceImpl(
                 ?.let { Ok(it) }
                 ?: Err(ProductoError.ProductoNoActualizado("Complemento no actualizado con id: $id"))
         }.andThen {
+            logger.debug { "Guardando en la cache" }
             productosCache.put(id, it) as Result<Complemento, ProductoError>
         }
     }
@@ -131,6 +141,7 @@ class ProductoServiceImpl(
     override fun deleteAllProductos(): Result<Unit, ProductoError> {
         logger.debug { "Borrando todos los productos" }
         butacaRepository.deleteAll().also {
+            logger.debug { "Eliminando de la cache" }
             productosCache.clear()
             return Ok(it)
         }
@@ -140,6 +151,7 @@ class ProductoServiceImpl(
         logger.debug { "Borrando butaca con id: $id" }
         return butacaRepository.delete(id)
             ?.let {
+                logger.debug { "Eliminando de la cache" }
                 productosCache.remove(id)
                 Ok(it)
             }
@@ -150,6 +162,7 @@ class ProductoServiceImpl(
         logger.debug { "Borrando complemento por id: $id" }
         return complementoRepository.delete(id)
             ?.let {
+                logger.debug { "Eliminando de la cache" }
                 productosCache.remove(id)
                 Ok(it)
             }
