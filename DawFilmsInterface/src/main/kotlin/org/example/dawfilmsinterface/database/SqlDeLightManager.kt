@@ -84,7 +84,7 @@ class SqlDeLightManager(
             databaseQueries.insertComplemento("1", "Complemento", "agua.png", 2.0, "Agua", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("2", "Complemento", "soda.png", 3.0, "Refresco", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("3", "Complemento", "popcorn.png", 3.0, "Palomitas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertComplemento("4", "Complemento", "pistacho.png", 2.0, "Frutos Secos", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertComplemento("4", "Complemento", "pistacho.png", 2.0, "Pistachos", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("5", "Complemento", "patatas.png", 2.5, "Patatas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
 
             databaseQueries.insertCliente("User", "User", "2000-05-10", "12345678A", "user@user.com", "AAA111", "user", LocalDate.now().toString(), LocalDate.now().toString(), 0)

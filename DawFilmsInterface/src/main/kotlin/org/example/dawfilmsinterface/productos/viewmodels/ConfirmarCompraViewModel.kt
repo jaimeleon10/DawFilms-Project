@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel.*
+import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
@@ -129,14 +130,14 @@ class ConfirmarCompraViewModel(
         }
     }
 
-    fun imprimirHtml() {
+    fun imprimirHtml(emailCliente: String) {
         val venta = venta
         val idsButacas = state.value.butacas.joinToString("-") { it.id }
         val file = Path("FicherosDeCompra", "entrada_${idsButacas}_${venta.cliente.numSocio}_${venta.fechaCompra}.html").toFile()
         Alert(Alert.AlertType.CONFIRMATION).apply {
             this.title = "Compra realizada con éxito"
-            this.headerText = "Tu compra ha sido realizada con éxito"
-            this.contentText = "Precio total de la compra: ${venta.total.toDefaultMoneyString()}"
+            this.headerText = "¿Deseas recibir el ticket de comprar en tú correo electrónico?"
+            this.contentText = "Correo de envío: $emailCliente"
         }.showAndWait().ifPresent { opcion ->
             if (opcion == ButtonType.OK) {
                 storage.exportHtml(venta, file)
@@ -144,9 +145,15 @@ class ConfirmarCompraViewModel(
         }
     }
 
+    fun deleteLastValues() {
+        state.value.butacas = mutableListOf()
+        state.value.complementos = mutableMapOf()
+        state.value.lineas = mutableListOf()
+    }
+
     data class GestionCompraState (
-        val lineas: MutableList<LineaVenta> = mutableListOf(),
-        val complementos: MutableMap<Complemento, Int> = mutableMapOf(),
-        val butacas: MutableList<Butaca> = mutableListOf(),
+        var lineas: MutableList<LineaVenta> = mutableListOf(),
+        var complementos: MutableMap<Complemento, Int> = mutableMapOf(),
+        var butacas: MutableList<Butaca> = mutableListOf(),
     )
 }

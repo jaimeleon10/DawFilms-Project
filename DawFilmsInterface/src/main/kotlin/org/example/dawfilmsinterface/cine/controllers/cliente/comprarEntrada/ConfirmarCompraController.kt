@@ -111,6 +111,8 @@ class ConfirmarCompraController: KoinComponent {
     }
 
     private fun initDefaultValues() {
+        viewModel.deleteLastValues()
+
         viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados)
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos.toList())
         nombreComplementosColumn.setCellValueFactory { cellData ->
@@ -156,7 +158,7 @@ class ConfirmarCompraController: KoinComponent {
         fechaLabel.text = "Fecha de compra: ${LocalDate.now().toDefaultDateString()}"
         var total = 0.0
         viewModel.state.value.butacas.forEach { total += it.tipoButaca.precio }
-        viewModel.state.value.complementos.toList().forEach { total += it.first.precio }
+        viewModel.state.value.complementos.toList().forEach { total += (it.first.precio * it.second) }
         precioTotalLabel.text = "Precio total: $total €"
         usernameField.text = loginViewModel.state.value.currentCliente.nombre
     }
@@ -169,7 +171,7 @@ class ConfirmarCompraController: KoinComponent {
         }
         confirmarCompraButton.setOnAction {
             viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
-            viewModel.imprimirHtml()
+            viewModel.imprimirHtml(loginViewModel.state.value.currentCliente.email)
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
