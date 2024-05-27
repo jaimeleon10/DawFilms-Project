@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.viewmodels
+package org.example.dawfilmsinterface.cine.viewmodels
 
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
@@ -14,7 +14,7 @@ private val logger = logging()
 class SeleccionarButacaViewModel (
     private val service: ProductoService
 ) {
-    val state : SimpleObjectProperty<ButacaSeleccionadaState> = SimpleObjectProperty<ButacaSeleccionadaState>()
+    val state : SimpleObjectProperty<ButacaSeleccionadaState> = SimpleObjectProperty(ButacaSeleccionadaState())
 
     fun iconoPorDefecto() {
         logger.debug { "Actualizando icono con butaca por defecto" }

@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.viewmodels
+package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
@@ -6,9 +6,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel.*
-import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
-import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento

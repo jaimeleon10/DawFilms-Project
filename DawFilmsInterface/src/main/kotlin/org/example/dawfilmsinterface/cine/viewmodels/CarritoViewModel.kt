@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.viewmodels
+package org.example.dawfilmsinterface.cine.viewmodels
 
 import javafx.beans.property.SimpleObjectProperty
 

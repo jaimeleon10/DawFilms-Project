@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.productos.viewmodels
+package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
@@ -21,7 +21,7 @@ class SeleccionarComplementoViewModel (
         logger.debug { "Cargando complementos del repositorio" }
         service.getAllComplementos().onSuccess {
             logger.debug { "Cargando complementos del repositorio: ${it.size}" }
-            state.value = state.value.copy(complementos = it)
+            state.value = state.value.copy(complementos = it.filter { complemento -> complemento.isDeleted == false })
             updateActualState()
         }
     }
