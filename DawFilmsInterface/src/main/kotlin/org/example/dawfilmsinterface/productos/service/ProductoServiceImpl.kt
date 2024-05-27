@@ -50,7 +50,7 @@ class ProductoServiceImpl(
                 logger.debug { "Producto no encontrado en cache" }
                 butacaRepository.findById(id)
                     ?.let { Ok(it) }?.andThen { p ->
-                        println("Guardando en cache")
+                        logger.debug { "Guardando en cache" }
                         productosCache.put(p.id, p) as Result<Butaca, ProductoError>
                     }
                     ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con id: $id"))
@@ -69,7 +69,7 @@ class ProductoServiceImpl(
                 logger.debug { "Producto no encontrado en cache" }
                 complementoRepository.findById(id)
                     ?.let { Ok(it) }?.andThen { p ->
-                        println("Guardando en cache")
+                        logger.debug { "Guardando en cache" }
                         productosCache.put(p.id, p) as Result<Complemento, ProductoError>
                     }
                     ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con id: $id"))
@@ -81,7 +81,7 @@ class ProductoServiceImpl(
         logger.debug { "Obteniendo complemento con nombre: $nombre" }
         return complementoRepository.findByNombre(nombre)
             ?.let { Ok(it) }?.andThen { p ->
-                println("Guardando en cache")
+                logger.debug { "Guardando en cache" }
                 productosCache.put(p.id, p) as Result<Complemento, ProductoError>
             }
             ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con nombre: $nombre"))
@@ -90,7 +90,6 @@ class ProductoServiceImpl(
     override fun saveAllButacas(butacas: List<Butaca>): Result<List<Butaca>, ProductoError> {
         logger.debug { "Guardando productos" }
         butacaRepository.saveAll(butacas).also {
-            productosCache.clear()
             return Ok(it)
         }
     }
@@ -100,7 +99,7 @@ class ProductoServiceImpl(
         return butacaValidator.validate(item).andThen {
             Ok(butacaRepository.save(it))
         }.andThen { p ->
-            println("Guardando en cache")
+            logger.debug { "Guardando en cache" }
             productosCache.put(p.id, p) as Result<Butaca, ProductoError>
         }
     }
@@ -110,7 +109,7 @@ class ProductoServiceImpl(
         return complementoValidator.validate(item).andThen {
             Ok(complementoRepository.save(it))
         }.andThen { p ->
-            println("Guardando en cache")
+            logger.debug { "Guardando en cache" }
             productosCache.put(p.id, p) as Result<Complemento, ProductoError>
         }
     }
@@ -133,7 +132,7 @@ class ProductoServiceImpl(
                 ?.let { Ok(it) }
                 ?: Err(ProductoError.ProductoNoActualizado("Complemento no actualizado con id: $id"))
         }.andThen {
-            logger.debug { "Guardando en la cache" }
+            logger.debug { "Guardando en cache" }
             productosCache.put(id, it) as Result<Complemento, ProductoError>
         }
     }

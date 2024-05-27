@@ -9,8 +9,8 @@ import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.locale.toDefaultDateString
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -130,6 +130,7 @@ class ConfirmarCompraController: KoinComponent {
         complementosTable.columns.forEach {
             it.isResizable = false
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+            it.isReorderable = false
         }
 
         viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)

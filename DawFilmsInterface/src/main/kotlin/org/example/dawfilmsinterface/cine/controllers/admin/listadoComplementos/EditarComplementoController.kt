@@ -6,9 +6,9 @@ import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.TipoOperacion.EDITAR
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel.TipoOperacion.NUEVO
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.EDITAR
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.NUEVO
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

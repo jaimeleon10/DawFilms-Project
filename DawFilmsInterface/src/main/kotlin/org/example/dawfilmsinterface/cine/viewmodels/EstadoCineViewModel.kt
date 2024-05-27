@@ -1,0 +1,49 @@
+package org.example.dawfilmsinterface.cine.viewmodels
+
+import javafx.beans.property.SimpleObjectProperty
+import javafx.scene.image.Image
+import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
+import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
+import org.example.dawfilmsinterface.productos.service.ProductoService
+import org.example.dawfilmsinterface.routes.RoutesManager
+import org.lighthousegames.logging.logging
+
+private val logger = logging()
+
+class EstadoCineViewModel(
+    private val service: ProductoService
+) {
+
+    val state : SimpleObjectProperty<EstadoCineState> = SimpleObjectProperty(EstadoCineState())
+
+    fun iconoPorDefecto() {
+        logger.debug { "Actualizando icono con butaca por defecto" }
+        logger.debug { "Buscando butaca por id ${state.value.id}" }
+        val butaca = service.getButacaById(state.value.id)
+
+        if (butaca.isOk) {
+
+            state.value.tipoButaca = butaca.value.tipoButaca
+            state.value.estadoButaca = butaca.value.estadoButaca
+            state.value.ocupacionButaca = butaca.value.ocupacionButaca
+
+            if (state.value.tipoButaca == TipoButaca.NORMAL) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png"))
+            if (state.value.tipoButaca == TipoButaca.VIP) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png"))
+
+            if (state.value.ocupacionButaca == OcupacionButaca.OCUPADA) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaOcupada.png"))
+            if (state.value.ocupacionButaca == OcupacionButaca.ENRESERVA) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaOcupada.png"))
+
+            if (state.value.estadoButaca == EstadoButaca.FUERASERVICIO) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaFueraDeServicio.png"))
+            if (state.value.estadoButaca == EstadoButaca.MANTENIMIENTO) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaMantenimiento.png"))
+        }
+    }
+
+    data class EstadoCineState(
+        var id: String = "",
+        var icono: Image = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")),
+        var tipoButaca: TipoButaca = TipoButaca.NORMAL,
+        var estadoButaca: EstadoButaca = EstadoButaca.ACTIVA,
+        var ocupacionButaca: OcupacionButaca = OcupacionButaca.LIBRE,
+    )
+}

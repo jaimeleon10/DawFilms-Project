@@ -7,7 +7,7 @@ import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -140,7 +140,10 @@ class ActualizarButacaController : KoinComponent {
         ocupacionFilterComboBox.selectionModel.selectFirst()
 
         butacaTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
-        butacaTable.columns.forEach {it.isResizable = false}
+        butacaTable.columns.forEach {
+            it.isResizable = false
+            it.isReorderable = false
+        }
 
         idColumnTable.cellValueFactory = PropertyValueFactory("id")
         estadoColumnTable.cellValueFactory = PropertyValueFactory("estadoButaca")

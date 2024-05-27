@@ -7,9 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.dawfilmsinterface.cine.controllers.EstadoCineController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.EstadoCineController">
    <children>
       <Label alignment="CENTER" layoutX="326.0" layoutY="35.0" prefHeight="60.0" prefWidth="263.0" text="SALA DE CINE" textFill="WHITE">
          <font>
@@ -92,7 +90,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a1Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -105,7 +103,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b1Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -118,7 +116,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c1Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -131,7 +129,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d1Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -144,7 +142,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e1Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -161,7 +159,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a2Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -174,7 +172,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b2Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -187,7 +185,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c2Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -200,7 +198,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d2Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -213,7 +211,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e2Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -230,7 +228,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a3Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -243,7 +241,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b3Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -256,7 +254,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c3Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -269,7 +267,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d3Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -282,7 +280,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e3Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -299,7 +297,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a4Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -312,7 +310,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b4Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -325,7 +323,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c4Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -338,7 +336,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d4Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -351,7 +349,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e4Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -368,7 +366,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a5Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -381,7 +379,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b5Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -394,7 +392,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c5Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -407,7 +405,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d5Button" disable="true" mnemonicParsing="false" style="-fx-border-color: #ffbd2e; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -420,7 +418,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e5Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -437,7 +435,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a6Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -450,7 +448,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b6Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -463,7 +461,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c6Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -476,7 +474,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d6Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -489,7 +487,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e6Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -506,7 +504,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="a7Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -519,7 +517,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="b7Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -532,7 +530,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="c7Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -545,7 +543,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="d7Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -558,7 +556,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="65.0">
                <children>
-                  <ToggleButton disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
+                  <ToggleButton fx:id="e7Button" disable="true" mnemonicParsing="false" style="-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 5; -fx-background-radius: 5; -fx-background-color: lightgray; -fx-opacity: 1;">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>

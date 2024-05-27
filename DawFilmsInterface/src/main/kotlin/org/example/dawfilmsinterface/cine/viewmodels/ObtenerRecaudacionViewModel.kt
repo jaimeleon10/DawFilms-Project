@@ -2,14 +2,9 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
-import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
-import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.service.ProductoService
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.*
 import org.lighthousegames.logging.logging
-import kotlin.math.log
 
 private val logger = logging()
 

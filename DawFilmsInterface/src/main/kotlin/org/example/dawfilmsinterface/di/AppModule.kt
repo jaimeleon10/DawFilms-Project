@@ -34,12 +34,14 @@ import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
 import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZipImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.GestionComplementosViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarComplementoViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ListadoComplementosViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.EstadoCineViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
@@ -153,4 +155,8 @@ val appModule = module {
     singleOf(::ConfirmarCompraViewModel)
 
     singleOf(::ObtenerRecaudacionViewModel)
+
+    singleOf(::ListadoComplementosViewModel)
+
+    singleOf(::EstadoCineViewModel)
 }

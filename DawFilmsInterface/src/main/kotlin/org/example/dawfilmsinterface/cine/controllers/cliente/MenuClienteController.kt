@@ -27,7 +27,7 @@ private val logger = logging()
  */
 class MenuClienteController: KoinComponent {
 
-    val viewModel: LoginViewModel by inject()
+    val loginViewModel: LoginViewModel by inject()
 
     @FXML
     lateinit var usernameField: Label
@@ -58,6 +58,7 @@ class MenuClienteController: KoinComponent {
      */
     @FXML
     private fun initialize() {
+        usernameField.text = loginViewModel.state.value.currentCliente.nombre
         exitButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
@@ -73,13 +74,9 @@ class MenuClienteController: KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.LISTADO_COMPLEMENTOS_CLIENTE)
         }
         showCinemaButton.setOnAction {
+            loginViewModel.state.value.isAdmin = false
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MOSTRAR_ESTADO_CINE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MOSTRAR_ESTADO_CINE)
         }
-
-        initValues()
-    }
-    private fun initValues() {
-        usernameField.text = viewModel.state.value.currentCliente.nombre
     }
 }
