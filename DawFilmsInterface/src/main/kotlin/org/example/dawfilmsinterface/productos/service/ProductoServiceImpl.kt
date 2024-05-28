@@ -106,6 +106,13 @@ class ProductoServiceImpl(
         }
     }
 
+    override fun saveAllComplementos(complementos: List<Complemento>): Result<List<Complemento>, ProductoError> {
+        logger.debug { "Guardando complementos" }
+        complementoRepository.saveAll(complementos).also {
+            return Ok(it)
+        }
+    }
+
     override fun saveComplemento(item: Complemento): Result<Complemento, ProductoError> {
         logger.debug { "Guardando complemento: $item" }
         return complementoValidator.validate(item).andThen {

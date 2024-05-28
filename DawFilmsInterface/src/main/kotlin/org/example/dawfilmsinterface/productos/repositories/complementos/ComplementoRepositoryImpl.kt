@@ -31,6 +31,11 @@ class ComplementoRepositoryImpl(
         return db.selectComplementoByNombre(nombre).executeAsOneOrNull()?.toComplemento()
     }
 
+    override fun saveAll(complementos: List<Complemento>): List<Complemento> {
+        logger.debug { "Guardando complementos" }
+        return complementos.map { save(it) }
+    }
+
     override fun save(item: Complemento): Complemento {
         logger.debug { "Guardando complemento: $item" }
         val timeStamp = LocalDate.now().toString()
