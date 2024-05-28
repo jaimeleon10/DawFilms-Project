@@ -146,6 +146,24 @@ class ProductoServiceImpl(
         }
     }
 
+    override fun deleteAllButacas(): Result<Unit, ProductoError> {
+        logger.debug { "Borrando todas las butacas" }
+        butacaRepository.deleteAll().also {
+            logger.debug { "Eliminando de la cache" }
+            productosCache.clear()
+            return Ok(it)
+        }
+    }
+
+    override fun deleteAllComplementos(): Result<Unit, ProductoError> {
+        logger.debug { "Borrando todos los complementos" }
+        complementoRepository.deleteAll().also {
+            logger.debug { "Eliminando de la cache" }
+            productosCache.clear()
+            return Ok(it)
+        }
+    }
+
     override fun deleteButaca(id: String): Result<Butaca, ProductoError> {
         logger.debug { "Borrando butaca con id: $id" }
         return butacaRepository.delete(id)

@@ -89,7 +89,7 @@ class ButacaRepositoryImpl(
     }
 
     override fun deleteAll() {
-        logger.debug { "Borrando todos los datos" }
-        return db.deleteAllProductos()
+        logger.debug { "Borrando todas las butacas" }
+        return db.deleteAllButacas()
     }
 }

@@ -83,4 +83,9 @@ class ComplementoRepositoryImpl(
 
         return this.findById(id)
     }
+
+    override fun deleteAll() {
+        logger.debug { "Borrando todos los complementos" }
+        return db.deleteAllComplementos()
+    }
 }
