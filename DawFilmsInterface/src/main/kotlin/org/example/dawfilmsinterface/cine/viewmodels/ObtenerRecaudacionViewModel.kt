@@ -2,13 +2,9 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-<<<<<<< HEAD
 import org.example.dawfilmsinterface.productos.models.producto.Producto
-import org.example.dawfilmsinterface.productos.service.ProductoService
-=======
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.services.VentaService
->>>>>>> vm-recaudacion
 import org.lighthousegames.logging.logging
 
 private val logger = logging()

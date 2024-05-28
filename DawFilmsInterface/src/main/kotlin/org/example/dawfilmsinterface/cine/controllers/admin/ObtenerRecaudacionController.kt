@@ -7,15 +7,8 @@ import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
-<<<<<<< HEAD
-=======
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
-import org.example.dawfilmsinterface.productos.models.complementos.Complemento
->>>>>>> vm-recaudacion
-import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
-import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -97,7 +90,9 @@ class ObtenerRecaudacionController : KoinComponent {
 
     @FXML
     private fun initDefaultValues(){
-        productoColumnTable.cellValueFactory = PropertyValueFactory("producto.id")
+        productoColumnTable.setCellValueFactory { cellData ->
+            SimpleObjectProperty(cellData.value.obtenerIdProducto())
+        }
         fechaColumnTable.cellValueFactory = PropertyValueFactory("createdAt")
         cantidadColumnTable.cellValueFactory = PropertyValueFactory("cantidad")
         precioColumnTable.setCellValueFactory { cellData ->
@@ -161,7 +156,6 @@ class ObtenerRecaudacionController : KoinComponent {
         logger.debug { "onComboSelected: $newValue"}
         filterDataTable()
     }
-
 
     private fun filterDataTable(){
         logger.debug { "filterDataTable" }
