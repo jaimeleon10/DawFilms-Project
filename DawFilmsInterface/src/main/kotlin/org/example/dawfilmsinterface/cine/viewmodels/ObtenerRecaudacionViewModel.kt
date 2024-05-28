@@ -11,7 +11,7 @@ private val logger = logging()
 class ObtenerRecaudacionViewModel(
     private val service : VentaService
 ){
-    val state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
+    var state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
 
     init {
         logger.debug { "Inicializando ObtenerRecaudacionViewModel" }
@@ -55,8 +55,6 @@ class ObtenerRecaudacionViewModel(
 
     data class RecaudacionState(
         val typesProducto : List<String> = emptyList(),
-
-        val cantidad : Int = 3,
 
         val lineaVenta: LineaVentaState = LineaVentaState(),
 
