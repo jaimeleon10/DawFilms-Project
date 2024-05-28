@@ -11,6 +11,12 @@ DELETE FROM ProductoEntity;
 deleteAllClientes:
 DELETE FROM UsuarioEntity;
 
+deleteAllButacas:
+DELETE FROM ProductoEntity WHERE tipo_producto = 'Butaca';
+
+deleteAllComplementos:
+DELETE FROM ProductoEntity WHERE tipo_producto = 'Complemento';
+
 
 -- Tabla de Clientes
 CREATE TABLE IF NOT EXISTS UsuarioEntity (

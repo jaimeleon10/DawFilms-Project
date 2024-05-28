@@ -19,6 +19,8 @@ interface ProductoService {
     fun updateButaca(id: String, item: Butaca): Result<Butaca, ProductoError>
     fun updateComplemento(id: String, item: Complemento): Result<Complemento, ProductoError>
     fun deleteAllProductos(): Result<Unit, ProductoError>
+    fun deleteAllButacas(): Result<Unit, ProductoError>
+    fun deleteAllComplementos(): Result<Unit, ProductoError>
     fun deleteButaca(id: String): Result<Butaca, ProductoError>
     fun deleteComplemento(id: String): Result<Complemento, ProductoError>
 }
