@@ -86,19 +86,6 @@ class GestionButacaViewModel(
             }
     }
 
-    /* TODO -> USAR EN IMPORTAR BUTACAS (AQUÍ NO HACE NADA)
-    fun loadButacasFromCsv(file: File): Result<List<Producto>, ProductoError> {
-        logger.debug { "Cargando butacas de CSV" }
-        return storage.deleteAllImages().andThen {
-            storage.loadCsv(file).onSuccess { listaProductos ->
-                val listaButacas: List<Producto> = listaProductos.filterIsInstance<Butaca>()
-                Ok(listaButacas)
-            }.onFailure {
-                Err(ProductoError.ProductoStorageError(it.message))
-            }
-        }
-    }*/
-
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
