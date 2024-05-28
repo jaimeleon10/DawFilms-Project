@@ -22,7 +22,6 @@ class SeleccionarButacaViewModel (
         val butaca = service.getButacaById(state.value.id)
 
         if (butaca.isOk) {
-
             state.value.tipoButaca = butaca.value.tipoButaca
             state.value.estadoButaca = butaca.value.estadoButaca
             state.value.ocupacionButaca = butaca.value.ocupacionButaca
@@ -36,6 +35,23 @@ class SeleccionarButacaViewModel (
             if (state.value.estadoButaca == EstadoButaca.FUERASERVICIO) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaFueraDeServicio.png"))
             if (state.value.estadoButaca == EstadoButaca.MANTENIMIENTO) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaMantenimiento.png"))
         }
+    }
+
+    fun butacaIsSelected(listadoButacasSeleccionadas: MutableList<String>): Boolean {
+        logger.debug { "Restaurando icono de butacas seleccionadas" }
+        logger.debug { "Buscando butaca por id ${state.value.id}" }
+        val butaca = service.getButacaById(state.value.id)
+
+        if (butaca.isOk && listadoButacasSeleccionadas.contains(butaca.value.id)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    fun updateIconoButacaSelected() {
+        if (state.value.tipoButaca == TipoButaca.NORMAL) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionada.png"))
+        if (state.value.tipoButaca == TipoButaca.VIP) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionadaVIP.png"))
     }
 
     fun cambiarIcono() {

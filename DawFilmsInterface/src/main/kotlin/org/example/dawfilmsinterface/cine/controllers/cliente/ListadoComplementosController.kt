@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente
 
+import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -7,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.cine.viewmodels.ListadoComplementosViewModel
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -93,7 +95,10 @@ class ListadoComplementosController: KoinComponent {
         complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 
         nombreColumn.cellValueFactory = PropertyValueFactory("nombre")
-        precioColumn.cellValueFactory = PropertyValueFactory("precio")
+        precioColumn.setCellValueFactory { cellData ->
+            val precio = cellData.value.precio
+            SimpleStringProperty(precio.toDefaultMoneyString())
+        }
         stockColumn.cellValueFactory = PropertyValueFactory("stock")
     }
 

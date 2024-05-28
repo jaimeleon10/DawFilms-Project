@@ -11,6 +11,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -123,8 +124,8 @@ class ConfirmarCompraController: KoinComponent {
             SimpleStringProperty(nombre)
         }
         precioComplementosColumn.setCellValueFactory { cellData ->
-            val precio = cellData.value.first.precio.toString()
-            SimpleStringProperty(precio)
+            val precio = cellData.value.first.precio
+            SimpleStringProperty(precio.toDefaultMoneyString())
         }
         cantidadComplementosColumn.setCellValueFactory { cellData ->
             val cantidad = cellData.value.second
@@ -150,7 +151,7 @@ class ConfirmarCompraController: KoinComponent {
         }
         precioButacasColumn.setCellValueFactory { cellData ->
             val precio = cellData.value.tipoButaca.precio
-            SimpleStringProperty(precio.toString())
+            SimpleStringProperty(precio.toDefaultMoneyString())
         }
         butacasTable.columns.forEach {
             it.isResizable = false
@@ -186,6 +187,7 @@ class ConfirmarCompraController: KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
         atrasCompraButton.setOnAction {
+
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
         }

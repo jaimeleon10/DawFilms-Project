@@ -193,7 +193,6 @@ class SeleccionButacasController: KoinComponent {
     lateinit var butacaA1Button: ToggleButton
 
     val botonesButacas: MutableList<ToggleButton> = mutableListOf()
-    var contadorButacasSeleccionadas = 0
 
     /**
      * Función que inicializa la vista de selección de butacas.
@@ -214,7 +213,7 @@ class SeleccionButacasController: KoinComponent {
 
         if (carritoViewModel.state.value.nuevaCompra) carritoViewModel.iniciarNuevaCompra()
 
-        continueButton.isDisable = true
+        if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) continueButton.isDisable = true
 
         botonesButacas.addAll(
             listOf(
@@ -241,27 +240,39 @@ class SeleccionButacasController: KoinComponent {
             newIcon.fitWidth = 24.0
             newIcon.fitHeight = 24.0
             boton.graphic = newIcon
+
+            if (viewModel.butacaIsSelected(carritoViewModel.state.value.listadoButacasSeleccionadas)) {
+                boton.isSelected = true
+                viewModel.updateIconoButacaSelected()
+                val newIcon = ImageView(viewModel.state.value.icono)
+                newIcon.fitWidth = 24.0
+                newIcon.fitHeight = 24.0
+                boton.graphic = newIcon
+            }
         }
     }
 
     private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
+            carritoViewModel.state.value.nuevaCompra = true
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
         continueButton.setOnAction {
+            carritoViewModel.state.value.nuevaCompra = true
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
         }
         usernameField.text = viewModelLogin.state.value.currentCliente.nombre
+        selectedButacasLabel.text = "Butacas seleccionadas: ${carritoViewModel.state.value.listadoButacasSeleccionadas.joinToString(", ") { it }}"
 
         for (boton in botonesButacas) {
             boton.setOnAction {
                 if (!boton.isDisable) {
                     changeButtonIcon(boton, boton.isSelected)
                     if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) selectedButacasLabel.text = "Butacas seleccionadas: "
-                    else selectedButacasLabel.text = "Butacas seleccionadas: ${carritoViewModel.state.value.listadoButacasSeleccionadas}"
+                    else selectedButacasLabel.text = "Butacas seleccionadas: ${carritoViewModel.state.value.listadoButacasSeleccionadas.joinToString(", ") { it }}"
                 }
             }
         }
@@ -269,7 +280,7 @@ class SeleccionButacasController: KoinComponent {
 
     private fun changeButtonIcon(boton: ToggleButton, seleccionado: Boolean) {
         if (seleccionado) {
-            if (contadorButacasSeleccionadas in 0..4) {
+            if (carritoViewModel.state.value.contadorButacasSeleccionadas in 0..4) {
                 viewModel.state.value.id = boton.id.substring(6, boton.id.length - 6)
                 viewModel.cambiarIcono()
                 val newIcon = ImageView(viewModel.state.value.icono)
@@ -277,7 +288,7 @@ class SeleccionButacasController: KoinComponent {
                 newIcon.fitHeight = 24.0
                 boton.graphic = newIcon
                 carritoViewModel.state.value.listadoButacasSeleccionadas.add(boton.id.substring(6, boton.id.length - 6))
-                contadorButacasSeleccionadas += 1
+                carritoViewModel.state.value.contadorButacasSeleccionadas += 1
             } else {
                 boton.isSelected = false
             }
@@ -288,7 +299,7 @@ class SeleccionButacasController: KoinComponent {
             newIcon.fitHeight = 24.0
             boton.graphic = newIcon
             carritoViewModel.state.value.listadoButacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
-            contadorButacasSeleccionadas -= 1
+            carritoViewModel.state.value.contadorButacasSeleccionadas -= 1
             if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) continueButton.isDisable = true
         }
     }
