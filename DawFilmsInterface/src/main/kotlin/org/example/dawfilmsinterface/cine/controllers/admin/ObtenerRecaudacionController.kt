@@ -7,6 +7,7 @@ import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
+import org.example.dawfilmsinterface.locale.toDefaultDateString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.koin.core.component.KoinComponent
@@ -93,7 +94,9 @@ class ObtenerRecaudacionController : KoinComponent {
         productoColumnTable.setCellValueFactory { cellData ->
             SimpleObjectProperty(cellData.value.obtenerIdProducto())
         }
-        fechaColumnTable.cellValueFactory = PropertyValueFactory("createdAt")
+        fechaColumnTable.setCellValueFactory { cellData ->
+            SimpleObjectProperty(cellData.value.createdAt.toDefaultDateString())
+        }
         cantidadColumnTable.cellValueFactory = PropertyValueFactory("cantidad")
         precioColumnTable.setCellValueFactory { cellData ->
             SimpleObjectProperty(cellData.value.precio)
