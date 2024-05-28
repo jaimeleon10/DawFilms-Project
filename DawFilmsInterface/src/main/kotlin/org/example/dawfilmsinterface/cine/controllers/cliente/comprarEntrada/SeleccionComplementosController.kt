@@ -1,5 +1,6 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
+import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -10,6 +11,7 @@ import org.example.dawfilmsinterface.productos.mappers.toModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewModel
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -125,9 +127,6 @@ class SeleccionComplementosController: KoinComponent {
 
         viewModel.loadAllComplementos()
 
-        val complementos = carritoViewModel.state.value.listadoComplementosSeleccionados.toList()
-        complementos.forEach { carritoViewModel.state.value.listadoComplementosSeleccionados.remove(it.first) }
-
         addComplementButton.isDisable = true
         addComplementButton.style = "-fx-opacity: 1; -fx-background-color: #3D486A; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: white; -fx-border-width: 2;"
 
@@ -140,8 +139,13 @@ class SeleccionComplementosController: KoinComponent {
         complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 
         nombreColumn.cellValueFactory = PropertyValueFactory("nombre")
-        precioColumn.cellValueFactory = PropertyValueFactory("precio")
+        precioColumn.setCellValueFactory { cellData ->
+            val precio = cellData.value.precio
+            SimpleStringProperty(precio.toDefaultMoneyString())
+        }
         stockColumn.cellValueFactory = PropertyValueFactory("stock")
+
+        selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
     }
 
     private fun initEventos() {
@@ -149,11 +153,11 @@ class SeleccionComplementosController: KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.CONFIRMAR_COMPRA}" }
             RoutesManager.changeScene(view = RoutesManager.View.CONFIRMAR_COMPRA)
         }
-        acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
+        acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         usernameField.text = viewModelLogin.state.value.currentCliente.nombre
         complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let { onTableSelected(newValue) }
@@ -161,9 +165,11 @@ class SeleccionComplementosController: KoinComponent {
         addComplementButton.setOnAction { onAñadirAction() }
         removeComplementButton.setOnAction { onEliminarAction() }
         backButacasButton.setOnAction {
+            carritoViewModel.state.value.nuevaCompra = false
             logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_BUTACAS}" }
             RoutesManager.changeScene(view = RoutesManager.View.SELECCION_BUTACAS)
         }
+        selectedComplementosLabel.text = carritoViewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
     }
 
     private fun onAñadirAction() {
@@ -183,9 +189,8 @@ class SeleccionComplementosController: KoinComponent {
                 complementosSeleccionados += 1
             }
         }
-
-        selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
         selectedComplementosLabel.text = carritoViewModel.state.value.listadoComplementosSeleccionados.entries.joinToString(",") { " ${it.key}: ${it.value}" }
+        selectedComplementosQuantityLabel.text = "Complementos seleccionados: $complementosSeleccionados"
     }
 
     private fun onEliminarAction() {
