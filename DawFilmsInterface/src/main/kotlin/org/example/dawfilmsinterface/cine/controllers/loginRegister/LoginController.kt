@@ -4,7 +4,7 @@ import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
 import javafx.scene.control.*
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -40,6 +40,18 @@ class LoginController: KoinComponent {
     @FXML
     private fun initialize(){
         userNameField.requestFocus()
+        userNameField.setOnKeyPressed { event ->
+            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
+        passwordField.setOnKeyPressed { event ->
+            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
         continueButton.setOnAction { cargarMenu() }
         exitMenuButton.setOnAction { RoutesManager.onAppExit() }
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
@@ -54,6 +66,7 @@ class LoginController: KoinComponent {
         if (userNameField.text == "admin" && passwordField.text == "admin") {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             viewModel.changeAdmin()
+            viewModel.state.value.isAdmin = true
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         } else {
             val encryptedPassword = encryptPassword(passwordField.text)

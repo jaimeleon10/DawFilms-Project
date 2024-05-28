@@ -5,10 +5,13 @@ import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
+import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtml
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
 import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
+import org.example.dawfilmsinterface.ventas.errors.VentaError
+import org.example.dawfilmsinterface.ventas.models.Venta
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
@@ -22,7 +25,7 @@ class ProductosStorageImpl(
     private val storageJson: StorageJson,
     private val storageXml: StorageXml,
     private val storageImage: StorageImage,
-    private val storageZip: StorageZip
+    private val storageZip: StorageZip,
 ) : ProductosStorage {
     init {
         logger.debug{ "Creando directorio de imagenes si no existe" }

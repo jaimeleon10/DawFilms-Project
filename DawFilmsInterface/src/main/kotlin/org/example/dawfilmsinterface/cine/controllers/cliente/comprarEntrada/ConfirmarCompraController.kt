@@ -1,17 +1,16 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
-import javafx.beans.property.SimpleIntegerProperty
 import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.locale.toDefaultDateString
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
-import org.example.dawfilmsinterface.productos.viewmodels.ConfirmarCompraViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -112,8 +111,10 @@ class ConfirmarCompraController: KoinComponent {
     }
 
     private fun initDefaultValues() {
-        val complementosList = viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados).toList()
-        complementosTable.items = FXCollections.observableArrayList(complementosList)
+        viewModel.deleteLastValues()
+
+        viewModel.updateToComplementosList(carritoViewModel.state.value.listadoComplementosSeleccionados)
+        complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos.toList())
         nombreComplementosColumn.setCellValueFactory { cellData ->
             val nombre = cellData.value.first.nombre
             SimpleStringProperty(nombre)
@@ -129,10 +130,11 @@ class ConfirmarCompraController: KoinComponent {
         complementosTable.columns.forEach {
             it.isResizable = false
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+            it.isReorderable = false
         }
 
-        val butacasList = viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
-        butacasTable.items = FXCollections.observableArrayList(butacasList)
+        viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
+        butacasTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
         tipoButacasColumn.cellValueFactory = PropertyValueFactory("tipoButaca")
         filaButacasColumn.setCellValueFactory { cellData ->
             val indice = cellData.value.fila
@@ -150,14 +152,15 @@ class ConfirmarCompraController: KoinComponent {
         butacasTable.columns.forEach {
             it.isResizable = false
             it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+            it.isReorderable = false
         }
 
-        cantidadButacasLabel.text = "Butacas seleccionadas: ${butacasList.size}"
-        cantidadComplementosLabel.text = "Complementos seleccionados: ${complementosList.size}"
+        cantidadButacasLabel.text = "Butacas seleccionadas: ${viewModel.state.value.butacas.size}"
+        cantidadComplementosLabel.text = "Complementos seleccionados: ${viewModel.state.value.complementos.size}"
         fechaLabel.text = "Fecha de compra: ${LocalDate.now().toDefaultDateString()}"
         var total = 0.0
-        butacasList.forEach { total += it.tipoButaca.precio }
-        complementosList.forEach { total += it.first.precio }
+        viewModel.state.value.butacas.forEach { total += it.tipoButaca.precio }
+        viewModel.state.value.complementos.toList().forEach { total += (it.first.precio * it.second) }
         precioTotalLabel.text = "Precio total: $total €"
         usernameField.text = loginViewModel.state.value.currentCliente.nombre
     }
@@ -169,6 +172,8 @@ class ConfirmarCompraController: KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
         confirmarCompraButton.setOnAction {
+            viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
+            viewModel.imprimirHtml(loginViewModel.state.value.currentCliente.email)
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }

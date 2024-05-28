@@ -1,23 +1,21 @@
 package org.example.dawfilmsinterface.cine.controllers.cliente.comprarEntrada
 
-import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.scene.control.ToggleButton
-import org.example.dawfilmsinterface.productos.viewmodels.SeleccionarButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import javafx.scene.image.*
-import org.example.dawfilmsinterface.cine.viewModels.LoginViewModel
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.EstadoButaca
 import org.example.dawfilmsinterface.productos.models.butacas.OcupacionButaca
 import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
-import org.example.dawfilmsinterface.productos.viewmodels.CarritoViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.CarritoViewModel
 
 private val logger = logging()
 
@@ -207,8 +205,6 @@ class SeleccionButacasController: KoinComponent {
     private fun initialize() {
         logger.debug { "Inicializando ActualizarButacaController FXML" }
 
-        viewModel.state.set(SeleccionarButacaViewModel.ButacaSeleccionadaState())
-
         initDefaultValues()
 
         initEventos()
@@ -218,6 +214,8 @@ class SeleccionButacasController: KoinComponent {
 
         val butacas = carritoViewModel.state.value.listadoButacasSeleccionadas.toList()
         butacas.forEach { carritoViewModel.state.value.listadoButacasSeleccionadas.remove(it) }
+
+        continueButton.isDisable = true
 
         botonesButacas.addAll(
             listOf(
@@ -284,6 +282,7 @@ class SeleccionButacasController: KoinComponent {
             } else {
                 boton.isSelected = false
             }
+            if (continueButton.isDisable) continueButton.isDisable = false
         } else {
             val newIcon = ImageView(Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")))
             newIcon.fitWidth = 24.0
@@ -291,6 +290,7 @@ class SeleccionButacasController: KoinComponent {
             boton.graphic = newIcon
             carritoViewModel.state.value.listadoButacasSeleccionadas.remove(boton.id.substring(6, boton.id.length - 6))
             contadorButacasSeleccionadas -= 1
+            if (carritoViewModel.state.value.listadoButacasSeleccionadas.isEmpty()) continueButton.isDisable = true
         }
     }
 }

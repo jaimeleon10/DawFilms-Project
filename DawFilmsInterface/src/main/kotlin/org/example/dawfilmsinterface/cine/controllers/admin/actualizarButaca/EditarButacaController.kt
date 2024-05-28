@@ -5,12 +5,12 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
-import org.example.dawfilmsinterface.productos.viewmodels.GestionButacaViewModel.TipoOperacion.EDITAR
+import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel.TipoOperacion.EDITAR
 
 private val logger = logging()
 

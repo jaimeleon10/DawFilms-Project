@@ -51,7 +51,7 @@
         <columns>
           <TableColumn fx:id="nombreColumn" prefWidth="181.0" style="-fx-font-size: 15;" text="Nombre" />
             <TableColumn fx:id="precioColumn" prefWidth="79.0" style="-fx-font-size: 15;" text="Precio" />
-          <TableColumn fx:id="stockColumn" prefWidth="122.0" style="-fx-font-size: 15;" text="Disponibilidad" />
+          <TableColumn fx:id="stockColumn" prefWidth="122.0" style="-fx-font-size: 15;" text="Stock" />
         </columns>
       </TableView>
       <Spinner fx:id="quantityComplementSpinner" layoutX="562.0" layoutY="340.0" prefHeight="30.0" prefWidth="210.0">
