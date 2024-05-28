@@ -244,10 +244,10 @@ class SeleccionButacasController: KoinComponent {
             if (viewModel.butacaIsSelected(carritoViewModel.state.value.listadoButacasSeleccionadas)) {
                 boton.isSelected = true
                 viewModel.updateIconoButacaSelected()
-                val newIcon = ImageView(viewModel.state.value.icono)
-                newIcon.fitWidth = 24.0
-                newIcon.fitHeight = 24.0
-                boton.graphic = newIcon
+                val newIcono = ImageView(viewModel.state.value.icono)
+                newIcono.fitWidth = 24.0
+                newIcono.fitHeight = 24.0
+                boton.graphic = newIcono
             }
         }
     }

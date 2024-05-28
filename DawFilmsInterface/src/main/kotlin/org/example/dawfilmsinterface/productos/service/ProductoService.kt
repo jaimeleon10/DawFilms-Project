@@ -15,6 +15,7 @@ interface ProductoService {
     fun getComplementoByNombre(nombre: String): Result<Complemento, ProductoError>
     fun saveAllButacas(butacas: List<Butaca>): Result<List<Butaca>, ProductoError>
     fun saveButaca(item: Butaca): Result<Butaca, ProductoError>
+    fun saveAllComplementos(complementos: List<Complemento>): Result<List<Complemento>, ProductoError>
     fun saveComplemento(item: Complemento): Result<Complemento, ProductoError>
     fun updateButaca(id: String, item: Butaca): Result<Butaca, ProductoError>
     fun updateComplemento(id: String, item: Complemento): Result<Complemento, ProductoError>

@@ -1,15 +1,21 @@
 package org.example.dawfilmsinterface.cine.controllers.admin
 
 import javafx.fxml.FXML
+import javafx.scene.Cursor.DEFAULT
+import javafx.scene.Cursor.WAIT
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.control.MenuItem
 import javafx.stage.FileChooser
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.MenuAdminViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import com.github.michaelbull.result.*
 
 private val logger = logging()
 
@@ -32,6 +38,7 @@ private val logger = logging()
  * @property exitButton Botón para cerrar la sesión y regresar a la vista de login.
  */
 class MenuAdminController: KoinComponent {
+    val viewModel: MenuAdminViewModel by inject()
 
     val loginViewModel: LoginViewModel by inject()
 
@@ -54,7 +61,13 @@ class MenuAdminController: KoinComponent {
     lateinit var backUpButton: Button
 
     @FXML
+    lateinit var importBackUpButton: Button
+
+    @FXML
     lateinit var getRaisingButton: Button
+
+    @FXML
+    lateinit var exportComplementsButton: Button
 
     @FXML
     lateinit var importComplementsButton: Button
@@ -64,6 +77,9 @@ class MenuAdminController: KoinComponent {
 
     @FXML
     lateinit var updateSeatButton: Button
+
+    @FXML
+    lateinit var exportSeatsButton: Button
 
     @FXML
     lateinit var importSeatsButton: Button
@@ -79,53 +95,151 @@ class MenuAdminController: KoinComponent {
      */
     @FXML
     private fun initialize() {
-        exitButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
-            RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
-        }
-        acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
-        exitMenuButton.setOnAction { RoutesManager.onAppExit() }
         importSeatsButton.setOnAction {
             logger.debug { "Importando butacas desde el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Butacas"
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                showOpenDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Importando butacas" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.importarButacas(file).onSuccess {
+                    showAlertOperacion(
+                        title = "Butacas importadas",
+                        mensaje = "Se han importado todas las butacas.\nButacas importadas: ${it.size}"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
+            }
+
+        }
+
+        exportSeatsButton.setOnAction {
+            logger.debug { "Exportando butacas al explorador de archivos" }
+            FileChooser().run {
+                title = "Exportar Butacas"
+                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
                 showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando butacas" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarButacas(file).onSuccess {
+                    showAlertOperacion(
+                        title = "Butacas exportadas",
+                        mensaje = "Se han exportado todas las butacas.\nButacas exportadas: ${it}"
+                    )
+                    }.onFailure { error ->
+                        showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
+                    }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
         }
-        exportCineButton.setOnAction { RoutesManager.initExportEstadoCine() }
-        getRaisingButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.OBTENER_RECAUDACION}" }
-            RoutesManager.changeScene(view = RoutesManager.View.OBTENER_RECAUDACION)
-        }
-        updateSeatButton.setOnAction {
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.ACTUALIZAR_BUTACA}" }
-            RoutesManager.changeScene(view = RoutesManager.View.ACTUALIZAR_BUTACA)
-        }
+
         importComplementsButton.setOnAction {
             logger.debug { "Importando complementos desde el explorador de archivos" }
             FileChooser().run {
-                title = "Importar Butacas"
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
-                showSaveDialog(RoutesManager.activeStage)
+                title = "Importar Complementos"
+                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                showOpenDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Importando complementos" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.importarComplementos(file).onSuccess {
+                    showAlertOperacion(
+                        title = "Complementos importados",
+                        mensaje = "Se han importado todos los complementos.\nComplementos importados: ${it.size}"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
         }
+
+        exportComplementsButton.setOnAction {
+            logger.debug { "Exportando complementos al explorador de archivos" }
+            FileChooser().run {
+                title = "Exportar Complementos"
+                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando complementos" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarComplementos(file).onSuccess {
+                    showAlertOperacion(
+                        title = "Complementos exportados",
+                        mensaje = "Se han exportado todos los complementos.\nComplementos exportados: ${it}"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
+            }
+        }
+
+        // TODO -> CONTINUAR DESDE AQUÍ
+
+        importBackUpButton.setOnAction {  }
+
         backUpButton.setOnAction {
             logger.debug { "Realizando backup y guardando en el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Butacas"
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
                 showSaveDialog(RoutesManager.activeStage)
             }
         }
+
+        exportCineButton.setOnAction { RoutesManager.initExportEstadoCine() }
+
+        exitButton.setOnAction {
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
+            RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
+        }
+        exitMenuButton.setOnAction { RoutesManager.onAppExit() }
+        acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
+
+        getRaisingButton.setOnAction {
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.OBTENER_RECAUDACION}" }
+            RoutesManager.changeScene(view = RoutesManager.View.OBTENER_RECAUDACION)
+        }
+
+        updateSeatButton.setOnAction {
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.ACTUALIZAR_BUTACA}" }
+            RoutesManager.changeScene(view = RoutesManager.View.ACTUALIZAR_BUTACA)
+        }
+
         showCineButton.setOnAction {
             loginViewModel.state.value.isAdmin = true
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MOSTRAR_ESTADO_CINE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MOSTRAR_ESTADO_CINE)
         }
+
         complementListButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.LISTADO_COMPLEMENTOS_ADMIN) }
         usernameField.text = loginViewModel.state.value.currentAdmin
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = ""
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.contentText = mensaje
+        }.showAndWait()
     }
 }
