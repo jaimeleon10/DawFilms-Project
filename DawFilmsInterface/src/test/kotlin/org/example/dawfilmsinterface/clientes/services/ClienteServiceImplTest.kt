@@ -2,17 +2,23 @@ package org.example.dawfilmsinterface.clientes.services
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
+import database.DatabaseQueries
 import org.example.dawfilmsinterface.cache.errors.CacheError
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
 import org.example.dawfilmsinterface.clientes.errors.ClienteError
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
+import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.validators.ClienteValidator
+import org.example.dawfilmsinterface.config.Config
+import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
+import org.lighthousegames.logging.logging
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
@@ -21,12 +27,15 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.time.LocalDate
 
-
+val logger = logging()
 @ExtendWith(MockitoExtension::class)
 class ClienteServiceImplTest {
 
     @Mock
-    private lateinit var mockRepo: ClienteRepository
+    lateinit var config: Config
+
+    @Mock
+    private lateinit var mockRepo: ClienteRepositoryImpl
 
     @Mock
     private lateinit var mockCache: ClienteCache
@@ -34,8 +43,25 @@ class ClienteServiceImplTest {
     @Mock
     private lateinit var mockClienteValidator: ClienteValidator
 
+    private lateinit var dbManager: SqlDeLightManager
+    private lateinit var databaseQueries: DatabaseQueries
+
     @InjectMocks
     private lateinit var service: ClienteServiceImpl
+
+    @BeforeEach
+    fun setUp() {
+        //whenever(config.dataBaseUrl).thenReturn("jdbc:sqlite::memory:")
+        whenever(config.dataBaseInMemory).thenReturn(true)
+        whenever(config.databaseInitData).thenReturn(true)
+        //whenever(config.databaseRemoveData).thenReturn(true)
+
+        dbManager = SqlDeLightManager(config)
+        databaseQueries = dbManager.databaseQueries
+        //mockRepo = ClienteRepositoryImpl(dbManager)
+
+        dbManager.initialize()
+    }
 
     @Test
     fun getAll() {
@@ -103,33 +129,36 @@ class ClienteServiceImplTest {
     @Test
     fun getByIdIsNotInCache() {
         val mockCliente = Cliente(
-            id = -1L,
-            nombre = "Pepe",
-            apellido = "",
-            fechaNacimiento = LocalDate.of(1997, 12, 31),
-            dni = "12345678Z",
-            email = "ejemplo@si.com",
-            numSocio = "123",
-            password = "password",
+            id = 1,
+            nombre = "User",
+            apellido = "User",
+            fechaNacimiento = LocalDate.of(2000,5,10),
+            dni = "12345678A",
+            email = "user@user.com",
+            numSocio = "AAA111",
+            password = "user",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
             isDeleted = false
         )
         val message = "No existe el valor en la cache"
 
-        whenever(mockCache.get(-1L)).thenReturn(Err(CacheError(message)))
-        whenever(mockRepo.findById(-1L)).thenReturn(mockCliente)
-        val clientes = service.getById(-1L)
+        logger.debug { mockCliente }
 
+        whenever(mockCache.get(1)).thenReturn(Err(CacheError(message)))
+        whenever(mockRepo.findById(1)).thenReturn(mockCliente)
+        val cliente = service.getById(1)
+
+        logger.debug { "Este es el resultado de cliente: $cliente" }
 
         assertAll(
-            { assertTrue(clientes.isOk) },
-            { assertTrue (clientes.value == mockCliente) }
+            { assertTrue(cliente.isOk) },
+            { assertEquals (cliente.value, mockCliente) }
         )
 
-        verify (mockCache, times (1)).get(-1L)
-        verify(mockRepo, times (1)).findById(-1L)
-        verify(mockCache, times(0)).put(-1L, mockCliente)
+        verify(mockCache, times (1)).get(1)
+        verify(mockRepo, times (1)).findById(1)
+        verify(mockCache, times(1)).put(1, mockCliente)
     }
 
     @Test
