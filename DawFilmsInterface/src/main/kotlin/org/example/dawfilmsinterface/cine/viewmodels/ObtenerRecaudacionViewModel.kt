@@ -60,7 +60,7 @@ class ObtenerRecaudacionViewModel(
 
         val lineaVenta: LineaVentaState = LineaVentaState(),
 
-        val lineasVentas : List<LineaVenta> = emptyList()
+        var lineasVentas : List<LineaVenta> = emptyList()
     )
 
     data class LineaVentaState(
