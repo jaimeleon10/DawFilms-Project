@@ -25,9 +25,9 @@
             </Label>
          </children>
       </HBox>
-      <AnchorPane layoutX="84.0" layoutY="541.0" prefHeight="100.0" prefWidth="750.0" style="-fx-background-color: #3D486A; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
+      <AnchorPane layoutX="85.0" layoutY="533.0" prefHeight="120.0" prefWidth="750.0" style="-fx-background-color: #3D486A; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
          <children>
-            <Button fx:id="continueButton" alignment="CENTER" layoutX="599.0" layoutY="29.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="118.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
+            <Button fx:id="continueButton" alignment="CENTER" layoutX="620.0" layoutY="11.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -35,11 +35,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="selectedComplementosLabel" contentDisplay="CENTER" layoutX="20.0" layoutY="29.0" prefHeight="43.0" prefWidth="565.0" textFill="WHITE">
+            <Label fx:id="selectedComplementosLabel" contentDisplay="CENTER" layoutX="30.0" layoutY="38.0" prefHeight="43.0" prefWidth="565.0" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button fx:id="backButacasButton" alignment="CENTER" layoutX="620.0" layoutY="66.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="115.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </AnchorPane>
       <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="72.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">

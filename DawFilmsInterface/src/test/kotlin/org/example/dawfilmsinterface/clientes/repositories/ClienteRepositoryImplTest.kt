@@ -53,13 +53,14 @@ class ClienteRepositoryImplTest {
         val cliente = clienteRepository.findById(1)
 
         assertEquals(1,cliente?.id)
-        assertEquals("Jaime", cliente?.nombre)
-        assertEquals("Leon", cliente?.apellido)
+        assertEquals("User", cliente?.nombre)
+        assertEquals("User", cliente?.apellido)
         assertEquals(LocalDate.parse("2000-05-10"), cliente?.fechaNacimiento)
         assertEquals("12345678A", cliente?.dni)
-        assertEquals("jleon@gmail.com", cliente?.email)
+        assertEquals("user@user.com", cliente?.email)
         assertEquals("AAA111", cliente?.numSocio)
-        assertEquals("password", cliente?.password)
+        assertEquals("user", cliente?.password)
+
     }
 
     @Test

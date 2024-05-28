@@ -2,7 +2,6 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
@@ -61,7 +60,7 @@ class ObtenerRecaudacionViewModel(
 
         val lineaVenta: LineaVentaState = LineaVentaState(),
 
-        val lineasVentas : List<LineaVenta> = emptyList()
+        var lineasVentas : List<LineaVenta> = emptyList()
     )
 
     data class LineaVentaState(

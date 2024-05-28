@@ -167,3 +167,15 @@ xsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/cliente/comprarE
 _src/main/kotlin/org/example/dawfilmsinterface/cine/controllers/loginRegister/LoginController.kt,3\4\34ba74adb93f0364d7fbafe7e7fdf7017cd72b32
 }
 Msrc/main/kotlin/org/example/dawfilmsinterface/ventas/services/VentaService.kt,9\1\91819a89748534c157b51229f7bda33155af50dd
+l
+<src/main/kotlin/org/example/dawfilmsinterface/cache/Cache.kt,a\a\aa03a78a537fdc60a05ac6ce4692400e86d0d405
+x
+Hsrc/main/kotlin/org/example/dawfilmsinterface/clientes/dto/ClienteDto.kt,c\a\ca098f156e29e779b0ab1c0ee0d7cf29b7c04b6a
+}
+Msrc/main/kotlin/org/example/dawfilmsinterface/clientes/errors/ClienteError.kt,d\6\d6142d6ba18880f3a4c2b14daf042fc4f7b6e311
+x
+Hsrc/main/kotlin/org/example/dawfilmsinterface/clientes/models/Cliente.kt,b\5\b556adc73794ff541edd031e6cc87883b4c50ec8
+ˆ
+Xsrc/main/kotlin/org/example/dawfilmsinterface/clientes/repositories/ClienteRepository.kt,0\c\0c48472e53ff80421680fe935379612fed4e87f9
+
+`src/test/kotlin/org/example/dawfilmsinterface/cine/viewmodels/ObtenerRecaudacionViewModelTest.kt,a\2\a22ae643fd12b694a9507c904252533e4640325e
