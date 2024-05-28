@@ -19,12 +19,14 @@ import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.extension.ExtendWith
+import org.lighthousegames.logging.logging
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
+import java.time.LocalDate
 
 /**
  * Tests para comprobar el correcto funcionamiento del servicio de productos
@@ -32,6 +34,8 @@ import org.mockito.kotlin.verify
  * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
  * @since 1.0.0
  */
+
+private val logger = logging()
 @ExtendWith(MockitoExtension::class)
 class ProductoServiceImplTest {
 
@@ -164,12 +168,13 @@ class ProductoServiceImplTest {
 
     @Test
     fun getComplementoByNombre() {
-        val nombre = "Palomitas"
-        val complemento = Complemento("1", "Complemento", "futura_imagen.png", nombre, 3.0, 20, CategoriaComplemento.COMIDA)
+        val nombre = "Agua"
+        val complemento = Complemento("1", "Complemento", "agua.png", nombre, 3.0, 20, CategoriaComplemento.BEBIDA)
 
         Mockito.`when`(mockComplementoRepository.findByNombre(nombre)).thenReturn(complemento)
 
         val result = service.getComplementoByNombre(nombre)
+        logger.debug { result }
 
         assertTrue(result.isOk)
         assertTrue(result.value == complemento)

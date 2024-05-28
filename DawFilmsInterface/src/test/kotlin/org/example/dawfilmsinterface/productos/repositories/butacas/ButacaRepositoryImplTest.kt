@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.junit.jupiter.MockitoSettings
 import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
+import java.time.LocalDate
 
 /**
  * Tests para comprobar el correcto funcionamiento del repositorio de Butaca
@@ -50,7 +51,7 @@ class ButacaRepositoryImplTest {
     fun findAll() {
         val butaca = butacaRepository.findAll()
 
-        assertEquals(1, butaca.size)
+        assertEquals(35, butaca.size)
     }
 
     @Test
@@ -59,11 +60,11 @@ class ButacaRepositoryImplTest {
 
         assertEquals("A1", butaca?.id)
         assertEquals("Butaca", butaca?.tipoProducto)
-        assertEquals("futura_imagen.png", butaca?.imagen)
+        assertEquals("sinImagen.png", butaca?.imagen)
         assertEquals(0, butaca?.fila)
         assertEquals(0, butaca?.columna)
         assertEquals(TipoButaca.NORMAL, butaca?.tipoButaca)
-        assertEquals(EstadoButaca.ACTIVA, butaca?.estadoButaca)
+        assertEquals(EstadoButaca.MANTENIMIENTO, butaca?.estadoButaca)
         assertEquals(OcupacionButaca.LIBRE, butaca?.ocupacionButaca)
 
 
@@ -80,7 +81,7 @@ class ButacaRepositoryImplTest {
     fun save() {
         val butaca = butacaRepository.save(
             Butaca(
-                id = "A2",
+                id = "A8",
                 tipoProducto = "Butaca",
                 imagen = "futura_imagen2.png",
                 fila = 1,
@@ -91,7 +92,7 @@ class ButacaRepositoryImplTest {
             )
         )
 
-        assertEquals("A2", butaca.id)
+        assertEquals("A8", butaca.id)
         assertEquals("Butaca", butaca.tipoProducto)
         assertEquals("futura_imagen2.png", butaca.imagen)
         assertEquals(1, butaca.fila)

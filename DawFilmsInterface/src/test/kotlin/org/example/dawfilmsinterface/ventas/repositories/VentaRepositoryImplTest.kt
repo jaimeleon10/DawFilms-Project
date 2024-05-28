@@ -192,12 +192,26 @@ class VentaRepositoryImplTest {
     @Test
     fun validateCliente() {
 
-        val cliente = ventaRepository.validateCliente(clienteMuestra)
+        val mockCliente = Cliente(
+            id = 1,
+            nombre = "User",
+            apellido = "User",
+            fechaNacimiento = LocalDate.of(2000,5, 10),
+            dni = "12345678A",
+            email = "user@user.com",
+            numSocio = "AAA111",
+            password = "user",
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false)
+
+
+        val cliente = ventaRepository.validateCliente(mockCliente)
 
         logger.debug { cliente }
 
         assertTrue(cliente.isOk)
-        assertEquals (clienteMuestra, cliente.value)
+        assertEquals (mockCliente, cliente.value)
     }
 
     @Test

@@ -80,9 +80,11 @@ class ProductoServiceImpl(
     override fun getComplementoByNombre(nombre: String): Result<Complemento, ProductoError> {
         logger.debug { "Obteniendo complemento con nombre: $nombre" }
         return complementoRepository.findByNombre(nombre)
-            ?.let { Ok(it) }?.andThen { p ->
-                logger.debug { "Guardando en cache" }
+            ?.let {
+                    p ->
+                println("Guardando en cache")
                 productosCache.put(p.id, p) as Result<Complemento, ProductoError>
+                Ok(p)
             }
             ?: Err(ProductoError.ProductoNoEncontrado("Producto no encontrado con nombre: $nombre"))
     }
