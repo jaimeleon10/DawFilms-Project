@@ -2,6 +2,8 @@ package org.example.dawfilmsinterface.di
 
 
 import org.example.dawfilmsinterface.cache.Cache
+import org.example.dawfilmsinterface.cine.services.storage.CineStorageZip
+import org.example.dawfilmsinterface.cine.services.storage.CineStorageZipImpl
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
@@ -43,6 +45,7 @@ import org.example.dawfilmsinterface.cine.viewmodels.ConfirmarCompraViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ListadoComplementosViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.EstadoCineViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.MenuAdminViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -61,6 +64,9 @@ val appModule = module {
 
     singleOf(::SqlDeLightManager)
 
+    singleOf(::CineStorageZipImpl) {
+        bind<CineStorageZip>()
+    }
 
     // Cliente
     singleOf(::ClienteRepositoryImpl) {
@@ -159,4 +165,6 @@ val appModule = module {
     singleOf(::ListadoComplementosViewModel)
 
     singleOf(::EstadoCineViewModel)
+
+    singleOf(::MenuAdminViewModel)
 }
