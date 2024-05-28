@@ -33,11 +33,11 @@ class ClienteServiceImpl(
             failure = {
                 logger.debug { "Cliente no encontrado en cache" }
                 clienteRepository.findById(id)
-                    ?.let { Ok(it) }?.andThen {
+                    ?.let {
                         logger.debug { "Guardando en la cache" }
                         clienteCache.put(id, it)
-                    }
-                    ?: Err(ClienteError.ClienteNoEncontrado("Cliente no encontrado con id: $id"))
+                        Ok(it)
+                    }?: Err(ClienteError.ClienteNoEncontrado("Cliente no encontrado con id: $id"))
             }
         )
     }
@@ -45,10 +45,10 @@ class ClienteServiceImpl(
     override fun save(cliente: Cliente): Result<Cliente, ClienteError> {
         logger.debug { "Guardando cliente: $cliente" }
         return clienteValidator.validate(cliente).andThen {
-            Ok(clienteRepository.save(it))
-        }.andThen { c ->
+                c ->
             println("Guardando en cache")
             clienteCache.put(c.id, c)
+            Ok(clienteRepository.save(c))
         }
     }
 
@@ -56,11 +56,12 @@ class ClienteServiceImpl(
         logger.debug { "Actualizando cliente con id: $id" }
         return clienteValidator.validate(cliente).andThen { p ->
             clienteRepository.update(id, p)
-                ?.let { Ok(it) }
+                ?.let {
+                    logger.debug { "Guardando en la cache" }
+                    clienteCache.put(id, it)
+                    Ok(it)
+                }
                 ?: Err(ClienteError.ClienteNoActualizado("Cliente no actualizado con id: $id"))
-        }.andThen {
-            logger.debug { "Guardando en la cache" }
-            clienteCache.put(id, it)
         }
     }
 

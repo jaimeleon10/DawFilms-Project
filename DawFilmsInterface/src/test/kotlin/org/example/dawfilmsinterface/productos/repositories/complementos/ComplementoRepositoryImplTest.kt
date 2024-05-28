@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.junit.jupiter.MockitoSettings
 import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -52,7 +53,7 @@ class ComplementoRepositoryImplTest {
     fun findAll() {
         val complementos = complementoRepository.findAll()
 
-        assertEquals(1, complementos.size)
+        assertEquals(5, complementos.size)
     }
 
     @Test
@@ -61,16 +62,16 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("1", complemento?.id)
         assertEquals("Complemento", complemento?.tipoProducto)
-        assertEquals("futura_imagen.png", complemento?.imagen)
-        assertEquals("Palomitas", complemento?.nombre)
-        assertEquals(3.0, complemento?.precio)
+        assertEquals("agua.png", complemento?.imagen)
+        assertEquals("Agua", complemento?.nombre)
+        assertEquals(2.0, complemento?.precio)
         assertEquals(20, complemento?.stock)
-        assertEquals(CategoriaComplemento.COMIDA, complemento?.categoria)
+        assertEquals(CategoriaComplemento.BEBIDA, complemento?.categoria)
     }
 
     @Test
     fun findByIdNotFound() {
-        val complemento = complementoRepository.findById("5")
+        val complemento = complementoRepository.findById("99999999999999")
 
         assertEquals(null, complemento)
     }
@@ -79,7 +80,7 @@ class ComplementoRepositoryImplTest {
     fun save() {
         val complemento = complementoRepository.save(
             Complemento(
-                id = "2",
+                id = "5000",
                 tipoProducto = "Complemento",
                 imagen = "futura_imagen.png",
                 nombre = "Agua",
@@ -89,7 +90,7 @@ class ComplementoRepositoryImplTest {
             )
         )
 
-        assertEquals("2", complemento.id)
+        assertEquals("5000", complemento.id)
         assertEquals("Complemento", complemento.tipoProducto)
         assertEquals("futura_imagen.png", complemento.imagen)
         assertEquals("Agua", complemento.nombre)
