@@ -37,7 +37,7 @@
       </HBox>
       <AnchorPane layoutX="84.0" layoutY="541.0" prefHeight="100.0" prefWidth="750.0" style="-fx-background-color: #3D486A; -fx-border-style: dashed; -fx-border-color: #ffbd2e;">
          <children>
-            <Button fx:id="confirmarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="438.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Confirmar compra" textFill="WHITE">
+            <Button fx:id="confirmarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="494.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="234.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Confirmar compra" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -52,7 +52,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="cancelarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="62.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Cancelar compra" textFill="WHITE">
+            <Button fx:id="cancelarCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="34.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="218.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Cancelar compra" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -60,6 +60,21 @@
                   <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../dawfilmsinterface/icons/cancelarCompra.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="atrasCompraButton" alignment="CENTER" graphicTextGap="15.0" layoutX="282.0" layoutY="26.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="186.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver atrás" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/atrasCompra.png" />
                      </image>
                   </ImageView>
                </graphic>

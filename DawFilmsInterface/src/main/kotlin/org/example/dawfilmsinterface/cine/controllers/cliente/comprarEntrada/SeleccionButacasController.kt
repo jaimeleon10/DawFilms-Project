@@ -212,8 +212,7 @@ class SeleccionButacasController: KoinComponent {
 
     private fun initDefaultValues() {
 
-        val butacas = carritoViewModel.state.value.listadoButacasSeleccionadas.toList()
-        butacas.forEach { carritoViewModel.state.value.listadoButacasSeleccionadas.remove(it) }
+        if (carritoViewModel.state.value.nuevaCompra) carritoViewModel.iniciarNuevaCompra()
 
         continueButton.isDisable = true
 

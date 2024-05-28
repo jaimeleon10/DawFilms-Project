@@ -9,6 +9,7 @@ import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import javafx.scene.input.KeyCode
 
 private val logger = logging()
 
@@ -41,13 +42,13 @@ class LoginController: KoinComponent {
     private fun initialize(){
         userNameField.requestFocus()
         userNameField.setOnKeyPressed { event ->
-            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+            if (event.code == KeyCode.ENTER) {
                 continueButton.fire()
                 event.consume()
             }
         }
         passwordField.setOnKeyPressed { event ->
-            if (event.code == javafx.scene.input.KeyCode.ENTER) {
+            if (event.code == KeyCode.ENTER) {
                 continueButton.fire()
                 event.consume()
             }

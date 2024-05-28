@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
+import com.vaadin.open.Open
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
@@ -16,6 +17,8 @@ import org.example.dawfilmsinterface.ventas.models.Venta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtml
 import org.lighthousegames.logging.logging
+import java.io.File
+import java.nio.file.Paths
 import java.time.LocalDate
 import java.util.*
 import kotlin.io.path.Path
@@ -64,6 +67,28 @@ class ConfirmarCompraViewModel(
             actualizarStockComplementos()
         }
 
+    }
+
+    fun imprimirHtml(emailCliente: String) {
+        val venta = venta
+        val idsButacas = state.value.butacas.joinToString("-") { it.id }
+        val file = Path("FicherosDeCompra", "entrada_${idsButacas}_${venta.cliente.numSocio}_${venta.fechaCompra}.html").toFile()
+        state.value.htmlFileName = file.name
+        Alert(Alert.AlertType.CONFIRMATION).apply {
+            this.title = "Compra realizada con éxito"
+            this.headerText = "¿Deseas recibir el ticket de comprar en tú correo electrónico?"
+            this.contentText = "Correo de envío: $emailCliente"
+        }.showAndWait().ifPresent { opcion ->
+            if (opcion == ButtonType.OK) {
+                storage.exportHtml(venta, file)
+            }
+        }
+    }
+
+    fun openHtml() {
+        val file = Path("data", "FicherosDeCompra", state.value.htmlFileName).toFile()
+        val url = "http://localhost:63342/DawFilmsInterface/DawFilmsInterface/FicherosDeCompra/${file.name}"
+        Open.open(url)
     }
 
     private fun actualizarOcupacionButacas() {
@@ -128,21 +153,6 @@ class ConfirmarCompraViewModel(
         }
     }
 
-    fun imprimirHtml(emailCliente: String) {
-        val venta = venta
-        val idsButacas = state.value.butacas.joinToString("-") { it.id }
-        val file = Path("FicherosDeCompra", "entrada_${idsButacas}_${venta.cliente.numSocio}_${venta.fechaCompra}.html").toFile()
-        Alert(Alert.AlertType.CONFIRMATION).apply {
-            this.title = "Compra realizada con éxito"
-            this.headerText = "¿Deseas recibir el ticket de comprar en tú correo electrónico?"
-            this.contentText = "Correo de envío: $emailCliente"
-        }.showAndWait().ifPresent { opcion ->
-            if (opcion == ButtonType.OK) {
-                storage.exportHtml(venta, file)
-            }
-        }
-    }
-
     fun deleteLastValues() {
         state.value.butacas = mutableListOf()
         state.value.complementos = mutableMapOf()
@@ -150,6 +160,7 @@ class ConfirmarCompraViewModel(
     }
 
     data class GestionCompraState (
+        var htmlFileName: String = "",
         var lineas: MutableList<LineaVenta> = mutableListOf(),
         var complementos: MutableMap<Complemento, Int> = mutableMapOf(),
         var butacas: MutableList<Butaca> = mutableListOf(),

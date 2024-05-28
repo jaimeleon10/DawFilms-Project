@@ -95,6 +95,9 @@ class ConfirmarCompraController: KoinComponent {
     @FXML
     lateinit var precioTotalLabel: Label
 
+    @FXML
+    lateinit var atrasCompraButton: Button
+
     /**
      * Función que inicializa la vista de confirmación de compra.
      * Asigna las acciones a los botones y elementos de menú.
@@ -174,12 +177,17 @@ class ConfirmarCompraController: KoinComponent {
         confirmarCompraButton.setOnAction {
             viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
             viewModel.imprimirHtml(loginViewModel.state.value.currentCliente.email)
+            viewModel.openHtml()
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }
         cancelarCompraButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
+        }
+        atrasCompraButton.setOnAction {
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_COMPLEMENTOS}" }
+            RoutesManager.changeScene(view = RoutesManager.View.SELECCION_COMPLEMENTOS)
         }
     }
 

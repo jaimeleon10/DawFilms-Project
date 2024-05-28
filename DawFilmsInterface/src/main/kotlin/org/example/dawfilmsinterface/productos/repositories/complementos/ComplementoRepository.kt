@@ -9,4 +9,5 @@ interface ComplementoRepository {
     fun save (item: Complemento): Complemento
     fun update(id: String, item: Complemento): Complemento?
     fun delete(id: String): Complemento?
+    fun deleteAll()
 }

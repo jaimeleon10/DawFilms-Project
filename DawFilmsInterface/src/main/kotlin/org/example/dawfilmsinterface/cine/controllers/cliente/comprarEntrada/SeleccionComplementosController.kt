@@ -85,6 +85,9 @@ class SeleccionComplementosController: KoinComponent {
     @FXML
     lateinit var removeComplementButton: Button
 
+    @FXML
+    lateinit var backButacasButton: Button
+
     var complementosSeleccionados = 0
 
     /**
@@ -157,6 +160,10 @@ class SeleccionComplementosController: KoinComponent {
         }
         addComplementButton.setOnAction { onAñadirAction() }
         removeComplementButton.setOnAction { onEliminarAction() }
+        backButacasButton.setOnAction {
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.SELECCION_BUTACAS}" }
+            RoutesManager.changeScene(view = RoutesManager.View.SELECCION_BUTACAS)
+        }
     }
 
     private fun onAñadirAction() {
