@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
 import org.example.dawfilmsinterface.locale.toDefaultDateString
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.koin.core.component.KoinComponent
@@ -71,7 +72,7 @@ class ObtenerRecaudacionController : KoinComponent {
     lateinit var cantidadColumnTable: TableColumn<LineaVenta, Int>
 
     @FXML
-    lateinit var precioColumnTable: TableColumn<LineaVenta, Double>
+    lateinit var precioColumnTable: TableColumn<LineaVenta, String>
 
     /**
      * Función que inicializa la vista de obtención de recaudación.
@@ -99,7 +100,7 @@ class ObtenerRecaudacionController : KoinComponent {
         }
         cantidadColumnTable.cellValueFactory = PropertyValueFactory("cantidad")
         precioColumnTable.setCellValueFactory { cellData ->
-            SimpleObjectProperty(cellData.value.precio)
+            SimpleObjectProperty(cellData.value.precio.toDefaultMoneyString())
         }
 
         actualizarTotal()
