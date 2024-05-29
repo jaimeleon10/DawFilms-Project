@@ -10,6 +10,7 @@ interface ClienteService {
     fun save(cliente: Cliente): Result<Cliente, ClienteError>
     fun update(id: Long, cliente: Cliente): Result<Cliente, ClienteError>
     fun delete(id: Long): Result<Cliente, ClienteError>
+    fun deleteAllClientes(): Result<Unit, ClienteError>
     fun validateCliente(email:String,encryptedPassword:String): Result<Cliente,ClienteError>
     fun getByEmail(email: String): Result<Cliente, ClienteError>
 }

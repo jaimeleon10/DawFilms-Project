@@ -95,7 +95,7 @@ class VentaRepositoryImplTest {
 
     @Test
     fun findAll(){
-        val ventas = ventaRepository.findAll(
+        val ventas = ventaRepository.findAllVentasCliente(
             clienteMuestra,
             listOf(lineaVentaMuestra1,lineaVentaMuestra2),
             LocalDate.of(2024,5,18))
@@ -112,7 +112,7 @@ class VentaRepositoryImplTest {
         assertEquals("37c712fb-5531-4f33-a744-0fdb65cd9dcf", venta?.id.toString())
         assertEquals(1,venta?.cliente?.id)
         assertEquals(8, venta?.total?.toLong())
-        assertEquals(LocalDate.of(2024,5,20), venta?.fechaCompra )
+        assertEquals(LocalDate.now(), venta?.fechaCompra )
     }
 
     @Test

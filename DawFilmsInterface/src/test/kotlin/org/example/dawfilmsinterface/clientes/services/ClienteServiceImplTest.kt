@@ -7,12 +7,10 @@ import org.example.dawfilmsinterface.cache.errors.CacheError
 import org.example.dawfilmsinterface.clientes.cache.ClienteCache
 import org.example.dawfilmsinterface.clientes.errors.ClienteError
 import org.example.dawfilmsinterface.clientes.models.Cliente
-import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
 import org.example.dawfilmsinterface.clientes.validators.ClienteValidator
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.database.SqlDeLightManager
-import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -304,7 +302,6 @@ class ClienteServiceImplTest {
             isDeleted = false
         )
         val id = -1L
-        val message = "El cliente no se ha encontrado"
 
         whenever(mockClienteValidator.validate(mockCliente)).thenReturn(Ok (mockCliente))
         whenever (mockRepo.update(-1L, mockCliente)).thenReturn(null)
@@ -375,7 +372,6 @@ class ClienteServiceImplTest {
             isDeleted = false
         )
 
-        val message = "El cliente no se ha encontrado"
 
         whenever (mockRepo.delete(-2L)).thenReturn(null)
 

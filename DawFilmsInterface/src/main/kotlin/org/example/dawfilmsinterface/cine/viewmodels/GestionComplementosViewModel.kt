@@ -32,6 +32,7 @@ class GestionComplementosViewModel(
     private fun loadTypes() {
         logger.debug { "Cargando tipos" }
         state.value = state.value.copy(typesCategoria = TipoCategoria.entries.map { it.value })
+        state.value = state.value.copy(disponibilidades = Disponibilitys.entries.map { it.value })
     }
 
     private fun loadAllComplementos(){
@@ -46,7 +47,6 @@ class GestionComplementosViewModel(
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Complemento" }
         state.value = state.value.copy(
-            typesCategoria = state.value.complementos.map { it.categoria.toString() },
             complemento = ComplementoState()
         )
     }
@@ -68,9 +68,10 @@ class GestionComplementosViewModel(
                 nombre = complemento.nombre,
                 precio = complemento.precio,
                 stock = complemento.stock,
-                categoria = complemento.categoria.name,
+                categoria = if(complemento.categoria.name == "COMIDA") "COMIDA" else complemento.categoria.name,
                 imagen = imagen,
-                fileImage = fileImage
+                fileImage = fileImage,
+                isDeleted = complemento.isDeleted!!
             )
         )
     }
@@ -122,9 +123,6 @@ class GestionComplementosViewModel(
         }*/
 
         service.deleteComplemento(myId)
-        state.value = state.value.copy(
-            complementos = state.value.complementos.toMutableList().apply { this.removeIf{ it.id == myId} }
-        )
         updateActualState()
         return Ok(Unit)
     }
@@ -183,7 +181,8 @@ class GestionComplementosViewModel(
         precio: Double,
         stock: Int,
         categoria: String,
-        imagen: Image
+        imagen: Image,
+        isDeleted: Boolean
     ){
         logger.debug { "Actualizando estado de Complemento Operacion" }
         state.value = state.value.copy(
@@ -192,13 +191,16 @@ class GestionComplementosViewModel(
                 precio = precio,
                 stock = stock,
                 categoria = categoria,
-                imagen = imagen
+                imagen = imagen,
+                isDeleted = isDeleted
             )
         )
     }
 
     data class GestionState(
         val typesCategoria: List<String> = emptyList(),
+
+        val disponibilidades: List<String> = emptyList(),
 
         val complementos : List<Complemento> = emptyList(),
 
@@ -215,7 +217,8 @@ class GestionComplementosViewModel(
         val categoria : String = "",
         val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
         val fileImage : File? = null,
-        val oldFileImage : File? = null
+        val oldFileImage : File? = null,
+        val isDeleted : Boolean = false
     )
 
     enum class TipoOperacion(val value : String){
@@ -223,10 +226,14 @@ class GestionComplementosViewModel(
     }
 
     enum class TipoImagen(val value : String){
-        SIN_IMAGEN("octogatoNatalia.png"), EMPTY("")
+        SIN_IMAGEN("sinImagen.png"), EMPTY("")
     }
 
     enum class TipoCategoria(val value : String){
         BEBIDA("BEBIDA"), COMIDA("COMIDA")
+    }
+
+    enum class Disponibilitys(val value: String) {
+        FALSE("SI"), TRUE("NO")
     }
 }

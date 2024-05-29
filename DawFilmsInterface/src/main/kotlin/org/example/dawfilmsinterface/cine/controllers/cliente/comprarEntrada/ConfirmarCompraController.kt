@@ -133,21 +133,21 @@ class ConfirmarCompraController: KoinComponent {
         }
         complementosTable.columns.forEach {
             it.isResizable = false
-            it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
             it.isReorderable = false
         }
+        complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 
         viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
         butacasTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
         tipoButacasColumn.cellValueFactory = PropertyValueFactory("tipoButaca")
         filaButacasColumn.setCellValueFactory { cellData ->
-            val indice = cellData.value.fila
-            val filaLetra = filaALetra(indice)
-            SimpleStringProperty(filaLetra)
+            val fila = cellData.value.id[0].toString()
+            SimpleStringProperty(fila)
         }
         columnaButacasColumn.setCellValueFactory { cellData ->
-            val indice = cellData.value.columna + 1
-            SimpleStringProperty(indice.toString())
+            val col = cellData.value.id[1].toString()
+            SimpleStringProperty(col)
         }
         precioButacasColumn.setCellValueFactory { cellData ->
             val precio = cellData.value.tipoButaca.precio
@@ -178,7 +178,6 @@ class ConfirmarCompraController: KoinComponent {
         confirmarCompraButton.setOnAction {
             viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
             viewModel.imprimirHtml(loginViewModel.state.value.currentCliente.email)
-            viewModel.openHtml()
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }

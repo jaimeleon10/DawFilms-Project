@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
+import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert.AlertType
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -113,6 +115,7 @@ class ListadoComplementosAdminController : KoinComponent {
         precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toString() })
         stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
 
+
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
             if (complementosTable.items != newValue.complementos){
@@ -131,10 +134,20 @@ class ListadoComplementosAdminController : KoinComponent {
             it.isResizable = false
             it.isReorderable = false
         }
+        complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        complementosTable.columns[3].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 
         nombreColumnTable.cellValueFactory = PropertyValueFactory("nombre")
-        precioColumnTable.cellValueFactory = PropertyValueFactory("precio")
+        precioColumnTable.setCellValueFactory { cellData ->
+            val precio = cellData.value.precio
+            SimpleStringProperty(precio.toDefaultMoneyString())
+        }
         stockColumnTable.cellValueFactory = PropertyValueFactory("stock")
+        disponibilidadColumnTable.setCellValueFactory { cellData ->
+            val disponible = if (cellData.value.isDeleted == true) "No" else "Sí"
+            SimpleStringProperty(disponible)
+        }
 
         usernameField.text = loginViewModel.state.value.currentAdmin
     }
@@ -169,7 +182,7 @@ class ListadoComplementosAdminController : KoinComponent {
             title = "¿Eliminar complemento?"
             contentText = "¿Desea eliminar el complemento?"
         }.showAndWait().ifPresent{
-            if(it == ButtonType.OK){
+            if (it == ButtonType.OK) {
                 viewModel.eliminarComplemento().onSuccess {
                     logger.debug { "Complemento eliminado correctamente" }
                     showAlertOperacion(

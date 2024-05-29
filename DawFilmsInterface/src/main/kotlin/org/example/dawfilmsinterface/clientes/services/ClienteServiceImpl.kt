@@ -75,6 +75,13 @@ class ClienteServiceImpl(
             } ?: Err(ClienteError.ClienteNoEliminado("Butaca no eliminada con id: $id"))
     }
 
+    override fun deleteAllClientes(): Result<Unit, ClienteError> {
+        logger.debug { "Borrando todos los clientes" }
+        clienteRepository.deleteAll()
+        clienteCache.clear()
+        return Ok(Unit)
+    }
+
     override fun validateCliente(email: String, encryptedPassword: String): Result<Cliente, ClienteError> {
         logger.debug { "Validando email y password del cliente con email $email" }
         return clienteRepository.validate(email,encryptedPassword)

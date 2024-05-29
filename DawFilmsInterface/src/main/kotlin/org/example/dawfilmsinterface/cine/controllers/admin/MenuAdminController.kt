@@ -16,6 +16,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import com.github.michaelbull.result.*
+import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
+import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.ventas.models.Venta
 
 private val logger = logging()
 
@@ -99,17 +104,17 @@ class MenuAdminController: KoinComponent {
             logger.debug { "Importando butacas desde el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Butacas"
-                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
-                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo", "*.csv", "*json", "*.xml"))
                 showOpenDialog(RoutesManager.activeStage)
             }?.let { file ->
                 logger.debug { "Importando butacas" }
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.importarButacas(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Butacas importadas",
-                        mensaje = "Se han importado todas las butacas.\nButacas importadas: ${it.size}"
+                        header = "Se han importado todas las butacas.",
+                        mensaje = "Butacas importadas: ${it.filterIsInstance<Butaca>().size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -132,8 +137,10 @@ class MenuAdminController: KoinComponent {
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.exportarButacas(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Butacas exportadas",
-                        mensaje = "Se han exportado todas las butacas.\nButacas exportadas: ${it}"
+                        header = "Se han exportado todas las butacas",
+                        mensaje = "Butacas exportadas: ${it}"
                     )
                     }.onFailure { error ->
                         showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
@@ -146,17 +153,17 @@ class MenuAdminController: KoinComponent {
             logger.debug { "Importando complementos desde el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Complementos"
-                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
-                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo", "*.csv", "*json", "*.xml"))
                 showOpenDialog(RoutesManager.activeStage)
             }?.let { file ->
                 logger.debug { "Importando complementos" }
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.importarComplementos(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Complementos importados",
-                        mensaje = "Se han importado todos los complementos.\nComplementos importados: ${it.size}"
+                        header = "Se han importado todos los complementos",
+                        mensaje = "Complementos importados: ${it.filterIsInstance<Complemento>().size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -178,8 +185,10 @@ class MenuAdminController: KoinComponent {
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.exportarComplementos(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Complementos exportados",
-                        mensaje = "Se han exportado todos los complementos.\nComplementos exportados: ${it}"
+                        header = "Se han exportado todos los complementos",
+                        mensaje = "Complementos exportados: ${it}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
@@ -188,20 +197,58 @@ class MenuAdminController: KoinComponent {
             }
         }
 
-        // TODO -> CONTINUAR DESDE AQUÍ
-
-        importBackUpButton.setOnAction {  }
-
-        backUpButton.setOnAction {
-            logger.debug { "Realizando backup y guardando en el explorador de archivos" }
+        importBackUpButton.setOnAction {
+            logger.debug { "Cargando copia de seguridad" }
             FileChooser().run {
-                title = "Importar Butacas"
+                title = "Importando copia de seguridad"
                 extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
-                showSaveDialog(RoutesManager.activeStage)
+                showOpenDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Importando copia de seguridad" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.importarZip(file).onSuccess {
+                    val clientesRestaurados = if (it.filterIsInstance<Cliente>().isEmpty()) "Sí" else "No"
+                    val productosRestaurados = if (it.filterIsInstance<Producto>().isEmpty()) "Sí" else "No"
+                    val ventasRestauradas = if (it.filterIsInstance<Venta>().isEmpty()) "Sí" else "No"
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Copia de seguridad importada",
+                        header = "Se ha importado la copia de seguridad",
+                        mensaje = "Dominios restaurados: \nClientes: $clientesRestaurados \nProductos: $productosRestaurados \nVentas: $ventasRestauradas"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar la copia de seguridad", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
         }
 
-        exportCineButton.setOnAction { RoutesManager.initExportEstadoCine() }
+        backUpButton.setOnAction {
+            logger.debug { "Guardando copia de seguridad" }
+            FileChooser().run {
+                title = "Exportando copia de seguridad"
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
+                showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando copia de seguridad" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarZip(file).onSuccess {
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Copia de seguridad guardada",
+                        header = "Se ha guardado la copia de seguridad",
+                        mensaje = "Ruta: \n$file"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al guardar la copia de seguridad", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
+            }
+        }
+
+        exportCineButton.setOnAction {
+            RoutesManager.initExportEstadoCine()
+        }
 
         exitButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
@@ -235,10 +282,12 @@ class MenuAdminController: KoinComponent {
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
         title: String = "",
-        mensaje: String = ""
+        mensaje: String = "",
+        header: String = ""
     ) {
         Alert(alerta).apply {
             this.title = title
+            this.headerText = header
             this.contentText = mensaje
         }.showAndWait()
     }

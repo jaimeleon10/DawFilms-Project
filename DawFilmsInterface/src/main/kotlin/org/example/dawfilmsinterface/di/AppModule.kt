@@ -47,6 +47,7 @@ import org.example.dawfilmsinterface.cine.viewmodels.EstadoCineViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.ObtenerRecaudacionViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.MenuAdminViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.RecuperarPasswordViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.RegistroViewModel
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepository
 import org.example.dawfilmsinterface.ventas.repositories.VentaRepositoryImpl
 import org.example.dawfilmsinterface.ventas.services.VentaService
@@ -171,4 +172,5 @@ val appModule = module {
 
     singleOf(::MenuAdminViewModel)
 
+    singleOf(::RegistroViewModel)
 }
