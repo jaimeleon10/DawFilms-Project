@@ -82,9 +82,9 @@ class ClienteServiceImpl(
             ?: Err(ClienteError.ClienteValidationError("Login o password incorrectos"))
     }
     override fun getByEmail(email: String): Result<Cliente, ClienteError> {
-        logger.debug { "Validando email y password del cliente con email $email" }
+        logger.debug { "Obteniendo cliente con email $email" }
         return clienteRepository.findByEmail(email)
             ?.let { Ok(it) }
-            ?: Err(ClienteError.ClienteValidationError("Login o password incorrectos"))
+            ?: Err(ClienteError.ClienteValidationError("No existe un cliente con email $email"))
     }
 }

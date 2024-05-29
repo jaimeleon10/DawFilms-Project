@@ -1,16 +1,25 @@
 package org.example.dawfilmsinterface.cine.controllers.loginRegister.recuperarContraseña
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.MenuItem
 import javafx.scene.control.TextField
 import javafx.stage.Stage
+import org.example.dawfilmsinterface.cine.viewmodels.RecuperarPasswordViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
-class CodigoContraseñaOlvidadaController {
+class CodigoContraseñaOlvidadaController :KoinComponent {
+
+    val viewModel: RecuperarPasswordViewModel by inject()
+
     @FXML
     lateinit var backLoginButton: Button
 
@@ -34,15 +43,44 @@ class CodigoContraseñaOlvidadaController {
 
     @FXML
     private fun initialize() {
-        continueButton.setOnAction {
-            RoutesManager.initNuevaRecuperarPass()
-            stage.close()
-        }
+
+        codeField.requestFocus()
+
+        continueButton.setOnAction { continuar() }
+
         backLoginButton.setOnAction {
             RoutesManager.initEmailRecuperarPass()
             stage.close()
         }
+
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
+
         backLoginMenuButton.setOnAction { stage.close() }
+    }
+
+    private fun continuar() {
+        viewModel.validateRestoredCode(codeField.text)
+            .onSuccess {
+                logger.debug { "Validado código de recuperación" }
+                RoutesManager.initNuevaRecuperarPass()
+                stage.close()
+            }.onFailure {
+                logger.debug { "Código de recuperación incorrecto" }
+                showAlertOperacion(alerta = Alert.AlertType.ERROR,
+                    "Error en la recuperación de contraseña",
+                    "Error, el código de recuperación es incorrecto, por favor introdúzcalo de nuevo.")
+            }
+    }
+    private fun showAlertOperacion(
+        alerta: Alert.AlertType = Alert.AlertType.CONFIRMATION,
+        title: String = "",
+        mensajeEncabezado: String = "",
+        mensajePie:String=""
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.headerText = mensajeEncabezado
+            this.contentText = mensajePie
+        }.showAndWait()
     }
 }
