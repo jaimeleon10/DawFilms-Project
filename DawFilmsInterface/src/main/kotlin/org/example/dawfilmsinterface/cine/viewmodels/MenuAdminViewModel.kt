@@ -27,8 +27,10 @@ class MenuAdminViewModel(
             return storageProductos.loadCsv(file).onSuccess { listaProductos ->
                 val listaButacas: List<Butaca> = listaProductos.filterIsInstance<Butaca>()
                 if (listaButacas.size == 35) {
-                    serviceProductos.deleteAllProductos()
+                    serviceProductos.deleteAllButacas()
                     serviceProductos.saveAllButacas(listaButacas)
+                } else {
+                    logger.debug { "Butacas no importadas, debe haber 35 exactas para coincidir con el tamaño del cine" }
                 }
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
@@ -38,8 +40,10 @@ class MenuAdminViewModel(
             return storageProductos.loadJson(file).onSuccess { listaProductos ->
                 val listaButacas: List<Butaca> = listaProductos.filterIsInstance<Butaca>()
                 if (listaButacas.size == 35) {
-                    serviceProductos.deleteAllProductos()
+                    serviceProductos.deleteAllButacas()
                     serviceProductos.saveAllButacas(listaButacas)
+                } else {
+                    logger.debug { "Butacas no importadas, debe haber 35 exactas para coincidir con el tamaño del cine" }
                 }
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
@@ -49,8 +53,10 @@ class MenuAdminViewModel(
             return storageProductos.loadXml(file).onSuccess { listaProductos ->
                 val listaButacas: List<Butaca> = listaProductos.filterIsInstance<Butaca>()
                 if (listaButacas.size == 35) {
-                    serviceProductos.deleteAllProductos()
+                    serviceProductos.deleteAllButacas()
                     serviceProductos.saveAllButacas(listaButacas)
+                } else {
+                    logger.debug { "Butacas no importadas, debe haber 35 exactas para coincidir con el tamaño del cine" }
                 }
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
@@ -75,11 +81,10 @@ class MenuAdminViewModel(
         if (file.extension == "csv") {
             logger.debug { "Cargando complementos de CSV" }
             return storageProductos.loadCsv(file).onSuccess { listaProductos ->
+                logger.warn { listaProductos.forEach { println(it) } }
                 val listaComplementos: List<Complemento> = listaProductos.filterIsInstance<Complemento>()
-                if (listaComplementos.size == 35) {
-                    serviceProductos.deleteAllProductos()
-                    serviceProductos.saveAllComplementos(listaComplementos)
-                }
+                serviceProductos.deleteAllComplementos()
+                serviceProductos.saveAllComplementos(listaComplementos)
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
             }
@@ -87,10 +92,8 @@ class MenuAdminViewModel(
             logger.debug { "Cargando butacas desde archivo JSON" }
             return storageProductos.loadJson(file).onSuccess { listaProductos ->
                 val listaComplementos: List<Complemento> = listaProductos.filterIsInstance<Complemento>()
-                if (listaComplementos.size == 35) {
-                    serviceProductos.deleteAllProductos()
-                    serviceProductos.saveAllComplementos(listaComplementos)
-                }
+                serviceProductos.deleteAllComplementos()
+                serviceProductos.saveAllComplementos(listaComplementos)
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
             }
@@ -98,10 +101,8 @@ class MenuAdminViewModel(
             logger.debug { "Cargando butacas desde archivo CSV" }
             return storageProductos.loadXml(file).onSuccess { listaProductos ->
                 val listaComplementos: List<Complemento> = listaProductos.filterIsInstance<Complemento>()
-                if (listaComplementos.size == 35) {
-                    serviceProductos.deleteAllProductos()
-                    serviceProductos.saveAllComplementos(listaComplementos)
-                }
+                serviceProductos.deleteAllComplementos()
+                serviceProductos.saveAllComplementos(listaComplementos)
             }.onFailure {
                 Err(ProductoError.ProductoStorageError(it.message))
             }

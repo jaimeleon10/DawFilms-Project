@@ -23,7 +23,7 @@ class GestionComplementosViewModel(
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
-    init {
+    fun initialize() {
         logger.debug { "Inicializando GestionComplementosViewModel" }
         loadAllComplementos()
         loadTypes()

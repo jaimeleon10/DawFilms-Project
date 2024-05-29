@@ -23,7 +23,7 @@ class GestionButacaViewModel(
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
-    init {
+    fun initialize() {
         logger.debug { "Inicializando ActualizarButacaViewModel" }
         loadAllButacas()
         loadTypes()
