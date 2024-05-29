@@ -124,6 +124,8 @@ class ListadoComplementosAdminController : KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
+        viewModel.initialize()
+
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
         complementosTable.columns.forEach {
             it.isResizable = false
