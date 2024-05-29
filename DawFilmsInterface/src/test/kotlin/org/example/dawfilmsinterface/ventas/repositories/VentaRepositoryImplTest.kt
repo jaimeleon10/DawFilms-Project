@@ -95,7 +95,7 @@ class VentaRepositoryImplTest {
 
     @Test
     fun findAll(){
-        val ventas = ventaRepository.findAll(
+        val ventas = ventaRepository.findAllVentasCliente(
             clienteMuestra,
             listOf(lineaVentaMuestra1,lineaVentaMuestra2),
             LocalDate.of(2024,5,18))
