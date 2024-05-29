@@ -6,6 +6,8 @@ import org.example.dawfilmsinterface.cine.errors.CineError
 import org.example.dawfilmsinterface.cine.services.storage.CineStorageZip
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
+import org.example.dawfilmsinterface.config.Config
+import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import java.io.File
@@ -17,6 +19,7 @@ import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.models.Venta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
+import java.nio.file.Files
 import java.time.LocalDate
 import java.util.*
 
@@ -27,7 +30,9 @@ class MenuAdminViewModel(
     private val serviceVentas: VentaService,
     private val serviceClientes: ClienteService,
     private val storageZip: CineStorageZip,
-    private val storageProductos: ProductosStorage
+    private val storageProductos: ProductosStorage,
+    private val database: SqlDeLightManager,
+    private val config: Config
 ) {
     val state: SimpleObjectProperty<MenuAdminState> = SimpleObjectProperty(MenuAdminState())
 
@@ -168,23 +173,26 @@ class MenuAdminViewModel(
             val butacas: List<Butaca> = listaCine.filterIsInstance<Butaca>()
             val complementos: List<Complemento> = listaCine.filterIsInstance<Complemento>()
 
+            Files.deleteIfExists(File(config.dataBaseUrl.removePrefix("jdbc:sqlite:")).toPath())
+            database.initQueries()
+
             if (clientes.isNotEmpty()) {
-                serviceClientes.deleteAllClientes()
+                //serviceClientes.deleteAllClientes()
                 clientes.forEach { serviceClientes.save(it) }
             }
 
             if (ventas.isNotEmpty()) {
-                serviceVentas.deleteAllVentas()
+                //serviceVentas.deleteAllVentas()
                 ventas.forEach { serviceVentas.createVenta(it) }
             }
 
             if (butacas.isNotEmpty()) {
-                serviceProductos.deleteAllButacas()
+                //serviceProductos.deleteAllButacas()
                 serviceProductos.saveAllButacas(butacas)
             }
 
             if (complementos.isNotEmpty()) {
-                serviceProductos.deleteAllComplementos()
+                //serviceProductos.deleteAllComplementos()
                 serviceProductos.saveAllComplementos(complementos)
             }
 

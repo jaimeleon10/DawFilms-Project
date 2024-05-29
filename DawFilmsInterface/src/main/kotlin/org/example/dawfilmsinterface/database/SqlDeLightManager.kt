@@ -22,7 +22,7 @@ class SqlDeLightManager(
         initialize()
     }
 
-    private fun initQueries(): DatabaseQueries {
+    fun initQueries(): DatabaseQueries {
         return if (config.dataBaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
             JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
@@ -39,11 +39,10 @@ class SqlDeLightManager(
     fun initialize() {
         if (config.databaseInitData) {
             removeAllData()
-            initDataExamples()
         }
     }
 
-    private fun initDataExamples() {
+     fun initDataExamples() {
         databaseQueries.transaction {
             databaseQueries.insertButaca("A1","Butaca", "sinImagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertButaca("A2","Butaca", "sinImagen.png", 5.0, 0, 1, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
