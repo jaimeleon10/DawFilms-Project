@@ -24,8 +24,10 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.doNothing
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import java.time.LocalDate
 
 /**
@@ -200,6 +202,27 @@ class ProductoServiceImplTest {
         verify(mockProductosCache, times(0)).put(nombre, complemento)
     }
 
+
+    @Test
+    fun saveAllButacas(){
+        val id = "A36"
+        val butaca = Butaca(id, "Butaca", "futura_imagen.png", 1, 1, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        val id2 = "A36"
+        val butaca2 = Butaca(id2, "Butaca", "futura_imagen.png", 1, 1, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE)
+
+        val lista = listOf(butaca, butaca2)
+
+        whenever(mockButacaRepository.saveAll(lista)).thenReturn(lista)
+
+        val lista2 = service.saveAllButacas(lista)
+
+        assertAll(
+            {assertTrue (lista2.isOk)},
+            { assertEquals(2, lista2.value.size ) }
+        )
+    }
+
     @Test
     fun saveButaca() {
         val id = "A2"
@@ -217,6 +240,26 @@ class ProductoServiceImplTest {
         verify(mockButacaValidator, times(1)).validate(butaca)
         verify(mockButacaRepository, times(1)).save(butaca)
         verify(mockProductosCache, times(1)).put(id, butaca)
+    }
+
+    @Test
+    fun saveAllComplementos(){
+        val id = "1"
+        val complemento = Complemento(id, "Complemento", "futura_imagen.png", "Agua", 2.0, 20, CategoriaComplemento.BEBIDA)
+
+        val id2 = "2"
+        val complemento2 = Complemento(id2, "Complemento", "futura_imagen.png", "Agua", 2.0, 20, CategoriaComplemento.BEBIDA)
+
+        val lista = listOf(complemento, complemento2)
+
+        whenever(mockComplementoRepository.saveAll(lista)).thenReturn(lista)
+
+        val lista2 = service.saveAllComplementos(lista)
+
+        assertAll(
+            {assertTrue (lista2.isOk)},
+            { assertEquals(2, lista2.value.size ) }
+        )
     }
 
     @Test
@@ -311,6 +354,58 @@ class ProductoServiceImplTest {
         verify(mockButacaValidator, times(1)).validate(butaca)
         verify(mockButacaRepository, times(1)).update(id, butaca)
         verify(mockProductosCache, times(0)).put(id, butaca)
+    }
+
+    @Test
+    fun deleteAllProductos(){
+
+        doNothing().whenever(mockButacaRepository).deleteAll()
+        doNothing().whenever(mockComplementoRepository).deleteAll()
+
+        service.deleteAllProductos()
+
+        val lista = service.getAllProductos()
+
+        logger.debug { lista.value.size }
+
+        assertAll(
+            { assertTrue(lista.isOk)},
+            { assertEquals(0, lista.value.size)}
+        )
+    }
+
+    @Test
+    fun deleteAllButacas(){
+
+        doNothing().whenever(mockButacaRepository).deleteAll()
+
+        service.deleteAllButacas()
+
+        val lista = service.getAllButacas()
+
+        logger.debug { lista.value.size }
+
+        assertAll(
+            { assertTrue(lista.isOk) },
+            { assertEquals(0, lista.value.size)}
+        )
+    }
+
+    @Test
+    fun deleteAllComplementos(){
+
+        doNothing().whenever(mockComplementoRepository).deleteAll()
+
+        service.deleteAllComplementos()
+
+        val lista = service.getAllComplementos()
+
+        logger.debug { lista.value.size }
+
+        assertAll(
+            { assertTrue(lista.isOk) },
+            { assertEquals(0, lista.value.size)}
+        )
     }
 
     @Test

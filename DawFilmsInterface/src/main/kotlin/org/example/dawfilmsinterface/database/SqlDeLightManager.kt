@@ -36,7 +36,7 @@ class SqlDeLightManager(
         }.databaseQueries
     }
 
-    private fun initialize() {
+    fun initialize() {
         if (config.databaseInitData) {
             removeAllData()
             initDataExamples()
