@@ -38,12 +38,12 @@ class VentaServiceImpl(
         return Ok(ventaRepository.findAllLineas())
     }
 
-    override fun getAllVentasCliente(cliente: Cliente, lineas: List<LineaVenta>, fecha: LocalDate): Result<List<Venta>, VentaError> {
+    override fun getAllVentasByCliente(cliente: Cliente, lineas: List<LineaVenta>, fecha: LocalDate): Result<List<Venta>, VentaError> {
         logger.debug { "Obteniendo ventas del cliente ${cliente.nombre}" }
         return Ok(ventaRepository.findAllVentasCliente(cliente, lineas, fecha))
     }
 
-    override fun getAllVentas(): Result<List<VentaEntity>, VentaError> {
+    override fun getAllVentasEntity(): Result<List<VentaEntity>, VentaError> {
         logger.debug { "Obteniendo todas las ventas}" }
         return Ok(ventaRepository.findAllVentas())
     }
@@ -51,5 +51,15 @@ class VentaServiceImpl(
     override fun getAllLineasByVentaID(id: String): Result<List<LineaVenta>, VentaError> {
         logger.debug { "Obteniendo todas las lineas de venta del id de venta: $id}" }
         return Ok(ventaRepository.findAllLineasByID(id))
+    }
+
+    override fun getAllVentasByDate(fechaCompra: LocalDate): Result<List<VentaEntity>, VentaError> {
+        logger.debug { "Obteniendo todas las ventas dada una fecha" }
+        return Ok(ventaRepository.findVentasByDate(fechaCompra))
+    }
+
+    override fun deleteAllVentas(): Result<Unit, VentaError> {
+        logger.debug { "Borrando todas las ventas" }
+        return Ok(ventaRepository.deleteAllVentas())
     }
 }

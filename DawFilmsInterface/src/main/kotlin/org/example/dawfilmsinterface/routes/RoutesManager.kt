@@ -61,7 +61,7 @@ object RoutesManager {
     }
 
     fun initMainStage(stage: Stage) {
-        logger.debug { "Inicializando ventana ${stage.title}" }
+        logger.debug { "Inicializando ventana: pantalla de carga" }
 
         val fxmlLoader = FXMLLoader(getResource(View.PANTALLA_DE_CARGA.fxml))
         val parentRoot = fxmlLoader.load<Pane>()

@@ -6,6 +6,8 @@ import org.example.dawfilmsinterface.cine.errors.CineError
 import org.example.dawfilmsinterface.cine.services.storage.CineStorageZip
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
+import org.example.dawfilmsinterface.config.Config
+import org.example.dawfilmsinterface.database.SqlDeLightManager
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import java.io.File
@@ -17,6 +19,7 @@ import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.models.Venta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
+import java.nio.file.Files
 import java.time.LocalDate
 import java.util.*
 
@@ -27,7 +30,9 @@ class MenuAdminViewModel(
     private val serviceVentas: VentaService,
     private val serviceClientes: ClienteService,
     private val storageZip: CineStorageZip,
-    private val storageProductos: ProductosStorage
+    private val storageProductos: ProductosStorage,
+    private val database: SqlDeLightManager,
+    private val config: Config
 ) {
     val state: SimpleObjectProperty<MenuAdminState> = SimpleObjectProperty(MenuAdminState())
 
@@ -91,7 +96,6 @@ class MenuAdminViewModel(
         if (file.extension == "csv") {
             logger.debug { "Cargando complementos de CSV" }
             return storageProductos.loadCsv(file).onSuccess { listaProductos ->
-                logger.warn { listaProductos.forEach { println(it) } }
                 val listaComplementos: List<Complemento> = listaProductos.filterIsInstance<Complemento>()
                 serviceProductos.deleteAllComplementos()
                 serviceProductos.saveAllComplementos(listaComplementos)
@@ -138,7 +142,7 @@ class MenuAdminViewModel(
         val listClientes = serviceClientes.getAll().value
         val listVentas = mutableListOf<Venta>()
 
-        val listVentasEntity = serviceVentas.getAllVentas().value
+        val listVentasEntity = serviceVentas.getAllVentasEntity().value
         var cliente: Cliente
         var lineas: List<LineaVenta> = listOf()
 
@@ -161,15 +165,60 @@ class MenuAdminViewModel(
     }
 
     fun importarZip(file: File): Result<List<Any>, CineError> {
-        // TODO -> Importar zip y cargar en bbdd cada linea
-        return Ok(listOf()) // BORRAR, SOLO PARA QUE NO DE ERROR
+        logger.debug { "Importando datos desde ZIP" }
+        storageZip.loadFromZip(file).onSuccess { listaCine ->
+            val clientes: List<Cliente> = listaCine.filterIsInstance<Cliente>()
+            val ventas: List<Venta> = listaCine.filterIsInstance<Venta>()
+            val butacas: List<Butaca> = listaCine.filterIsInstance<Butaca>()
+            val complementos: List<Complemento> = listaCine.filterIsInstance<Complemento>()
+
+            database.initQueries()
+
+            if (clientes.isNotEmpty()) {
+                serviceClientes.deleteAllClientes()
+                clientes.forEach { serviceClientes.save(it) }
+            }
+
+            if (ventas.isNotEmpty()) {
+                serviceVentas.deleteAllVentas()
+                ventas.forEach { serviceVentas.createVenta(it) }
+            }
+
+            if (butacas.isNotEmpty()) {
+                serviceProductos.deleteAllButacas()
+                serviceProductos.saveAllButacas(butacas)
+            }
+
+            if (complementos.isNotEmpty()) {
+                serviceProductos.deleteAllComplementos()
+                serviceProductos.saveAllComplementos(complementos)
+            }
+
+        }.onFailure {
+            Err(ProductoError.ProductoStorageError(it.message))
+        }
+        return Ok(listOf())
     }
 
-    fun exportarEstadoCine() {
+    fun exportarEstadoCine(file: File): Result<Long, ProductoError> {
+        logger.debug { "Exportando estado del cine" }
+        val ventasFecha = serviceVentas.getAllVentasByDate(state.value.fechaEstadoCine).value
+        val lineas: MutableList<LineaVenta> = mutableListOf()
+        val pructosEstadoCine: MutableList<Producto> = mutableListOf()
 
+        for (venta in ventasFecha) serviceVentas.getAllLineasByVentaID(venta.id).value.forEach { lineas.add(it) }
+
+        for (linea in lineas) pructosEstadoCine.add(linea.producto)
+
+        if (pructosEstadoCine.isEmpty()) {
+            return Err(ProductoError.ProductoNoEncontrado("No existen ventas en la fecha dada"))
+        }
+        else {
+            return Ok(storageProductos.storeJson(file, pructosEstadoCine).value)
+        }
     }
 
     data class MenuAdminState(
-        val hola: String = ""
+        var fechaEstadoCine: LocalDate = LocalDate.now()
     )
 }

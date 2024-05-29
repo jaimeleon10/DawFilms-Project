@@ -81,11 +81,12 @@ class ConfirmarCompraViewModel(
         }.showAndWait().ifPresent { opcion ->
             if (opcion == ButtonType.OK) {
                 storage.exportHtml(venta, file)
+                openHtml()
             }
         }
     }
 
-    fun openHtml() {
+    private fun openHtml() {
         val file = Path("data", "FicherosDeCompra", state.value.htmlFileName).toFile()
         val url = "http://localhost:63342/DawFilmsInterface/DawFilmsInterface/FicherosDeCompra/${file.name}"
         Open.open(url)
