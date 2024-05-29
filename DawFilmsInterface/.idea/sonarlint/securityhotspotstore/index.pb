@@ -179,3 +179,9 @@ Hsrc/main/kotlin/org/example/dawfilmsinterface/clientes/models/Cliente.kt,b\5\b
 Xsrc/main/kotlin/org/example/dawfilmsinterface/clientes/repositories/ClienteRepository.kt,0\c\0c48472e53ff80421680fe935379612fed4e87f9
 ê
 `src/test/kotlin/org/example/dawfilmsinterface/cine/viewmodels/ObtenerRecaudacionViewModelTest.kt,a\2\a22ae643fd12b694a9507c904252533e4640325e
+í
+bsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/loginRegister/RegisterController.kt,a\4\a4e232ffc4736dbdbd1fbaa17635e3499fa81da9
+Ç
+Rsrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/RegistroViewModel.kt,a\5\a582522e0e75d556908241bab8a09840b5ce5a44
+ã
+[src/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/SeleccionarButacaViewModel.kt,a\f\afb025b8ac353e5635dd716ec05120946f115158
