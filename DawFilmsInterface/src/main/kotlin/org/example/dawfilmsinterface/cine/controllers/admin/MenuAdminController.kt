@@ -215,7 +215,7 @@ class MenuAdminController: KoinComponent {
                         mensaje = "Dominios restaurados: \nClientes: $clientesRestaurados \nProductos: $productosRestaurados \nVentas: $ventasRestauradas"
                     )
                 }.onFailure { error ->
-                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al guardar la copia de seguridad", mensaje = error.message)
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar la copia de seguridad", mensaje = error.message)
                 }
                 RoutesManager.activeStage.scene.cursor = DEFAULT
             }
@@ -245,8 +245,26 @@ class MenuAdminController: KoinComponent {
         }
 
         exportCineButton.setOnAction {
-            // TODO !!!!!!!!!!
             RoutesManager.initExportEstadoCine()
+            FileChooser().run {
+                title = "Exportando estado del cine dada una fecha"
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
+                showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando estado del cine" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarEstadoCine(file).onSuccess {
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Estado del cine exportado",
+                        header = "Se ha exportado el estado del cine",
+                        mensaje = "Ruta: \n$file"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar el estado del cine", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
+            }
         }
 
         exitButton.setOnAction {
