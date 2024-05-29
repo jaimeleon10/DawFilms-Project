@@ -1,5 +1,8 @@
 package org.example.dawfilmsinterface.cine.controllers.loginRegister.recuperarContraseña
 
+import com.github.michaelbull.result.andThen
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Button
@@ -44,9 +47,9 @@ class NuevaContraseñaOlvidadaController: KoinComponent {
 
     @FXML
     private fun initialize() {
-        continueButton.setOnAction { stage.close() }
+        continueButton.setOnAction { nuevoPassword() }
 
-        backLoginButton.setOnAction { nuevoPassword() }
+        backLoginButton.setOnAction { stage.close() }
 
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
 
@@ -65,9 +68,26 @@ class NuevaContraseñaOlvidadaController: KoinComponent {
             return
 
         } else {
-            //viewModel.validatePassword(newPassField.text)
-            //viewModel.updatePassword(newPassField.text)
-            stage.close()
+            viewModel.validateUserPassword(newPassField.text).onSuccess {
+                logger.debug { "Formato password correcto, actualizando usuario" }
+                viewModel.updatePassword().onSuccess {
+                    showAlertOperacion(alerta = Alert.AlertType.INFORMATION,
+                        title="Contraseña correcta",
+                        mensajeEncabezado = "Contraseña actualizada.")
+                }.onFailure {
+                    showAlertOperacion(alerta = Alert.AlertType.ERROR,
+                        title = "Error en la recuperación de contraseña",
+                        mensajeEncabezado = "La contraseña no se pudo actualizar")
+                }
+
+                stage.close()
+            }.onFailure {
+                    logger.debug { "Formato de password incorrecto" }
+                showAlertOperacion(alerta = Alert.AlertType.ERROR,
+                    title = "Error en la recuperación de contraseña",
+                    mensajeEncabezado = "La contraseña no es válida",
+                    mensajePie = "La contraseña debe tener 5 caracteres o mas, y contener al menos un número, una letra (al menos una mayúscula)")
+            }
         }
     }
 
