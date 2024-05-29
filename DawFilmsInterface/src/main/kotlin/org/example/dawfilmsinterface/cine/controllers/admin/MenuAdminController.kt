@@ -16,6 +16,9 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import com.github.michaelbull.result.*
+import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.ventas.models.Venta
 
 private val logger = logging()
 
@@ -108,7 +111,8 @@ class MenuAdminController: KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         title = "Butacas importadas",
-                        mensaje = "Se han importado todas las butacas.\nButacas importadas: ${it.size}"
+                        header = "Se han importado todas las butacas.",
+                        mensaje = "Butacas importadas: ${it.size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -133,7 +137,8 @@ class MenuAdminController: KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         title = "Butacas exportadas",
-                        mensaje = "Se han exportado todas las butacas.\nButacas exportadas: ${it}"
+                        header = "Se han exportado todas las butacas",
+                        mensaje = "Butacas exportadas: ${it}"
                     )
                     }.onFailure { error ->
                         showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
@@ -155,7 +160,8 @@ class MenuAdminController: KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         title = "Complementos importados",
-                        mensaje = "Se han importado todos los complementos.\nComplementos importados: ${it.size}"
+                        header = "Se han importado todos los complementos",
+                        mensaje = "Complementos importados: ${it.size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -179,7 +185,8 @@ class MenuAdminController: KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         title = "Complementos exportados",
-                        mensaje = "Se han exportado todos los complementos.\nComplementos exportados: ${it}"
+                        header = "Se han exportado todos los complementos",
+                        mensaje = "Complementos exportados: ${it}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar", mensaje = error.message)
@@ -189,12 +196,28 @@ class MenuAdminController: KoinComponent {
         }
 
         importBackUpButton.setOnAction {
-            // TODO !!!!!!!!!!
             logger.debug { "Cargando copia de seguridad" }
             FileChooser().run {
                 title = "Importando copia de seguridad"
                 extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
                 showOpenDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Importando copia de seguridad" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.importarZip(file).onSuccess {
+                    val clientesRestaurados = if (it.filterIsInstance<Cliente>().isEmpty()) "Sí" else "No"
+                    val productosRestaurados = if (it.filterIsInstance<Producto>().isEmpty()) "Sí" else "No"
+                    val ventasRestauradas = if (it.filterIsInstance<Venta>().isEmpty()) "Sí" else "No"
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Copia de seguridad importada",
+                        header = "Se ha importado la copia de seguridad",
+                        mensaje = "Dominios restaurados: \nClientes: $clientesRestaurados \nProductos: $productosRestaurados \nVentas: $ventasRestauradas"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al guardar la copia de seguridad", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
         }
 
@@ -211,7 +234,8 @@ class MenuAdminController: KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         title = "Copia de seguridad guardada",
-                        mensaje = "Se ha guardado la copia de seguridad en:\n$file"
+                        header = "Se ha guardado la copia de seguridad",
+                        mensaje = "Ruta: \n$file"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al guardar la copia de seguridad", mensaje = error.message)
@@ -220,7 +244,10 @@ class MenuAdminController: KoinComponent {
             }
         }
 
-        exportCineButton.setOnAction { RoutesManager.initExportEstadoCine() }
+        exportCineButton.setOnAction {
+            // TODO !!!!!!!!!!
+            RoutesManager.initExportEstadoCine()
+        }
 
         exitButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
@@ -254,10 +281,12 @@ class MenuAdminController: KoinComponent {
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
         title: String = "",
-        mensaje: String = ""
+        mensaje: String = "",
+        header: String = ""
     ) {
         Alert(alerta).apply {
             this.title = title
+            this.headerText = header
             this.contentText = mensaje
         }.showAndWait()
     }

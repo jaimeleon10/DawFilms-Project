@@ -18,6 +18,7 @@ interface VentaRepository {
     fun save(venta: Venta): Venta
     fun update(id: UUID, venta: Venta): Venta?
     fun delete (id: UUID): Venta?
+    fun deleteAllVentas()
     fun validateCliente(cliente: Cliente): Result<Cliente, VentaError>
     fun validateLineas(lineas: List<LineaVenta>): Result<List<LineaVenta>, VentaError>
 }

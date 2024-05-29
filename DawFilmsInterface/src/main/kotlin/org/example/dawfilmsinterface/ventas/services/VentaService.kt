@@ -13,7 +13,8 @@ interface VentaService {
     fun getById(id: UUID): Result<Venta, VentaError>
     fun createVenta(venta: Venta): Result<Venta, VentaError>
     fun getAllLineas(): Result<List<LineaVenta>, VentaError>
-    fun getAllVentasCliente(cliente: Cliente, lineas: List<LineaVenta>, fecha: LocalDate): Result<List<Venta>, VentaError>
-    fun getAllVentas(): Result<List<VentaEntity>, VentaError>
+    fun getAllVentasByCliente(cliente: Cliente, lineas: List<LineaVenta>, fecha: LocalDate): Result<List<Venta>, VentaError>
+    fun getAllVentasEntity(): Result<List<VentaEntity>, VentaError>
     fun getAllLineasByVentaID(id: String): Result<List<LineaVenta>, VentaError>
+    fun deleteAllVentas(): Result<Unit, VentaError>
 }

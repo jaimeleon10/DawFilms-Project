@@ -145,6 +145,14 @@ class VentaRepositoryImpl(
         return result.copy(isDeleted = true, updatedAt = timeStamp)
     }
 
+    override fun deleteAllVentas() {
+        logger.debug { "Borrando todas las ventas" }
+        db.transaction {
+            db.deleteAllLineas()
+            db.deleteAllVentas()
+        }
+    }
+
     override fun validateCliente(cliente: Cliente): Result<Cliente, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
         return clienteRepository.findById(cliente.id)

@@ -102,6 +102,11 @@ class ClienteRepositoryImpl(
         return result.copy(isDeleted = true, updatedAt = timeStamp)
     }
 
+    override fun deleteAll() {
+        logger.debug { "Borrando todos los clientes" }
+        db.deleteAllClientes()
+    }
+
     override fun validate(email: String, password: String): Cliente? {
         logger.debug { "Validando email y password de cliente con email: $email" }
         return db.selectClienteByEmailAndPassword(email,password).executeAsOneOrNull()?.toCliente()

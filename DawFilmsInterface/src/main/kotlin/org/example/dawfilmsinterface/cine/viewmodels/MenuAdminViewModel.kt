@@ -91,7 +91,6 @@ class MenuAdminViewModel(
         if (file.extension == "csv") {
             logger.debug { "Cargando complementos de CSV" }
             return storageProductos.loadCsv(file).onSuccess { listaProductos ->
-                logger.warn { listaProductos.forEach { println(it) } }
                 val listaComplementos: List<Complemento> = listaProductos.filterIsInstance<Complemento>()
                 serviceProductos.deleteAllComplementos()
                 serviceProductos.saveAllComplementos(listaComplementos)
@@ -138,7 +137,7 @@ class MenuAdminViewModel(
         val listClientes = serviceClientes.getAll().value
         val listVentas = mutableListOf<Venta>()
 
-        val listVentasEntity = serviceVentas.getAllVentas().value
+        val listVentasEntity = serviceVentas.getAllVentasEntity().value
         var cliente: Cliente
         var lineas: List<LineaVenta> = listOf()
 
@@ -161,8 +160,38 @@ class MenuAdminViewModel(
     }
 
     fun importarZip(file: File): Result<List<Any>, CineError> {
-        // TODO -> Importar zip y cargar en bbdd cada linea
-        return Ok(listOf()) // BORRAR, SOLO PARA QUE NO DE ERROR
+        logger.debug { "Importando datos desde ZIP" }
+        storageZip.loadFromZip(file).onSuccess { listaCine ->
+            logger.warn { listaCine.forEach { println(it) } }
+            val clientes: List<Cliente> = listaCine.filterIsInstance<Cliente>()
+            val ventas: List<Venta> = listaCine.filterIsInstance<Venta>()
+            val butacas: List<Butaca> = listaCine.filterIsInstance<Butaca>()
+            val complementos: List<Complemento> = listaCine.filterIsInstance<Complemento>()
+
+            if (clientes.isNotEmpty()) {
+                serviceClientes.deleteAllClientes()
+                clientes.forEach { serviceClientes.save(it) }
+            }
+
+            if (ventas.isNotEmpty()) {
+                serviceVentas.deleteAllVentas()
+                ventas.forEach { serviceVentas.createVenta(it) }
+            }
+
+            if (butacas.isNotEmpty()) {
+                serviceProductos.deleteAllButacas()
+                serviceProductos.saveAllButacas(butacas)
+            }
+
+            if (complementos.isNotEmpty()) {
+                serviceProductos.deleteAllComplementos()
+                serviceProductos.saveAllComplementos(complementos)
+            }
+
+        }.onFailure {
+            Err(ProductoError.ProductoStorageError(it.message))
+        }
+        return Ok(listOf())
     }
 
     fun exportarEstadoCine() {
