@@ -72,6 +72,9 @@ class EditarComplementoController : KoinComponent {
     @FXML
     lateinit var imagenImage : ImageView
 
+    @FXML
+    lateinit var disponibleComboBox: ComboBox<String>
+
     private lateinit var stage: Stage
     fun setStage(stage: Stage) {
         this.stage = stage
@@ -100,6 +103,9 @@ class EditarComplementoController : KoinComponent {
 
         categoriaComboBox.items = FXCollections.observableList(viewModel.state.value.typesCategoria)
         categoriaComboBox.value = viewModel.state.value.complemento.categoria
+
+        disponibleComboBox.items = FXCollections.observableArrayList(viewModel.state.value.disponibilidades)
+        disponibleComboBox.value = if (viewModel.state.value.complemento.isDeleted) "NO" else "SI"
 
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
         priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00, 0.5)
@@ -131,7 +137,8 @@ class EditarComplementoController : KoinComponent {
             categoria = categoriaComboBox.value.toString(),
             stock = stockSpinner.value,
             precio = priceSpinner.value,
-            imagen = imagenImage.image
+            imagen = imagenImage.image,
+            isDeleted = disponibleComboBox.value == "NO"
         )
 
         when(viewModel.state.value.tipoOperacion){

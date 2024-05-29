@@ -133,9 +133,10 @@ class ConfirmarCompraController: KoinComponent {
         }
         complementosTable.columns.forEach {
             it.isResizable = false
-            it.style = "-fx-font-size: 15; -fx-alignment: CENTER;"
             it.isReorderable = false
         }
+        complementosTable.columns[1].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
+        complementosTable.columns[2].style = "-fx-font-size: 15; -fx-alignment: CENTER;"
 
         viewModel.updateToButacasList(carritoViewModel.state.value.listadoButacasSeleccionadas)
         butacasTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)

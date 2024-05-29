@@ -15,7 +15,7 @@
          </font>
       </Label>
       <Line endX="669.199951171875" endY="-7.6200103759765625" layoutX="202.0" layoutY="127.0" startX="-154.4000244140625" startY="-7.62" stroke="#ffbd2e" />
-      <TextField fx:id="userNameField" layoutX="315.0" layoutY="215.0" prefHeight="40.0" prefWidth="350.0" promptText="Nombre de usuario">
+      <TextField fx:id="userNameField" layoutX="315.0" layoutY="215.0" prefHeight="40.0" prefWidth="350.0" promptText="Correo electrónico">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
@@ -30,7 +30,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label focusTraversable="false" layoutX="315.0" layoutY="172.0" prefHeight="30.0" prefWidth="350.0" text="Nombre de usuario:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="315.0" layoutY="172.0" prefHeight="30.0" prefWidth="350.0" text="Correo electrónico:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
