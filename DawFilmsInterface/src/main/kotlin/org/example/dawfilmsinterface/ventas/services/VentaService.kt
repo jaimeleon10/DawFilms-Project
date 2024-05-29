@@ -16,5 +16,6 @@ interface VentaService {
     fun getAllVentasByCliente(cliente: Cliente, lineas: List<LineaVenta>, fecha: LocalDate): Result<List<Venta>, VentaError>
     fun getAllVentasEntity(): Result<List<VentaEntity>, VentaError>
     fun getAllLineasByVentaID(id: String): Result<List<LineaVenta>, VentaError>
+    fun getAllVentasByDate(fechaCompra: LocalDate): Result<List<VentaEntity>, VentaError>
     fun deleteAllVentas(): Result<Unit, VentaError>
 }

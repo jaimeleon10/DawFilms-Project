@@ -178,7 +178,6 @@ class ConfirmarCompraController: KoinComponent {
         confirmarCompraButton.setOnAction {
             viewModel.realizarCompra(loginViewModel.state.value.currentCliente)
             viewModel.imprimirHtml(loginViewModel.state.value.currentCliente.email)
-            viewModel.openHtml()
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
         }

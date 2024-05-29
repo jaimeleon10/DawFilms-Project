@@ -3,6 +3,7 @@ package org.example.dawfilmsinterface.ventas.repositories
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.onFailure
 import database.VentaEntity
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
@@ -18,6 +19,7 @@ import org.example.dawfilmsinterface.ventas.models.Venta
 import org.lighthousegames.logging.logging
 import java.time.LocalDate
 import java.util.*
+import kotlin.math.log
 
 private val logger = logging()
 
@@ -72,6 +74,11 @@ class VentaRepositoryImpl(
             return ventaEntity.toVenta(cliente, lineasVenta, LocalDate.parse(ventaEntity.fecha_compra))
         }
         return null
+    }
+
+    override fun findVentasByDate(fechaCompra: LocalDate): List<VentaEntity> {
+        logger.debug { "Obteniendo todas las ventas de la fecha: $fechaCompra" }
+        return db.selectVentasByDate(fechaCompra.toString()).executeAsList()
     }
 
     override fun save(venta: Venta): Venta {

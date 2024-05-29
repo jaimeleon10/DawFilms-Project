@@ -53,6 +53,11 @@ class VentaServiceImpl(
         return Ok(ventaRepository.findAllLineasByID(id))
     }
 
+    override fun getAllVentasByDate(fechaCompra: LocalDate): Result<List<VentaEntity>, VentaError> {
+        logger.debug { "Obteniendo todas las ventas dada una fecha" }
+        return Ok(ventaRepository.findVentasByDate(fechaCompra))
+    }
+
     override fun deleteAllVentas(): Result<Unit, VentaError> {
         logger.debug { "Borrando todas las ventas" }
         return Ok(ventaRepository.deleteAllVentas())

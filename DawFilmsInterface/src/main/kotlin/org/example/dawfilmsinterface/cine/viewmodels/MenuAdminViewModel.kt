@@ -167,7 +167,6 @@ class MenuAdminViewModel(
     fun importarZip(file: File): Result<List<Any>, CineError> {
         logger.debug { "Importando datos desde ZIP" }
         storageZip.loadFromZip(file).onSuccess { listaCine ->
-            logger.warn { listaCine.forEach { println(it) } }
             val clientes: List<Cliente> = listaCine.filterIsInstance<Cliente>()
             val ventas: List<Venta> = listaCine.filterIsInstance<Venta>()
             val butacas: List<Butaca> = listaCine.filterIsInstance<Butaca>()
@@ -177,22 +176,18 @@ class MenuAdminViewModel(
             database.initQueries()
 
             if (clientes.isNotEmpty()) {
-                //serviceClientes.deleteAllClientes()
                 clientes.forEach { serviceClientes.save(it) }
             }
 
             if (ventas.isNotEmpty()) {
-                //serviceVentas.deleteAllVentas()
                 ventas.forEach { serviceVentas.createVenta(it) }
             }
 
             if (butacas.isNotEmpty()) {
-                //serviceProductos.deleteAllButacas()
                 serviceProductos.saveAllButacas(butacas)
             }
 
             if (complementos.isNotEmpty()) {
-                //serviceProductos.deleteAllComplementos()
                 serviceProductos.saveAllComplementos(complementos)
             }
 
@@ -204,12 +199,23 @@ class MenuAdminViewModel(
 
     fun exportarEstadoCine(file: File): Result<Long, ProductoError> {
         logger.debug { "Exportando estado del cine" }
-        // TODO -> CAMBIAR ESTO, DEBE RECOGER LA LISTA DE PRODUCTOS DEL STATE
-        // TODO -> ESTA LISTA LLEGA DESDE EL CONTROLLER DE EXPORTARESTADOCINE DEPENDIENDO DE UNA FECHA
-        return storageProductos.storeJson(file, serviceProductos.getAllProductos().value)
+        val ventasFecha = serviceVentas.getAllVentasByDate(state.value.fechaEstadoCine).value
+        val lineas: MutableList<LineaVenta> = mutableListOf()
+        val pructosEstadoCine: MutableList<Producto> = mutableListOf()
+
+        for (venta in ventasFecha) serviceVentas.getAllLineasByVentaID(venta.id).value.forEach { lineas.add(it) }
+
+        for (linea in lineas) pructosEstadoCine.add(linea.producto)
+
+        if (pructosEstadoCine.isEmpty()) {
+            return Err(ProductoError.ProductoNoEncontrado("No existen ventas en la fecha dada"))
+        }
+        else {
+            return Ok(storageProductos.storeJson(file, pructosEstadoCine).value)
+        }
     }
 
     data class MenuAdminState(
-        val fechaEstadoCine: LocalDate = LocalDate.now()
+        var fechaEstadoCine: LocalDate = LocalDate.now()
     )
 }
