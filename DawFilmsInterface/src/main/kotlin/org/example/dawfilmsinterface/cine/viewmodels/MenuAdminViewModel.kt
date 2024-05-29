@@ -194,11 +194,14 @@ class MenuAdminViewModel(
         return Ok(listOf())
     }
 
-    fun exportarEstadoCine() {
-
+    fun exportarEstadoCine(file: File): Result<Long, ProductoError> {
+        logger.debug { "Exportando estado del cine" }
+        // TODO -> CAMBIAR ESTO, DEBE RECOGER LA LISTA DE PRODUCTOS DEL STATE
+        // TODO -> ESTA LISTA LLEGA DESDE EL CONTROLLER DE EXPORTARESTADOCINE DEPENDIENDO DE UNA FECHA
+        return storageProductos.storeJson(file, serviceProductos.getAllProductos().value)
     }
 
     data class MenuAdminState(
-        val hola: String = ""
+        val fechaEstadoCine: LocalDate = LocalDate.now()
     )
 }
