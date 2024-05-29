@@ -142,13 +142,12 @@ class ConfirmarCompraController: KoinComponent {
         butacasTable.items = FXCollections.observableArrayList(viewModel.state.value.butacas)
         tipoButacasColumn.cellValueFactory = PropertyValueFactory("tipoButaca")
         filaButacasColumn.setCellValueFactory { cellData ->
-            val indice = cellData.value.fila
-            val filaLetra = filaALetra(indice)
-            SimpleStringProperty(filaLetra)
+            val fila = cellData.value.id[0].toString()
+            SimpleStringProperty(fila)
         }
         columnaButacasColumn.setCellValueFactory { cellData ->
-            val indice = cellData.value.columna + 1
-            SimpleStringProperty(indice.toString())
+            val col = cellData.value.id[1].toString()
+            SimpleStringProperty(col)
         }
         precioButacasColumn.setCellValueFactory { cellData ->
             val precio = cellData.value.tipoButaca.precio

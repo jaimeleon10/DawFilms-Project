@@ -88,7 +88,7 @@ class ConfirmarCompraViewModel(
 
     private fun openHtml() {
         val file = Path("data", "FicherosDeCompra", state.value.htmlFileName).toFile()
-        val url = "http://localhost:63342/DawFilmsInterface/DawFilmsInterface/FicherosDeCompra/${file.name}"
+        val url = "http://localhost:63342/DawFilmsInterface/FicherosDeCompra/${file.name}"
         Open.open(url)
     }
 

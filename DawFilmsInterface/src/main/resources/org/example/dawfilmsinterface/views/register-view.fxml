@@ -15,17 +15,41 @@
          </font>
       </Label>
       <Line endX="670.0" endY="-7.6200103759765625" layoutX="202.0" layoutY="127.0" startX="-154.4000244140625" startY="-7.62" stroke="#ffbd2e" />
-      <PasswordField fx:id="passwordField" layoutX="511.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </PasswordField>
       <TextField fx:id="nameField" layoutX="182.0" layoutY="196.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre">
          <font>
             <Font name="System Italic" size="15.0" />
          </font>
       </TextField>
-      <Label layoutX="182.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="Nombre:" textFill="WHITE">
+      <TextField fx:id="surnameField" layoutX="182.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Apellidos">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="birthDatePicker" editable="false" layoutX="182.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Fecha de Nacimiento">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <TextField fx:id="dniField" layoutX="182.0" layoutY="483.0" prefHeight="30.0" prefWidth="250.0" promptText="DNI">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="emailField" layoutX="511.0" layoutY="196.0" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="511.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="checkPassField" layoutX="511.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <Label focusTraversable="false" layoutX="182.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="Nombre:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -63,61 +87,37 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="511.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Contraseña:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="511.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Contraseña:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <PasswordField fx:id="checkPassField" layoutX="511.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </PasswordField>
-      <Label layoutX="511.0" layoutY="358.0" prefHeight="30.0" prefWidth="175.0" text="Confirmar contraseña" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="511.0" layoutY="358.0" prefHeight="30.0" prefWidth="175.0" text="Confirmar contraseña" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="surnameField" layoutX="182.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Apellidos">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </TextField>
-      <Label layoutX="182.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Apellidos:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="182.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Apellidos:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="dniField" layoutX="182.0" layoutY="483.0" prefHeight="30.0" prefWidth="250.0" promptText="DNI">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </TextField>
-      <Label layoutX="182.0" layoutY="450.0" prefHeight="30.0" prefWidth="150.0" text="DNI:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="182.0" layoutY="450.0" prefHeight="30.0" prefWidth="150.0" text="DNI:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="emailField" layoutX="511.0" layoutY="196.0" prefHeight="30.0" prefWidth="250.0" promptText="e-mail">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </TextField>
-      <Label layoutX="511.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="E-MAIL:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="511.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="Correo electrónico:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <DatePicker fx:id="birthDatePicker" editable="false" layoutX="182.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Fecha de Nacimiento">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></DatePicker>
-      <Label layoutX="182.0" layoutY="355.0" prefHeight="30.0" prefWidth="175.0" text="Fecha de nacimiento:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="182.0" layoutY="355.0" prefHeight="30.0" prefWidth="175.0" text="Fecha de nacimiento:" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="backLoginButton" alignment="CENTER" layoutX="188.0" layoutY="566.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="238.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al inicio de sesión" textFill="WHITE">
+      <Button fx:id="backLoginButton" alignment="CENTER" focusTraversable="false" layoutX="188.0" layoutY="566.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="238.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al inicio de sesión" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
