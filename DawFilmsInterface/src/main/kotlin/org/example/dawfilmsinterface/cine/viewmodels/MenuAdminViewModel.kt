@@ -172,22 +172,25 @@ class MenuAdminViewModel(
             val butacas: List<Butaca> = listaCine.filterIsInstance<Butaca>()
             val complementos: List<Complemento> = listaCine.filterIsInstance<Complemento>()
 
-            Files.deleteIfExists(File(config.dataBaseUrl.removePrefix("jdbc:sqlite:")).toPath())
             database.initQueries()
 
             if (clientes.isNotEmpty()) {
+                serviceClientes.deleteAllClientes()
                 clientes.forEach { serviceClientes.save(it) }
             }
 
             if (ventas.isNotEmpty()) {
+                serviceVentas.deleteAllVentas()
                 ventas.forEach { serviceVentas.createVenta(it) }
             }
 
             if (butacas.isNotEmpty()) {
+                serviceProductos.deleteAllButacas()
                 serviceProductos.saveAllButacas(butacas)
             }
 
             if (complementos.isNotEmpty()) {
+                serviceProductos.deleteAllComplementos()
                 serviceProductos.saveAllComplementos(complementos)
             }
 
