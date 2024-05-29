@@ -115,6 +115,7 @@ class ListadoComplementosAdminController : KoinComponent {
         precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toString() })
         stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
 
+
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
             if (complementosTable.items != newValue.complementos){
