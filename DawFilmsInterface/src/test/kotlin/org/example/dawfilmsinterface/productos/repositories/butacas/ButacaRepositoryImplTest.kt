@@ -10,6 +10,7 @@ import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.extension.ExtendWith
+import org.lighthousegames.logging.logging
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.junit.jupiter.MockitoSettings
@@ -23,6 +24,7 @@ import java.time.LocalDate
  * @author Jaime León, Alba García, Natalia González, Javier Ruiz, Germán Fernández
  * @since 1.0.0
  */
+private val logger = logging()
 @ExtendWith(MockitoExtension::class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class ButacaRepositoryImplTest {
@@ -64,7 +66,7 @@ class ButacaRepositoryImplTest {
         assertEquals(0, butaca?.fila)
         assertEquals(0, butaca?.columna)
         assertEquals(TipoButaca.NORMAL, butaca?.tipoButaca)
-        assertEquals(EstadoButaca.MANTENIMIENTO, butaca?.estadoButaca)
+        assertEquals(EstadoButaca.ACTIVA, butaca?.estadoButaca)
         assertEquals(OcupacionButaca.LIBRE, butaca?.ocupacionButaca)
 
 
@@ -159,5 +161,66 @@ class ButacaRepositoryImplTest {
         val butaca = butacaRepository.delete("20")
 
         assertEquals(null, butaca)
+    }
+
+    @Test
+    fun saveAll() {
+        val butaca =
+            Butaca(
+                id = "A8",
+                tipoProducto = "Butaca",
+                imagen = "futura_imagen2.png",
+                fila = 1,
+                columna = 1,
+                tipoButaca = TipoButaca.NORMAL,
+                estadoButaca = EstadoButaca.ACTIVA,
+                ocupacionButaca = OcupacionButaca.LIBRE
+            )
+
+
+        val butaca2 =
+            Butaca(
+                id = "A9",
+                tipoProducto = "Butaca",
+                imagen = "futura_imagen2.png",
+                fila = 1,
+                columna = 1,
+                tipoButaca = TipoButaca.NORMAL,
+                estadoButaca = EstadoButaca.ACTIVA,
+                ocupacionButaca = OcupacionButaca.LIBRE
+            )
+
+        val butaca3 =
+            Butaca(
+                id = "A10",
+                tipoProducto = "Butaca",
+                imagen = "futura_imagen2.png",
+                fila = 1,
+                columna = 1,
+                tipoButaca = TipoButaca.NORMAL,
+                estadoButaca = EstadoButaca.ACTIVA,
+                ocupacionButaca = OcupacionButaca.LIBRE
+            )
+
+        val lista = listOf(butaca, butaca2, butaca3)
+
+        val lista2 = butacaRepository.saveAll(lista)
+
+        assertEquals(3, lista2.size)
+        assertEquals("A8", lista2[0].id)
+        assertEquals("A9", lista2[1].id)
+        assertEquals("A10", lista2[2].id)
+    }
+
+
+
+    @Test
+    fun deleteAll(){
+        butacaRepository.deleteAll()
+
+        val lista = butacaRepository.findAll()
+
+        assertEquals(0, lista.size)
+
     }
 }

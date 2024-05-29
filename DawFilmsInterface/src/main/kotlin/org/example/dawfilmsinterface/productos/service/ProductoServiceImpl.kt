@@ -149,9 +149,11 @@ class ProductoServiceImpl(
     override fun deleteAllProductos(): Result<Unit, ProductoError> {
         logger.debug { "Borrando todos los productos" }
         butacaRepository.deleteAll().also {
+            complementoRepository.deleteAll().also {
             logger.debug { "Eliminando de la cache" }
             productosCache.clear()
             return Ok(it)
+            }
         }
     }
 
