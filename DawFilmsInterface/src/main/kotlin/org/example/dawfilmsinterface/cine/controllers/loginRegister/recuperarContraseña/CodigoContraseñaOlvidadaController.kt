@@ -7,6 +7,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.MenuItem
 import javafx.scene.control.TextField
+import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.RecuperarPasswordViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -45,6 +46,16 @@ class CodigoContraseñaOlvidadaController :KoinComponent {
     private fun initialize() {
 
         codeField.requestFocus()
+
+        codeField.text = viewModel.generateRestoreCode()
+        viewModel.state.value.restoreCode = codeField.text
+
+        codeField.setOnKeyPressed { event ->
+            if (event.code == KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
 
         continueButton.setOnAction { continuar() }
 

@@ -7,6 +7,7 @@ import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.lighthousegames.logging.logging
 import java.time.LocalDate
+import java.util.*
 
 private val logger = logging()
 
@@ -26,7 +27,7 @@ class RegistroViewModel(
      ): Boolean {
          val dniRegex = Regex("^[0-9]{8}[A-HJ-NP-TV-Z]$")
          val emailRegex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-         val passwordRegex = Regex("^[a-zA-Z0-9]{5,}$")
+         val passwordRegex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{5,}$")
 
          if (enteredNombre.isEmpty() || enteredNombre.isBlank()) {
              showAlertOperacion("Nombre inválido", "El nombre no puede estar vacío")
@@ -53,7 +54,7 @@ class RegistroViewModel(
              showAlertOperacion("Contraseña inválida", "La contraseña no puede estar vacía")
              return false
          } else if (!enteredPass.matches(passwordRegex)) {
-             showAlertOperacion("Contraseña inválida", "La contraseña debe tener una longitud mínima de 5 caracteres alfanuméricos")
+             showAlertOperacion("Contraseña inválida", "La contraseña debe tener una longitud mínima de 5 caracteres, una mayúscula, una minúscula y un número")
              return false
          } else if (enteredConfPass.isEmpty() || enteredConfPass.isBlank()) {
              showAlertOperacion("Contraseña inválida", "Las confirmación de contraseña no puede estar vacía")
@@ -67,9 +68,15 @@ class RegistroViewModel(
              state.value.cliente.fechaNacimiento = selectedDate
              state.value.cliente.dni = enteredDni
              state.value.cliente.email = enteredEmail
-             state.value.cliente.password = enteredPass
+             state.value.cliente.password = encodeBase64(enteredPass)
              return true
          }
+    }
+
+    private fun encodeBase64(input: String): String {
+        val encoder = Base64.getEncoder()
+        val encodedBytes = encoder.encode(input.toByteArray(Charsets.UTF_8))
+        return String(encodedBytes, Charsets.UTF_8)
     }
 
     private fun showAlertOperacion(

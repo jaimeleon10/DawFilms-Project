@@ -123,9 +123,10 @@ class RegisterController : KoinComponent {
             ) {
                 logger.debug { "Registrando cliente" }
                 viewModel.registerCliente()
+
+                logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
+                RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
             }
-            logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
-            RoutesManager.changeScene(view = RoutesManager.View.LOGIN)
         }
     }
 }
