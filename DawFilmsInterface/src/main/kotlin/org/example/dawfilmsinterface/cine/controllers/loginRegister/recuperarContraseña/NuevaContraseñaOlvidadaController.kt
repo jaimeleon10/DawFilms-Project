@@ -8,6 +8,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.MenuItem
 import javafx.scene.control.PasswordField
+import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.RecuperarPasswordViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -54,19 +55,30 @@ class NuevaContraseñaOlvidadaController: KoinComponent {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
 
         backLoginMenuButton.setOnAction { stage.close() }
+
+        newPassField.setOnKeyPressed { event ->
+            if (event.code == KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
+
+        checkNewPassField.setOnKeyPressed { event ->
+            if (event.code == KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
     }
 
     private fun nuevoPassword() {
-        //RoutesManager.initCodigoRecuperarPass()
-        if( !validateFields()) {
-
+        if(!validateFields()) {
             showAlertOperacion(alerta = Alert.AlertType.ERROR,
                 title = "Error en la recuperación de contraseña",
                 mensajeEncabezado = "Los campos de contraseña y repetir contraseña no son válidos.",
-                mensajePie = "Deben coincidir y no estar vacíos")
-
+                mensajePie = "Deben coincidir y no estar vacíos"
+            )
             return
-
         } else {
             viewModel.validateUserPassword(newPassField.text).onSuccess {
                 logger.debug { "Formato password correcto, actualizando usuario" }
@@ -79,28 +91,26 @@ class NuevaContraseñaOlvidadaController: KoinComponent {
                         title = "Error en la recuperación de contraseña",
                         mensajeEncabezado = "La contraseña no se pudo actualizar")
                 }
-
                 stage.close()
             }.onFailure {
-                    logger.debug { "Formato de password incorrecto" }
+                logger.debug { "Formato de password incorrecto" }
                 showAlertOperacion(alerta = Alert.AlertType.ERROR,
                     title = "Error en la recuperación de contraseña",
                     mensajeEncabezado = "La contraseña no es válida",
-                    mensajePie = "La contraseña debe tener 5 caracteres o mas, y contener al menos un número, una letra (al menos una mayúscula)")
+                    mensajePie = "La contraseña debe tener 5 caracteres o mas, y contener al menos un número, una letra (al menos una mayúscula)"
+                )
             }
         }
     }
 
     private fun validateFields(): Boolean {
-
         if (checkNewPassField.text == "" || newPassField.text == "") return false
         if (checkNewPassField.text != newPassField.text) return false
         return true
-
     }
 
     private fun showAlertOperacion(
-        alerta: Alert.AlertType = Alert.AlertType.CONFIRMATION,
+        alerta: Alert.AlertType = Alert.AlertType.ERROR,
         title: String = "",
         mensajeEncabezado: String = "",
         mensajePie:String=""

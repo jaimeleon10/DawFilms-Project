@@ -7,9 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="690.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="org.example.dawfilmsinterface.cine.controllers.loginRegister.recuperarContraseña.CodigoContraseñaOlvidadaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="690.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.loginRegister.recuperarContraseña.CodigoContraseñaOlvidadaController">
    <children>
       <Label alignment="CENTER" layoutX="165.0" layoutY="40.0" prefHeight="60.0" prefWidth="360.0" text="INTRODUZCA EL CÓDIGO" textFill="WHITE">
          <font>
@@ -22,7 +20,7 @@
             <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
          </image>
       </ImageView>
-      <MenuBar layoutX="23.0" layoutY="22.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+      <MenuBar focusTraversable="false" layoutX="23.0" layoutY="22.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
          <menus>
             <Menu mnemonicParsing="false">
                <items>
@@ -42,6 +40,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MenuBar>
+      <TextField fx:id="codeField" alignment="CENTER" layoutX="277.0" layoutY="215.0" prefHeight="35.0" prefWidth="135.0" promptText="Código de verificación" text="783-964">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
       <Button fx:id="continueButton" alignment="CENTER" layoutX="351.0" layoutY="291.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="118.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -50,17 +53,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="codeField" alignment="CENTER" layoutX="277.0" layoutY="215.0" prefHeight="35.0" prefWidth="135.0" promptText="Código de verificación" text="783-964">
-         <font>
-            <Font name="System Italic" size="15.0" />
-         </font>
-      </TextField>
-      <Label layoutX="178.0" layoutY="163.0" prefHeight="30.0" prefWidth="338.0" text="Introduzca el código recibido en el e-mail:" textFill="WHITE">
+      <Label focusTraversable="false" layoutX="178.0" layoutY="163.0" prefHeight="30.0" prefWidth="338.0" text="Introduzca el código recibido en el e-mail:" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="backLoginButton" alignment="CENTER" layoutX="220.0" layoutY="291.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver" textFill="WHITE">
+      <Button fx:id="backLoginButton" alignment="CENTER" focusTraversable="false" layoutX="220.0" layoutY="291.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="90.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

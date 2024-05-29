@@ -10,6 +10,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import javafx.scene.input.KeyCode
+import java.util.*
 
 private val logger = logging()
 
@@ -70,7 +71,7 @@ class LoginController: KoinComponent {
             viewModel.state.value.isAdmin = true
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         } else {
-            val encryptedPassword = encryptPassword(passwordField.text)
+            val encryptedPassword = encodeBase64(passwordField.text)
             viewModel.validarCliente(userNameField.text, encryptedPassword).onSuccess {
                 logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_CLIENTE}" }
                 RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_CLIENTE)
@@ -80,9 +81,10 @@ class LoginController: KoinComponent {
             }
         }
     }
-    private fun encryptPassword(text: String): String {
-        return text
-        // TODO aquí llamar a función que encripte nuestra cadena
+    private fun encodeBase64(input: String): String {
+        val encoder = Base64.getEncoder()
+        val encodedBytes = encoder.encode(input.toByteArray(Charsets.UTF_8))
+        return String(encodedBytes, Charsets.UTF_8)
     }
 
     private fun showAlertOperacion(

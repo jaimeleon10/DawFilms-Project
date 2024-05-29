@@ -7,6 +7,7 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.MenuItem
 import javafx.scene.control.TextField
+import javafx.scene.input.KeyCode
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.RecuperarPasswordViewModel
 import org.example.dawfilmsinterface.routes.RoutesManager
@@ -19,6 +20,7 @@ private val logger = logging()
 class EmailContraseñaOlvidadaController: KoinComponent {
 
     val viewModel: RecuperarPasswordViewModel by inject()
+
     @FXML
     lateinit var backLoginButton: Button
 
@@ -55,10 +57,16 @@ class EmailContraseñaOlvidadaController: KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.LOGIN}" }
             stage.close()
         }
+
+        emailField.setOnKeyPressed { event ->
+            if (event.code == KeyCode.ENTER) {
+                continueButton.fire()
+                event.consume()
+            }
+        }
     }
 
     private fun continuar() {
-
         viewModel.validateUserEmail(emailField.text)
             .onSuccess {
                 logger.debug { "Validado email del usuario" }
@@ -71,8 +79,8 @@ class EmailContraseñaOlvidadaController: KoinComponent {
             }.onFailure {
                 logger.debug { "Intento de acceso incorrecto" }
                 showAlertOperacion(alerta = Alert.AlertType.ERROR,
-                    title = "Error en la recuperación de contraseña",
-                    mensajeEncabezado = "Error, el email facilitado no existe, por favor introdúzcalo de nuevo.")
+                    title = "Error en la recuperación de contraseña.",
+                    mensajeEncabezado = "Error, el email no existe.")
             }
     }
 
@@ -81,7 +89,7 @@ class EmailContraseñaOlvidadaController: KoinComponent {
         alerta: Alert.AlertType = Alert.AlertType.CONFIRMATION,
         title: String = "",
         mensajeEncabezado: String = "",
-        mensajePie:String=""
+        mensajePie:String = ""
     ) {
         Alert(alerta).apply {
             this.title = title
