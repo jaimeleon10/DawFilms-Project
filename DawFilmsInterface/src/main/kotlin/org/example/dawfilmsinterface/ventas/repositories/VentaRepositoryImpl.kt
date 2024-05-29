@@ -3,11 +3,10 @@ package org.example.dawfilmsinterface.ventas.repositories
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import database.VentaEntity
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.database.SqlDeLightManager
-import org.example.dawfilmsinterface.productos.models.butacas.Butaca
-import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.repositories.butacas.ButacaRepository
 import org.example.dawfilmsinterface.productos.repositories.complementos.ComplementoRepository
@@ -31,9 +30,21 @@ class VentaRepositoryImpl(
 
     private val db = dbManager.databaseQueries
 
-    override fun findAll(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra: LocalDate): List<Venta> {
+    override fun findAllVentasCliente(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra: LocalDate): List<Venta> {
         logger.debug { "Buscando todas las ventas" }
         return db.selectAllVentas().executeAsList().map { it.toVenta(cliente, lineas, fechaCompra) }
+    }
+
+    override fun findAllVentas(): List<VentaEntity> {
+        logger.debug { "Buscando todas las ventas" }
+        return db.selectAllVentas().executeAsList()
+    }
+
+    override fun findAllLineasByID(idVenta: String): List<LineaVenta> {
+        return db.selectAllLineasVentaByVentaId(idVenta).executeAsList().map {
+            if (it.producto_tipo == "Butaca") it.toLineaVenta(butacaRepository.findById(it.producto_id) as Producto)
+            else it.toLineaVenta(complementoRepository.findById(it.producto_id) as Producto)
+        }
     }
 
     override fun findAllLineas(): List<LineaVenta> {

@@ -2,7 +2,10 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.*
 import javafx.beans.property.SimpleObjectProperty
+import org.example.dawfilmsinterface.cine.errors.CineError
 import org.example.dawfilmsinterface.cine.services.storage.CineStorageZip
+import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.clientes.services.ClienteService
 import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import java.io.File
@@ -10,12 +13,19 @@ import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
+import org.example.dawfilmsinterface.ventas.models.LineaVenta
+import org.example.dawfilmsinterface.ventas.models.Venta
+import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
+import java.util.*
 
 private val logger = logging()
 
 class MenuAdminViewModel(
     private val serviceProductos: ProductoService,
+    private val serviceVentas: VentaService,
+    private val serviceClientes: ClienteService,
     private val storageZip: CineStorageZip,
     private val storageProductos: ProductosStorage
 ) {
@@ -122,12 +132,37 @@ class MenuAdminViewModel(
         }
     }
 
-    fun exportarZip() {
+    fun exportarZip(file: File): Result<File, CineError> {
+        logger.debug { "Guardando fichero ZIP" }
+        val listProductos = serviceProductos.getAllProductos().value
+        val listClientes = serviceClientes.getAll().value
+        val listVentas = mutableListOf<Venta>()
 
+        val listVentasEntity = serviceVentas.getAllVentas().value
+        var cliente: Cliente
+        var lineas: List<LineaVenta> = listOf()
+
+        for (venta in listVentasEntity) {
+            cliente = serviceClientes.getById(venta.cliente_id).value
+            lineas = serviceVentas.getAllLineasByVentaID(venta.id).value
+            listVentas.add(
+                Venta(
+                    id = UUID.fromString(venta.id),
+                    cliente = cliente,
+                    lineas = lineas,
+                    fechaCompra = LocalDate.parse(venta.fecha_compra),
+                    createdAt = LocalDate.parse(venta.created_at),
+                    updatedAt = LocalDate.parse(venta.updated_at),
+                    isDeleted = venta.is_deleted == 1L
+                )
+            )
+        }
+        return storageZip.exportToZip(file, listProductos, listClientes, listVentas)
     }
 
-    fun importarZip() {
-
+    fun importarZip(file: File): Result<List<Any>, CineError> {
+        // TODO -> Importar zip y cargar en bbdd cada linea
+        return Ok(listOf()) // BORRAR, SOLO PARA QUE NO DE ERROR
     }
 
     fun exportarEstadoCine() {

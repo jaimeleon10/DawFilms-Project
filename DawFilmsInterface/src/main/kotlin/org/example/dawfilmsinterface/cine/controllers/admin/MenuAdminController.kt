@@ -99,15 +99,14 @@ class MenuAdminController: KoinComponent {
             logger.debug { "Importando butacas desde el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Butacas"
-                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
-                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo", "*.csv", "*json", "*.xml"))
                 showOpenDialog(RoutesManager.activeStage)
             }?.let { file ->
                 logger.debug { "Importando butacas" }
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.importarButacas(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Butacas importadas",
                         mensaje = "Se han importado todas las butacas.\nButacas importadas: ${it.size}"
                     )
@@ -132,6 +131,7 @@ class MenuAdminController: KoinComponent {
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.exportarButacas(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Butacas exportadas",
                         mensaje = "Se han exportado todas las butacas.\nButacas exportadas: ${it}"
                     )
@@ -146,15 +146,14 @@ class MenuAdminController: KoinComponent {
             logger.debug { "Importando complementos desde el explorador de archivos" }
             FileChooser().run {
                 title = "Importar Complementos"
-                extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
-                extensionFilters.add(FileChooser.ExtensionFilter("JSON:", "*.json"))
-                extensionFilters.add(FileChooser.ExtensionFilter("XML", "*.xml"))
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo", "*.csv", "*json", "*.xml"))
                 showOpenDialog(RoutesManager.activeStage)
             }?.let { file ->
                 logger.debug { "Importando complementos" }
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.importarComplementos(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Complementos importados",
                         mensaje = "Se han importado todos los complementos.\nComplementos importados: ${it.size}"
                     )
@@ -178,6 +177,7 @@ class MenuAdminController: KoinComponent {
                 RoutesManager.activeStage.scene.cursor = WAIT
                 viewModel.exportarComplementos(file).onSuccess {
                     showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
                         title = "Complementos exportados",
                         mensaje = "Se han exportado todos los complementos.\nComplementos exportados: ${it}"
                     )
@@ -188,16 +188,35 @@ class MenuAdminController: KoinComponent {
             }
         }
 
-        // TODO -> CONTINUAR DESDE AQUÍ
-
-        importBackUpButton.setOnAction {  }
+        importBackUpButton.setOnAction {
+            // TODO !!!!!!!!!!
+            logger.debug { "Cargando copia de seguridad" }
+            FileChooser().run {
+                title = "Importando copia de seguridad"
+                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
+                showOpenDialog(RoutesManager.activeStage)
+            }
+        }
 
         backUpButton.setOnAction {
-            logger.debug { "Realizando backup y guardando en el explorador de archivos" }
+            logger.debug { "Guardando copia de seguridad" }
             FileChooser().run {
-                title = "Importar Butacas"
+                title = "Exportando copia de seguridad"
                 extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
                 showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando copia de seguridad" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarZip(file).onSuccess {
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Copia de seguridad guardada",
+                        mensaje = "Se ha guardado la copia de seguridad en:\n$file"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al guardar la copia de seguridad", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
         }
 
