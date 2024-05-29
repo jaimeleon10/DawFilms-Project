@@ -77,6 +77,55 @@ class ComplementoRepositoryImplTest {
     }
 
     @Test
+    fun findByNombre(){
+        val complemento = complementoRepository.findByNombre("Agua")
+
+        assertEquals("Agua", complemento?.nombre)
+    }
+
+    @Test
+    fun findByNombreNotFound(){
+        val complemento = complementoRepository.findByNombre("perro")
+
+        assertEquals(null, complemento)
+    }
+
+    @Test
+    fun saveAll(){
+        val complemento = Complemento(
+            id = "123",
+            tipoProducto = "Complemento",
+            imagen = "futura_imagen.png",
+            nombre = "Soda",
+            precio = 2.0,
+            stock = 20,
+            categoria = CategoriaComplemento.BEBIDA
+        )
+
+        val complemento2 = Complemento(
+            id = "124",
+            tipoProducto = "Complemento",
+            imagen = "futura_imagen.png",
+            nombre = "Fanta",
+            precio = 2.0,
+            stock = 20,
+            categoria = CategoriaComplemento.BEBIDA
+        )
+
+        val lista = listOf(complemento, complemento2)
+
+        complementoRepository.saveAll(lista)
+
+        val lista2 = complementoRepository.findAll()
+
+
+             assertEquals(7, lista2.size)
+             assertEquals("Soda", lista2[5].nombre)
+             assertEquals ("Fanta", lista2[6].nombre)
+
+    }
+
+    @Test
     fun save() {
         val complemento = complementoRepository.save(
             Complemento(
@@ -153,5 +202,14 @@ class ComplementoRepositoryImplTest {
         val complemento = complementoRepository.delete("20")
 
         assertEquals(null, complemento)
+    }
+
+    @Test
+    fun deleteAll(){
+        complementoRepository.deleteAll()
+
+        val lista = complementoRepository.findAll()
+
+        assertEquals(0, lista.size)
     }
 }

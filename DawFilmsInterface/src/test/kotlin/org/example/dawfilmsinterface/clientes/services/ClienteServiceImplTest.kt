@@ -302,7 +302,6 @@ class ClienteServiceImplTest {
             isDeleted = false
         )
         val id = -1L
-        val message = "El cliente no se ha encontrado"
 
         whenever(mockClienteValidator.validate(mockCliente)).thenReturn(Ok (mockCliente))
         whenever (mockRepo.update(-1L, mockCliente)).thenReturn(null)
@@ -373,7 +372,6 @@ class ClienteServiceImplTest {
             isDeleted = false
         )
 
-        val message = "El cliente no se ha encontrado"
 
         whenever (mockRepo.delete(-2L)).thenReturn(null)
 

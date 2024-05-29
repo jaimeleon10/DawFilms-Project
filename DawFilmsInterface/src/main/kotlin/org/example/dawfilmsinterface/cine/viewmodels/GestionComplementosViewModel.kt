@@ -47,8 +47,6 @@ class GestionComplementosViewModel(
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Complemento" }
         state.value = state.value.copy(
-            typesCategoria = state.value.complementos.map { it.categoria.toString() },
-            disponibilidades = state.value.complementos.map { it.isDeleted.toString().uppercase() },
             complemento = ComplementoState()
         )
     }
@@ -70,7 +68,7 @@ class GestionComplementosViewModel(
                 nombre = complemento.nombre,
                 precio = complemento.precio,
                 stock = complemento.stock,
-                categoria = complemento.categoria.name,
+                categoria = if(complemento.categoria.name == "COMIDA") "COMIDA" else complemento.categoria.name,
                 imagen = imagen,
                 fileImage = fileImage,
                 isDeleted = complemento.isDeleted!!
@@ -228,7 +226,7 @@ class GestionComplementosViewModel(
     }
 
     enum class TipoImagen(val value : String){
-        SIN_IMAGEN("octogatoNatalia.png"), EMPTY("")
+        SIN_IMAGEN("sinImagen.png"), EMPTY("")
     }
 
     enum class TipoCategoria(val value : String){

@@ -185,3 +185,7 @@ bsrc/main/kotlin/org/example/dawfilmsinterface/cine/controllers/loginRegister/Re
 Rsrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/RegistroViewModel.kt,a\5\a582522e0e75d556908241bab8a09840b5ce5a44
 ã
 [src/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/SeleccionarButacaViewModel.kt,a\f\afb025b8ac353e5635dd716ec05120946f115158
+á
+Wsrc/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/GestionButacaViewModel.kt,a\b\abb1eeb0be3e36329240643dacf9d52e54c7420c
+ç
+]src/main/kotlin/org/example/dawfilmsinterface/cine/viewmodels/GestionComplementosViewModel.kt,1\d\1d650423092481df9e5f2baf6ab8e6c58ded89f5
