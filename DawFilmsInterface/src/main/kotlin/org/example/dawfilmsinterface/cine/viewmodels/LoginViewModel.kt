@@ -21,8 +21,6 @@ class LoginViewModel (
 
     init {
         logger.debug { "Inicializando LoginViewModel" }
-        logger.debug { "Iniciando datos por defecto en la base de datos" }
-        database.initDataExamples()
     }
 
     fun validarCliente(email: String, encryptedPassword: String): Result<Unit, ClienteError> {

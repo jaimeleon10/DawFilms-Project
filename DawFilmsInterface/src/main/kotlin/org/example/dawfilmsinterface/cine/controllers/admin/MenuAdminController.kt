@@ -17,6 +17,8 @@ import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import com.github.michaelbull.result.*
 import org.example.dawfilmsinterface.clientes.models.Cliente
+import org.example.dawfilmsinterface.productos.models.butacas.Butaca
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.ventas.models.Venta
 
@@ -112,7 +114,7 @@ class MenuAdminController: KoinComponent {
                         alerta = AlertType.INFORMATION,
                         title = "Butacas importadas",
                         header = "Se han importado todas las butacas.",
-                        mensaje = "Butacas importadas: ${it.size}"
+                        mensaje = "Butacas importadas: ${it.filterIsInstance<Butaca>().size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -161,7 +163,7 @@ class MenuAdminController: KoinComponent {
                         alerta = AlertType.INFORMATION,
                         title = "Complementos importados",
                         header = "Se han importado todos los complementos",
-                        mensaje = "Complementos importados: ${it.size}"
+                        mensaje = "Complementos importados: ${it.filterIsInstance<Complemento>().size}"
                     )
                 }.onFailure { error ->
                     showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje = error.message)
@@ -246,25 +248,6 @@ class MenuAdminController: KoinComponent {
 
         exportCineButton.setOnAction {
             RoutesManager.initExportEstadoCine()
-            FileChooser().run {
-                title = "Exportando estado del cine dada una fecha"
-                extensionFilters.add(FileChooser.ExtensionFilter("Tipos de archivo:", "*.zip"))
-                showSaveDialog(RoutesManager.activeStage)
-            }?.let { file ->
-                logger.debug { "Exportando estado del cine" }
-                RoutesManager.activeStage.scene.cursor = WAIT
-                viewModel.exportarEstadoCine(file).onSuccess {
-                    showAlertOperacion(
-                        alerta = AlertType.INFORMATION,
-                        title = "Estado del cine exportado",
-                        header = "Se ha exportado el estado del cine",
-                        mensaje = "Ruta: \n$file"
-                    )
-                }.onFailure { error ->
-                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar el estado del cine", mensaje = error.message)
-                }
-                RoutesManager.activeStage.scene.cursor = DEFAULT
-            }
         }
 
         exitButton.setOnAction {

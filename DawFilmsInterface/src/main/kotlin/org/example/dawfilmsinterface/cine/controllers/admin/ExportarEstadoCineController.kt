@@ -1,6 +1,12 @@
 package org.example.dawfilmsinterface.cine.controllers.admin
 
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import javafx.fxml.FXML
+import javafx.scene.Cursor.DEFAULT
+import javafx.scene.Cursor.WAIT
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.Button
 import javafx.scene.control.DatePicker
 import javafx.stage.FileChooser
@@ -10,6 +16,7 @@ import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -25,6 +32,7 @@ private val logger = logging()
  */
 class ExportarEstadoCineController: KoinComponent {
     val viewModel: MenuAdminViewModel by inject()
+
     @FXML
     lateinit var exportButton: Button
 
@@ -51,19 +59,53 @@ class ExportarEstadoCineController: KoinComponent {
     @FXML
     private fun initialize() {
         exportButton.setOnAction {
-            logger.debug { "Exportando estado del cine" }
             FileChooser().run {
-                title = "Exportar estado del cine"
+                title = "Exportando estado del cine dada una fecha"
                 extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
                 showSaveDialog(RoutesManager.activeStage)
+            }?.let { file ->
+                logger.debug { "Exportando estado del cine" }
+                RoutesManager.activeStage.scene.cursor = WAIT
+                viewModel.exportarEstadoCine(file).onSuccess {
+                    showAlertOperacion(
+                        alerta = AlertType.INFORMATION,
+                        title = "Estado del cine exportado",
+                        header = "Se ha exportado el estado del cine",
+                        mensaje = "Ruta: \n$file\n\nProductos exportados: $it"
+                    )
+                }.onFailure { error ->
+                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al exportar el estado del cine", mensaje = error.message)
+                }
+                RoutesManager.activeStage.scene.cursor = DEFAULT
             }
+
+            logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
+            stage.close()
         }
+
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             stage.close()
         }
-        exportDatePicker.setOnAction {
-            // TODO -> LISTA DE PRODUCTOS COMPRADOS EN X FECHA -> PASAR A VIEWMODEL PARA HACER EXPORT DE CINE POR FECHA
+        exportDatePicker.valueProperty().addListener{ _, _, newValue ->
+            newValue?.let { onDateSelected(newValue) }
         }
+    }
+
+    private fun onDateSelected(newValue: LocalDate) {
+        viewModel.state.value.fechaEstadoCine = exportDatePicker.value
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        mensaje: String = "",
+        header: String = ""
+    ) {
+        Alert(alerta).apply {
+            this.title = title
+            this.headerText = header
+            this.contentText = mensaje
+        }.showAndWait()
     }
 }

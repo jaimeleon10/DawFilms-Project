@@ -15,6 +15,7 @@ interface VentaRepository {
     fun findAllVentas(): List<VentaEntity>
     fun findAllLineasByID(idVenta: String): List<LineaVenta>
     fun findById(id: UUID): Venta?
+    fun findVentasByDate(fechaCompra: LocalDate): List<VentaEntity>
     fun save(venta: Venta): Venta
     fun update(id: UUID, venta: Venta): Venta?
     fun delete (id: UUID): Venta?

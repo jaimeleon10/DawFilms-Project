@@ -1,6 +1,0 @@
-id,tipo producto,imagen,precio,fila butaca,columna butaca,tipo butaca,estado butaca,ocupacion butaca,nombre complemento,stock complemento,categoria complemento,created at,updated at,is deleted
-1,Complemento,agua.png,2.0,null,null,null,null,null,Agua,20,BEBIDA,2024-05-29,2024-05-29,false
-2,Complemento,soda.png,3.0,null,null,null,null,null,Refresco,20,BEBIDA,2024-05-29,2024-05-29,false
-3,Complemento,popcorn.png,3.0,null,null,null,null,null,Palomitas,20,COMIDA,2024-05-29,2024-05-29,false
-4,Complemento,pistacho.png,2.0,null,null,null,null,null,Pistachos,20,COMIDA,2024-05-29,2024-05-29,false
-5,Complemento,patatas.png,2.5,null,null,null,null,null,Patatas,20,COMIDA,2024-05-29,2024-05-29,false
