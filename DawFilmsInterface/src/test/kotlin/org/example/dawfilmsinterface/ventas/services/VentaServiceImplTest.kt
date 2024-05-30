@@ -86,11 +86,11 @@ class VentaServiceImplTest {
 
         whenever(repoVentas.findById(id)).thenReturn(null)
 
-        val resul = serviceVentas.getById(id)
+        val result = serviceVentas.getById(id)
 
-        assertTrue(resul.isErr)
-        assertTrue(resul.error is VentaError.VentaNoEncontrada)
-        assertEquals(resul.error.message, "Venta no encontrada con id: $id")
+        assertTrue(result.isErr)
+        assertTrue(result.error is VentaError.VentaNoEncontrada)
+        assertEquals(result.error.message, "Venta no encontrada con id: $id")
 
         verify(repoVentas,times(1)).findById(id)
 
