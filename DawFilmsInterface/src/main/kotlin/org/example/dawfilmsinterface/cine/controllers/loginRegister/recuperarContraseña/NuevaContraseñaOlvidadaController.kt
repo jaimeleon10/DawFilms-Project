@@ -50,11 +50,15 @@ class NuevaContraseñaOlvidadaController: KoinComponent {
     private fun initialize() {
         continueButton.setOnAction { nuevoPassword() }
 
-        backLoginButton.setOnAction { stage.close() }
+        backLoginButton.setOnAction {
+            RoutesManager.initCodigoRecuperarPass()
+            stage.close() }
 
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
 
-        backLoginMenuButton.setOnAction { stage.close() }
+        backLoginMenuButton.setOnAction {
+            viewModel.state.value.restoreCode = ""
+            stage.close() }
 
         newPassField.setOnKeyPressed { event ->
             if (event.code == KeyCode.ENTER) {
