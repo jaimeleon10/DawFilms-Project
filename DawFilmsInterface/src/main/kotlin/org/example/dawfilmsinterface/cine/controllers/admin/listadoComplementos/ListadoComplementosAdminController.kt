@@ -112,7 +112,7 @@ class ListadoComplementosAdminController : KoinComponent {
 
         idSelectedField.textProperty().bind(viewModel.state.map { it.complemento.id })
         nombreSelectedField.textProperty().bind(viewModel.state.map { it.complemento.nombre })
-        precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toString() })
+        precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toDefaultMoneyString() })
         stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
 
 
@@ -127,7 +127,7 @@ class ListadoComplementosAdminController : KoinComponent {
     private fun initDefaultValues() {
         logger.debug { "Inicializando valores por defecto" }
 
-        viewModel.initialize()
+        viewModel.loadAllComplementos()
 
         complementosTable.items = FXCollections.observableArrayList(viewModel.state.value.complementos)
         complementosTable.columns.forEach {
@@ -154,22 +154,31 @@ class ListadoComplementosAdminController : KoinComponent {
 
     @FXML
     private fun initEventos() {
+        complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onTablaSelected(newValue) }
+        }
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        addButton.setOnAction {onNuevoAction()}
-        editButton.setOnAction {onEditarAction()}
+        /*
+        addButton.setOnAction { onNuevoAction( ) }
+         */
+        editButton.setOnAction { onEditarAction() }
+        deleteButton.setOnAction { onEliminarAction() }
+
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        deleteButton.setOnAction { onEliminarAction() }
+    }
 
-        complementosTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
-            newValue?.let { onTablaSelected(newValue) }
-        }
+    private fun onTablaSelected(newValue: Complemento){
+        logger.debug { "onTablaSelected: $newValue" }
+        viewModel.updateComplementoSeleccionado(newValue)
+        if (complementosTable.selectionModel.selectedItem.isDeleted == true) deleteButton.isDisable = true
+        if (complementosTable.selectionModel.selectedItem.isDeleted == false) deleteButton.isDisable = false
     }
 
     private fun onEliminarAction(){
@@ -178,9 +187,12 @@ class ListadoComplementosAdminController : KoinComponent {
         if (complementosTable.selectionModel.selectedItem == null){
             return
         }
+
+        val complementoSelected = complementosTable.selectionModel.selectedItem.nombre
+
         Alert(AlertType.CONFIRMATION).apply {
-            title = "¿Eliminar complemento?"
-            contentText = "¿Desea eliminar el complemento?"
+            title = "Eliminando complemento"
+            headerText = "¿Desea eliminar el complemento: $complementoSelected?"
         }.showAndWait().ifPresent{
             if (it == ButtonType.OK) {
                 viewModel.eliminarComplemento().onSuccess {
@@ -188,7 +200,7 @@ class ListadoComplementosAdminController : KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.INFORMATION,
                         "Complemento eliminado",
-                        "Se ha eliminado el complemento"
+                        "Se ha eliminado el complemento: $complementoSelected"
                     )
                     complementosTable.selectionModel.clearSelection()
                 }.onFailure {
@@ -196,23 +208,18 @@ class ListadoComplementosAdminController : KoinComponent {
                     showAlertOperacion(
                         alerta = AlertType.ERROR,
                         "Error al eliminar el complemento",
-                        "No se ha eliminado el complemento"
+                        "No se ha podido eliminar el complemento: $complementoSelected"
                     )
                 }
             }
         }
     }
 
-    private fun onNuevoAction() {
+    /*private fun onNuevoAction() {
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
         viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.NUEVO)
         RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
-    }
-
-    private fun onTablaSelected(newValue: Complemento){
-        logger.debug { "onTablaSelected: $newValue" }
-        viewModel.updateComplementoSeleccionado(newValue)
-    }
+    }*/
 
     private fun onEditarAction(){
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
@@ -223,10 +230,12 @@ class ListadoComplementosAdminController : KoinComponent {
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
         title: String = "",
+        header: String = "",
         mensaje: String = ""
     ) {
         Alert(alerta).apply {
             this.title = title
+            this.headerText = header
             this.contentText = mensaje
         }.showAndWait()
     }

@@ -12,6 +12,7 @@ import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel.ButacaState
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.ComplementoState
 import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewModel.ComplementoSeleccionadoState
+import javafx.scene.image.*
 import java.time.LocalDate
 
 fun ProductoEntity.toProducto(): Producto {
@@ -186,7 +187,8 @@ fun ComplementoState.toModel(): Complemento {
         precio = this.precio,
         stock = this.stock,
         categoria = CategoriaComplemento.valueOf(this.categoria),
-        imagen = this.fileImage?.name ?: "sinImagen.png",
+        // TODO -> StorageImagenes
+        imagen = (this.imagen ?: Image("sinImagen.png")).toString(),
         createdAt = LocalDate.now(),
         updatedAt = LocalDate.now(),
         isDeleted = false

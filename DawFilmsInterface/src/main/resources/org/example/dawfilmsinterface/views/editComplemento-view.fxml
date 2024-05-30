@@ -85,8 +85,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="idField" layoutX="190.0" layoutY="100.0" prefHeight="30.0" prefWidth="200.0" />
-      <Label layoutX="37.0" layoutY="97.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
+      <TextField fx:id="idField" editable="false" layoutX="190.0" layoutY="104.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="37.0" layoutY="101.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
