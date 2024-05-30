@@ -2,7 +2,6 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
@@ -23,19 +22,13 @@ class GestionComplementosViewModel(
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
-    fun initialize() {
-        logger.debug { "Inicializando GestionComplementosViewModel" }
-        loadAllComplementos()
-        loadTypes()
-    }
-
-    private fun loadTypes() {
+     fun loadTypes() {
         logger.debug { "Cargando tipos" }
         state.value = state.value.copy(typesCategoria = TipoCategoria.entries.map { it.value })
-        state.value = state.value.copy(disponibilidades = Disponibilitys.entries.map { it.value })
+        state.value = state.value.copy(availability = Disponibilidades.entries.map { it.value })
     }
 
-    private fun loadAllComplementos(){
+     fun loadAllComplementos(){
         logger.debug { "Cargando complementos del repositorio" }
         service.getAllComplementos().onSuccess {
             logger.debug { "Cargando complementos del repositorio: ${it.size}" }
@@ -54,14 +47,6 @@ class GestionComplementosViewModel(
     fun updateComplementoSeleccionado(complemento: Complemento){
         logger.debug { "Actualizando estado de Complemento: $complemento" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("icons/${complemento.imagen}"))
-        var fileImage = File(RoutesManager.getResource("icons/${complemento.imagen}").toURI())
-
-        storage.loadImage(complemento.imagen).onSuccess {
-            imagen = Image(it.absoluteFile.toURI().toString())
-            fileImage = it
-        }
-
         state.value = state.value.copy(
             complemento = ComplementoState(
                 id = complemento.id,
@@ -69,8 +54,7 @@ class GestionComplementosViewModel(
                 precio = complemento.precio,
                 stock = complemento.stock,
                 categoria = if(complemento.categoria.name == "COMIDA") "COMIDA" else complemento.categoria.name,
-                imagen = imagen,
-                fileImage = fileImage,
+                imagen = Image(RoutesManager.getResourceAsStream("icons/logoCine.png")),
                 isDeleted = complemento.isDeleted!!
             )
         )
@@ -79,66 +63,31 @@ class GestionComplementosViewModel(
     fun editarComplemento(): Result<Complemento, ProductoError> {
         logger.debug { "Editando Complemento" }
 
-        val updatedComplementoTemp = state.value.complemento.copy()
-        val fileNameTemp = state.value.complemento.oldFileImage?.name ?: TipoImagen.SIN_IMAGEN.value
-        var updatedComplemento = state.value.complemento.toModel().copy(imagen = fileNameTemp)
+        val updatedComplemento = state.value.complemento.toModel()
 
-        return updatedComplementoTemp.fileImage?.let { newFileImage ->
-            if (updatedComplemento.imagen == TipoImagen.SIN_IMAGEN.value || updatedComplemento.imagen == TipoImagen.EMPTY.value) {
-                storage.saveImage(newFileImage).onSuccess {
-                    updatedComplemento = updatedComplemento.copy(imagen = it.name)
-                }
-            } else {
-                storage.updateImage(fileNameTemp, newFileImage)
-            }
-
+        return Ok(
             service.updateComplemento(state.value.complemento.id, updatedComplemento).onSuccess {
-                val index = state.value.complementos.indexOfFirst { b -> b.id == it.id }
+                val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
+                state.value.complementos.toMutableList().apply { this[index] = it }
                 state.value = state.value.copy(
-                    complementos = state.value.complementos.toMutableList().apply { this[index] = it }
+                    complementos = state.value.complementos
                 )
                 updateActualState()
-                Ok(it)
             }
-        } ?: service.updateComplemento(state.value.complemento.id, updatedComplemento).onSuccess {
-            val index = state.value.complementos.indexOfFirst { b -> b.id == it.id }
-            state.value = state.value.copy(
-                complementos = state.value.complementos.toMutableList().apply { this[index] = it }
-            )
-            updateActualState()
-            Ok(it)
-        }
+        ).value
     }
 
     fun eliminarComplemento(): Result<Unit, ProductoError>{
         logger.debug { "Eliminando Complemento" }
-        val complemento = state.value.complemento.copy()
+        val complemento = state.value.complemento
         val myId = complemento.id
 
-        // TODO -> MIRAR PORQUE AL BORRAR SE "BORRAN" Y SALTA ERROR
-        /*complemento.fileImage?.let {
-            if (it.name != TipoImagen.SIN_IMAGEN.value){
-                storage.deleteImage(it)
-            }
-        }*/
-
         service.deleteComplemento(myId)
-        updateActualState()
+        loadAllComplementos()
         return Ok(Unit)
     }
 
-    private fun updateImageComplementoOperacion(fileImage: File){
-        logger.debug { "Actualizando imagen: $fileImage" }
-        state.value = state.value.copy(
-            complemento = state.value.complemento.copy(
-                imagen = Image(fileImage.toURI().toString()),
-                fileImage = fileImage,
-                oldFileImage = state.value.complemento.fileImage
-            )
-        )
-    }
-
-    fun createComplemento(): Result<Complemento, ProductoError>{
+   /* fun createComplemento(): Result<Complemento, ProductoError>{
         logger.debug { "Creando Complemento"}
         val newComplementoTemp = state.value.complemento.copy()
         var newComplemento = newComplementoTemp.toModel().copy()
@@ -157,15 +106,15 @@ class GestionComplementosViewModel(
             Ok(it)
         }
 
-    }
+    }*/
 
     fun changeComplementoOperacion(newValue: TipoOperacion){
         logger.debug { "Cambiando tipo de operacion: $newValue" }
         if (newValue == TipoOperacion.EDITAR){
             logger.debug { "Copiando estado de Complemento seleccionado a Operacion"}
             state.value = state.value.copy(
-                complemento = state.value.complemento.copy(),
-                tipoOperacion = newValue
+                tipoOperacion = newValue,
+                complemento = state.value.complemento
             )
         } else {
             logger.debug { "Limpiando estado de Complemento Operacion" }
@@ -177,6 +126,7 @@ class GestionComplementosViewModel(
     }
 
     fun updateDataComplementoOperacion(
+        id: String,
         nombre: String,
         precio: Double,
         stock: Int,
@@ -184,9 +134,10 @@ class GestionComplementosViewModel(
         imagen: Image,
         isDeleted: Boolean
     ){
-        logger.debug { "Actualizando estado de Complemento Operacion" }
+        logger.debug { "Actualizando estado de Complemento Operación" }
         state.value = state.value.copy(
-            complemento = state.value.complemento.copy(
+            complemento = ComplementoState(
+                id = id,
                 nombre = nombre,
                 precio = precio,
                 stock = stock,
@@ -200,7 +151,7 @@ class GestionComplementosViewModel(
     data class GestionState(
         val typesCategoria: List<String> = emptyList(),
 
-        val disponibilidades: List<String> = emptyList(),
+        val availability: List<String> = emptyList(),
 
         val complementos : List<Complemento> = emptyList(),
 
@@ -212,12 +163,10 @@ class GestionComplementosViewModel(
     data class ComplementoState(
         val id : String = "",
         val nombre : String = "",
-        val precio : Double = 3.00,
-        val stock : Int = 20,
+        val precio : Double = 0.0,
+        val stock : Int = 0,
         val categoria : String = "",
         val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
-        val fileImage : File? = null,
-        val oldFileImage : File? = null,
         val isDeleted : Boolean = false
     )
 
@@ -225,15 +174,11 @@ class GestionComplementosViewModel(
         NUEVO("NUEVO"), EDITAR("EDITAR")
     }
 
-    enum class TipoImagen(val value : String){
-        SIN_IMAGEN("sinImagen.png"), EMPTY("")
-    }
-
     enum class TipoCategoria(val value : String){
         BEBIDA("BEBIDA"), COMIDA("COMIDA")
     }
 
-    enum class Disponibilitys(val value: String) {
+    enum class Disponibilidades(val value: String) {
         FALSE("SI"), TRUE("NO")
     }
 }

@@ -6,12 +6,12 @@ import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
-import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.EDITAR
-import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.NUEVO
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
+import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.*
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.logger.MESSAGE
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
@@ -89,31 +89,33 @@ class EditarComplementoController : KoinComponent {
     private fun initialize() {
         logger.debug { "Inicializando EditarComplementoController FXML en Modo: ${viewModel.state.value.tipoOperacion}" }
 
-        initValues()
+        initDefaultValues()
 
         initEventos()
     }
 
-    @FXML
-    private fun initValues() {
+    private fun initDefaultValues() {
         logger.debug { "InitValues" }
-        idField.text = viewModel.state.value.complemento.id
 
+        viewModel.loadTypes()
+
+        logger.warn { "Inicio controller: ${viewModel.state.value.complemento}" }
+
+        idField.text = viewModel.state.value.complemento.id
         nombreField.text = viewModel.state.value.complemento.nombre
 
         categoriaComboBox.items = FXCollections.observableList(viewModel.state.value.typesCategoria)
         categoriaComboBox.value = viewModel.state.value.complemento.categoria
 
-        disponibleComboBox.items = FXCollections.observableArrayList(viewModel.state.value.disponibilidades)
+        disponibleComboBox.items = FXCollections.observableArrayList(viewModel.state.value.availability)
         disponibleComboBox.value = if (viewModel.state.value.complemento.isDeleted) "NO" else "SI"
 
-        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
-        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, 3.00, 0.5)
+        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500, viewModel.state.value.complemento.stock)
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, viewModel.state.value.complemento.precio, 0.5)
 
         imagenImage.image = viewModel.state.value.complemento.imagen
     }
 
-    @FXML
     private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
         backMenuMenuButton.setOnAction {
@@ -128,63 +130,65 @@ class EditarComplementoController : KoinComponent {
         cleanButton.setOnAction { onLimpiarAction() }
     }
 
-    @FXML
     private fun onGuardarAction(){
-        logger.debug { "onGuardarAction" }
+        logger.debug { "Guardando complemento" }
 
         viewModel.updateDataComplementoOperacion(
+            id = idField.text,
             nombre = nombreField.text,
-            categoria = categoriaComboBox.value.toString(),
-            stock = stockSpinner.value,
             precio = priceSpinner.value,
+            stock = stockSpinner.value,
+            categoria = categoriaComboBox.value.toString(),
             imagen = imagenImage.image,
-            isDeleted = disponibleComboBox.value == "NO"
+            isDeleted = disponibleComboBox.value != "SI"
         )
 
-        when(viewModel.state.value.tipoOperacion){
-            NUEVO -> viewModel.createComplemento()
-            EDITAR -> viewModel.editarComplemento()
-        }
-
-        if (nombreField.text == null || nombreField.text == "") {
+        if (nombreField.text == null || nombreField.text.isEmpty()) {
             showAlertOperacion(
                 AlertType.ERROR,
-                "Complemento no salvado",
-                "El nombre no puede estar vacío"
+                title = "Complemento no salvado",
+                header = "El nombre no puede estar vacío"
             )
+        } else {
+            logger.warn { viewModel.editarComplemento() }
+            when (viewModel.state.value.tipoOperacion) {
+                NUEVO -> viewModel//.createComplemento()
+                EDITAR -> viewModel.editarComplemento()
+            }
         }
+
+
     }
 
-    @FXML
     private fun onCancelarAction() {
         logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
         stage.close()
     }
 
-    @FXML
     private fun onLimpiarAction() {
         logger.debug { "onLimpiarAction" }
         limpiarFormulario()
     }
 
-    @FXML
     private fun limpiarFormulario() {
         logger.debug { "limpiarFormulario" }
         nombreField.clear()
-        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 25.0, 3.0)
-        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,20)
-        categoriaComboBox.selectionModel.selectFirst()
+        priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 100.0, 1.0, 0.5)
+        stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,1)
+        categoriaComboBox.selectionModel.selectLast()
+        disponibleComboBox.selectionModel.selectFirst()
     }
 
-    @FXML
     private fun showAlertOperacion(
         alerta: AlertType = AlertType.CONFIRMATION,
         title: String = "",
-        mensaje: String = ""
+        header: String = "",
+        message: String = ""
     ) {
         val alert = Alert(alerta)
         alert.title = title
-        alert.contentText = mensaje
+        alert.headerText = header
+        alert.contentText = message
         alert.showAndWait()
     }
 }
