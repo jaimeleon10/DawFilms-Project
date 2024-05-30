@@ -3,6 +3,7 @@ package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
@@ -11,6 +12,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel.TipoOperacion.EDITAR
+import org.example.dawfilmsinterface.productos.models.butacas.TipoButaca
 
 private val logger = logging()
 
@@ -97,7 +99,7 @@ class EditarButacaController : KoinComponent {
         ocupacionComboBox.items = FXCollections.observableList(viewModel.state.value.typesOcupacion)
         ocupacionComboBox.value = viewModel.state.value.butaca.ocupacion
 
-        imagenImage.image = viewModel.state.value.butaca.imagen
+        imagenImage.image = if (viewModel.state.value.butaca.tipo == "VIP") Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionadaVIP.png")) else Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionada.png"))
     }
 
     @FXML
@@ -124,11 +126,11 @@ class EditarButacaController : KoinComponent {
             tipo = tipoComboBox.value,
             ocupacion = ocupacionComboBox.value,
             precio = 5.0,
-            imagen = imagenImage.image
+            imagen = viewModel.state.value.butaca.imagen
         )
 
 
-        if(viewModel.state.value.tipoOperacion == EDITAR){
+        if (viewModel.state.value.tipoOperacion == EDITAR){
             viewModel.editarButaca()
         }
     }

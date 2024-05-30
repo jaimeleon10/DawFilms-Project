@@ -13,13 +13,11 @@ import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.genericStorage.ProductosStorage
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
-import java.io.File
 
 private val logger = logging()
 
 class GestionButacaViewModel(
     private val service : ProductoService,
-    private val storage : ProductosStorage
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
@@ -89,14 +87,6 @@ class GestionButacaViewModel(
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png"))
-        var fileImage = File(RoutesManager.getResource("images/octogatoNatalia.png").toURI())
-
-        storage.loadImage(butaca.imagen).onSuccess {
-            imagen = Image(it.absoluteFile.toURI().toString())
-            fileImage = it
-        }
-
         state.value = state.value.copy(
             butaca = ButacaState(
                 id = butaca.id,
@@ -104,8 +94,7 @@ class GestionButacaViewModel(
                 tipo = butaca.tipoButaca.name,
                 ocupacion = if (butaca.ocupacionButaca.name == "ENRESERVA") "EN RESERVA" else butaca.ocupacionButaca.name,
                 precio = butaca.tipoButaca.precio,
-                imagen = imagen,
-                fileImage = fileImage
+                imagen = if (butaca.tipoButaca == TipoButaca.VIP) "icons/butacaSeleccionadaVIP.png" else "icons/butacaSeleccionada.png"
             )
         )
     }
@@ -113,28 +102,9 @@ class GestionButacaViewModel(
     fun editarButaca(): Result<Butaca, ProductoError> {
         logger.debug { "Editando Butaca" }
 
-        val updatedButacaTemp = state.value.butaca.copy()
-        val fileNameTemp = state.value.butaca.oldFileImage?.name ?: TipoImagen.SIN_IMAGEN.value
-        var updatedButaca = state.value.butaca.toModel().copy(imagen = fileNameTemp)
+        val updatedButaca = state.value.butaca.toModel()
 
-        return updatedButacaTemp.fileImage?.let { newFileImage ->
-            if (updatedButaca.imagen == TipoImagen.SIN_IMAGEN.value || updatedButaca.imagen == TipoImagen.EMPTY.value) {
-                storage.saveImage(newFileImage).onSuccess {
-                    updatedButaca = updatedButaca.copy(imagen = it.name)
-                }
-            } else {
-                storage.updateImage(fileNameTemp, newFileImage)
-            }
-
-            service.updateButaca(state.value.butaca.id, updatedButaca).onSuccess {
-                val index = state.value.butacas.indexOfFirst { b -> b.id == it.id }
-                state.value = state.value.copy(
-                    butacas = state.value.butacas.toMutableList().apply { this[index] = it }
-                )
-                updateActualState()
-                Ok(it)
-            }
-        } ?: service.updateButaca(state.value.butaca.id, updatedButaca).onSuccess {
+        return service.updateButaca(state.value.butaca.id, updatedButaca).onSuccess {
             val index = state.value.butacas.indexOfFirst { b -> b.id == it.id }
             state.value = state.value.copy(
                 butacas = state.value.butacas.toMutableList().apply { this[index] = it }
@@ -144,24 +114,12 @@ class GestionButacaViewModel(
         }
     }
 
-
-    private fun updateImageButacaOperacion(fileImage: File){
-        logger.debug { "Actualizando imagen: $fileImage" }
-        state.value = state.value.copy(
-            butaca = state.value.butaca.copy(
-                imagen = Image(fileImage.toURI().toString()),
-                fileImage = fileImage,
-                oldFileImage = state.value.butaca.fileImage
-            )
-        )
-    }
-
     fun updateDataButacaOperacion(
         estado: String,
         tipo: String,
         ocupacion: String,
         precio: Double,
-        imagen: Image
+        imagen: String
     ){
         logger.debug { "Actualizando estado de Butaca Operacion" }
         state.value = state.value.copy(
@@ -192,22 +150,16 @@ class GestionButacaViewModel(
     )
 
     data class ButacaState(
-        val id : String = "",
-        val estado : String = "",
-        val tipo : String = "",
-        val ocupacion : String = "",
-        val precio : Double = 5.0,
-        val imagen : Image = Image(RoutesManager.getResourceAsStream("images/octogatoNatalia.png")),
-        val fileImage : File? = null,
-        val oldFileImage : File? = null
+        val id: String = "",
+        val estado: String = "",
+        val tipo: String = "",
+        val ocupacion: String = "",
+        val precio: Double = 5.0,
+        val imagen: String = "sinImagen.png"
     )
 
     enum class TipoOperacion(val value : String){
         EDITAR("EDITAR")
-    }
-
-    enum class TipoImagen(val value : String){
-        SIN_IMAGEN("octogatoNatalia.png"), EMPTY("")
     }
 
     enum class TipoFiltroEstado(val value : String){
