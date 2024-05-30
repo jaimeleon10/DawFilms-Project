@@ -22,9 +22,14 @@ class Config {
 
     private val actualDirectory = System.getProperty("user.dir")
 
+    val recaudacionDirectory by lazy {
+        val path = readProperty("app.recaudacion") ?: "FicherosRecaudacion"
+        "$actualDirectory${File.separator}$path"
+    }
+
     val imagesDirectory by lazy {
         val path = readProperty("app.images") ?: "imagenes"
-        "$actualDirectory${File.separator}$path"
+        "$actualDirectory${File.separator}$path/"
     }
 
     val dataBaseUrl: String by lazy {

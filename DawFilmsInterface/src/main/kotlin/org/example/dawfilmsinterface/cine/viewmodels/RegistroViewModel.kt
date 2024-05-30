@@ -30,37 +30,37 @@ class RegistroViewModel(
          val passwordRegex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{5,}$")
 
          if (enteredNombre.isEmpty() || enteredNombre.isBlank()) {
-             showAlertOperacion("Nombre inválido", "El nombre no puede estar vacío")
+             showAlertOperacion(AlertType.ERROR, "Nombre inválido", "El nombre no puede estar vacío")
              return false
          } else if (enteredApellido.isEmpty() || enteredApellido.isBlank()) {
-             showAlertOperacion("Apellido inválido", "El apellido no puede estar vacío")
+             showAlertOperacion(AlertType.ERROR, "Apellido inválido", "El apellido no puede estar vacío")
              return false
          } else if (selectedDate > LocalDate.now()) {
-             showAlertOperacion("Fecha inválida", "La fecha no puede ser posterior a la fecha actual")
+             showAlertOperacion(AlertType.ERROR, "Fecha inválida", "La fecha no puede ser posterior a la fecha actual")
              return false
          } else if (enteredDni.isEmpty() || enteredDni.isBlank()) {
-             showAlertOperacion("DNI inválido", "El dni no puede estar vacío")
+             showAlertOperacion(AlertType.ERROR, "DNI inválido", "El dni no puede estar vacío")
              return false
          } else if (!enteredDni.matches(dniRegex)) {
-             showAlertOperacion("DNI inválido", "El dni debe estar compuesto por 8 números seguidos de una letra\nLetras no válidas: I, O, Ñ, U")
+             showAlertOperacion(AlertType.ERROR, "DNI inválido", "El dni debe estar compuesto por 8 números seguidos de una letra\nLetras no válidas: I, O, Ñ, U")
              return false
          } else if (enteredEmail.isEmpty() || enteredEmail.isBlank()) {
-             showAlertOperacion("Email inválido", "El email no puede estar vacío")
+             showAlertOperacion(AlertType.ERROR, "Email inválido", "El email no puede estar vacío")
              return false
          } else if (!enteredEmail.matches(emailRegex)) {
-             showAlertOperacion("Email inválido", "El email debe tener formato (****@****.***)")
+             showAlertOperacion(AlertType.ERROR, "Email inválido", "El email debe tener formato (****@****.***)")
              return false
          } else if (enteredPass.isEmpty() || enteredPass.isBlank()) {
-             showAlertOperacion("Contraseña inválida", "La contraseña no puede estar vacía")
+             showAlertOperacion(AlertType.ERROR, "Contraseña inválida", "La contraseña no puede estar vacía")
              return false
          } else if (!enteredPass.matches(passwordRegex)) {
-             showAlertOperacion("Contraseña inválida", "La contraseña debe tener una longitud mínima de 5 caracteres, una mayúscula, una minúscula y un número")
+             showAlertOperacion(AlertType.ERROR, "Contraseña inválida", "La contraseña debe tener una longitud mínima de 5 caracteres, una mayúscula, una minúscula y un número")
              return false
          } else if (enteredConfPass.isEmpty() || enteredConfPass.isBlank()) {
-             showAlertOperacion("Contraseña inválida", "Las confirmación de contraseña no puede estar vacía")
+             showAlertOperacion(AlertType.ERROR, "Contraseña inválida", "Las confirmación de contraseña no puede estar vacía")
              return false
          } else if (enteredConfPass != enteredPass) {
-             showAlertOperacion("Contraseña inválida", "Las contraseñas no coinciden")
+             showAlertOperacion(AlertType.ERROR, "Contraseña inválida", "Las contraseñas no coinciden")
              return false
          } else {
              state.value.cliente.nombre = enteredNombre
@@ -80,12 +80,15 @@ class RegistroViewModel(
     }
 
     private fun showAlertOperacion(
+        alertType: AlertType = AlertType.INFORMATION,
         title: String = "",
+        header: String = "",
         mensaje: String = ""
     ) {
-        Alert(AlertType.ERROR).apply {
+        Alert(alertType).apply {
             this.title = title
-            this.headerText = mensaje
+            this.headerText = header
+            this.contentText = mensaje
         }.showAndWait()
     }
 
@@ -100,6 +103,13 @@ class RegistroViewModel(
             password = state.value.cliente.password,
         )
         service.save(cliente)
+
+        showAlertOperacion(
+            AlertType.INFORMATION,
+            title = "Registro completado",
+            header = "Usuario registrado con éxito",
+            mensaje = "¡Bienvenido ${cliente.nombre}!"
+        )
     }
 
     private fun generateNumSocioRandom(): String {

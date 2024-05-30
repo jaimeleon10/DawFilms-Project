@@ -1,7 +1,7 @@
 <ArrayList>
-    <ProductoDto id="1" tipoProducto="Complemento" imagen="agua.png" nombreComplemento="Agua" precioComplemento="2.0" stockComplemento="20" categoriaComplemento="BEBIDA" createdAt="2024-05-29" updatedAt="2024-05-29" isDeleted="false"/>
-    <ProductoDto id="2" tipoProducto="Complemento" imagen="soda.png" nombreComplemento="Refresco" precioComplemento="3.0" stockComplemento="20" categoriaComplemento="BEBIDA" createdAt="2024-05-29" updatedAt="2024-05-29" isDeleted="false"/>
-    <ProductoDto id="3" tipoProducto="Complemento" imagen="popcorn.png" nombreComplemento="Palomitas" precioComplemento="3.0" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-29" updatedAt="2024-05-29" isDeleted="false"/>
-    <ProductoDto id="4" tipoProducto="Complemento" imagen="pistacho.png" nombreComplemento="Pistachos" precioComplemento="2.0" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-29" updatedAt="2024-05-29" isDeleted="false"/>
-    <ProductoDto id="5" tipoProducto="Complemento" imagen="patatas.png" nombreComplemento="Patatas" precioComplemento="2.5" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-29" updatedAt="2024-05-29" isDeleted="false"/>
+    <ProductoDto id="1" tipoProducto="Complemento" imagen="1717094754269.png" nombreComplemento="Agua" precioComplemento="2.0" stockComplemento="20" categoriaComplemento="BEBIDA" createdAt="2024-05-30" updatedAt="2024-05-30" isDeleted="false"/>
+    <ProductoDto id="2" tipoProducto="Complemento" imagen="1717094798369.png" nombreComplemento="Refresco" precioComplemento="3.0" stockComplemento="20" categoriaComplemento="BEBIDA" createdAt="2024-05-30" updatedAt="2024-05-30" isDeleted="false"/>
+    <ProductoDto id="3" tipoProducto="Complemento" imagen="1717101172823.png" nombreComplemento="Palomitas" precioComplemento="3.0" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-30" updatedAt="2024-05-30" isDeleted="false"/>
+    <ProductoDto id="4" tipoProducto="Complemento" imagen="1717101192810.png" nombreComplemento="Pistachos" precioComplemento="2.0" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-30" updatedAt="2024-05-30" isDeleted="false"/>
+    <ProductoDto id="5" tipoProducto="Complemento" imagen="1717101183463.png" nombreComplemento="Patatas" precioComplemento="2.5" stockComplemento="20" categoriaComplemento="COMIDA" createdAt="2024-05-30" updatedAt="2024-05-30" isDeleted="false"/>
 </ArrayList>

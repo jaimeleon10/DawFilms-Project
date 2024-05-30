@@ -83,9 +83,9 @@ class SqlDeLightManager(
 
             databaseQueries.insertComplemento("1", "Complemento", "1717094754269.png", 2.0, "Agua", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
             databaseQueries.insertComplemento("2", "Complemento", "1717094798369.png", 3.0, "Refresco", 20, CategoriaComplemento.BEBIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertComplemento("3", "Complemento", "1717094788589.png", 3.0, "Palomitas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertComplemento("4", "Complemento", "1717094776442.png", 2.0, "Pistachos", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
-            databaseQueries.insertComplemento("5", "Complemento", "1717094765516.png", 2.5, "Patatas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertComplemento("3", "Complemento", "1717101172823.png", 3.0, "Palomitas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertComplemento("4", "Complemento", "1717101192810.png", 2.0, "Pistachos", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
+            databaseQueries.insertComplemento("5", "Complemento", "1717101183463.png", 2.5, "Patatas", 20, CategoriaComplemento.COMIDA.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
 
             databaseQueries.insertCliente("User", "User", "2000-05-10", "12345678A", "user@user.com", "AAA111", "VXNlcjE=", LocalDate.now().toString(), LocalDate.now().toString(), 0)
 

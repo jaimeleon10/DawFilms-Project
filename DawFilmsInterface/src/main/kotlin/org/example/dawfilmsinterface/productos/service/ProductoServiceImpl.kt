@@ -82,7 +82,7 @@ class ProductoServiceImpl(
         return complementoRepository.findByNombre(nombre)
             ?.let {
                     p ->
-                println("Guardando en cache")
+                logger.debug { "Guardando en cache" }
                 productosCache.put(p.id, p) as Result<Complemento, ProductoError>
                 Ok(p)
             }

@@ -7,13 +7,13 @@
         "columnaButaca": 0,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -24,13 +24,13 @@
         "columnaButaca": 1,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -41,13 +41,13 @@
         "columnaButaca": 2,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -63,8 +63,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -80,8 +80,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -97,8 +97,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -109,13 +109,13 @@
         "columnaButaca": 6,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -131,8 +131,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -148,8 +148,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -165,8 +165,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -182,8 +182,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -199,8 +199,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -211,13 +211,13 @@
         "columnaButaca": 5,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -233,8 +233,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -250,8 +250,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -267,8 +267,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -284,8 +284,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -296,13 +296,13 @@
         "columnaButaca": 3,
         "tipoButaca": "VIP",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -313,13 +313,13 @@
         "columnaButaca": 4,
         "tipoButaca": "VIP",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -335,8 +335,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -352,8 +352,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -369,8 +369,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -386,8 +386,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -403,8 +403,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -420,8 +420,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -437,8 +437,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -449,13 +449,13 @@
         "columnaButaca": 5,
         "tipoButaca": "NORMAL",
         "estadoButaca": "ACTIVA",
-        "ocupacionButaca": "LIBRE",
+        "ocupacionButaca": "OCUPADA",
         "nombreComplemento": null,
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -471,8 +471,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -488,8 +488,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -505,8 +505,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -522,8 +522,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -539,8 +539,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -556,8 +556,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -573,8 +573,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     },
     {
@@ -590,8 +590,8 @@
         "precioComplemento": null,
         "stockComplemento": null,
         "categoriaComplemento": null,
-        "createdAt": "2024-05-29",
-        "updatedAt": "2024-05-29",
+        "createdAt": "2024-05-30",
+        "updatedAt": "2024-05-30",
         "isDeleted": false
     }
 ]

@@ -121,7 +121,7 @@ class ObtenerRecaudacionController : KoinComponent {
     @FXML
     private fun actualizarTotal(){
         val total = productosTable.items.sumOf { (it as LineaVenta).precio * it.cantidad }
-        totalRecaudacionField.text = total.toString()
+        totalRecaudacionField.text = total.toDefaultMoneyString()
     }
 
     @FXML
@@ -138,9 +138,11 @@ class ObtenerRecaudacionController : KoinComponent {
         tipoProductoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let {onComboSelected(newValue.toString())}
         }
-        val lineas: MutableList<LineaVenta> = mutableListOf()
-        productosTable.items.forEach { lineas.add(it as LineaVenta) }
-        informeButton.setOnAction { viewModel.sacarInforme(lineas.toList()) }
+
+        informeButton.setOnAction {
+            val lineas = filterDataTable()
+            viewModel.sacarInforme(lineas.toList())
+        }
 
         dateFilterDatePicker.valueProperty().addListener{ _, _, newValue ->
             newValue?.let {onDateSelected(newValue)}
@@ -167,7 +169,7 @@ class ObtenerRecaudacionController : KoinComponent {
         filterDataTable()
     }
 
-    private fun filterDataTable(){
+    private fun filterDataTable(): List<LineaVenta> {
         logger.debug { "filterDataTable" }
         val tipoProducto = tipoProductoFilterComboBox.value.toString()
         val selectedDate = dateFilterDatePicker.value
@@ -179,5 +181,7 @@ class ObtenerRecaudacionController : KoinComponent {
         productosTable.items = FXCollections.observableArrayList(filteredList)
 
         actualizarTotal()
+
+        return filteredList
     }
 }

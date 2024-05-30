@@ -7,6 +7,7 @@ import org.example.dawfilmsinterface.cine.errors.CineError
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import org.example.dawfilmsinterface.clientes.storage.ClienteStorage
 import org.example.dawfilmsinterface.config.Config
+import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.ventas.models.Venta
@@ -42,6 +43,7 @@ class CineStorageZipImpl (
         return try {
             dataProductos.forEach {
                 val file = File(config.imagesDirectory + it.imagen)
+
                 if (file.exists()) {
                     Files.copy(
                         file.toPath(),
@@ -51,47 +53,22 @@ class CineStorageZipImpl (
                 }
             }
             storageJsonProductos.storeJson(File("$tempDir/dataProducto.json"), dataProductos)
-            Files.walk(tempDir)
-                .forEach { logger.debug { it } }
-            val archivosProductos = Files.walk(tempDir)
-                .filter { Files.isRegularFile(it) }
-                .toList()
-            ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
-                archivosProductos.forEach { archivoProducto ->
-                    val entradaZip = ZipEntry(tempDir.relativize(archivoProducto).toString())
-                    zip.putNextEntry(entradaZip)
-                    Files.copy(archivoProducto, zip)
-                    zip.closeEntry()
-                }
-            }
             storageJsonClientes.storeJson(File("$tempDir/dataCliente.json"), dataClientes)
-            Files.walk(tempDir)
-                .forEach { logger.debug { it } }
-            val archivosClientes = Files.walk(tempDir)
-                .filter { Files.isRegularFile(it) }
-                .toList()
-            ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
-                archivosClientes.forEach { archivoCliente ->
-                    val entradaZip = ZipEntry(tempDir.relativize(archivoCliente).toString())
-                    zip.putNextEntry(entradaZip)
-                    Files.copy(archivoCliente, zip)
-                    zip.closeEntry()
-                }
-            }
             storageJsonVentas.storeJson(File("$tempDir/dataVentas.json"), dataVentas)
             Files.walk(tempDir)
                 .forEach { logger.debug { it } }
-            val archivosVentas = Files.walk(tempDir)
+            val archivos = Files.walk(tempDir)
                 .filter { Files.isRegularFile(it) }
                 .toList()
             ZipOutputStream(Files.newOutputStream(fileToZip.toPath())).use { zip ->
-                archivosVentas.forEach { archivoVenta ->
-                    val entradaZip = ZipEntry(tempDir.relativize(archivoVenta).toString())
+                archivos.forEach { archive ->
+                    val entradaZip = ZipEntry(tempDir.relativize(archive).toString())
                     zip.putNextEntry(entradaZip)
-                    Files.copy(archivoVenta, zip)
+                    Files.copy(archive, zip)
                     zip.closeEntry()
                 }
             }
+            tempDir.toFile().deleteRecursively()
             Ok(fileToZip)
         } catch (e: Exception) {
             logger.error { "Error al exportar a ZIP: ${e.message}" }
