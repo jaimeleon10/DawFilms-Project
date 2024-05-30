@@ -118,6 +118,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <ImageView fx:id="imagenImage" fitHeight="118.0" fitWidth="121.0" layoutX="395.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imagenImage" fitHeight="106.0" fitWidth="105.0" layoutX="403.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

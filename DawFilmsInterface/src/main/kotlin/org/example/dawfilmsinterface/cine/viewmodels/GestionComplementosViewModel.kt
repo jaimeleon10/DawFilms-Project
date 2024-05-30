@@ -19,7 +19,6 @@ private val logger = logging()
 
 class GestionComplementosViewModel(
     private val service : ProductoService,
-    private val storage : ProductosStorage
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
@@ -55,7 +54,7 @@ class GestionComplementosViewModel(
                 precio = complemento.precio,
                 stock = complemento.stock,
                 categoria = if(complemento.categoria.name == "COMIDA") "COMIDA" else complemento.categoria.name,
-                imagen = Image(RoutesManager.getResourceAsStream("icons/logoCine.png")),
+                imagen = "icons/logoCine.png",
                 isDeleted = complemento.isDeleted!!
             )
         )
@@ -126,7 +125,7 @@ class GestionComplementosViewModel(
         precio: Double,
         stock: Int,
         categoria: String,
-        imagen: Image,
+        imagen: String,
         isDeleted: Boolean
     ){
         logger.debug { "Actualizando estado de Complemento Operación" }
@@ -163,7 +162,7 @@ class GestionComplementosViewModel(
         val precio : Double = 0.0,
         val stock : Int = 0,
         val categoria : String = "",
-        val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
+        val imagen : String = "icons/sinImagen.png",
         val isDeleted : Boolean = false
     )
 

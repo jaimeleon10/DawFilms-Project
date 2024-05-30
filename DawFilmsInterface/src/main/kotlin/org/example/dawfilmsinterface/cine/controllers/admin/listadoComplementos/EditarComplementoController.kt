@@ -4,6 +4,7 @@ import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
@@ -111,7 +112,7 @@ class EditarComplementoController : KoinComponent {
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500, viewModel.state.value.complemento.stock)
         priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, viewModel.state.value.complemento.precio, 0.5)
 
-        imagenImage.image = viewModel.state.value.complemento.imagen
+        imagenImage.image = Image(RoutesManager.getResourceAsStream(viewModel.state.value.complemento.imagen))
     }
 
     private fun initEventos() {
@@ -137,7 +138,7 @@ class EditarComplementoController : KoinComponent {
             precio = priceSpinner.value,
             stock = stockSpinner.value,
             categoria = categoriaComboBox.value.toString(),
-            imagen = imagenImage.image,
+            imagen = viewModel.state.value.complemento.imagen,
             isDeleted = disponibleComboBox.value == "NO"
         )
 
