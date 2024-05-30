@@ -8,6 +8,7 @@ import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
+import java.io.File
 
 private val logger = logging()
 
@@ -36,7 +37,9 @@ class SeleccionarComplementoViewModel (
     fun updateComplementoSeleccionado(complemento: Complemento) {
         logger.debug { "Actualizando estado de complemento: $complemento" }
 
-        var imagen = Image(RoutesManager.getResourceAsStream("icons/${complemento.imagen}"))
+        var imagen = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png"))
+        var fileImage = File(RoutesManager.getResource("icons/sinImagen.png").toURI())
+
         storage.loadImage(complemento.imagen).onSuccess {
             imagen = Image(it.absoluteFile.toURI().toString())
         }

@@ -66,8 +66,8 @@ class StorageHtmlImpl: StorageHtml {
                             </tbody>
                         </table>
                         <ul>
-                        <li style="font-size: larger;"><strong>Coste Total(sin IVA): </strong>${(venta.total * 0.79).toDefaultMoneyString()}<br /><br /></li>
-                            <li style="font-size: larger;"><strong>Coste Total(con IVA): </strong>${venta.total.toDefaultMoneyString()}<br /><br /></li>
+                        <li style="font-size: larger;"><strong>Coste Total (sin IVA): </strong>${(venta.total * 0.79).toDefaultMoneyString()}<br /><br /></li>
+                            <li style="font-size: larger;"><strong>Coste Total (con IVA): </strong>${venta.total.toDefaultMoneyString()}<br /><br /></li>
                         </ul>
                         <p class="text-right lead"><span style="font-weight: bold;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/04/29/16512471939657.jpg" width="554" height="359" /><br /></span></p>
                         <p class="text-right lead" style="text-align: center;"><span style="font-weight: bold;">&iexcl; GRACIAS POR SU COMPRA !<br />🎫🎫🎫</span></p>

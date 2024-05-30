@@ -2,6 +2,9 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.*
 import javafx.beans.property.SimpleObjectProperty
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
+import javafx.scene.control.ButtonType
 import javafx.scene.image.Image
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.mappers.toModel
@@ -134,18 +137,27 @@ class GestionComplementosViewModel(
         val complemento = state.value.complemento.copy()
         val myId = complemento.id
 
-        complemento.fileImage?.let {
-            if (it.name != "sinImagen.png") {
-                storage.deleteImage(it)
+        Alert(AlertType.CONFIRMATION).apply {
+            this.title = "Borrar imagen"
+            this.headerText = "¿Deseas borrar la imagen?"
+            this.contentText = "El complemento quedará no disponible y sin imagen"
+        }.showAndWait().ifPresent { opcion ->
+            if (opcion == ButtonType.OK) {
+                complemento.fileImage?.let {
+                    if (it.name != "sinImagen.png") {
+                        storage.deleteImage(it)
+                    }
+                }
             }
         }
 
-        service.deleteComplemento(myId)
-        state.value = state.value.copy(
-            complementos = state.value.complementos.toMutableList().apply { this.removeIf { it.id == myId } }
-        )
+        service.deleteComplemento(myId).onSuccess {
+            val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
+            state.value = state.value.copy(
+                complementos = state.value.complementos.toMutableList().apply { this[index] = it }
+            )
+        }
         updateActualState()
-        //loadAllComplementos()
         return Ok(Unit)
     }
 

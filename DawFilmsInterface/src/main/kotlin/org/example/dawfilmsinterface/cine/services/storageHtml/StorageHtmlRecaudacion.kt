@@ -5,6 +5,6 @@ import org.example.dawfilmsinterface.ventas.errors.VentaError
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import java.io.File
 
-interface StorageHtml {
+interface StorageHtmlRecaudacion {
     fun exportHtml(listaLineas: List<LineaVenta>, file: File): Result<Unit, VentaError>
 }

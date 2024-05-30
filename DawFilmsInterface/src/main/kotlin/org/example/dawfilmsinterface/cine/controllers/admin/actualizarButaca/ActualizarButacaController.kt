@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
+import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -117,7 +118,7 @@ class ActualizarButacaController : KoinComponent {
         estadoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.estado })
         tipoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.tipo })
         ocupacionSelectedField.textProperty().bind(viewModel.state.map { it.butaca.ocupacion })
-        precioSelectedField.textProperty().bind(viewModel.state.map { it.butaca.precio.toString() })
+        precioSelectedField.textProperty().bind(viewModel.state.map { it.butaca.precio.toDefaultMoneyString() })
 
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }

@@ -187,8 +187,8 @@ fun ComplementoState.toModel(): Complemento {
         precio = this.precio,
         stock = this.stock,
         categoria = if (this.categoria == "BEBIDA") CategoriaComplemento.BEBIDA else CategoriaComplemento.COMIDA,
-        // TODO -> StorageImagenes
-        imagen = (this.imagen ?: Image("sinImagen.png")).toString(),
+        //imagen = (this.imagen ?: Image("sinImagen.png")).toString(),
+        imagen = this.imagen.url ?: "sinImagen.png",
         createdAt = LocalDate.now(),
         updatedAt = LocalDate.now(),
         isDeleted = this.isDeleted

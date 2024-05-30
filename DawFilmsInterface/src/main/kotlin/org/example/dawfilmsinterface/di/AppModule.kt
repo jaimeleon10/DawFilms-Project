@@ -4,6 +4,8 @@ package org.example.dawfilmsinterface.di
 import org.example.dawfilmsinterface.cache.Cache
 import org.example.dawfilmsinterface.cine.services.storage.CineStorageZip
 import org.example.dawfilmsinterface.cine.services.storage.CineStorageZipImpl
+import org.example.dawfilmsinterface.cine.services.storageHtml.StorageHtmlRecaudacion
+import org.example.dawfilmsinterface.cine.services.storageHtml.StorageHtmlRecaudacionImpl
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepository
 import org.example.dawfilmsinterface.clientes.repositories.ClienteRepositoryImpl
@@ -66,8 +68,14 @@ val appModule = module {
 
     singleOf(::SqlDeLightManager)
 
+    // Cine
+
     singleOf(::CineStorageZipImpl) {
         bind<CineStorageZip>()
+    }
+
+    singleOf(::StorageHtmlRecaudacionImpl) {
+        bind<StorageHtmlRecaudacion>()
     }
 
     // Cliente

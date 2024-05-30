@@ -50,7 +50,7 @@ class ComplementoRepositoryImpl(
                 categoria_complemento = item.categoria.toString(),
                 created_at = timeStamp,
                 updated_at = timeStamp,
-                is_deleted = 0
+                is_deleted = if (item.isDeleted == true) 1 else 0
             )
         }
         return db.selectComplementoById(item.id).executeAsOne().toComplemento()
