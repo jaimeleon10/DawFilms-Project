@@ -47,8 +47,14 @@ class CodigoContraseñaOlvidadaController :KoinComponent {
 
         codeField.requestFocus()
 
-        codeField.text = viewModel.generateRestoreCode()
-        viewModel.state.value.restoreCode = codeField.text
+        if (viewModel.state.value.restoreCode==""){
+
+            codeField.text = viewModel.generateRestoreCode()
+            viewModel.state.value.restoreCode = codeField.text
+        }
+        else{
+            codeField.text = viewModel.state.value.restoreCode
+        }
 
         codeField.setOnKeyPressed { event ->
             if (event.code == KeyCode.ENTER) {
@@ -60,13 +66,16 @@ class CodigoContraseñaOlvidadaController :KoinComponent {
         continueButton.setOnAction { continuar() }
 
         backLoginButton.setOnAction {
+            viewModel.state.value.restoreCode = ""
             RoutesManager.initEmailRecuperarPass()
             stage.close()
         }
 
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
 
-        backLoginMenuButton.setOnAction { stage.close() }
+        backLoginMenuButton.setOnAction {
+            viewModel.state.value.restoreCode = ""
+            stage.close() }
     }
 
     private fun continuar() {
