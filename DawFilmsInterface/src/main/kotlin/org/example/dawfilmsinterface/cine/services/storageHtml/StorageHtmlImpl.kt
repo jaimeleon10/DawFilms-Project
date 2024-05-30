@@ -1,4 +1,4 @@
-package org.example.dawfilmsinterface.ventas.storage.storageHtml
+package org.example.dawfilmsinterface.cine.services.storageHtml
 
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
@@ -8,14 +8,14 @@ import org.example.dawfilmsinterface.locale.toDefaultMoneyString
 import org.example.dawfilmsinterface.productos.models.butacas.Butaca
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.ventas.errors.VentaError
-import org.example.dawfilmsinterface.ventas.models.Venta
-import org.lighthousegames.logging.logging
+import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import java.io.File
 
-private val logger = logging()
+/*class StorageHtmlImpl:StorageHtml {
+    override fun exportHtml(listaLineas: List<LineaVenta>, file: File): Result<Unit, VentaError> {
 
-class StorageHtmlImpl: StorageHtml {
-    override fun exportHtml(venta: Venta, file: File): Result<Unit, VentaError> {
+        val totalLineas = 0.0
+
         return try {
             val html = """
             <html>
@@ -27,12 +27,9 @@ class StorageHtmlImpl: StorageHtml {
                 </head>
                 <body>
                     <div class="container">
-                        <h1><span style="text-decoration: underline; color: #3366ff;">Ticket Cines DAWFILMS</span> 🍿🎥</h1>
+                        <h1><span style="text-decoration: underline; color: #3366ff;">Recaudación Cines DAWFILMS</span> 🍿🎥</h1>
                         <ul>
-                            <li style="font-size: larger;"><strong>Identificador de compra: </strong>${venta.fechaCompra.dayOfMonth}${venta.fechaCompra.monthValue}${venta.fechaCompra.year}_${venta.total}_${venta.cliente.numSocio}</li>
-                            <li style="font-size: larger;"><strong>Nombre: </strong>${venta.cliente.nombre}</li>
-                            <li style="font-size: larger;"><strong>Número de Socio: </strong>${venta.cliente.numSocio}</li>
-                            <li style="font-size: larger;"><strong>Fecha de compra: </strong>${venta.fechaCompra.toDefaultDateString()}</li>
+                            <li style="font-size: larger;"><strong>Fecha de compra: </strong>${listaLineas.createdAt.toDefaultDateString()}</li>
                             <li style="font-size: larger;"><strong>Productos:</strong></li>
                         </ul>
                         <table class="table table-bordered">
@@ -45,28 +42,28 @@ class StorageHtmlImpl: StorageHtml {
                                 </tr>
                             </thead>
                             <tbody>
-                                ${venta.lineas.joinToString("") { "<tr><td>${
-                                    if (it.tipoProducto == "Butaca") {
-                                        "${"Butaca"}-${it.producto.id}"
-                                    } else {
-                                        (it.producto as Complemento).nombre
-                                    }
-                                }</td><td>${it.cantidad}</td><td>${
-                                    if (it.tipoProducto == "Butaca") {
-                                        (it.producto as Butaca).tipoButaca.precio.toDefaultMoneyString()
-                                    } else {
-                                        (it.producto as Complemento).precio.toDefaultMoneyString()
-                                    }
-                                }</td><td>${(it.cantidad * (if (it.tipoProducto == "Butaca") {
-                                    (it.producto as Butaca).tipoButaca.precio
-                                } else {
-                                    (it.producto as Complemento).precio
-                                } )).toDefaultMoneyString()
-                                }</td></tr>" }}
+            <tr><td>${
+                if (listaLineas. == "Butaca") {
+                    "${"Butaca"}-${listaLineas.producto.id}"
+                } else {
+                    (listaLineas.producto as Complemento).nombre
+                }
+            }</td><td>${listaLineas.cantidad}</td><td>${
+                if (listaLineas.tipoProducto == "Butaca") {
+                    (listaLineas.producto as Butaca).tipoButaca.precio.toDefaultMoneyString()
+                } else {
+                    (listaLineas.producto as Complemento).precio.toDefaultMoneyString()
+                }
+            }</td><td>${(listaLineas.cantidad * (if (listaLineas.tipoProducto == "Butaca") {
+                (listaLineas.producto as Butaca).tipoButaca.precio
+            } else {
+                (listaLineas.producto as Complemento).precio
+            } )).toDefaultMoneyString()
+            }</td></tr>" }}
                             </tbody>
                         </table>
                         <ul>
-                        <li style="font-size: larger;"><strong>Coste Total(sin IVA): </strong>${(venta.total * 0.79).toDefaultMoneyString()}<br /><br /></li>
+                        <li style="font-size: larger;"><strong>Coste Total(sin IVA): </strong>${(listaLineas.precio * 0.79).toDefaultMoneyString()}<br /><br /></li>
                             <li style="font-size: larger;"><strong>Coste Total(con IVA): </strong>${venta.total.toDefaultMoneyString()}<br /><br /></li>
                         </ul>
                         <p class="text-right lead"><span style="font-weight: bold;"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2022/04/29/16512471939657.jpg" width="554" height="359" /><br /></span></p>
@@ -81,4 +78,4 @@ class StorageHtmlImpl: StorageHtml {
             Err(VentaError.VentaStorageError("Error al salvar fichero de venta: ${file.absolutePath}. ${e.message}"))
         }
     }
-}
+}*/

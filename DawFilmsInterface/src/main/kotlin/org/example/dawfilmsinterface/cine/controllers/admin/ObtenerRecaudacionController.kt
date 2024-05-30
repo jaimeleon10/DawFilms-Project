@@ -74,6 +74,9 @@ class ObtenerRecaudacionController : KoinComponent {
     @FXML
     lateinit var precioColumnTable: TableColumn<LineaVenta, String>
 
+    @FXML
+    lateinit var informeButton: Button
+
     /**
      * Función que inicializa la vista de obtención de recaudación.
      * Asigna las acciones a los botones y elementos de menú.
@@ -135,6 +138,9 @@ class ObtenerRecaudacionController : KoinComponent {
         tipoProductoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let {onComboSelected(newValue.toString())}
         }
+        val lineas: MutableList<LineaVenta> = mutableListOf()
+        productosTable.items.forEach { lineas.add(it as LineaVenta) }
+        informeButton.setOnAction { viewModel.sacarInforme(lineas.toList()) }
 
         dateFilterDatePicker.valueProperty().addListener{ _, _, newValue ->
             newValue?.let {onDateSelected(newValue)}

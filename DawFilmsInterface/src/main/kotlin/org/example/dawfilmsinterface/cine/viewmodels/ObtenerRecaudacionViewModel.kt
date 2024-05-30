@@ -2,14 +2,18 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
+import org.example.dawfilmsinterface.cine.services.storageHtml.StorageHtml
 import org.example.dawfilmsinterface.ventas.models.LineaVenta
 import org.example.dawfilmsinterface.ventas.services.VentaService
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
+import kotlin.io.path.Path
 
 private val logger = logging()
 
 class ObtenerRecaudacionViewModel(
-    private val service : VentaService
+    private val service : VentaService,
+    private val storage: StorageHtml
 ){
     var state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
 
@@ -51,6 +55,11 @@ class ObtenerRecaudacionViewModel(
                     else -> true
                 }
             }
+    }
+
+    fun sacarInforme(lineas: List<LineaVenta>) {
+        val file = Path("FicherosRecaudacion", "recaudacion_${LocalDate.now()}.html").toFile()
+        storage.exportHtml(lineas, file)
     }
 
     data class RecaudacionState(
