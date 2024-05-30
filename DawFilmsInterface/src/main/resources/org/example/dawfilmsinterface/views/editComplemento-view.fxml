@@ -124,7 +124,10 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></ComboBox>
-      <ImageView fx:id="imagenImage" fitHeight="109.0" fitWidth="115.0" layoutX="401.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imagenImage" fitHeight="109.0" fitWidth="115.0" layoutX="401.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
       <Label layoutX="38.0" layoutY="396.0" prefHeight="35.0" prefWidth="115.0" text="Disponible" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />

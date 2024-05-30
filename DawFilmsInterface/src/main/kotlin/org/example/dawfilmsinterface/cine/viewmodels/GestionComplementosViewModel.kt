@@ -1,9 +1,6 @@
 package org.example.dawfilmsinterface.cine.viewmodels
 
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.andThen
-import com.github.michaelbull.result.onSuccess
+import com.github.michaelbull.result.*
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import org.example.dawfilmsinterface.productos.errors.ProductoError
@@ -19,6 +16,7 @@ private val logger = logging()
 
 class GestionComplementosViewModel(
     private val service : ProductoService,
+    private val storage : ProductosStorage
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
 
@@ -47,6 +45,14 @@ class GestionComplementosViewModel(
     fun updateComplementoSeleccionado(complemento: Complemento){
         logger.debug { "Actualizando estado de Complemento: $complemento" }
 
+        var imagen = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png"))
+        var fileImage = File(RoutesManager.getResource("icons/sinImagen.png").toURI())
+
+        storage.loadImage(complemento.imagen).onSuccess {
+            imagen = Image(it.absoluteFile.toURI().toString())
+            fileImage = it
+        }
+
         state.value = state.value.copy(
             complemento = ComplementoState(
                 id = complemento.id,
@@ -54,7 +60,8 @@ class GestionComplementosViewModel(
                 precio = complemento.precio,
                 stock = complemento.stock,
                 categoria = if(complemento.categoria.name == "COMIDA") "COMIDA" else complemento.categoria.name,
-                imagen = "icons/logoCine.png",
+                imagen = imagen,
+                fileImage = fileImage,
                 isDeleted = complemento.isDeleted!!
             )
         )
@@ -63,43 +70,83 @@ class GestionComplementosViewModel(
     fun editarComplemento(): Result<Complemento, ProductoError> {
         logger.debug { "Editando Complemento" }
 
-        val updatedComplemento = state.value.complemento.toModel().copy()
+        val updatedComplementoTemp = state.value.complemento.copy()
+        val fileNameTemp = state.value.complemento.oldFileImage?.name
+            ?: "sinImagen.png"
+        var updatedComplemento = state.value.complemento.toModel().copy(imagen = fileNameTemp)
 
-        return service.updateComplemento(state.value.complemento.id, updatedComplemento).onSuccess {
-            val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
-            state.value = state.value.copy(
-                complementos = state.value.complementos.toMutableList().apply { this[index] = it }
-            )
-            updateActualState()
-            Ok(it)
+        logger.warn { updatedComplemento }
+        logger.warn { updatedComplementoTemp }
+
+        return updatedComplemento.validate().andThen {
+            updatedComplementoTemp.fileImage?.let { newFileImage ->
+                if (updatedComplemento.imagen == "sinImagen.png" || updatedComplemento.imagen == "") {
+                    storage.saveImage(newFileImage).onSuccess {
+                        updatedComplemento = updatedComplemento.copy(imagen = it.name)
+                        logger.warn { updatedComplemento }
+                    }
+                } else {
+                    storage.updateImage(fileNameTemp, newFileImage)
+                }
+            }
+
+            service.updateComplemento(updatedComplemento.id, updatedComplemento).onSuccess {
+                val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
+                state.value = state.value.copy(
+                    complementos = state.value.complementos.toMutableList().apply { this[index] = it }
+                )
+                updateActualState()
+                Ok(it)
+            }
         }
-    }
-
-    fun eliminarComplemento(): Result<Unit, ProductoError>{
-        logger.debug { "Eliminando Complemento" }
-        val complemento = state.value.complemento
-        val myId = complemento.id
-
-        service.deleteComplemento(myId)
-        loadAllComplementos()
-        return Ok(Unit)
     }
 
     fun createComplemento(): Result<Complemento, ProductoError>{
         logger.debug { "Creando Complemento"}
         val newId = ((service.getAllComplementos().value.maxBy { it.id }.id.toInt()) + 1).toString()
         val newComplementoTemp = state.value.complemento.copy()
-        val newComplemento = newComplementoTemp.toModel().copy()
-        newComplemento.id = newId
+        var newComplemento = newComplementoTemp.toModel().copy(id = newId)
 
-        return service.saveComplemento(newComplemento).andThen {
-            state.value = state.value.copy(
-                complementos = state.value.complementos + it
-            )
-            updateActualState()
-            Ok(it)
+        return newComplemento.validate().andThen {
+            newComplementoTemp.fileImage?.let { newFileImage ->
+                storage.saveImage(newFileImage).onSuccess {
+                    newComplemento = newComplemento.copy(imagen = it.name)
+                }
+            }
+
+            service.saveComplemento(newComplemento).andThen {
+                state.value = state.value.copy(
+                    complementos = state.value.complementos + it
+                )
+                updateActualState()
+                Ok(it)
+            }
+        }
+    }
+
+    private fun Complemento.validate(): Result<Complemento, ProductoError> {
+        if (this.nombre.isEmpty() || this.nombre.isBlank()) return Err(ProductoError.ProductoValidationError("El nombre no puede estar vacio"))
+        return Ok(this)
+    }
+
+    fun eliminarComplemento(): Result<Unit, ProductoError>{
+        logger.debug { "Eliminando Complemento" }
+        val complemento = state.value.complemento.copy()
+        val myId = complemento.id
+
+        complemento.fileImage?.let {
+            if (it.name != "sinImagen.png") {
+                storage.deleteImage(it)
+            }
         }
 
+        service.deleteComplemento(myId)
+        state.value = state.value.copy(
+            complementos = state.value.complementos.toMutableList().apply { this.removeIf { it.id == myId } }
+        )
+        updateActualState()
+        //loadAllComplementos()
+        return Ok(Unit)
     }
 
     fun changeComplementoOperacion(newValue: TipoOperacion){
@@ -107,14 +154,14 @@ class GestionComplementosViewModel(
         if (newValue == TipoOperacion.EDITAR){
             logger.debug { "Copiando estado de Complemento seleccionado a Operacion"}
             state.value = state.value.copy(
-                tipoOperacion = newValue,
-                complemento = state.value.complemento
+                complemento = state.value.complemento.copy(),
+                tipoOperacion = newValue
             )
         } else {
             logger.debug { "Limpiando estado de Complemento Operacion" }
             state.value = state.value.copy(
                 complemento = ComplementoState(id = ((service.getAllComplementos().value.maxBy { it.id }.id.toInt()) + 1).toString()),
-                tipoOperacion = newValue,
+                tipoOperacion = newValue
             )
         }
     }
@@ -125,12 +172,12 @@ class GestionComplementosViewModel(
         precio: Double,
         stock: Int,
         categoria: String,
-        imagen: String,
+        imagen: Image,
         isDeleted: Boolean
     ){
         logger.debug { "Actualizando estado de Complemento Operación" }
         state.value = state.value.copy(
-            complemento = ComplementoState(
+            complemento = state.value.complemento.copy(
                 id = id,
                 nombre = nombre,
                 precio = precio,
@@ -138,6 +185,17 @@ class GestionComplementosViewModel(
                 categoria = categoria,
                 imagen = imagen,
                 isDeleted = isDeleted
+            )
+        )
+    }
+
+    fun updateImageComplementoOperacion(fileImage: File) {
+        logger.debug { "Actualizando imagen: $fileImage" }
+        state.value = state.value.copy(
+            complemento = state.value.complemento.copy(
+                imagen = Image(fileImage.toURI().toString()),
+                fileImage = fileImage,
+                oldFileImage = state.value.complemento.fileImage
             )
         )
     }
@@ -162,7 +220,9 @@ class GestionComplementosViewModel(
         val precio : Double = 0.0,
         val stock : Int = 0,
         val categoria : String = "",
-        val imagen : String = "icons/sinImagen.png",
+        val imagen : Image = Image(RoutesManager.getResourceAsStream("icons/sinImagen.png")),
+        val fileImage: File? = null,
+        val oldFileImage: File? = null,
         val isDeleted : Boolean = false
     )
 

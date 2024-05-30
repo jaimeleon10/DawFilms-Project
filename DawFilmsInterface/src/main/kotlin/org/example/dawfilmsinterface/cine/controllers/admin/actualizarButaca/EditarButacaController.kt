@@ -3,6 +3,7 @@ package org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.Stage
@@ -133,6 +134,12 @@ class EditarButacaController : KoinComponent {
         if (viewModel.state.value.tipoOperacion == EDITAR){
             viewModel.editarButaca()
         }
+
+        showAlertOperacion(
+            AlertType.INFORMATION,
+            title = "Butaca editada",
+            header = "Butaca editada con éxito"
+        )
     }
 
     @FXML
@@ -153,5 +160,18 @@ class EditarButacaController : KoinComponent {
         estadoComboBox.selectionModel.selectFirst()
         tipoComboBox.selectionModel.selectFirst()
         ocupacionComboBox.selectionModel.selectFirst()
+    }
+
+    private fun showAlertOperacion(
+        alerta: AlertType = AlertType.CONFIRMATION,
+        title: String = "",
+        header: String = "",
+        message: String = ""
+    ) {
+        val alert = Alert(alerta)
+        alert.title = title
+        alert.headerText = header
+        alert.contentText = message
+        alert.showAndWait()
     }
 }

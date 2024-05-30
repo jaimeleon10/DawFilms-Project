@@ -60,11 +60,6 @@
             </ImageView>
          </graphic>
       </Label>
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="817.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../dawfilmsinterface/icons/hamburguesa.png" />
-         </image>
-      </ImageView>
       <TextField fx:id="idSelectedField" layoutX="661.0" layoutY="282.0" prefHeight="30.0" prefWidth="200.0" />
       <Label layoutX="522.0" layoutY="279.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
          <font>
@@ -89,19 +84,9 @@
       <TextField fx:id="nombreSelectedField" layoutX="661.0" layoutY="342.0" prefHeight="30.0" prefWidth="200.0" />
       <TextField fx:id="precioSelectedField" layoutX="661.0" layoutY="402.0" prefHeight="30.0" prefWidth="200.0" />
       <TextField fx:id="stockSelectedField" layoutX="661.0" layoutY="462.0" prefHeight="30.0" prefWidth="200.0" />
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="717.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="complementoImage" fitHeight="94.0" fitWidth="115.0" layoutX="759.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../dawfilmsinterface/icons/soda.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="612.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../dawfilmsinterface/icons/pizza.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="64.0" layoutX="505.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../dawfilmsinterface/icons/popcorn.png" />
          </image>
       </ImageView>
       <Button fx:id="addButton" alignment="CENTER" graphicTextGap="10.0" layoutX="480.0" layoutY="539.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="125.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Añadir" textFill="WHITE">

@@ -8,6 +8,8 @@ import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.control.Alert.AlertType
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
 import org.example.dawfilmsinterface.cine.viewmodels.LoginViewModel
 import org.example.dawfilmsinterface.productos.models.complementos.Complemento
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
@@ -91,6 +93,9 @@ class ListadoComplementosAdminController : KoinComponent {
     @FXML
     lateinit var disponibilidadColumnTable: TableColumn<Complemento, String>
 
+    @FXML
+    lateinit var complementoImage: ImageView
+
     /**
      * Función que inicializa la vista de administración de complementos.
      * Asigna las acciones a los botones y elementos de menú.
@@ -100,6 +105,7 @@ class ListadoComplementosAdminController : KoinComponent {
     @FXML
     private fun initialize() {
         logger.debug { "Inicializando ListadoComplementosAdminController FXML" }
+
         initDefaultValues()
 
         initBindings()
@@ -114,6 +120,7 @@ class ListadoComplementosAdminController : KoinComponent {
         nombreSelectedField.textProperty().bind(viewModel.state.map { it.complemento.nombre })
         precioSelectedField.textProperty().bind(viewModel.state.map { it.complemento.precio.toDefaultMoneyString() })
         stockSelectedField.textProperty().bind(viewModel.state.map { it.complemento.stock.toString() })
+        complementoImage.imageProperty().bind(viewModel.state.map { it.complemento.imagen })
 
 
         viewModel.state.addListener { _, _, newValue ->
@@ -163,9 +170,17 @@ class ListadoComplementosAdminController : KoinComponent {
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
 
-        addButton.setOnAction { onNuevoAction() }
-        editButton.setOnAction { onEditarAction() }
-        deleteButton.setOnAction { onEliminarAction() }
+        addButton.setOnAction {
+            onNuevoAction()
+            complementosTable.selectionModel.clearSelection()
+        }
+        editButton.setOnAction {
+            onEditarAction()
+            complementosTable.selectionModel.clearSelection()
+        }
+        deleteButton.setOnAction {
+            onEliminarAction()
+        }
 
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
@@ -221,6 +236,9 @@ class ListadoComplementosAdminController : KoinComponent {
     }
 
     private fun onEditarAction(){
+        if (complementosTable.selectionModel.selectedItem == null){
+            return
+        }
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
         viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.EDITAR)
         RoutesManager.initEditarComplemento("EDITAR COMPLEMENTO")

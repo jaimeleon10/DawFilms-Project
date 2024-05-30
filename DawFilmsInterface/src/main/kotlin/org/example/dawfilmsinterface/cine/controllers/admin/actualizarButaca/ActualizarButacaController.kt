@@ -36,9 +36,9 @@ private val logger = logging()
  * @property butacaTable Tabla donde se nos mostrará la información relativa a los complementos
  */
 class ActualizarButacaController : KoinComponent {
-    val viewModel : GestionButacaViewModel by inject()
+    val viewModel: GestionButacaViewModel by inject()
 
-    val loginViewModel : LoginViewModel by inject()
+    val loginViewModel: LoginViewModel by inject()
 
     @FXML
     lateinit var backMenuMenuButton: MenuItem
@@ -83,7 +83,7 @@ class ActualizarButacaController : KoinComponent {
     lateinit var butacaTable: TableView<Butaca>
 
     @FXML
-    lateinit var idColumnTable : TableColumn<Butaca, String>
+    lateinit var idColumnTable: TableColumn<Butaca, String>
 
     @FXML
     lateinit var estadoColumnTable: TableColumn<Butaca, String>
@@ -98,7 +98,7 @@ class ActualizarButacaController : KoinComponent {
      * Función que inicializa la vista de actualizar butaca
      * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
      * @since 1.0.0
-    */
+     */
     @FXML
     private fun initialize() {
         logger.debug { "Inicializando ActualizarButacaController FXML" }
@@ -111,17 +111,17 @@ class ActualizarButacaController : KoinComponent {
     }
 
     private fun initBindings() {
-        logger.debug { "Inicializando bindings"}
+        logger.debug { "Inicializando bindings" }
 
         idSelectedField.textProperty().bind(viewModel.state.map { it.butaca.id })
         estadoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.estado })
-        tipoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.tipo})
+        tipoSelectedField.textProperty().bind(viewModel.state.map { it.butaca.tipo })
         ocupacionSelectedField.textProperty().bind(viewModel.state.map { it.butaca.ocupacion })
         precioSelectedField.textProperty().bind(viewModel.state.map { it.butaca.precio.toString() })
 
         viewModel.state.addListener { _, _, newValue ->
             logger.debug { "Actualizando datos de la vista" }
-            if (butacaTable.items != newValue.butacas){
+            if (butacaTable.items != newValue.butacas) {
                 butacaTable.items = FXCollections.observableArrayList(newValue.butacas)
             }
         }
@@ -152,14 +152,12 @@ class ActualizarButacaController : KoinComponent {
         tipoColumnTable.cellValueFactory = PropertyValueFactory("tipoButaca")
         ocupacionColumnTable.cellValueFactory = PropertyValueFactory("ocupacionButaca")
 
-        //viewModel.loadButacasFromCsv(File(Paths.get("data/productosIniciales.csv").toAbsolutePath().toString()))
-
         usernameField.text = loginViewModel.state.value.currentAdmin
     }
 
     private fun initEventos() {
         acercaDeMenuButton.setOnAction { RoutesManager.initAcercaDeStage() }
-        
+
         backMenuButton.setOnAction {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
@@ -171,78 +169,49 @@ class ActualizarButacaController : KoinComponent {
         }
         editButton.setOnAction { onEditarAction() }
 
-        estadoFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+        estadoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let { onComboSelected(newValue.toString()) }
         }
-        tipoFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
-            newValue?.let { onComboSelected(newValue.toString())}
+        tipoFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
+            newValue?.let { onComboSelected(newValue.toString()) }
         }
-        ocupacionFilterComboBox.selectionModel.selectedItemProperty().addListener{ _, _, newValue ->
+        ocupacionFilterComboBox.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let { onComboSelected(newValue.toString()) }
         }
 
-        butacaTable.selectionModel.selectedItemProperty().addListener { _,_, newValue ->
+        butacaTable.selectionModel.selectedItemProperty().addListener { _, _, newValue ->
             newValue?.let { onTablaSelected(newValue) }
         }
     }
 
     private fun onComboSelected(newValue: String) {
-        logger.debug { "onComboSelected: $newValue"}
+        logger.debug { "onComboSelected: $newValue" }
         filterDataTable()
     }
 
 
-    private fun filterDataTable(){
+    private fun filterDataTable() {
         logger.debug { "filterDataTable" }
         butacaTable.items =
-            FXCollections.observableList(viewModel.butacasFilteredList(estadoFilterComboBox.value.toString(), tipoFilterComboBox.value.toString(), ocupacionFilterComboBox.value.toString()))
+            FXCollections.observableList(
+                viewModel.butacasFilteredList(
+                    estadoFilterComboBox.value.toString(),
+                    tipoFilterComboBox.value.toString(),
+                    ocupacionFilterComboBox.value.toString()
+                )
+            )
     }
 
-    private fun onTablaSelected(newValue: Butaca){
+    private fun onTablaSelected(newValue: Butaca) {
         logger.debug { "onTablaSelected: $newValue" }
         viewModel.updateButacaSeleccionada(newValue)
     }
 
-    private fun onEditarAction(){
+    private fun onEditarAction() {
+        if (butacaTable.selectionModel.selectedItem == null) {
+            return
+        }
         logger.debug { "onEditarAction" }
         RoutesManager.initEditarButaca()
-    }
-
-    /*private fun onImportarAction(){
-        logger.debug { "onImportarAction" }
-        FileChooser().run {
-            title = "Importar butacas"
-            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
-            showOpenDialog(RoutesManager.activeStage)
-        }?.let {
-            logger.debug { "onAbrirAction: $it" }
-            showAlertOperacion(
-                AlertType.INFORMATION,
-                "Importando datos",
-                "Importando datos..."
-            )
-            RoutesManager.activeStage.scene.cursor = Cursor.WAIT
-            viewModel.loadButacasFromCsv(it)
-                .onSuccess {
-                    showAlertOperacion(
-                        title= "Datos importados",
-                        mensaje= "Datos importados..."
-                    )
-                }.onFailure { error ->
-                    showAlertOperacion(alerta = AlertType.ERROR, title = "Error al importar", mensaje= error.message)
-                }
-            RoutesManager.activeStage.scene.cursor = Cursor.DEFAULT
-        }
-    }*/
-
-    private fun showAlertOperacion(
-        alerta: AlertType = AlertType.CONFIRMATION,
-        title: String = "",
-        mensaje: String = ""
-    ){
-        Alert(alerta).apply {
-            this.title = title
-            this.contentText =mensaje
-        }.showAndWait()
     }
 }
