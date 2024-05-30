@@ -1,19 +1,25 @@
 package org.example.dawfilmsinterface.cine.controllers.admin.listadoComplementos
 
+import com.github.michaelbull.result.*
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import javafx.stage.Stage
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel
 import org.example.dawfilmsinterface.cine.viewmodels.GestionComplementosViewModel.TipoOperacion.*
+import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.routes.RoutesManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.logger.MESSAGE
 import org.lighthousegames.logging.logging
+import java.io.File
+import java.net.URI
+import java.time.LocalDate
 
 private val logger = logging()
 
@@ -92,6 +98,8 @@ class EditarComplementoController : KoinComponent {
 
         initDefaultValues()
 
+        initBindings()
+
         initEventos()
     }
 
@@ -112,7 +120,7 @@ class EditarComplementoController : KoinComponent {
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500, viewModel.state.value.complemento.stock)
         priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.00, 25.00, viewModel.state.value.complemento.precio, 0.5)
 
-        imagenImage.image = Image(RoutesManager.getResourceAsStream(viewModel.state.value.complemento.imagen))
+        imagenImage.image = viewModel.state.value.complemento.imagen
     }
 
     private fun initEventos() {
@@ -125,37 +133,80 @@ class EditarComplementoController : KoinComponent {
             onGuardarAction()
             stage.close()
         }
-        cancelButton.setOnAction { onCancelarAction() }
-        cleanButton.setOnAction { onLimpiarAction() }
+        cancelButton.setOnAction {
+            onCancelarAction()
+        }
+        cleanButton.setOnAction {
+            onLimpiarAction()
+        }
+        imagenImage.setOnMouseClicked {
+            onImageAction()
+        }
     }
 
-    private fun onGuardarAction(){
-        logger.debug { "Guardando complemento" }
-
-        viewModel.updateDataComplementoOperacion(
-            id = idField.text,
-            nombre = nombreField.text,
-            precio = priceSpinner.value,
-            stock = stockSpinner.value,
-            categoria = categoriaComboBox.value.toString(),
-            imagen = viewModel.state.value.complemento.imagen,
-            isDeleted = disponibleComboBox.value == "NO"
-        )
-
-        if (nombreField.text == null || nombreField.text.isEmpty()) {
-            showAlertOperacion(
-                AlertType.ERROR,
-                title = "Complemento no salvado",
-                header = "El nombre no puede estar vacío"
-            )
-        } else {
-            when (viewModel.state.value.tipoOperacion) {
-                NUEVO -> viewModel.createComplemento()
-                EDITAR -> viewModel.editarComplemento()
+    private fun initBindings() {
+        viewModel.state.addListener { _, oldValue, newValue ->
+            logger.debug { "Actualizando imagen del detalle" }
+            if (oldValue.complemento.imagen != newValue.complemento.imagen) {
+                imagenImage.image = newValue.complemento.imagen
             }
         }
+    }
 
+    private fun onImageAction() {
+        FileChooser().run {
+            title = "Selecciona una imagen"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            viewModel.updateImageComplementoOperacion(it)
+        }
+    }
 
+    private fun onGuardarAction() {
+        logger.debug { "Guardando complemento" }
+
+        validateForm().andThen {
+            viewModel.updateDataComplementoOperacion(
+                id = idField.text,
+                nombre = nombreField.text,
+                precio = priceSpinner.value,
+                stock = stockSpinner.value,
+                categoria = categoriaComboBox.value.toString(),
+                imagen = imagenImage.image,
+                isDeleted = disponibleComboBox.value == "NO"
+            )
+
+            when (viewModel.state.value.tipoOperacion) {
+                NUEVO -> {
+                    viewModel.createComplemento()
+                }
+                EDITAR -> {
+                    viewModel.editarComplemento()
+                }
+            }
+        }.onSuccess {
+            showAlertOperacion(
+                AlertType.INFORMATION,
+                title = "Complemento guardado",
+                header = "El complemento ${nombreField.text} ha sido guardado con éxito"
+            )
+        }.onFailure {
+            showAlertOperacion(
+                AlertType.ERROR,
+                title = "Complemento no guardado",
+                header = "El complemento ${nombreField.text} no ha sido guardado"
+            )
+        }
+    }
+
+    private fun validateForm(): Result<Unit, ProductoError> {
+        logger.debug { "validateForm" }
+
+        if (nombreField.text.isNullOrEmpty()) {
+            return Err(ProductoError.ProductoValidationError("El nombre no puede estar vacío"))
+        }
+        return Ok(Unit)
     }
 
     private fun onCancelarAction() {
@@ -174,6 +225,7 @@ class EditarComplementoController : KoinComponent {
         priceSpinner.valueFactory = SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 100.0, 1.0, 0.5)
         stockSpinner.valueFactory = SpinnerValueFactory.IntegerSpinnerValueFactory(0, 500,1)
         categoriaComboBox.selectionModel.selectLast()
+        imagenImage.image = Image(RoutesManager.getResourceAsStream("icons/sin-imagen.png"))
         disponibleComboBox.selectionModel.selectFirst()
     }
 
