@@ -99,8 +99,6 @@ class EditarComplementoController : KoinComponent {
 
         viewModel.loadTypes()
 
-        logger.warn { "Inicio controller: ${viewModel.state.value.complemento}" }
-
         idField.text = viewModel.state.value.complemento.id
         nombreField.text = viewModel.state.value.complemento.nombre
 
@@ -140,7 +138,7 @@ class EditarComplementoController : KoinComponent {
             stock = stockSpinner.value,
             categoria = categoriaComboBox.value.toString(),
             imagen = imagenImage.image,
-            isDeleted = disponibleComboBox.value != "SI"
+            isDeleted = disponibleComboBox.value == "NO"
         )
 
         if (nombreField.text == null || nombreField.text.isEmpty()) {
@@ -150,9 +148,8 @@ class EditarComplementoController : KoinComponent {
                 header = "El nombre no puede estar vacío"
             )
         } else {
-            logger.warn { viewModel.editarComplemento() }
             when (viewModel.state.value.tipoOperacion) {
-                NUEVO -> viewModel//.createComplemento()
+                NUEVO -> viewModel.createComplemento()
                 EDITAR -> viewModel.editarComplemento()
             }
         }

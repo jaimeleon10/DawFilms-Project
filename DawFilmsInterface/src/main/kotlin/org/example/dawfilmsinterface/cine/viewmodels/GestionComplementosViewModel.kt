@@ -2,6 +2,7 @@ package org.example.dawfilmsinterface.cine.viewmodels
 
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.andThen
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
@@ -63,18 +64,16 @@ class GestionComplementosViewModel(
     fun editarComplemento(): Result<Complemento, ProductoError> {
         logger.debug { "Editando Complemento" }
 
-        val updatedComplemento = state.value.complemento.toModel()
+        val updatedComplemento = state.value.complemento.toModel().copy()
 
-        return Ok(
-            service.updateComplemento(state.value.complemento.id, updatedComplemento).onSuccess {
-                val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
-                state.value.complementos.toMutableList().apply { this[index] = it }
-                state.value = state.value.copy(
-                    complementos = state.value.complementos
-                )
-                updateActualState()
-            }
-        ).value
+        return service.updateComplemento(state.value.complemento.id, updatedComplemento).onSuccess {
+            val index = state.value.complementos.indexOfFirst { complemento -> complemento.id == it.id }
+            state.value = state.value.copy(
+                complementos = state.value.complementos.toMutableList().apply { this[index] = it }
+            )
+            updateActualState()
+            Ok(it)
+        }
     }
 
     fun eliminarComplemento(): Result<Unit, ProductoError>{
@@ -87,16 +86,12 @@ class GestionComplementosViewModel(
         return Ok(Unit)
     }
 
-   /* fun createComplemento(): Result<Complemento, ProductoError>{
+    fun createComplemento(): Result<Complemento, ProductoError>{
         logger.debug { "Creando Complemento"}
+        val newId = ((service.getAllComplementos().value.maxBy { it.id }.id.toInt()) + 1).toString()
         val newComplementoTemp = state.value.complemento.copy()
-        var newComplemento = newComplementoTemp.toModel().copy()
-
-        newComplementoTemp.fileImage?.let { newFileImage ->
-            storage.saveImage(newFileImage).onSuccess {
-                newComplemento = newComplemento.copy(imagen = it.name)
-            }
-        }
+        val newComplemento = newComplementoTemp.toModel().copy()
+        newComplemento.id = newId
 
         return service.saveComplemento(newComplemento).andThen {
             state.value = state.value.copy(
@@ -106,7 +101,7 @@ class GestionComplementosViewModel(
             Ok(it)
         }
 
-    }*/
+    }
 
     fun changeComplementoOperacion(newValue: TipoOperacion){
         logger.debug { "Cambiando tipo de operacion: $newValue" }
@@ -119,8 +114,8 @@ class GestionComplementosViewModel(
         } else {
             logger.debug { "Limpiando estado de Complemento Operacion" }
             state.value = state.value.copy(
-                complemento = ComplementoState(),
-                tipoOperacion = newValue
+                complemento = ComplementoState(id = ((service.getAllComplementos().value.maxBy { it.id }.id.toInt()) + 1).toString()),
+                tipoOperacion = newValue,
             )
         }
     }
@@ -157,11 +152,13 @@ class GestionComplementosViewModel(
 
         val complemento : ComplementoState = ComplementoState(),
 
-        val tipoOperacion : TipoOperacion = TipoOperacion.NUEVO
+        val tipoOperacion : TipoOperacion = TipoOperacion.NUEVO,
+
+        val newId : String = ""
     )
 
     data class ComplementoState(
-        val id : String = "",
+        var id : String = "",
         val nombre : String = "",
         val precio : Double = 0.0,
         val stock : Int = 0,

@@ -165,7 +165,7 @@ class ConfirmarCompraController: KoinComponent {
         var total = 0.0
         viewModel.state.value.butacas.forEach { total += it.tipoButaca.precio }
         viewModel.state.value.complementos.toList().forEach { total += (it.first.precio * it.second) }
-        precioTotalLabel.text = "Precio total: $total €"
+        precioTotalLabel.text = "Precio total: ${total.toDefaultMoneyString()}"
         usernameField.text = loginViewModel.state.value.currentCliente.nombre
     }
 

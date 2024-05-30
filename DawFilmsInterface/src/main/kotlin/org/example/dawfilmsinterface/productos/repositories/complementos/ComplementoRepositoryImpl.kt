@@ -72,7 +72,6 @@ class ComplementoRepositoryImpl(
             is_deleted = if (item.isDeleted!!) 1 else 0,
             id = item.id
         )
-
         return item
     }
 

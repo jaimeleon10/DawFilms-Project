@@ -162,9 +162,8 @@ class ListadoComplementosAdminController : KoinComponent {
             logger.debug { "Cambiando de escena a ${RoutesManager.View.MENU_CINE_ADMIN}" }
             RoutesManager.changeScene(view = RoutesManager.View.MENU_CINE_ADMIN)
         }
-        /*
-        addButton.setOnAction { onNuevoAction( ) }
-         */
+
+        addButton.setOnAction { onNuevoAction() }
         editButton.setOnAction { onEditarAction() }
         deleteButton.setOnAction { onEliminarAction() }
 
@@ -181,7 +180,7 @@ class ListadoComplementosAdminController : KoinComponent {
         if (complementosTable.selectionModel.selectedItem.isDeleted == false) deleteButton.isDisable = false
     }
 
-    private fun onEliminarAction(){
+    private fun onEliminarAction() {
         logger.debug { "onEliminarAction" }
 
         if (complementosTable.selectionModel.selectedItem == null){
@@ -215,11 +214,11 @@ class ListadoComplementosAdminController : KoinComponent {
         }
     }
 
-    /*private fun onNuevoAction() {
+    private fun onNuevoAction() {
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
         viewModel.changeComplementoOperacion(GestionComplementosViewModel.TipoOperacion.NUEVO)
         RoutesManager.initEditarComplemento("AÑADIR COMPLEMENTO")
-    }*/
+    }
 
     private fun onEditarAction(){
         logger.debug { "Cambiando de escena a ${RoutesManager.View.EDITAR_COMPLEMENTO}" }
