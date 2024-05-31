@@ -1,0 +1,6 @@
+
+nkotlin:S1481œ"*Remove this unused "regex" local variable.(Š²¶¿ûÿÿÿÿJ$8b7def11-65bf-4679-8e1a-239ed9aebc29
+™kotlin:S1192J"VDefine a constant instead of duplicating this literal "ContraseÃ±a invÃ¡lida" 4 times.(ÑÖÀûÿÿÿÿJ$b38dc115-4661-4aa1-a58c-18337ad63edd
+•kotlin:S3776'"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(¶ğ™ùÿÿÿÿJ$695888c0-47a2-4df4-8ecc-27a229e35fa7
+„kotlin:S6510R"AMove "return" statements from all branches before "if" statement.(İÀ²İúÿÿÿÿJ$c26add25-3d0d-4170-b7b1-7e0d916385bc
+zkotlin:S65114"=Merge chained "if" statements into a single "when" statement.(°éŸrJ$5af124b1-2d38-4fcb-acf9-23d6e0c559e1
