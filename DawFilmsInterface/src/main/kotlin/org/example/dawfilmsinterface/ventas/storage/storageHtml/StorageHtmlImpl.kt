@@ -14,6 +14,14 @@ import java.io.File
 
 private val logger = logging()
 
+/**
+ * Implementación de la interfaz [StorageHtml] para manejar el almacenamiento de ventas en formato HTML.
+ * @property ventaRepository Repositorio de ventas para obtener información de ventas.
+ * @constructor Crea una instancia de [StorageHtmlImpl] con el repositorio de ventas proporcionado.
+ * @since 1.0.0
+ * @param ventaRepository Repositorio de ventas.
+ * @param Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz Autores del código.
+ */
 class StorageHtmlImpl: StorageHtml {
     override fun exportHtml(venta: Venta, file: File): Result<Unit, VentaError> {
         return try {

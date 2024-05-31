@@ -15,6 +15,11 @@ import java.io.File
 
 private val logger = logging()
 
+/**
+ * Implementación de [StorageJson] que permite almacenar y cargar datos en formato JSON.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class StorageJsonImpl: StorageJson {
     override fun storeJson(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Guardando datos en fichero $file" }

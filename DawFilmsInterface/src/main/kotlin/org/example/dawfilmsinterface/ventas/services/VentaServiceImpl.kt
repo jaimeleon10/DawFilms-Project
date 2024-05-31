@@ -16,6 +16,13 @@ import java.util.*
 
 private val logger = logging()
 
+/**
+ * Implementación de [VentaService] que proporciona funcionalidades para interactuar con las ventas.
+ * @property ventaRepository El repositorio de ventas que maneja el almacenamiento y recuperación de datos de las ventas.
+ * @since 1.0.0
+ * @param ventaRepository El repositorio de ventas.
+ * @param authors Los autores de la implementación.
+ */
 class VentaServiceImpl(
     private val ventaRepository: VentaRepository,
 ) : VentaService {

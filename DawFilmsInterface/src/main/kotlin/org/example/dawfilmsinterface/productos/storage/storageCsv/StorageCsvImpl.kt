@@ -16,6 +16,11 @@ import java.time.LocalDate
 
 private val logger = logging()
 
+/**
+ * Implementación concreta de [StorageCsv] que permite almacenar y cargar datos en formato CSV.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class StorageCsvImpl: StorageCsv {
     override fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Cargando datos en fichero $file" }

@@ -13,7 +13,11 @@ import java.nio.file.StandardCopyOption
 import java.time.Instant
 
 private val logger = logging()
-
+/**
+ * Implementación concreta de [StorageImage] que gestiona el almacenamiento de imágenes en el sistema de archivos.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class StorageImageImpl(
     private val config: Config
 ): StorageImage {
@@ -29,6 +33,11 @@ class StorageImageImpl(
         }
     }
 
+    /**
+     * Obtiene el nombre único para la imagen.
+     * @param newFileImage el archivo de la nueva imagen.
+     * @return el nombre único de la imagen.
+     */
     fun getImageName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
