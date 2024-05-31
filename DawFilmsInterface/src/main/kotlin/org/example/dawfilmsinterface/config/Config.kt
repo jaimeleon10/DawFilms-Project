@@ -56,6 +56,15 @@ class Config {
         logger.debug { "Cargando configuración del cine" }
     }
 
+    /**
+     * Lee una propiedad específica desde un archivo de configuración.
+     * Esta función lee una propiedad específica del archivo de configuración definido y devuelve su valor.
+     * Si la propiedad no se encuentra o no se puede leer, se maneja el error y se devuelve null.
+     * @param propiedad Nombre de la propiedad que se desea leer.
+     * @return El valor de la propiedad si se encuentra en el archivo de configuración, o null si hay algún error.
+     * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+     * @since 1.0.0
+     */
     private fun readProperty(propiedad: String): String? {
         return try {
             logger.debug { "Leyendo propiedad: $propiedad" }

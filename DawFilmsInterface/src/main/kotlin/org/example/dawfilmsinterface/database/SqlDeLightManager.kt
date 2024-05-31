@@ -13,6 +13,14 @@ import java.time.LocalDate
 
 private val logger = logging()
 
+/**
+ * Gestor para el manejo de la base de datos SQLite utilizando SQLDelight.
+ * Esta clase se encarga de inicializar la base de datos y proporcionar acceso a las consultas definidas en SQLDelight.
+ * @param config Configuración de la base de datos.
+ * @property databaseQueries Consultas de la base de datos que se utilizarán para interactuar con la base de datos SQLite.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class SqlDeLightManager(
     private val config: Config
 ) {
@@ -22,6 +30,11 @@ class SqlDeLightManager(
         initialize()
     }
 
+    /**
+     * Inicializa las consultas de la base de datos.
+     * Dependiendo de la configuración, inicializa la base de datos en memoria o desde un archivo.
+     * @return Las consultas de la base de datos.
+     */
     fun initQueries(): DatabaseQueries {
         return if (config.dataBaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
@@ -36,6 +49,10 @@ class SqlDeLightManager(
         }.databaseQueries
     }
 
+    /**
+     * Inicializa la base de datos según la configuración proporcionada.
+     * Si la configuración indica la inicialización de datos de ejemplo, se eliminan todos los datos existentes y se inicializan con datos de ejemplo.
+     */
     fun initialize() {
         if (config.databaseInitData) {
             removeAllData()
@@ -43,6 +60,10 @@ class SqlDeLightManager(
         }
     }
 
+    /**
+     * Inicializa la base de datos con datos de ejemplo.
+     * Inserta datos de ejemplo en las tablas de la base de datos, como butacas, complementos, clientes, líneas de venta y ventas.
+     */
      private fun initDataExamples() {
         databaseQueries.transaction {
             databaseQueries.insertButaca("A1","Butaca", "sinImagen.png", 5.0, 0, 0, TipoButaca.NORMAL.toString(), EstadoButaca.ACTIVA.toString(), OcupacionButaca.LIBRE.toString(), LocalDate.now().toString(), LocalDate.now().toString(), 0)
@@ -96,6 +117,10 @@ class SqlDeLightManager(
         }
     }
 
+    /**
+     * Elimina todos los datos existentes en la base de datos.
+     * Elimina todos los registros de todas las tablas de la base de datos.
+     */
      private fun removeAllData() {
         databaseQueries.transaction {
             databaseQueries.deleteAllProductos()

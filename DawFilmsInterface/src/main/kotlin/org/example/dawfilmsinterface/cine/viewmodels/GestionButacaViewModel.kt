@@ -16,6 +16,13 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase ViewModel que gestiona la funcionalidad de la pantalla de gestión de butacas.
+ *
+ * @param service Servicio para obtener y actualizar información de butacas.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class GestionButacaViewModel(
     private val service : ProductoService,
 ) {
@@ -27,6 +34,9 @@ class GestionButacaViewModel(
         loadTypes()
     }
 
+    /**
+     * Carga los tipos de estado, tipo y ocupación de las butacas.
+     */
     private fun loadTypes() {
         logger.debug { "Cargando tipos" }
         state.value = state.value.copy(typesEstadoFiltro = TipoFiltroEstado.entries.map { it.value })
@@ -38,6 +48,9 @@ class GestionButacaViewModel(
         state.value = state.value.copy(typesOcupacion = TipoOcupacion.entries.map { it.value})
     }
 
+    /**
+     * Carga la lista de butacas del repositorio.
+     */
     private fun loadAllButacas(){
         logger.debug { "Cargando butacas del repositorio" }
         service.getAllButacas().onSuccess {
@@ -47,6 +60,9 @@ class GestionButacaViewModel(
         }
     }
 
+    /**
+     * Actualiza el estado de la butaca seleccionada.
+     */
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Butaca" }
         state.value = state.value.copy(
@@ -54,6 +70,14 @@ class GestionButacaViewModel(
         )
     }
 
+    /**
+     * Obtiene una lista de butacas filtradas por estado, tipo y ocupación.
+     *
+     * @param estado El estado de la butaca a filtrar.
+     * @param tipo El tipo de la butaca a filtrar.
+     * @param ocupacion La ocupación de la butaca a filtrar.
+     * @return Una lista de butacas filtradas.
+     */
     fun butacasFilteredList(estado: String, tipo: String, ocupacion: String) : List<Butaca>{
         logger.debug { "Filtrando lista de Butacas: $estado" }
 
@@ -83,7 +107,11 @@ class GestionButacaViewModel(
                 }
             }
     }
-
+    /**
+     * Actualiza el estado de la butaca seleccionada.
+     *
+     * @param butaca La butaca seleccionada a actualizar.
+     */
     fun updateButacaSeleccionada(butaca: Butaca){
         logger.debug { "Actualizando estado de Butaca: $butaca" }
 
@@ -99,6 +127,10 @@ class GestionButacaViewModel(
         )
     }
 
+    /**
+     * Función para editar una butaca.
+     * @return Un resultado que representa la operación de edición de la butaca.
+     */
     fun editarButaca(): Result<Butaca, ProductoError> {
         logger.debug { "Editando Butaca" }
 
@@ -114,6 +146,14 @@ class GestionButacaViewModel(
         }
     }
 
+    /**
+     * Función para actualizar los datos de operación de una butaca.
+     * @param estado Estado de la butaca.
+     * @param tipo Tipo de la butaca.
+     * @param ocupacion Ocupación de la butaca.
+     * @param precio Precio de la butaca.
+     * @param imagen Ruta de la imagen asociada a la butaca.
+     */
     fun updateDataButacaOperacion(
         estado: String,
         tipo: String,
@@ -132,7 +172,18 @@ class GestionButacaViewModel(
             )
         )
     }
-
+    /**
+     * Estado de la gestión de butacas en la aplicación.
+     * @property typesEstadoFiltro Lista de tipos de estado para filtros.
+     * @property typesTipoFiltro Lista de tipos de butacas para filtros.
+     * @property typesOcupacionFiltro Lista de tipos de ocupación para filtros.
+     * @property typesEstado Lista de tipos de estado de las butacas.
+     * @property typesTipo Lista de tipos de las butacas.
+     * @property typesOcupacion Lista de tipos de ocupación de las butacas.
+     * @property butacas Lista de butacas cargadas.
+     * @property butaca Estado de la butaca seleccionada.
+     * @property tipoOperacion Tipo de operación en curso.
+     */
     data class GestionState(
         val typesEstadoFiltro : List<String> = emptyList(),
         val typesTipoFiltro : List<String> = emptyList(),
@@ -149,6 +200,15 @@ class GestionButacaViewModel(
         val tipoOperacion : TipoOperacion = TipoOperacion.EDITAR
     )
 
+    /**
+     * Estado individual de una butaca.
+     * @property id Identificador de la butaca.
+     * @property estado Estado de la butaca.
+     * @property tipo Tipo de la butaca.
+     * @property ocupacion Ocupación de la butaca.
+     * @property precio Precio de la butaca.
+     * @property imagen Ruta de la imagen asociada a la butaca.
+     */
     data class ButacaState(
         val id: String = "",
         val estado: String = "",
@@ -158,30 +218,58 @@ class GestionButacaViewModel(
         val imagen: String = "sinImagen.png"
     )
 
+    /**
+     * Enumeración de los tipos de operación.
+     * @property value Valor del tipo de operación.
+     */
     enum class TipoOperacion(val value : String){
         EDITAR("EDITAR")
     }
 
+    /**
+     * Enumeración de los tipos de filtro de estado.
+     * @property value Valor del tipo de filtro de estado.
+     */
     enum class TipoFiltroEstado(val value : String){
         TODAS("TODAS"), ACTIVA("ACTIVA"), MANTENIMIENTO("MANTENIMIENTO"), FUERASERVICIO("FUERA DE SERVICIO")
     }
 
+    /**
+     * Enumeración de los tipos de filtro de ocupación.
+     * @property value Valor del tipo de filtro de ocupación.
+     */
     enum class TipoFiltroOcupacion(val value : String){
         TODAS("TODAS"), LIBRE("LIBRE"), ENRESERVA("EN RESERVA"), OCUPADA("OCUPADA")
     }
 
+    /**
+     * Enumeración de los tipos de filtro de tipo.
+     * @property value Valor del tipo de filtro de tipo.
+     */
     enum class TipoFiltroTipo(val value : String){
         TODAS("TODAS"), NORMAL("NORMAL"), VIP("VIP")
     }
 
+    /**
+     * Enumeración de los tipos de estado de las butacas.
+     * @property value Valor del tipo de estado de la butaca.
+     */
     enum class TipoEstado(val value : String){
         ACTIVA("ACTIVA"), MANTENIMIENTO("MANTENIMIENTO"), FUERASERVICIO("FUERA DE SERVICIO")
     }
 
+    /**
+     * Enumeración de los tipos de ocupación de las butacas.
+     * @property value Valor del tipo de ocupación de la butaca.
+     */
     enum class TipoOcupacion(val value : String){
         LIBRE("LIBRE"), ENRESERVA("EN RESERVA"), OCUPADA("OCUPADA")
     }
 
+    /**
+     * Enumeración de los tipos de butacas.
+     * @property value Valor del tipo de butaca.
+     */
     enum class TipoTipo(val value : String){
         NORMAL("NORMAL"), VIP("VIP")
     }

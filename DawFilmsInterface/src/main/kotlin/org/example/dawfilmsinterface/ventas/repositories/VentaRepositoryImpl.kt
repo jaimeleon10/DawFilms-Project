@@ -23,6 +23,11 @@ import kotlin.math.log
 
 private val logger = logging()
 
+/**
+ * Implementación concreta de [VentaRepository] que utiliza un [SqlDeLightManager] para interactuar con la base de datos.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class VentaRepositoryImpl(
     private val dbManager: SqlDeLightManager,
     private val butacaRepository: ButacaRepository,

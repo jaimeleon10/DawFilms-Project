@@ -17,6 +17,18 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para la pantalla de recuperación de contraseña mediante email.
+ * Gestiona las acciones y eventos relacionados con la introducción y validación del email para la recuperación de la contraseña.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property viewModel ViewModel que gestiona el estado y la lógica de la recuperación de contraseña.
+ * @property backLoginButton Botón para regresar a la pantalla de inicio de sesión.
+ * @property emailField Campo de texto para ingresar el email del usuario.
+ * @property continueButton Botón para continuar con la validación del email.
+ * @property backLoginMenuButton Menú de opción para regresar a la pantalla de inicio de sesión.
+ * @property acercaDeMenuButton Menú de opción para mostrar información sobre los desarrolladores.
+ */
 class EmailContraseñaOlvidadaController: KoinComponent {
 
     val viewModel: RecuperarPasswordViewModel by inject()

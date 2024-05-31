@@ -11,12 +11,21 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase ViewModel que gestiona el estado de una butaca de cine.
+ * @param service Servicio para obtener información de las butacas.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class EstadoCineViewModel(
     private val service: ProductoService
 ) {
 
     val state : SimpleObjectProperty<EstadoCineState> = SimpleObjectProperty(EstadoCineState())
 
+    /**
+     * Actualiza el icono de la butaca en función de su estado.
+     */
     fun iconoPorDefecto() {
         logger.debug { "Actualizando icono con butaca por defecto" }
         logger.debug { "Buscando butaca por id ${state.value.id}" }
@@ -39,6 +48,14 @@ class EstadoCineViewModel(
         }
     }
 
+    /**
+     * Clase que define el estado de una butaca de cine.
+     * @param id Identificador único de la butaca.
+     * @param icono Imagen que representa el estado de la butaca.
+     * @param tipoButaca Tipo de butaca (NORMAL o VIP).
+     * @param estadoButaca Estado de la butaca (ACTIVA, FUERASERVICIO, MANTENIMIENTO).
+     * @param ocupacionButaca Ocupación de la butaca (LIBRE, OCUPADA, ENRESERVA).
+     */
     data class EstadoCineState(
         var id: String = "",
         var icono: Image = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")),

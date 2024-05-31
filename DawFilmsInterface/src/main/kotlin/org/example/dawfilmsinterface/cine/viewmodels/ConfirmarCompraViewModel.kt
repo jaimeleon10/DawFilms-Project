@@ -25,6 +25,15 @@ import kotlin.io.path.Path
 
 private val logger = logging()
 
+/**
+ * ViewModel para la confirmación de compra.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property productoService Servicio de productos.
+ * @property ventaService Servicio de ventas.
+ * @property clienteService Servicio de clientes.
+ * @property storage Almacenamiento HTML.
+ */
 class ConfirmarCompraViewModel(
     private val productoService: ProductoService,
     private val ventaService: VentaService,
@@ -35,14 +44,26 @@ class ConfirmarCompraViewModel(
 
     lateinit var venta: Venta
 
+    /**
+     * Actualiza la lista de complementos en el estado.
+     * @param listado Lista de complementos seleccionados.
+     */
     fun updateToComplementosList(listado: MutableMap<String, Int>) {
         listado.keys.forEach { state.value.complementos.put(productoService.getComplementoByNombre(it).value, listado.getValue(it)) }
     }
 
+    /**
+     * Actualiza la lista de butacas en el estado.
+     * @param listado Lista de IDs de butacas seleccionadas.
+     */
     fun updateToButacasList(listado: MutableList<String>) {
         listado.forEach { state.value.butacas.add(productoService.getButacaById(it).value) }
     }
 
+    /**
+     * Realiza la compra.
+     * @param cliente Estado del cliente.
+     */
     fun realizarCompra(cliente: ClienteState) {
         añadirLineasCompra()
         val clienteCompra = clienteService.getById(cliente.id.toLong()).value
@@ -69,6 +90,10 @@ class ConfirmarCompraViewModel(
 
     }
 
+    /**
+     * Imprime el HTML de la compra.
+     * @param emailCliente Correo electrónico del cliente.
+     */
     fun imprimirHtml(emailCliente: String) {
         val venta = venta
         val idsButacas = state.value.butacas.joinToString("-") { it.id }
@@ -86,12 +111,18 @@ class ConfirmarCompraViewModel(
         }
     }
 
+    /**
+     * Abre el HTML de la compra.
+     */
     private fun openHtml() {
         val file = Path("data", "FicherosDeCompra", state.value.htmlFileName).toFile()
         val url = "http://localhost:63342/DawFilmsInterface/FicherosDeCompra/${file.name}"
         Open.open(url)
     }
 
+    /**
+     * Actualiza el estado de ocupación de las butacas.
+     */
     private fun actualizarOcupacionButacas() {
         state.value.butacas.forEach {
             val butaca = Butaca(
@@ -108,6 +139,9 @@ class ConfirmarCompraViewModel(
         }
     }
 
+    /**
+     * Actualiza el stock de los complementos.
+     */
     private fun actualizarStockComplementos() {
         state.value.complementos.forEach {
             val complemento = Complemento(
@@ -123,6 +157,9 @@ class ConfirmarCompraViewModel(
         }
     }
 
+    /**
+     * Añade las líneas de compra al estado.
+     */
     private fun añadirLineasCompra() {
         state.value.butacas.forEach {
             state.value.lineas.add(
@@ -154,12 +191,22 @@ class ConfirmarCompraViewModel(
         }
     }
 
+    /**
+     * Elimina los últimos valores del estado.
+     */
     fun deleteLastValues() {
         state.value.butacas = mutableListOf()
         state.value.complementos = mutableMapOf()
         state.value.lineas = mutableListOf()
     }
 
+    /**
+     * Estado de la gestión de compra.
+     * @property htmlFileName Nombre del archivo HTML.
+     * @property lineas Lista de líneas de venta.
+     * @property complementos Mapa de complementos seleccionados (complemento y cantidad).
+     * @property butacas Lista de butacas seleccionadas.
+     */
     data class GestionCompraState (
         var htmlFileName: String = "",
         var lineas: MutableList<LineaVenta> = mutableListOf(),

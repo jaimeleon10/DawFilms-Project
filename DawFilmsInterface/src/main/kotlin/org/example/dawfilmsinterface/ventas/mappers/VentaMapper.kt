@@ -19,6 +19,13 @@ import org.example.dawfilmsinterface.ventas.models.Venta
 import java.time.LocalDate
 import java.util.*
 
+/**
+ * Extensión para convertir una entidad de LineaVenta a un objeto de dominio LineaVenta.
+ * @param producto Producto asociado a la línea de venta.
+ * @return Objeto de dominio LineaVenta.
+ * @since 1.0.0
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 fun LineaVentaEntity.toLineaVenta(producto: Producto): LineaVenta {
     return LineaVenta(
         id = UUID.fromString(this.id),
@@ -31,6 +38,13 @@ fun LineaVentaEntity.toLineaVenta(producto: Producto): LineaVenta {
     )
 }
 
+/**
+ * Extensión para convertir una entidad de Venta a un objeto de dominio Venta.
+ * @param cliente Cliente asociado a la venta.
+ * @param lineas Lista de líneas de venta.
+ * @param fechaCompra Fecha de compra de la venta.
+ * @return Objeto de dominio Venta.
+ */
 fun VentaEntity.toVenta(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra: LocalDate): Venta {
     return Venta(
         id = UUID.fromString(this.id),
@@ -42,6 +56,10 @@ fun VentaEntity.toVenta(cliente: Cliente, lineas: List<LineaVenta>, fechaCompra:
     )
 }
 
+/**
+ * Extensión para convertir un objeto de dominio LineaVenta a su correspondiente DTO.
+ * @return DTO de LineaVenta.
+ */
 fun LineaVenta.toLineaVentaDto(): LineaVentaDto {
     return when (this.producto) {
         is Butaca -> {
@@ -74,6 +92,10 @@ fun LineaVenta.toLineaVentaDto(): LineaVentaDto {
     }
 }
 
+/**
+ * Extensión para convertir un DTO de LineaVenta a su correspondiente objeto de dominio.
+ * @return Objeto de dominio LineaVenta.
+ */
 fun LineaVentaDto.toLineaVenta(): LineaVenta {
     return when (this.producto.tipoProducto) {
         "Butaca" -> {
@@ -104,6 +126,10 @@ fun LineaVentaDto.toLineaVenta(): LineaVenta {
     }
 }
 
+/**
+ * Extensión para convertir un objeto de dominio Venta a su correspondiente DTO.
+ * @return DTO de Venta.
+ */
 fun Venta.toVentaDto(): VentaDto {
     return VentaDto(
         id = this.id.toString(),
@@ -117,6 +143,10 @@ fun Venta.toVentaDto(): VentaDto {
     )
 }
 
+/**
+ * Extensión para convertir un DTO de Venta a su correspondiente objeto de dominio.
+ * @return Objeto de dominio Venta.
+ */
 fun VentaDto.toVenta(): Venta{
     return Venta(
         id = UUID.fromString(this.id),
@@ -129,14 +159,26 @@ fun VentaDto.toVenta(): Venta{
     )
 }
 
+/**
+ * Extensión para convertir una lista de objetos de dominio Venta a una lista de DTOs de Venta.
+ * @return Lista de DTOs de Venta.
+ */
 fun List<Venta>.toVentaDtoList(): List<VentaDto>{
     return map { it.toVentaDto() }
 }
 
+/**
+ * Extensión para convertir una lista de DTOs de Venta a una lista de objetos de dominio Venta.
+ * @return Lista de objetos de dominio Venta.
+ */
 fun List<VentaDto>.toVentaList(): List<Venta>{
     return map { it.toVenta() }
 }
 
+/**
+ * Extensión para convertir una lista de DTOs de LineaVenta a una lista de objetos de dominio LineaVenta.
+ * @return Lista de objetos de dominio LineaVenta.
+ */
 fun List<LineaVentaDto>.toLineaVentaList(): List<LineaVenta>{
     return map {it.toLineaVenta()}
 }

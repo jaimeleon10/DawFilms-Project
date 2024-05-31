@@ -2,6 +2,17 @@ package org.example.dawfilmsinterface.productos.models.producto
 
 import java.time.LocalDate
 
+/**
+ * Clase abstracta que representa un producto en el sistema.
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property id Identificador único del producto.
+ * @property tipoProducto Tipo de producto.
+ * @property imagen URL de la imagen del producto.
+ * @property createdAt Fecha de creación del producto.
+ * @property updatedAt Fecha de la última actualización del producto.
+ * @property isDeleted Indica si el producto ha sido eliminado.
+ */
 abstract class Producto(
     var id: String,
     var tipoProducto: String,

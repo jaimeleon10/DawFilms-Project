@@ -16,6 +16,19 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
+/**
+ * Clase controller para la pantalla de creación de una nueva contraseña en caso de contraseña olvidada.
+ * Gestiona las acciones y eventos relacionados con la introducción y validación de la nueva contraseña.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property viewModel ViewModel que gestiona el estado y la lógica de la recuperación de contraseña.
+ * @property backLoginButton Botón para regresar a la pantalla de ingreso del código de recuperación.
+ * @property checkNewPassField Campo de contraseña para confirmar la nueva contraseña.
+ * @property newPassField Campo de contraseña para ingresar la nueva contraseña.
+ * @property continueButton Botón para continuar con la validación y actualización de la contraseña.
+ * @property backLoginMenuButton Menú de opción para regresar a la pantalla de ingreso del código de recuperación.
+ * @property acercaDeMenuButton Menú de opción para mostrar información sobre los desarrolladores.
+ */
 private val logger = logging()
 
 class NuevaContraseñaOlvidadaController: KoinComponent {

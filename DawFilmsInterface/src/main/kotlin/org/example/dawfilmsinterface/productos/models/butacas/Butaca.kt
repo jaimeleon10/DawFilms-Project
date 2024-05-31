@@ -3,6 +3,22 @@ package org.example.dawfilmsinterface.productos.models.butacas
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import java.time.LocalDate
 
+/**
+ * Clase que representa una butaca en el sistema.
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property id Identificador único de la butaca.
+ * @property tipoProducto Tipo de producto al que pertenece la butaca. Por defecto es "Butaca".
+ * @property imagen URL de la imagen de la butaca. Por defecto es una cadena vacía.
+ * @property fila Número de fila donde se encuentra la butaca.
+ * @property columna Número de columna donde se encuentra la butaca.
+ * @property tipoButaca Tipo de la butaca (normal, VIP, etc.).
+ * @property estadoButaca Estado actual de la butaca (activa, fuera de servicio, etc.).
+ * @property ocupacionButaca Ocupación actual de la butaca (libre, reservada, ocupada, etc.).
+ * @property createdAt Fecha de creación de la butaca. Por defecto es la fecha y hora actual.
+ * @property updatedAt Fecha de la última actualización de la butaca. Por defecto es la fecha y hora actual.
+ * @property isDeleted Indica si la butaca ha sido eliminada. Por defecto es falso.
+ */
 class Butaca (
     id: String,
     tipoProducto: String = "Butaca",

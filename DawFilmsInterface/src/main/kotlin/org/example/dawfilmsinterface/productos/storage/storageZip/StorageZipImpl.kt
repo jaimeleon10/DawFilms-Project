@@ -19,6 +19,11 @@ import kotlin.io.path.name
 
 private val logger = logging()
 
+/**
+ * Implementación de [StorageZip] que permite exportar e importar datos en formato ZIP.
+ * @since 1.0.0
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class StorageZipImpl(
     private val config: Config,
     private val storageJson: StorageJson

@@ -16,6 +16,11 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Implementación de [StorageXml] que permite almacenar y cargar datos en formato XML.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class StorageXmlImpl : StorageXml {
     override fun storeXml(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug{ "Guardando datos en fichero $file" }

@@ -15,6 +15,13 @@ import org.example.dawfilmsinterface.cine.viewmodels.SeleccionarComplementoViewM
 import javafx.scene.image.*
 import java.time.LocalDate
 
+/**
+ * Convierte una [ProductoEntity] en un [Producto].
+ * @return La instancia de [Producto] correspondiente a la entidad.
+ * @throws IllegalArgumentException si el tipo de producto no es compatible.
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun ProductoEntity.toProducto(): Producto {
     return when (this.tipo_producto) {
         "Butaca" -> Butaca(
@@ -48,6 +55,10 @@ fun ProductoEntity.toProducto(): Producto {
     }
 }
 
+/**
+ * Convierte una [ProductoEntity] en un [Complemento].
+ * @return La instancia de [Complemento] correspondiente a la entidad.
+ */
 fun ProductoEntity.toComplemento(): Complemento {
     return Complemento(
         id = this.id,
@@ -63,6 +74,10 @@ fun ProductoEntity.toComplemento(): Complemento {
     )
 }
 
+/**
+ * Convierte una [ProductoEntity] en una [Butaca].
+ * @return La instancia de [Butaca] correspondiente a la entidad.
+ */
 fun ProductoEntity.toButaca(): Butaca {
     return Butaca(
         id = this.id,
@@ -79,6 +94,11 @@ fun ProductoEntity.toButaca(): Butaca {
     )
 }
 
+/**
+ * Convierte un [Producto] en un [ProductoDto].
+ * @return El DTO correspondiente al producto.
+ * @throws IllegalArgumentException si el tipo de producto no es compatible.
+ */
 fun Producto.toProductoDto(): ProductoDto {
     return when (this) {
         is Butaca -> ProductoDto(
@@ -121,6 +141,10 @@ fun Producto.toProductoDto(): ProductoDto {
     }
 }
 
+/**
+ * Convierte un [ProductoDto] en una [Butaca].
+ * @return La instancia de [Butaca] correspondiente al DTO.
+ */
 fun ProductoDto.toButaca(): Butaca {
     return Butaca(
         id = this.id,
@@ -137,6 +161,10 @@ fun ProductoDto.toButaca(): Butaca {
     )
 }
 
+/**
+ * Convierte un [ProductoDto] en un [Complemento].
+ * @return La instancia de [Complemento] correspondiente al DTO.
+ */
 fun ProductoDto.toComplemento(): Complemento {
     return Complemento(
         id = this.id,
@@ -152,10 +180,18 @@ fun ProductoDto.toComplemento(): Complemento {
     )
 }
 
+/**
+ * Convierte una lista de [Producto] en una lista de [ProductoDto].
+ * @return La lista de DTOs correspondiente a la lista de productos.
+ */
 fun List<Producto>.toProductoDtoList(): List<ProductoDto> {
     return map { it.toProductoDto() }
 }
 
+/**
+ * Convierte una lista de [ProductoDto] en una lista de [Producto].
+ * @return La lista de productos correspondiente a la lista de DTOs.
+ */
 fun List<ProductoDto>.toProductoList(): List<Producto> {
     return map {
         if (it.tipoProducto == "Butaca") it.toButaca()
@@ -163,6 +199,10 @@ fun List<ProductoDto>.toProductoList(): List<Producto> {
     }
 }
 
+/**
+ * Convierte un [ButacaState] en una [Butaca].
+ * @return La instancia de [Butaca] correspondiente al estado.
+ */
 fun ButacaState.toModel(): Butaca {
     return Butaca(
         id = this.id,
@@ -179,6 +219,10 @@ fun ButacaState.toModel(): Butaca {
     )
 }
 
+/**
+ * Convierte un [ComplementoState] en un [Complemento].
+ * @return La instancia de [Complemento] correspondiente al estado.
+ */
 fun ComplementoState.toModel(): Complemento {
     return Complemento(
         id = this.id,
@@ -195,6 +239,10 @@ fun ComplementoState.toModel(): Complemento {
     )
 }
 
+/**
+ * Convierte un [ComplementoSeleccionadoState] en un [Complemento].
+ * @return La instancia de [Complemento] correspondiente al estado.
+ */
 fun ComplementoSeleccionadoState.toModel(): Complemento {
     return Complemento(
         id = this.id,
