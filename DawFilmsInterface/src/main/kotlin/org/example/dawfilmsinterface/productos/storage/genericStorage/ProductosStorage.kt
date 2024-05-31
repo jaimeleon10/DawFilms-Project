@@ -62,6 +62,12 @@ interface ProductosStorage {
      * @return un [Result] que contiene la lista de productos cargados si la operación fue exitosa o un error de [ProductoError].
      */
     fun loadXml(file: File): Result<List<Producto>, ProductoError>
+
+    /**
+     * Obtiene el nombre de la imagen de un nuevo archivo de imagen.
+     * @param newFileImage el nuevo archivo de imagen.
+     * @return un [Result] que contiene el nombre de la imagen si la operación fue exitosa o un error de [ProductoError].
+     */
     fun getImageName(newFileImage: File): Result<String, ProductoError>
 
     /**
