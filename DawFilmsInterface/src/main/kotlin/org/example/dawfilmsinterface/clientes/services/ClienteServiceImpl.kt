@@ -11,6 +11,14 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Implementación de [ClienteService] que gestiona las operaciones relacionadas con los clientes.
+ * @param clienteRepository Repositorio de clientes.
+ * @param clienteCache Cache de clientes para mejorar el rendimiento.
+ * @param clienteValidator Validador de clientes para asegurar la integridad de los datos.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class ClienteServiceImpl(
     private val clienteRepository: ClienteRepository,
     private val clienteCache: ClienteCache,

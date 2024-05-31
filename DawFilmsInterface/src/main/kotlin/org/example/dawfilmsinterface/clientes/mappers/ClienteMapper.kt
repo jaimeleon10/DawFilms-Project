@@ -5,6 +5,12 @@ import org.example.dawfilmsinterface.clientes.dto.ClienteDto
 import org.example.dawfilmsinterface.clientes.models.Cliente
 import java.time.LocalDate
 
+/**
+ * Convierte esta entidad de usuario en un objeto de tipo [Cliente].
+ * @return Un objeto de tipo [Cliente] creado a partir de esta entidad de usuario.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun UsuarioEntity.toCliente(): Cliente {
     return Cliente(
         id = this.id,
@@ -21,6 +27,12 @@ fun UsuarioEntity.toCliente(): Cliente {
     )
 }
 
+/**
+ * Convierte este objeto de tipo [Cliente] en un objeto de tipo [ClienteDto].
+ * @return Un objeto de tipo [ClienteDto] creado a partir de este cliente.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun Cliente.toClienteDto(): ClienteDto {
     return ClienteDto(
         id = this.id,
@@ -37,6 +49,12 @@ fun Cliente.toClienteDto(): ClienteDto {
     )
 }
 
+/**
+ * Convierte este objeto de tipo [ClienteDto] en un objeto de tipo [Cliente].
+ * @return Un objeto de tipo [Cliente] creado a partir de este cliente DTO.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun ClienteDto.toCliente(): Cliente{
     return Cliente(
         id = this.id,
@@ -53,10 +71,22 @@ fun ClienteDto.toCliente(): Cliente{
     )
 }
 
+/**
+ * Convierte una lista de objetos de tipo [Cliente] en una lista de objetos de tipo [ClienteDto].
+ * @return Una lista de objetos de tipo [ClienteDto] creada a partir de la lista de clientes.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun List<Cliente>.toClienteDtoList(): List<ClienteDto>{
     return map { it.toClienteDto() }
 }
 
+/**
+ * Convierte una lista de objetos de tipo [ClienteDto] en una lista de objetos de tipo [Cliente].
+ * @return Una lista de objetos de tipo [Cliente] creada a partir de la lista de clientes DTO.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 fun List<ClienteDto>.toClienteList(): List<Cliente>{
     return map{ it.toCliente() }
 }

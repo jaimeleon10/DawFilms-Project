@@ -10,6 +10,14 @@ import java.time.LocalDate
 
 private val logger = logging()
 
+/**
+ * Implementación concreta de [ButacaRepository] que utiliza un [SqlDeLightManager] para interactuar con la base de datos.
+ * @property dbManager El gestor de SQLite utilizado para acceder a la base de datos.
+ * @constructor Crea un [ButacaRepositoryImpl] con el [SqlDeLightManager] especificado.
+ * @param dbManager El gestor de SQLite utilizado para acceder a la base de datos.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class ButacaRepositoryImpl(
     private val dbManager: SqlDeLightManager
 ) : ButacaRepository {

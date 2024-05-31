@@ -9,7 +9,11 @@ import java.time.LocalDate
 
 private val logger = logging()
 
-
+/**
+ * Implementación concreta de [ComplementoRepository] que utiliza un [SqlDeLightManager] para interactuar con la base de datos.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class ComplementoRepositoryImpl(
     private val dbManager: SqlDeLightManager
 ) : ComplementoRepository {

@@ -15,6 +15,11 @@ import java.io.File
 
 private val logger = logging()
 
+/**
+ * Implementación de [ClienteStorage] que gestiona el almacenamiento y la carga de datos de clientes en formato JSON.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class ClienteStorageImpl: ClienteStorage {
     override fun storeJson(file: File, data: List<Cliente>): Result<Long, ClienteError> {
         logger.debug { "Guardando datos en fichero $file" }

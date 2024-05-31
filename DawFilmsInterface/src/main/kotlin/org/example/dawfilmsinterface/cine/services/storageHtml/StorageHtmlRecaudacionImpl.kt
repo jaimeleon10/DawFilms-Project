@@ -14,6 +14,9 @@ import java.io.File
 
 private val logger = logging()
 
+/**
+ * Implementación concreta de [StorageHtmlRecaudacion] que exporta datos de recaudación a un archivo HTML.
+ */
 class StorageHtmlRecaudacionImpl:StorageHtmlRecaudacion {
     override fun exportHtml(listaLineas: List<LineaVenta>, file: File): Result<Unit, VentaError> {
 

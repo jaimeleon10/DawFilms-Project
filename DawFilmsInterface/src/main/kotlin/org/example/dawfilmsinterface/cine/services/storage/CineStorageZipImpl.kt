@@ -24,6 +24,16 @@ import kotlin.io.path.name
 
 private val logger = logging()
 
+/**
+ * Implementación de la interfaz [CineStorageZip] que proporciona métodos para exportar e importar datos a/desde archivos ZIP.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @param config Configuración del sistema del cine.
+ * @param storageJsonProductos Almacenamiento JSON para productos.
+ * @param storageJsonClientes Almacenamiento JSON para clientes.
+ * @param storageJsonVentas Almacenamiento JSON para ventas.
+ * @property tempDirName Nombre del directorio temporal utilizado durante las operaciones ZIP.
+ */
 class CineStorageZipImpl (
     private val config: Config,
     private val storageJsonProductos: StorageJson,

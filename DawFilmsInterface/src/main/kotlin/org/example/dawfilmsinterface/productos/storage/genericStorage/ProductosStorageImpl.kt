@@ -18,7 +18,12 @@ import java.nio.file.Files
 import java.nio.file.Paths
 
 private val logger = logging()
-
+/**
+ * Interfaz que define las operaciones de almacenamiento y recuperación de productos en diferentes formatos,
+ * gestión de imágenes y operaciones de importación y exportación en formato ZIP.
+ * @since 1.0.0
+ * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ */
 class ProductosStorageImpl(
     private val config: Config,
     private val storageCsv: StorageCsv,

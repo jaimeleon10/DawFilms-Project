@@ -13,6 +13,24 @@ import java.time.LocalDate
 
 private val logger = logging()
 
+/**
+ * Clase controller para la pantalla de registro de usuarios.
+ * Gestiona las acciones y eventos relacionados con el registro de nuevos usuarios.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property viewModel ViewModel que gestiona el estado y la lógica del registro de usuarios.
+ * @property backLoginButton Botón para volver a la pantalla de inicio de sesión.
+ * @property birthDatePicker Selector de fecha de nacimiento del usuario.
+ * @property emailField Campo de texto para ingresar el correo electrónico del usuario.
+ * @property dniField Campo de texto para ingresar el número de identificación del usuario.
+ * @property surnameField Campo de texto para ingresar el apellido del usuario.
+ * @property checkPassField Campo de contraseña para confirmar la contraseña ingresada.
+ * @property continueButton Botón para continuar con el registro.
+ * @property volverLoginMenuButton Menú de opción para volver a la pantalla de inicio de sesión.
+ * @property acercaDeMenuButton Menú de opción para mostrar información sobre los desarrolladores.
+ * @property nameField Campo de texto para ingresar el nombre del usuario.
+ * @property passwordField Campo de contraseña para ingresar la contraseña del usuario.
+ */
 class RegisterController : KoinComponent {
     private val viewModel : RegistroViewModel by inject()
 

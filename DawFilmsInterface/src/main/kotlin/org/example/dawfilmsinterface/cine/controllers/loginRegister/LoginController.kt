@@ -14,6 +14,20 @@ import java.util.*
 
 private val logger = logging()
 
+/**
+ * Clase controller para la pantalla de inicio de sesión.
+ * Gestiona las acciones y eventos relacionados con el inicio de sesión del usuario.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property viewModel ViewModel que gestiona el estado y la lógica del inicio de sesión.
+ * @property continueButton Botón para continuar con el inicio de sesión.
+ * @property exitMenuButton Menú de opción para salir de la aplicación.
+ * @property acercaDeMenuButton Menú de opción para mostrar información sobre los desarrolladores.
+ * @property registerButton Botón para ir a la pantalla de registro.
+ * @property forgotPassButton Botón para ir a la pantalla de recuperación de contraseña.
+ * @property userNameField Campo de texto para ingresar el nombre de usuario.
+ * @property passwordField Campo de contraseña para ingresar la contraseña.
+ */
 class LoginController: KoinComponent {
 
     val viewModel: LoginViewModel by inject()

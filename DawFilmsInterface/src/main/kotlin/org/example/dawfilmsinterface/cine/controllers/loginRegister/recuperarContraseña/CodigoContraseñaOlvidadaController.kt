@@ -17,6 +17,18 @@ import org.lighthousegames.logging.logging
 
 private val logger = logging()
 
+/**
+ * Clase controller para la pantalla de recuperación de contraseña olvidada.
+ * Gestiona las acciones y eventos relacionados con la introducción y validación del código de recuperación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ * @property viewModel ViewModel que gestiona el estado y la lógica de la recuperación de contraseña.
+ * @property backLoginButton Botón para regresar a la pantalla de inicio de sesión.
+ * @property codeField Campo de texto para ingresar el código de recuperación.
+ * @property continueButton Botón para continuar con la validación del código.
+ * @property backLoginMenuButton Menú de opción para regresar a la pantalla de inicio de sesión.
+ * @property acercaDeMenuButton Menú de opción para mostrar información sobre los desarrolladores.
+ */
 class CodigoContraseñaOlvidadaController :KoinComponent {
 
     val viewModel: RecuperarPasswordViewModel by inject()
