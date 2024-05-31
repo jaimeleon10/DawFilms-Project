@@ -20,6 +20,7 @@ import org.lighthousegames.logging.logging
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.doNothing
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -386,4 +387,125 @@ class ClienteServiceImplTest {
 
 
     }
+
+    @Test
+    fun deleteAllClientes(){
+
+        doNothing().whenever(mockRepo).deleteAll()
+        whenever(mockCache.clear()).thenReturn(Ok(Unit))
+
+        service.deleteAllClientes()
+
+        val lista = service.getAll()
+
+        assertAll(
+            { assertEquals(0, lista.value.size)},
+            { assertTrue(lista.isOk)}
+        )
+    }
+
+    @Test
+    fun validateCliente(){
+        val mockCliente = Cliente(
+            id = -1L,
+            nombre = "Pepe",
+            apellido = "",
+            fechaNacimiento = LocalDate.of(1997, 12, 31),
+            dni = "12345678Z",
+            email = "ejemplo@si.com",
+            numSocio = "123",
+            password = "password",
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        whenever(mockRepo.validate("ejemplo@si.com", "password")).thenReturn(mockCliente)
+
+        val cli = service.validateCliente("ejemplo@si.com", "password")
+
+        assertAll(
+            { assertTrue(cli.isOk)},
+            { assertEquals( "Pepe", cli.value.nombre)}
+        )
+    }
+
+    @Test
+    fun validateClienteNotValid(){
+        val mockCliente = Cliente(
+            id = -1L,
+            nombre = "Pepe",
+            apellido = "",
+            fechaNacimiento = LocalDate.of(1997, 12, 31),
+            dni = "12345678Z",
+            email = "ejemplo@si.com",
+            numSocio = "123",
+            password = "password",
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        whenever(mockRepo.validate("ejemplo@si.com", "pasword")).thenReturn(null)
+
+        val cli = service.validateCliente("ejemplo@si.com", "pasword")
+
+        assertAll(
+            { assertTrue(cli.isErr)},
+            { assertFalse (cli.value == mockCliente) }
+        )
+    }
+
+    @Test
+    fun getByEmail(){
+        val mockCliente = Cliente(
+            id = -1L,
+            nombre = "Pepe",
+            apellido = "",
+            fechaNacimiento = LocalDate.of(1997, 12, 31),
+            dni = "12345678Z",
+            email = "ejemplo@si.com",
+            numSocio = "123",
+            password = "password",
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        whenever(mockRepo.findByEmail("ejemplo@si.com")).thenReturn(mockCliente)
+
+        val cliente = service.getByEmail("ejemplo@si.com")
+
+        assertAll(
+            { assertTrue(cliente.isOk)},
+            { assertEquals( "Pepe", cliente.value.nombre)}
+        )
+    }
+
+    @Test
+    fun getByEmailNotFound(){
+        val mockCliente = Cliente(
+            id = -1L,
+            nombre = "Pepe",
+            apellido = "",
+            fechaNacimiento = LocalDate.of(1997, 12, 31),
+            dni = "12345678Z",
+            email = "ejemplo@si.com",
+            numSocio = "123",
+            password = "password",
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        whenever(mockRepo.findByEmail("ejempla@si.com")).thenReturn(null)
+
+        val cliente = service.getByEmail("ejempla@si.com")
+
+        assertAll(
+            { assertTrue(cliente.isErr)},
+            { assertFalse( mockCliente == cliente.value) }
+        )
+    }
+
 }

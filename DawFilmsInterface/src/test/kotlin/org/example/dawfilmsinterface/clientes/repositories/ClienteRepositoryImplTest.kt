@@ -144,6 +144,54 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
+    fun deleteAll() {
+        clienteRepository.deleteAll()
+
+        val clientes = clienteRepository.findAll()
+
+        assertEquals(0, clientes.size)
+
+    }
+
+    @Test
+    fun validate(){
+        val cliente = clienteRepository.update(1, Cliente(
+            nombre = "test-update",
+            apellido = "test-update",
+            fechaNacimiento = LocalDate.parse("2024-06-06"),
+            dni = "12345678Z",
+            email = "test-update@test-update.com",
+            numSocio = "ZZZ999",
+            password = "0000")
+        )
+
+        val cli = clienteRepository.validate("test-update@test-update.com", "0000")
+
+        assertTrue(cliente == cli)
+        assertFalse(null == cli)
+        assertEquals("test-update@test-update.com", cli?.email)
+        assertEquals("0000", cli?.password)
+    }
+
+    @Test
+    fun findByEmail(){
+        val cliente = clienteRepository.update(1, Cliente(
+            nombre = "test-update",
+            apellido = "test-update",
+            fechaNacimiento = LocalDate.parse("2024-06-06"),
+            dni = "12345678Z",
+            email = "test-update@test-update.com",
+            numSocio = "ZZZ999",
+            password = "0000")
+        )
+
+        val cli = clienteRepository.findByEmail("test-update@test-update.com")
+
+        assertEquals("test-update@test-update.com", cli?.email)
+        assertEquals("test-update", cli?.nombre)
+    }
+
+    @Test
     fun deleteNotFound() {
         val cliente = clienteRepository.delete(5)
 
