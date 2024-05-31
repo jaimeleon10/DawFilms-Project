@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
+import org.lighthousegames.logging.logging
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.junit.jupiter.MockitoExtension
@@ -27,6 +28,8 @@ import org.mockito.kotlin.whenever
 import java.time.LocalDate
 import java.util.*
 
+
+private val logger = logging()
 @ExtendWith(MockitoExtension::class)
 
 class VentaServiceImplTest {
@@ -143,6 +146,33 @@ class VentaServiceImplTest {
     }
 
     @Test
+    fun getAllVentasByClienteNotFound(){
+
+        val venta = Venta(
+            id = UUID.fromString("22c712fb-5531-4f33-a744-0fdb65cd9dcf"),
+            cliente = clienteMuestra,
+            lineas = listOf(lineaVentaMuestra1,lineaVentaMuestra2),
+            fechaCompra = LocalDate.of(2024,5,18),
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false)
+
+
+
+        whenever(repoVentas.findAllVentasCliente(clienteMuestra, listOf(lineaVentaMuestra1,lineaVentaMuestra2), LocalDate.of(2024,5,18)))
+            .thenReturn(null)
+
+        val ventas = serviceVentas.getAllVentasByCliente(clienteMuestra, listOf(lineaVentaMuestra1,lineaVentaMuestra2), LocalDate.of(2024,5,18))
+
+        logger.debug { ventas }
+
+        assertAll(
+            { assertTrue(ventas.isOk) },
+            { assertEquals(null, ventas.value )}
+        )
+    }
+
+    @Test
     fun getAllVentasEntity(){
         val venta = VentaEntity(
             id = "22c712fb-5531-4f33-a744-0fdb65cd9dcf",
@@ -187,6 +217,29 @@ class VentaServiceImplTest {
     }
 
     @Test
+    fun getAllLineasByVentaIDNotFound(){
+
+        val venta = Venta(
+            id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb65cd9dcf"),
+            cliente = clienteMuestra,
+            lineas = listOf(lineaVentaMuestra1, lineaVentaMuestra2),
+            fechaCompra = LocalDate.now(),
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        whenever(repoVentas.findAllLineasByID("21c712fb-5531-4f33-a744-0fdb65cd9dcf")).thenReturn(null)
+
+        val lineas = serviceVentas.getAllLineasByVentaID("21c712fb-5531-4f33-a744-0fdb65cd9dcf")
+
+        assertAll(
+            { assertTrue(lineas.isOk) },
+            { assertEquals(null, lineas.value )}
+        )
+    }
+
+    @Test
     fun getAllVentasByDate(){
         val venta = VentaEntity(
             id = "22c712fb-5531-4f33-a744-0fdb65cd9dcf",
@@ -204,6 +257,27 @@ class VentaServiceImplTest {
         assertAll(
             { assertEquals(1, ventas.value.size)},
             { assertEquals("22c712fb-5531-4f33-a744-0fdb65cd9dcf", ventas.value[0].id)}
+        )
+    }
+
+    @Test
+    fun getAllVentasByDateNotFound(){
+        val venta = VentaEntity(
+            id = "22c712fb-5531-4f33-a744-0fdb65cd9dcf",
+            cliente_id = clienteMuestra.id,
+            total = 0.0,
+            fecha_compra = LocalDate.now().toString(),
+            created_at = LocalDate.now().toString(),
+            updated_at = LocalDate.now().toString(),
+            is_deleted = 0)
+
+        whenever(repoVentas.findVentasByDate(LocalDate.now())).thenReturn(null)
+
+        val ventas = serviceVentas.getAllVentasByDate(LocalDate.now())
+
+        assertAll(
+            { assertTrue(ventas.isOk) },
+            { assertEquals(null, ventas.value )}
         )
     }
 

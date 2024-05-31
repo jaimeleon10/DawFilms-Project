@@ -59,7 +59,7 @@ class ClienteRepositoryImplTest {
         assertEquals("12345678A", cliente?.dni)
         assertEquals("user@user.com", cliente?.email)
         assertEquals("AAA111", cliente?.numSocio)
-        assertEquals("user", cliente?.password)
+        assertEquals("VXNlcjE=", cliente?.password)
 
     }
 
@@ -174,6 +174,25 @@ class ClienteRepositoryImplTest {
     }
 
     @Test
+    fun validateNotValid(){
+        val cliente = clienteRepository.update(1, Cliente(
+            nombre = "test-update",
+            apellido = "test-update",
+            fechaNacimiento = LocalDate.parse("2024-06-06"),
+            dni = "12345678Z",
+            email = "test-update@test-update.com",
+            numSocio = "ZZZ999",
+            password = "0000")
+        )
+
+        val cli = clienteRepository.validate("testupdate@test-update.com", "0000")
+
+        assertFalse(cliente == cli)
+        assertTrue(null == cli)
+
+    }
+
+    @Test
     fun findByEmail(){
         val cliente = clienteRepository.update(1, Cliente(
             nombre = "test-update",
@@ -189,6 +208,24 @@ class ClienteRepositoryImplTest {
 
         assertEquals("test-update@test-update.com", cli?.email)
         assertEquals("test-update", cli?.nombre)
+    }
+
+    @Test
+    fun findByEmailNotFound(){
+        val cliente = clienteRepository.update(1, Cliente(
+            nombre = "test-update",
+            apellido = "test-update",
+            fechaNacimiento = LocalDate.parse("2024-06-06"),
+            dni = "12345678Z",
+            email = "test-update@test-update.com",
+            numSocio = "ZZZ999",
+            password = "0000")
+        )
+
+        val cli = clienteRepository.findByEmail("testupdate@test-update.com")
+
+        assertFalse(cliente == cli)
+        assertTrue(null == cli)
     }
 
     @Test

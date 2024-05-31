@@ -62,7 +62,7 @@ class ComplementoRepositoryImplTest {
 
         assertEquals("1", complemento?.id)
         assertEquals("Complemento", complemento?.tipoProducto)
-        assertEquals("agua.png", complemento?.imagen)
+        assertEquals("1717094754269.png", complemento?.imagen)
         assertEquals("Agua", complemento?.nombre)
         assertEquals(2.0, complemento?.precio)
         assertEquals(20, complemento?.stock)

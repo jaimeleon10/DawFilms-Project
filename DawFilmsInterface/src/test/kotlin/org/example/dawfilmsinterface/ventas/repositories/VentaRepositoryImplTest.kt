@@ -151,6 +151,43 @@ class VentaRepositoryImplTest {
     }
 
     @Test
+    fun findAllLineasByIDNotFound(){
+
+        val linea =
+            LineaVenta(
+                id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb66cd9dcf"),
+                producto = butacaMuestra,
+                tipoProducto = butacaMuestra.tipoProducto,
+                cantidad = 1,
+                precio = butacaMuestra.tipoButaca.precio,
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                isDeleted = false
+            )
+
+        val venta = Venta(
+            id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb66cd9dcf"),
+            cliente = clienteMuestra,
+            lineas = listOf(linea),
+            fechaCompra = LocalDate.now(),
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        ventaRepository.save(venta)
+
+        logger.debug { "Estas son las lineas ${ventaRepository.findAllLineas()}" }
+
+        val lineas = ventaRepository.findAllLineasByID("21c712fb-5531-4f33-a744-0fdb65cd9dcf")
+
+        logger.debug{ lineas}
+
+        assertEquals(0, lineas.size)
+
+    }
+
+    @Test
     fun findAllLineas(){
         val lineas = ventaRepository.findAllLineas()
 
@@ -162,6 +199,13 @@ class VentaRepositoryImplTest {
         val ventas = ventaRepository.findVentasByDate(LocalDate.now())
 
         assertEquals(1, ventas.size)
+    }
+
+    @Test
+    fun findVentasByDateNotFound(){
+        val ventas = ventaRepository.findVentasByDate(LocalDate.of(3000,1,1))
+
+        assertEquals(0, ventas.size)
     }
 
     @Test
@@ -270,7 +314,7 @@ class VentaRepositoryImplTest {
             dni = "12345678A",
             email = "user@user.com",
             numSocio = "AAA111",
-            password = "user",
+            password = "VXNlcjE=",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
             isDeleted = false)

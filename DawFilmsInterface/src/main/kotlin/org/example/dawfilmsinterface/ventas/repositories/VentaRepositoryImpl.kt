@@ -87,7 +87,7 @@ class VentaRepositoryImpl(
             db.insertVenta(
                 id = venta.id.toString(),
                 cliente_id = venta.cliente.id,
-                total = venta.total,
+                total =venta.total,
                 fecha_compra = LocalDate.now().toString(),
                 created_at = venta.createdAt.toString(),
                 updated_at = venta.updatedAt.toString(),
