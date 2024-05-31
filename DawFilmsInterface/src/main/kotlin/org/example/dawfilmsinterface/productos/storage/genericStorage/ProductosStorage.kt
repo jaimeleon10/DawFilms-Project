@@ -62,6 +62,7 @@ interface ProductosStorage {
      * @return un [Result] que contiene la lista de productos cargados si la operación fue exitosa o un error de [ProductoError].
      */
     fun loadXml(file: File): Result<List<Producto>, ProductoError>
+    fun getImageName(newFileImage: File): Result<String, ProductoError>
 
     /**
      * Guarda una imagen en el sistema de archivos.
@@ -97,19 +98,4 @@ interface ProductosStorage {
      * @return un [Result] que contiene el archivo actualizado si la operación fue exitosa o un error de [ProductoError].
      */
     fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError>
-
-    /**
-     * Exporta los datos de productos a un archivo ZIP.
-     * @param fileToZip el archivo ZIP en el que se exportarán los datos.
-     * @param data la lista de productos a exportar.
-     * @return un [Result] que contiene el archivo ZIP creado si la operación fue exitosa o un error de [ProductoError].
-     */
-    fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError>
-
-    /**
-     * Carga los datos de productos desde un archivo ZIP.
-     * @param fileToUnzip el archivo ZIP del que se cargarán los datos.
-     * @return un [Result] que contiene la lista de productos cargados si la operación fue exitosa o un error de [ProductoError].
-     */
-    fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError>
 }

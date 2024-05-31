@@ -10,12 +10,16 @@ import java.io.File
  * @author Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
  */
 interface StorageImage {
+<<<<<<< HEAD
 
     /**
      * Guarda una imagen con el nombre especificado.
      * @param fileName el nombre del archivo de imagen a guardar.
      * @return un [Result] con el archivo de imagen guardado o un error de [ProductoError].
      */
+=======
+    fun getImageName(newFileImage: File): String
+>>>>>>> 1b176171e9fadbd5f83c08bfd33a25e65ed925e0
     fun saveImage(fileName: File): Result<File, ProductoError>
 
     /**

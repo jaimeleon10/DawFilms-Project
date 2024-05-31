@@ -38,7 +38,7 @@ class StorageImageImpl(
      * @param newFileImage el archivo de la nueva imagen.
      * @return el nombre único de la imagen.
      */
-    fun getImageName(newFileImage: File): String {
+    override fun getImageName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
         return "${Instant.now().toEpochMilli()}.$extension"

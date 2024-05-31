@@ -7,10 +7,21 @@ import org.example.dawfilmsinterface.productos.service.ProductoService
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
-
+/**
+ * Clase ListadoComplementosViewModel
+ *
+ * Gestiona la lógica relacionada con la carga de complementos no eliminados.
+ *
+ * @param service Servicio para gestionar productos.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class ListadoComplementosViewModel(
     private val service: ProductoService
 ) {
+    /**
+     * Carga todos los complementos no eliminados del servicio en el estado actual.
+     */
     fun loadAllComplementos() {
         logger.debug { "Cargando complementos del repositorio" }
         service.getAllComplementos().onSuccess {
@@ -20,7 +31,13 @@ class ListadoComplementosViewModel(
     }
 
     val state: SimpleObjectProperty<ListadoComplementosState> = SimpleObjectProperty(ListadoComplementosState())
-
+    /**
+     * Clase de datos ListadoComplementosState
+     *
+     * Representa el estado de la lista de complementos.
+     *
+     * @param complementos Lista de complementos no eliminados.
+     */
     data class ListadoComplementosState(
         val complementos: List<Complemento> = emptyList()
     )

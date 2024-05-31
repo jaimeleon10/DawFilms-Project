@@ -34,8 +34,6 @@ import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJsonImpl
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXmlImpl
-import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
-import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZipImpl
 import org.example.dawfilmsinterface.productos.validators.ButacaValidator
 import org.example.dawfilmsinterface.productos.validators.ComplementoValidator
 import org.example.dawfilmsinterface.cine.viewmodels.GestionButacaViewModel
@@ -120,7 +118,7 @@ val appModule = module {
     singleOf(::ComplementoValidator)
 
     single {
-        ProductosStorageImpl(get(), get(), get(), get(), get(), get())
+        ProductosStorageImpl(get(), get(), get(), get(), get())
     } bind ProductosStorage::class
 
     singleOf(::StorageImageImpl) {
@@ -134,9 +132,6 @@ val appModule = module {
     singleOf(::StorageXmlImpl) {
         bind<StorageXml>()
     }
-
-    single { StorageZipImpl(get(), get()) } bind StorageZip::class
-
 
     // Ventas
     singleOf(::VentaRepositoryImpl) {
