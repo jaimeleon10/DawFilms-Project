@@ -29,7 +29,7 @@ class CineStorageHtmlRecaudacionImplTest {
 
     @Test
     fun exportHtml() {
-        val listaLineas: List<LineaVenta> = listOf(LineaVenta(tipoProducto = "Butaca", producto = Butaca(id = "A1", fila = 0, columna = 0, tipoButaca = TipoButaca.NORMAL, estadoButaca = EstadoButaca.ACTIVA, ocupacionButaca = OcupacionButaca.LIBRE), cantidad = 1, precio = 5.0, createdAt = LocalDate.now(), updatedAt = LocalDate.now(),))
+        val listaLineas: List<LineaVenta> = listOf(LineaVenta(tipoProducto = "Butaca", producto = Butaca(id = "A1", fila = 0, columna = 0, tipoButaca = TipoButaca.NORMAL, estadoButaca = EstadoButaca.ACTIVA, ocupacionButaca = OcupacionButaca.LIBRE), cantidad = 1, precio = 5.0, createdAt = LocalDate.parse("2024-05-30"), updatedAt = LocalDate.now()))
 
         val result = storageHtml.exportHtml(listaLineas, myFile)
 

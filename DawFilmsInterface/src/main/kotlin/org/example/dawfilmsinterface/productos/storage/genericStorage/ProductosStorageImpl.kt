@@ -1,17 +1,14 @@
 package org.example.dawfilmsinterface.productos.storage.genericStorage
 
+import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.dawfilmsinterface.config.Config
 import org.example.dawfilmsinterface.productos.errors.ProductoError
 import org.example.dawfilmsinterface.productos.models.producto.Producto
 import org.example.dawfilmsinterface.productos.storage.storageCsv.StorageCsv
-import org.example.dawfilmsinterface.ventas.storage.storageHtml.StorageHtml
 import org.example.dawfilmsinterface.productos.storage.storageImage.StorageImage
 import org.example.dawfilmsinterface.productos.storage.storageJson.StorageJson
 import org.example.dawfilmsinterface.productos.storage.storageXml.StorageXml
-import org.example.dawfilmsinterface.productos.storage.storageZip.StorageZip
-import org.example.dawfilmsinterface.ventas.errors.VentaError
-import org.example.dawfilmsinterface.ventas.models.Venta
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.nio.file.Files
@@ -25,12 +22,7 @@ class ProductosStorageImpl(
     private val storageJson: StorageJson,
     private val storageXml: StorageXml,
     private val storageImage: StorageImage,
-    private val storageZip: StorageZip,
 ) : ProductosStorage {
-    /*init {
-        logger.debug{ "Creando directorio de imagenes si no existe" }
-        Files.createDirectories(Paths.get(config.imagesDirectory))
-    }*/
 
     override fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Guardando datos en fichero $file" }
@@ -62,6 +54,11 @@ class ProductosStorageImpl(
         return storageXml.loadXml(file)
     }
 
+    override fun getImageName(fileImage: File): Result<String, ProductoError> {
+        logger.debug { "Sacando nombre de imagen" }
+        return Ok(storageImage.getImageName(fileImage))
+    }
+
     override fun saveImage(fileName: File): Result<File, ProductoError> {
         Files.createDirectories(Paths.get(config.imagesDirectory))
         logger.debug { "Guardando imagen $fileName" }
@@ -86,15 +83,5 @@ class ProductosStorageImpl(
     override fun updateImage(imageName: String, newFileImage: File): Result<File, ProductoError> {
         logger.debug { "Actualizando la imagen $imageName" }
         return storageImage.updateImage(imageName, newFileImage)
-    }
-
-    override fun exportToZip(fileToZip: File, data: List<Producto>): Result<File, ProductoError> {
-        logger.debug { "Exportando a ZIP $fileToZip" }
-        return storageZip.exportToZip(fileToZip, data)
-    }
-
-    override fun loadFromZip(fileToUnzip: File): Result<List<Producto>, ProductoError> {
-        logger.debug { "Importando desde ZIP $fileToUnzip" }
-        return storageZip.loadFromZip(fileToUnzip)
     }
 }
