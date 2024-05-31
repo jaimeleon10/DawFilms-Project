@@ -45,10 +45,11 @@ Todo el programa ha sido revisado exhaustivamente con el objetivo de garantizar 
 * Germán Fernández
 
 ## Capturas de la aplicación
-![Menú del administrador](Imagenes/menuAdmin.jpg)
 
 _Ilustración 1. Menú del administrador._
 
-![Menú del cliente](Imagenes/menuCliente.jpg)
+![Menú del administrador](Imagenes/menuAdmin.jpg)
 
 _Ilustración 2. Menú del cliente._
+
+![Menú del cliente](Imagenes/menuCliente.jpg)
