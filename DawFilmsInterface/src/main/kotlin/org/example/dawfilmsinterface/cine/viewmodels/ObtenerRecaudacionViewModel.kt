@@ -34,7 +34,7 @@ class ObtenerRecaudacionViewModel(
 ){
     var state : SimpleObjectProperty<RecaudacionState> = SimpleObjectProperty(RecaudacionState())
 
-    init {
+    fun initialize() {
         logger.debug { "Inicializando ObtenerRecaudacionViewModel" }
         loadAllLineasVenta()
         loadTypes()

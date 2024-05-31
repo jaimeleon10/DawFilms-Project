@@ -95,6 +95,7 @@ class ObtenerRecaudacionController : KoinComponent {
 
     @FXML
     private fun initDefaultValues(){
+        viewModel.initialize()
         productoColumnTable.setCellValueFactory { cellData ->
             SimpleObjectProperty(cellData.value.obtenerIdProducto())
         }
