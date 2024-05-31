@@ -27,10 +27,10 @@ class ProductosStorageImpl(
     private val storageImage: StorageImage,
     private val storageZip: StorageZip,
 ) : ProductosStorage {
-    init {
+    /*init {
         logger.debug{ "Creando directorio de imagenes si no existe" }
         Files.createDirectories(Paths.get(config.imagesDirectory))
-    }
+    }*/
 
     override fun storeCsv(file: File, data: List<Producto>): Result<Long, ProductoError> {
         logger.debug { "Guardando datos en fichero $file" }
@@ -63,6 +63,7 @@ class ProductosStorageImpl(
     }
 
     override fun saveImage(fileName: File): Result<File, ProductoError> {
+        Files.createDirectories(Paths.get(config.imagesDirectory))
         logger.debug { "Guardando imagen $fileName" }
         return storageImage.saveImage(fileName)
     }

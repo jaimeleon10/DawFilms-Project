@@ -21,7 +21,6 @@ class StorageImageImplTest {
     @BeforeEach
     fun setUp() {
         storageImage = StorageImageImpl(Config())
-        //val dir = Path(System.getProperty("user.dir"), "data")
         myFile = Files.createTempFile("image", ".png").toFile()
     }
 

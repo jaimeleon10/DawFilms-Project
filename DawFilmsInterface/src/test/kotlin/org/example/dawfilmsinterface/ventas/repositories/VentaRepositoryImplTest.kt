@@ -86,21 +86,126 @@ class VentaRepositoryImplTest {
 
         dbManager.initialize()
 
-        clienteMuestra = Cliente(1, "Jaime", "Leon", LocalDate.parse("2000-05-10"), "12345678A", "jleon@gmail.com", "AAA111", "password", LocalDate.now(), LocalDate.now(), false)
-        complementoMuestra = Complemento("1", "Complemento", "futura_imagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA, LocalDate.now(), LocalDate.now(), false)
-        butacaMuestra = Butaca("A1","Butaca", "futura_imagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE, LocalDate.now(), LocalDate.now(), false)
+        clienteMuestra = Cliente(1, "User", "User", LocalDate.parse("2000-05-10"), "12345678A", "user@user.com", "AAA111", "user", LocalDate.now(), LocalDate.now(), false)
+        complementoMuestra = Complemento("1", "Complemento", "sinImagen.png", "Palomitas", 3.0, 20, CategoriaComplemento.COMIDA, LocalDate.now(), LocalDate.now(), false)
+        butacaMuestra = Butaca("A1","Butaca", "sinImagen.png", 0, 0, TipoButaca.NORMAL, EstadoButaca.ACTIVA, OcupacionButaca.LIBRE, LocalDate.now(), LocalDate.now(), false)
         lineaVentaMuestra1 = LineaVenta(UUID.fromString("21c712fb-5531-4f33-a744-0fdb65cd9dcf"), butacaMuestra, butacaMuestra.tipoProducto, 1, butacaMuestra.tipoButaca.precio, LocalDate.now(), LocalDate.now(), false)
         lineaVentaMuestra2 = LineaVenta(UUID.fromString("22c712fb-5531-4f33-a744-0fdb65cd9dcf"), complementoMuestra, complementoMuestra.tipoProducto, 1, complementoMuestra.precio, LocalDate.now(), LocalDate.now(), false)
     }
 
     @Test
-    fun findAll(){
+    fun findAllVentasCliente(){
         val ventas = ventaRepository.findAllVentasCliente(
             clienteMuestra,
             listOf(lineaVentaMuestra1,lineaVentaMuestra2),
             LocalDate.of(2024,5,18))
 
         assertEquals(1,ventas.size)
+    }
+
+
+    @Test
+    fun findAllVentas(){
+        val ventas = ventaRepository.findAllVentas()
+
+        logger.debug { ventas }
+
+        assertEquals(1,ventas.size)
+    }
+
+    @Test
+    fun findAllLineasByID(){
+
+        val linea =
+            LineaVenta(
+                id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb65cd9dcf"),
+                producto = butacaMuestra,
+                tipoProducto = butacaMuestra.tipoProducto,
+                cantidad = 1,
+                precio = butacaMuestra.tipoButaca.precio,
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                isDeleted = false
+            )
+
+        val venta = Venta(
+            id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb65cd9dcf"),
+            cliente = clienteMuestra,
+            lineas = listOf(linea),
+            fechaCompra = LocalDate.now(),
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        ventaRepository.save(venta)
+
+        logger.debug { "Estas son las lineas ${ventaRepository.findAllLineas()}" }
+
+        val lineas = ventaRepository.findAllLineasByID("21c712fb-5531-4f33-a744-0fdb65cd9dcf")
+
+        logger.debug{ lineas}
+
+        assertEquals(1, lineas.size)
+
+    }
+
+    @Test
+    fun findAllLineasByIDNotFound(){
+
+        val linea =
+            LineaVenta(
+                id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb66cd9dcf"),
+                producto = butacaMuestra,
+                tipoProducto = butacaMuestra.tipoProducto,
+                cantidad = 1,
+                precio = butacaMuestra.tipoButaca.precio,
+                createdAt = LocalDate.now(),
+                updatedAt = LocalDate.now(),
+                isDeleted = false
+            )
+
+        val venta = Venta(
+            id = UUID.fromString("21c712fb-5531-4f33-a744-0fdb66cd9dcf"),
+            cliente = clienteMuestra,
+            lineas = listOf(linea),
+            fechaCompra = LocalDate.now(),
+            createdAt = LocalDate.now(),
+            updatedAt = LocalDate.now(),
+            isDeleted = false
+        )
+
+        ventaRepository.save(venta)
+
+        logger.debug { "Estas son las lineas ${ventaRepository.findAllLineas()}" }
+
+        val lineas = ventaRepository.findAllLineasByID("21c712fb-5531-4f33-a744-0fdb65cd9dcf")
+
+        logger.debug{ lineas}
+
+        assertEquals(0, lineas.size)
+
+    }
+
+    @Test
+    fun findAllLineas(){
+        val lineas = ventaRepository.findAllLineas()
+
+        assertEquals(2, lineas.size)
+    }
+
+    @Test
+    fun findVentasByDate(){
+        val ventas = ventaRepository.findVentasByDate(LocalDate.now())
+
+        assertEquals(1, ventas.size)
+    }
+
+    @Test
+    fun findVentasByDateNotFound(){
+        val ventas = ventaRepository.findVentasByDate(LocalDate.of(3000,1,1))
+
+        assertEquals(0, ventas.size)
     }
 
     @Test
@@ -183,6 +288,15 @@ class VentaRepositoryImplTest {
     }
 
     @Test
+    fun deleteAllVentas(){
+        ventaRepository.deleteAllVentas()
+
+        val venta = ventaRepository.findAllVentas()
+
+        assertEquals(0, venta.size)
+    }
+
+    @Test
     fun deleteNotFound() {
         val ventaDeleted = ventaRepository.delete(UUID.fromString("666712fb-5531-4f33-a744-0fdb65cd9dcf"))
 
@@ -200,7 +314,7 @@ class VentaRepositoryImplTest {
             dni = "12345678A",
             email = "user@user.com",
             numSocio = "AAA111",
-            password = "user",
+            password = "VXNlcjE=",
             createdAt = LocalDate.now(),
             updatedAt = LocalDate.now(),
             isDeleted = false)

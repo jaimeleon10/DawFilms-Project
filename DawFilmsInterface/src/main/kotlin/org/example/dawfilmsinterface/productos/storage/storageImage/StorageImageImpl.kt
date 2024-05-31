@@ -29,7 +29,7 @@ class StorageImageImpl(
         }
     }
 
-    private fun getImageName(newFileImage: File): String {
+    fun getImageName(newFileImage: File): String {
         val name = newFileImage.name
         val extension = name.substring(name.lastIndexOf(".") + 1)
         return "${Instant.now().toEpochMilli()}.$extension"
