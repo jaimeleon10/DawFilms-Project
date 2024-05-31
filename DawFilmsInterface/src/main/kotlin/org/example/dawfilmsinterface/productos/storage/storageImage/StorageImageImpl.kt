@@ -47,8 +47,7 @@ class StorageImageImpl(
     override fun saveImage(fileName: File): Result<File, ProductoError> {
         logger.debug { "Guardando imagen $fileName" }
         return try {
-            val newFileName = getImageName(fileName)
-            val newFileImage = Paths.get(config.imagesDirectory, newFileName).toFile()
+            val newFileImage = File(config.imagesDirectory + getImageName(fileName))
             Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
             Ok(newFileImage)
         }catch (e : Exception){
