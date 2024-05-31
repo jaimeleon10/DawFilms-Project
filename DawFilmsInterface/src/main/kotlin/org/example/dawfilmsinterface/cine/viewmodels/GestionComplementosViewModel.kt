@@ -16,19 +16,32 @@ import org.lighthousegames.logging.logging
 import java.io.File
 
 private val logger = logging()
-
+/**
+ * Clase GestionComplementosViewModel
+ *
+ * Gestiona la lógica relacionada con los complementos, incluyendo la carga de tipos, la gestión de complementos y la actualización de imágenes.
+ *
+ * @param service Servicio para gestionar productos.
+ * @param storage Servicio para gestionar el almacenamiento de imágenes de productos.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class GestionComplementosViewModel(
     private val service : ProductoService,
     private val storage : ProductosStorage
 ) {
     val state : SimpleObjectProperty<GestionState> = SimpleObjectProperty(GestionState())
-
+    /**
+     * Carga los tipos de categoría y disponibilidad en el estado actual.
+     */
      fun loadTypes() {
         logger.debug { "Cargando tipos" }
         state.value = state.value.copy(typesCategoria = TipoCategoria.entries.map { it.value })
         state.value = state.value.copy(availability = Disponibilidades.entries.map { it.value })
     }
-
+    /**
+     * Carga todos los complementos del servicio en el estado actual.
+     */
      fun loadAllComplementos(){
         logger.debug { "Cargando complementos del repositorio" }
         service.getAllComplementos().onSuccess {
@@ -44,7 +57,11 @@ class GestionComplementosViewModel(
             complemento = ComplementoState()
         )
     }
-
+    /**
+     * Actualiza el estado del complemento seleccionado.
+     *
+     * @param complemento Complemento a actualizar en el estado.
+     */
     fun updateComplementoSeleccionado(complemento: Complemento){
         logger.debug { "Actualizando estado de Complemento: $complemento" }
 
@@ -69,7 +86,11 @@ class GestionComplementosViewModel(
             )
         )
     }
-
+    /**
+     * Edita el complemento seleccionado.
+     *
+     * @return Resultado de la operación de edición.
+     */
     fun editarComplemento(): Result<Complemento, ProductoError> {
         logger.debug { "Editando Complemento" }
 
@@ -103,7 +124,11 @@ class GestionComplementosViewModel(
             }
         }
     }
-
+    /**
+     * Crea un nuevo complemento.
+     *
+     * @return Resultado de la operación de creación.
+     */
     fun createComplemento(): Result<Complemento, ProductoError>{
         logger.debug { "Creando Complemento"}
         val newId = ((service.getAllComplementos().value.maxBy { it.id }.id.toInt()) + 1).toString()
@@ -126,12 +151,20 @@ class GestionComplementosViewModel(
             }
         }
     }
-
+    /**
+     * Valida el complemento.
+     *
+     * @return Resultado de la validación.
+     */
     private fun Complemento.validate(): Result<Complemento, ProductoError> {
         if (this.nombre.isEmpty() || this.nombre.isBlank()) return Err(ProductoError.ProductoValidationError("El nombre no puede estar vacio"))
         return Ok(this)
     }
-
+    /**
+     * Elimina el complemento seleccionado.
+     *
+     * @return Resultado de la operación de eliminación.
+     */
     fun eliminarComplemento(): Result<Unit, ProductoError>{
         logger.debug { "Eliminando Complemento" }
         val complemento = state.value.complemento.copy()
@@ -160,7 +193,11 @@ class GestionComplementosViewModel(
         updateActualState()
         return Ok(Unit)
     }
-
+    /**
+     * Cambia el tipo de operación actual.
+     *
+     * @param newValue Nuevo tipo de operación.
+     */
     fun changeComplementoOperacion(newValue: TipoOperacion){
         logger.debug { "Cambiando tipo de operacion: $newValue" }
         if (newValue == TipoOperacion.EDITAR){
@@ -177,7 +214,17 @@ class GestionComplementosViewModel(
             )
         }
     }
-
+    /**
+     * Actualiza los datos del complemento en la operación actual.
+     *
+     * @param id Identificador del complemento.
+     * @param nombre Nombre del complemento.
+     * @param precio Precio del complemento.
+     * @param stock Stock del complemento.
+     * @param categoria Categoría del complemento.
+     * @param imagen Imagen del complemento.
+     * @param isDeleted Estado de eliminación del complemento.
+     */
     fun updateDataComplementoOperacion(
         id: String,
         nombre: String,
@@ -200,7 +247,11 @@ class GestionComplementosViewModel(
             )
         )
     }
-
+    /**
+     * Actualiza la imagen del complemento en la operación actual.
+     *
+     * @param fileImage Archivo de imagen.
+     */
     fun updateImageComplementoOperacion(fileImage: File) {
         logger.debug { "Actualizando imagen: $fileImage" }
         state.value = state.value.copy(
@@ -211,7 +262,18 @@ class GestionComplementosViewModel(
             )
         )
     }
-
+    /**
+     * Clase de datos GestionState
+     *
+     * Representa el estado de la gestión de complementos.
+     *
+     * @param typesCategoria Lista de tipos de categorías.
+     * @param availability Lista de disponibilidades.
+     * @param complementos Lista de complementos.
+     * @param complemento Estado del complemento actual.
+     * @param tipoOperacion Tipo de operación actual.
+     * @param newId Nuevo identificador del complemento.
+     */
     data class GestionState(
         val typesCategoria: List<String> = emptyList(),
 
@@ -225,7 +287,21 @@ class GestionComplementosViewModel(
 
         val newId : String = ""
     )
-
+    /**
+     * Clase de datos ComplementoState
+     *
+     * Representa el estado de un complemento.
+     *
+     * @param id Identificador del complemento.
+     * @param nombre Nombre del complemento.
+     * @param precio Precio del complemento.
+     * @param stock Stock del complemento.
+     * @param categoria Categoría del complemento.
+     * @param imagen Imagen del complemento.
+     * @param fileImage Archivo de imagen del complemento.
+     * @param oldFileImage Archivo de imagen antiguo del complemento.
+     * @param isDeleted Estado de eliminación del complemento.
+     */
     data class ComplementoState(
         var id : String = "",
         val nombre : String = "",
@@ -237,15 +313,33 @@ class GestionComplementosViewModel(
         val oldFileImage: File? = null,
         val isDeleted : Boolean = false
     )
-
+    /**
+     * Enum TipoOperacion
+     *
+     * Representa los tipos de operación que se pueden realizar.
+     *
+     * @param value Valor del tipo de operación.
+     */
     enum class TipoOperacion(val value : String){
         NUEVO("NUEVO"), EDITAR("EDITAR")
     }
-
+    /**
+     * Enum TipoCategoria
+     *
+     * Representa los tipos de categoría de los complementos.
+     *
+     * @param value Valor del tipo de categoría.
+     */
     enum class TipoCategoria(val value : String){
         BEBIDA("BEBIDA"), COMIDA("COMIDA")
     }
-
+    /**
+     * Enum Disponibilidades
+     *
+     * Representa las disponibilidades de los complementos.
+     *
+     * @param value Valor de la disponibilidad.
+     */
     enum class Disponibilidades(val value: String) {
         FALSE("SI"), TRUE("NO")
     }

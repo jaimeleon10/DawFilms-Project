@@ -16,7 +16,17 @@ import java.util.UUID
 import kotlin.io.path.Path
 
 private val logger = logging()
-
+/**
+ * Clase ObtenerRecaudacionViewModel
+ *
+ * Gestiona la lógica de obtención y exportación de la recaudación, incluyendo la carga y filtrado de datos.
+ *
+ * @param service Servicio para gestionar ventas.
+ * @param storage Servicio para exportar los datos de recaudación en formato HTML.
+ * @param config Configuración de la aplicación.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class ObtenerRecaudacionViewModel(
     private val service : VentaService,
     private val storage: StorageHtmlRecaudacion,
@@ -29,12 +39,16 @@ class ObtenerRecaudacionViewModel(
         loadAllLineasVenta()
         loadTypes()
     }
-
+    /**
+     * Carga los tipos de producto en el estado.
+     */
     private fun loadTypes() {
         logger.debug { "Cargando tipos" }
         state.value = state.value.copy(typesProducto = TipoFiltroProducto.entries.map { it.value })
     }
-
+    /**
+     * Carga todas las líneas de venta del servicio.
+     */
     private fun loadAllLineasVenta(){
         logger.debug { "Cargando productos del repositorio" }
         service.getAllLineas().onSuccess {
@@ -43,14 +57,21 @@ class ObtenerRecaudacionViewModel(
             updateActualState()
         }
     }
-
+    /**
+     * Carga todas las líneas de venta del servicio.
+     */
     private fun updateActualState() {
         logger.debug { "Actualizando el estado de Linea de venta" }
         state.value = state.value.copy(
             lineaVenta = LineaVentaState()
         )
     }
-
+    /**
+     * Filtra la lista de líneas de venta según el tipo de producto especificado.
+     *
+     * @param tipoProducto Tipo de producto a filtrar.
+     * @return Lista de líneas de venta filtradas.
+     */
     fun lineasFilteredList(tipoProducto: String) : List<LineaVenta>{
         logger.debug { "Filtrando lista de Lineas de venta: $tipoProducto" }
 
@@ -63,7 +84,11 @@ class ObtenerRecaudacionViewModel(
                 }
             }
     }
-
+    /**
+     * Genera un informe de recaudación en formato HTML.
+     *
+     * @param lineas Lista de líneas de venta para el informe.
+     */
     fun sacarInforme(lineas: List<LineaVenta>) {
 
         val recaudacionPath = Paths.get(config.recaudacionDirectory)
@@ -85,13 +110,24 @@ class ObtenerRecaudacionViewModel(
 
         openHtml()
     }
-
+    /**
+     * Abre el archivo HTML generado en el navegador.
+     */
     private fun openHtml() {
         val file = Path("FicherosRecaudacion", state.value.htmlFileName).toFile()
         val url = "http://localhost:63342/DawFilmsInterface/FicherosRecaudacion/${file.name}"
         Open.open(url)
     }
-
+    /**
+     * Clase de datos RecaudacionState
+     *
+     * Representa el estado de la recaudación.
+     *
+     * @param typesProducto Lista de tipos de productos.
+     * @param lineaVenta Estado de la línea de venta.
+     * @param lineasVentas Lista de líneas de venta.
+     * @param htmlFileName Nombre del archivo HTML generado.
+     */
     data class RecaudacionState(
         val typesProducto : List<String> = emptyList(),
 
@@ -101,12 +137,25 @@ class ObtenerRecaudacionViewModel(
 
         var htmlFileName: String = ""
     )
-
+    /**
+     * Clase de datos LineaVentaState
+     *
+     * Representa el estado de una línea de venta.
+     *
+     * @param id ID de la línea de venta.
+     * @param precio Precio de la línea de venta.
+     */
     data class LineaVentaState(
         val id : String = "",
         val precio : Double = 5.00,
     )
-
+    /**
+     * Enumeración TipoFiltroProducto
+     *
+     * Representa los diferentes tipos de filtro de productos.
+     *
+     * @param value Valor del tipo de filtro de producto.
+     */
     enum class TipoFiltroProducto(val value : String){
         TODOS("TODOS"), BUTACAS("BUTACAS"), COMPLEMENTOS("COMPLEMENTOS")
     }

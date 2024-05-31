@@ -10,12 +10,23 @@ import org.example.dawfilmsinterface.routes.RoutesManager
 import org.lighthousegames.logging.logging
 
 private val logger = logging()
-
+/**
+ * ViewModel para seleccionar una butaca.
+ *
+ * @param service Servicio para interactuar con los productos.
+ * @autor Jaime León, German Fernández, Natalia González, Alba García, Javier Ruiz
+ * @since 1.0.0
+ */
 class SeleccionarButacaViewModel (
     private val service: ProductoService
 ) {
+    /**
+     * Estado de la butaca seleccionada.
+     */
     val state : SimpleObjectProperty<ButacaSeleccionadaState> = SimpleObjectProperty(ButacaSeleccionadaState())
-
+    /**
+     * Actualiza el icono de la butaca con el icono por defecto según su estado y tipo.
+     */
     fun iconoPorDefecto() {
         logger.debug { "Actualizando icono con butaca por defecto" }
         logger.debug { "Buscando butaca por id ${state.value.id}" }
@@ -36,7 +47,12 @@ class SeleccionarButacaViewModel (
             if (state.value.estadoButaca == EstadoButaca.MANTENIMIENTO) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaMantenimiento.png"))
         }
     }
-
+    /**
+     * Verifica si la butaca está seleccionada.
+     *
+     * @param listadoButacasSeleccionadas Lista de ID de butacas seleccionadas.
+     * @return Verdadero si la butaca está seleccionada, falso en caso contrario.
+     */
     fun butacaIsSelected(listadoButacasSeleccionadas: MutableList<String>): Boolean {
         logger.debug { "Restaurando icono de butacas seleccionadas" }
         logger.debug { "Buscando butaca por id ${state.value.id}" }
@@ -48,12 +64,16 @@ class SeleccionarButacaViewModel (
             return false
         }
     }
-
+    /**
+     * Actualiza el icono de la butaca seleccionada.
+     */
     fun updateIconoButacaSelected() {
         if (state.value.tipoButaca == TipoButaca.NORMAL) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionada.png"))
         if (state.value.tipoButaca == TipoButaca.VIP) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionadaVIP.png"))
     }
-
+    /**
+     * Cambia el icono de la butaca seleccionada.
+     */
     fun cambiarIcono() {
         logger.debug { "Actualizando icono de butaca seleccionada" }
         logger.debug { "Buscando butaca por id ${state.value.id}" }
@@ -69,7 +89,15 @@ class SeleccionarButacaViewModel (
             if (state.value.tipoButaca == TipoButaca.VIP) state.value.icono = Image(RoutesManager.getResourceAsStream("icons/butacaSeleccionadaVIP.png"))
         }
     }
-
+    /**
+     * Estado de la butaca seleccionada en el ViewModel para seleccionar una butaca.
+     *
+     * @param id ID de la butaca.
+     * @param icono Icono asociado a la butaca.
+     * @param tipoButaca Tipo de la butaca.
+     * @param estadoButaca Estado actual de la butaca.
+     * @param ocupacionButaca Estado de ocupación de la butaca.
+     */
     data class ButacaSeleccionadaState(
         var id: String = "",
         var icono: Image = Image(RoutesManager.getResourceAsStream("icons/butacaSinSeleccionar.png")),
