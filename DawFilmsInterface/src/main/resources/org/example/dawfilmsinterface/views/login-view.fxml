@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.loginRegister.LoginController">
+   <children>
+      <Label alignment="CENTER" focusTraversable="false" layoutX="327.0" layoutY="40.0" prefHeight="60.0" prefWidth="263.0" text="INICIAR SESIÓN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Line endX="669.199951171875" endY="-7.6200103759765625" layoutX="202.0" layoutY="127.0" startX="-154.4000244140625" startY="-7.62" stroke="#ffbd2e" />
+      <TextField fx:id="userNameField" layoutX="315.0" layoutY="215.0" prefHeight="40.0" prefWidth="350.0" promptText="Correo electrónico">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="315.0" layoutY="341.0" prefHeight="40.0" prefWidth="350.0" promptText="Contraseña">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <Label focusTraversable="false" layoutX="315.0" layoutY="299.0" prefHeight="30.0" prefWidth="350.0" text="Contraseña:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="315.0" layoutY="172.0" prefHeight="30.0" prefWidth="350.0" text="Correo electrónico:" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="forgotPassButton" focusTraversable="false" layoutX="346.0" layoutY="418.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="224.0" style="-fx-background-color: transparent; -fx-underline: true;" text="¿Olvidaste la contraseña?" textFill="#56b0ff">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="251.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="254.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/clave.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="registerButton" focusTraversable="false" layoutX="365.0" layoutY="464.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="190.0" style="-fx-background-color: transparent; -fx-underline: true;" text="Crear cuenta" textFill="#ffd757">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="100.0" fitWidth="104.0" layoutX="765.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutX="40.0" layoutY="46.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+                  <MenuItem fx:id="exitMenuButton" mnemonicParsing="false" text="Salir" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Button fx:id="continueButton" alignment="CENTER" layoutX="399.0" layoutY="553.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="118.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Continuar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

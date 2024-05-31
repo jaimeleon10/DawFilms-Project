@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.loginRegister.RegisterController">
+   <children>
+      <Label alignment="CENTER" layoutX="328.0" layoutY="31.0" prefHeight="60.0" prefWidth="263.0" text="REGISTRO" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Line endX="670.0" endY="-7.6200103759765625" layoutX="202.0" layoutY="127.0" startX="-154.4000244140625" startY="-7.62" stroke="#ffbd2e" />
+      <TextField fx:id="nameField" layoutX="182.0" layoutY="196.0" prefHeight="30.0" prefWidth="250.0" promptText="Nombre">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="surnameField" layoutX="182.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Apellidos">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="birthDatePicker" editable="false" layoutX="182.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Fecha de Nacimiento">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <TextField fx:id="dniField" layoutX="182.0" layoutY="483.0" prefHeight="30.0" prefWidth="250.0" promptText="DNI">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="emailField" layoutX="511.0" layoutY="196.0" prefHeight="30.0" prefWidth="250.0" promptText="Correo electrónico">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="passwordField" layoutX="511.0" layoutY="292.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <PasswordField fx:id="checkPassField" layoutX="511.0" layoutY="389.0" prefHeight="30.0" prefWidth="250.0" promptText="Contraseña">
+         <font>
+            <Font name="System Italic" size="15.0" />
+         </font>
+      </PasswordField>
+      <Label focusTraversable="false" layoutX="182.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="Nombre:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="98.0" fitWidth="94.0" layoutX="772.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutX="38.0" layoutY="37.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+                  <MenuItem fx:id="volverLoginMenuButton" mnemonicParsing="false" text="Volver al login" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Button fx:id="continueButton" alignment="CENTER" layoutX="542.0" layoutY="566.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="188.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Confirmar registro" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label focusTraversable="false" layoutX="511.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Contraseña:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="511.0" layoutY="358.0" prefHeight="30.0" prefWidth="175.0" text="Confirmar contraseña" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="182.0" layoutY="261.0" prefHeight="30.0" prefWidth="150.0" text="Apellidos:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="182.0" layoutY="450.0" prefHeight="30.0" prefWidth="150.0" text="DNI:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="511.0" layoutY="165.0" prefHeight="30.0" prefWidth="150.0" text="Correo electrónico:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label focusTraversable="false" layoutX="182.0" layoutY="355.0" prefHeight="30.0" prefWidth="175.0" text="Fecha de nacimiento:" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="backLoginButton" alignment="CENTER" focusTraversable="false" layoutX="188.0" layoutY="566.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="238.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al inicio de sesión" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

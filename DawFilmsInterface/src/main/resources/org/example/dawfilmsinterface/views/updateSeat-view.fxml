@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.admin.actualizarButaca.ActualizarButacaController">
+   <children>
+      <Label alignment="CENTER" layoutX="300.0" layoutY="40.0" prefHeight="60.0" prefWidth="320.0" text="ACTUALIZAR BUTACA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="139.0" startX="-420.0" stroke="#ffbd2e" />
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="76.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="butacaTable" layoutX="40.0" layoutY="230.0" prefHeight="410.0" prefWidth="475.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+        <columns>
+          <TableColumn fx:id="idColumnTable" prefWidth="88.0" style="-fx-font-size: 15;" text="ID Butaca" />
+            <TableColumn fx:id="estadoColumnTable" minWidth="0.0" prefWidth="140.0" style="-fx-font-size: 15;" text="Estado" />
+          <TableColumn fx:id="tipoColumnTable" prefWidth="97.0" style="-fx-font-size: 15;" text="Tipo" />
+            <TableColumn fx:id="ocupacionColumnTable" prefWidth="148.0" style="-fx-font-size: 15;" text="Ocupación" />
+        </columns>
+      </TableView>
+      <MenuBar layoutX="4.0" layoutY="6.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="743.0" layoutY="53.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Button fx:id="backMenuButton" alignment="CENTER" layoutX="721.0" layoutY="597.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al menú" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label alignment="CENTER" layoutX="62.0" layoutY="153.0" prefHeight="35.0" prefWidth="100.0" text="Estado" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="228.0" layoutY="152.0" prefHeight="35.0" prefWidth="100.0" text="Tipo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="396.0" layoutY="152.0" prefHeight="35.0" prefWidth="100.0" text="Ocupación" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="estadoFilterComboBox" layoutX="62.0" layoutY="196.0" prefHeight="25.0" prefWidth="100.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <ComboBox fx:id="tipoFilterComboBox" layoutX="228.0" layoutY="195.0" prefHeight="25.0" prefWidth="100.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <ComboBox fx:id="ocupacionFilterComboBox" layoutX="396.0" layoutY="195.0" prefHeight="25.0" prefWidth="100.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <Button fx:id="editButton" alignment="CENTER" layoutX="573.0" layoutY="597.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="95.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Editar" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <TextField fx:id="idSelectedField" layoutX="682.0" layoutY="279.0" prefHeight="30.0" prefWidth="200.0" />
+      <Label layoutX="561.0" layoutY="276.0" prefHeight="35.0" prefWidth="115.0" text="Identificador" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="336.0" prefHeight="35.0" prefWidth="115.0" text="Estado" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="396.0" prefHeight="35.0" prefWidth="115.0" text="Tipo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="456.0" prefHeight="35.0" prefWidth="115.0" text="Ocupación" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="561.0" layoutY="516.0" prefHeight="35.0" prefWidth="115.0" text="Precio" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="estadoSelectedField" layoutX="682.0" layoutY="339.0" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="tipoSelectedField" layoutX="682.0" layoutY="399.0" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="ocupacionSelectedField" layoutX="682.0" layoutY="459.0" prefHeight="30.0" prefWidth="200.0" />
+      <TextField fx:id="precioSelectedField" layoutX="682.0" layoutY="519.0" prefHeight="30.0" prefWidth="200.0" />
+      <Line endX="67.0" endY="439.0" layoutX="471.0" layoutY="203.0" startX="67.0" startY="-62.5" stroke="#ffbd2e" />
+      <Label alignment="CENTER" layoutX="561.0" layoutY="186.0" prefHeight="60.0" prefWidth="320.0" style="-fx-underline: true;" text="BUTACA SELECCIONADA" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

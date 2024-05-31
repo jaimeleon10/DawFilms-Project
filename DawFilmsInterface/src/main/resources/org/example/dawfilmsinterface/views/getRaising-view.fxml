@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="920.0" style="-fx-background-color: #0e2853; -fx-border-color: #ffbd2e;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.dawfilmsinterface.cine.controllers.admin.ObtenerRecaudacionController">
+   <children>
+      <Label alignment="CENTER" layoutX="280.0" layoutY="40.0" prefHeight="60.0" prefWidth="360.0" text="RECAUDACIÓN" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Line endX="420.0" layoutX="460.0" layoutY="121.0" startX="-420.0" stroke="#ffbd2e" />
+      <ImageView fitHeight="100.0" fitWidth="94.0" layoutX="12.0" layoutY="576.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../dawfilmsinterface/icons/logoCine.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="productosTable" layoutX="184.0" layoutY="221.0" prefHeight="346.0" prefWidth="550.0" style="-fx-background-color: #3D486A; -fx-border-color: ffbd2e;">
+        <columns>
+          <TableColumn fx:id="productoColumnTable" prefWidth="202.39999389648438" style="-fx-font-size: 14;" text="Producto" />
+            <TableColumn fx:id="fechaColumnTable" minWidth="0.0" prefWidth="157.5999755859375" style="-fx-font-size: 14;" text="Fecha de compra" />
+            <TableColumn fx:id="cantidadColumnTable" minWidth="0.0" prefWidth="96.0" style="-fx-font-size: 14;" text="Cantidad" />
+          <TableColumn fx:id="precioColumnTable" prefWidth="93.5999755859375" style="-fx-font-size: 14;" text="Precio" />
+        </columns>
+      </TableView>
+      <MenuBar layoutX="34.0" layoutY="46.0" prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: transparent;">
+         <menus>
+            <Menu mnemonicParsing="false">
+               <items>
+                  <MenuItem fx:id="backMenuMenuButton" mnemonicParsing="false" text="Volver al menú" />
+                  <MenuItem fx:id="acercaDeMenuButton" mnemonicParsing="false" text="Acerca de" />
+               </items>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../dawfilmsinterface/icons/rayitasMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Menu>
+         </menus>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </MenuBar>
+      <Label fx:id="usernameField" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="15.0" layoutX="743.0" layoutY="53.0" prefHeight="34.0" prefWidth="126.0" text="Usuario" textFill="#ffd757">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dawfilmsinterface/icons/usuario.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Label layoutX="212.0" layoutY="156.0" prefHeight="35.0" prefWidth="58.0" text="Fecha:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="backMenuButton" alignment="CENTER" graphicTextGap="10.0" layoutX="337.0" layoutY="598.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="157.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Volver al menú" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <DatePicker fx:id="dateFilterDatePicker" editable="false" layoutX="276.0" layoutY="161.0" prefHeight="26.0" prefWidth="150.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <Label layoutX="464.0" layoutY="156.0" prefHeight="35.0" prefWidth="94.0" text="Producto:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="tipoProductoFilterComboBox" layoutX="558.0" layoutY="161.0" prefHeight="25.0" prefWidth="150.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ComboBox>
+      <TextField fx:id="totalRecaudacionField" alignment="CENTER_RIGHT" editable="false" layoutX="244.0" layoutY="604.0" prefHeight="30.0" prefWidth="72.0" />
+      <Label layoutX="184.0" layoutY="602.0" prefHeight="35.0" prefWidth="50.0" text="Total:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="informeButton" alignment="CENTER" graphicTextGap="10.0" layoutX="517.0" layoutY="598.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="217.0" style="-fx-background-color: #0e2853; -fx-background-radius: 20; -fx-border-color: white; -fx-border-radius: 20; -fx-border-width: 2;" text="Informe Recaudación" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
